@@ -25,7 +25,7 @@ function getHabiticaData(serverPathUrl,xClientHeader,credentials){
     try {
         xhr.send();
     } catch (e) {
-        alert(e);
+        console.log(e);
     }
     return xhr;
 }

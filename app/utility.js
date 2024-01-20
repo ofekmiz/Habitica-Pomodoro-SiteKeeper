@@ -114,13 +114,9 @@ function getBrowser() {
     return sBrowser;
 }
 
-function downloadObjectAsJson(JSONData) {
-    var tempLink = document.createElement('a');
-    tempLink.setAttribute("href", dataStr);
-    tempLink.setAttribute("download", "Histogram.json");
+function getJsonDownloadHref(JSONData) {
     var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(JSONData));
-    tempLink.click();
-    tempLink.remove();
+    return dataStr;
 }
 
 function readJsonFileAsync(file) {

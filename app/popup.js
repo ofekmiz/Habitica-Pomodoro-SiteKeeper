@@ -860,8 +860,9 @@ function updateHistory() {
         });
 
         $("#DownloadHistogram").click(function (e) {
-            downloadObjectAsJson(Vars.Histogram);
-            e.stopImmediatePropagation();
+            var dataStr = getJsonDownloadHref(Vars.Histogram);
+            this.setAttribute("href", dataStr);
+            this.setAttribute("download", "Histogram.json");
         });
 
         $("#ImportHistogram").click(async function () {
