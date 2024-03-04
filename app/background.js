@@ -22,7 +22,7 @@ var Consts = {
         type: "habit",
         alias: "sitepassPomodoro",
         notes: "Habit utilized by Habitica SiteKeeper. " +
-            "Change the difficulty manualy according to your needs.",
+            "Change the difficulty manually according to your needs.",
         priority: 1
     },
     PomodoroSetHabitTemplate: {
@@ -30,7 +30,7 @@ var Consts = {
         type: "habit",
         alias: "sitepassPomodoroSet",
         notes: "Habit utilized by Habitica SiteKeeper. " +
-            "Change the difficulty manualy according to your needs.",
+            "Change the difficulty manually according to your needs.",
         down: false,
         priority: 1.5
     },
