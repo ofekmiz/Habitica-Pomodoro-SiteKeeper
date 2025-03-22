@@ -3,6 +3,7 @@
 var browser = browser || chrome; //for firefox support (browser.runtime instead of chrome.runtime)
 var Vars = {};
 var Consts = {};
+
 var timerPort = chrome.runtime.connect({ name: "timer" });
 timerPort.onMessage.addListener(function (response) {
     if (response.complete) {

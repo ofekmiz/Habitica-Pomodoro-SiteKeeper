@@ -1,4 +1,20 @@
+
 "use strict";
+
+// This is the service worker script, which executes in its own context
+// when the extension is installed or refreshed (or when you access its console).
+// It would correspond to the background script in chrome extensions v2.
+
+console.log("This prints to the console of the service worker (background script)")
+
+
+// Importing and using functionality from external files is also possible.
+// If you want to import a file that is deeper in the file hierarchy of your
+// extension, simply do `importScripts('path/to/file.js')`.
+// The path should be relative to the file `manifest.json`.
+importScripts('library/habiticaAPI.js');
+importScripts('library/utility.js')
+
 //------synced variables with popup.js , includes only data (not pointers nor functions)------//
 var Consts = {
     xClientHeader: "5a8238ab-1819-4f7f-a750-f23264719a2d-HabiticaPomodoroSiteKeeper",
@@ -65,6 +81,8 @@ var Vars = {
 // -------------------------background variables----------------------------- //
 var currentAmbientAudio = null; //current playing ambient sound
 const BROWSER = getBrowser();
+const pageOverlayCSS = "foreground/pageOverlay.css";
+const pageOverlayJS = "foreground/pageOverlay.js";
 // -------------------------------------------------------------------------- //
 
 function UserSettings(copyFrom) {
@@ -228,33 +246,38 @@ function isInWhiteList(siteUrl) {
     return false;
 }
 
-var callbackTabActive = function (details) {
-    chrome.tabs.get(details.tabId, function callback(tab) {
-        chrome.tabs.insertCSS({
-            file: "pageOverlay.css"
+const callbackTabActive = function (details) {
+    chrome.tabs.get(details.tabId, function (tab) {
+        chrome.scripting.insertCSS({
+            target: { tabId: tab.id },
+            files: [pageOverlayCSS]
         });
+
         mainSiteBlockFunction(tab);
 
-        //Pass Expiry time badge
+        // Pass Expiry time badge
         if (!Vars.TimerRunnig) {
-            var siteUrl = new URL(tab.url);
-            var site = GetBlockedSite(siteUrl.hostname);
+            const siteUrl = new URL(tab.url);
+            const site = GetBlockedSite(siteUrl.hostname);
             showPayToPassTimerBadge(site);
         }
     });
 };
 
 function callbackTabUpdate(tabId) {
-    chrome.tabs.get(tabId, function callback(tab) {
-        //css insert
-        chrome.tabs.insertCSS({
-            file: "pageOverlay.css"
+    chrome.tabs.get(tabId, function (tab) {
+        // Insert CSS
+        chrome.scripting.insertCSS({
+            target: { tabId: tab.id },
+            files: [pageOverlayCSS]
         });
+
         mainSiteBlockFunction(tab);
-        //Pass Expiry time badge
+
+        // Pass Expiry time badge
         if (!Vars.TimerRunnig) {
-            var siteUrl = new URL(tab.url);
-            var site = GetBlockedSite(siteUrl.hostname);
+            const siteUrl = new URL(tab.url);
+            const site = GetBlockedSite(siteUrl.hostname);
             showPayToPassTimerBadge(site);
         }
     });
@@ -308,16 +331,16 @@ function showPayToPassTimerBadge(site) {
         if (site && !Vars.TimerRunnig) {
             var remainingTime = getSitePassRemainingTime(site);
             if (remainingTime) {
-                chrome.browserAction.setBadgeBackgroundColor({
+                chrome.action.setBadgeBackgroundColor({
                     color: "#F18E02"
                 });
                 var timeString = BROWSER === "Mozilla Firefox" ? shortTimeString(remainingTime) : remainingTime;
-                chrome.browserAction.setBadgeText({
+                chrome.action.setBadgeText({
                     text: timeString
                 });
             } else {
                 if (Vars.Timer != Consts.POMODORO_DONE_TEXT) {
-                    chrome.browserAction.setBadgeText({
+                    chrome.action.setBadgeText({
                         text: ''
                     });
                 }
@@ -325,7 +348,7 @@ function showPayToPassTimerBadge(site) {
             }
         } else {
             if (Vars.Timer != Consts.POMODORO_DONE_TEXT) {
-                chrome.browserAction.setBadgeText({
+                chrome.action.setBadgeText({
                     text: ''
                 });
             }
@@ -338,46 +361,92 @@ function showPayToPassTimerBadge(site) {
 
 //Create "Pay X coins To Visit" site overlay
 function payToPassOverlay(tab, siteData) {
-    var opacity = Vars.UserData.TranspartOverlay ? "0.85" : "1";
-    var imageURLPayToPass = chrome.runtime.getURL("/img/siteKeeper2.png");
-    chrome.tabs.insertCSS({
-        code: `
-        .payToPass:after { background-image:url("` + imageURLPayToPass + `"); }
-        .payToPass::before {background-color:rgba(0,0,0,`+ opacity + `)!important}`
+    const opacity = Vars.UserData.TranspartOverlay ? "0.85" : "1";
+    const imageURLPayToPass = chrome.runtime.getURL("/img/siteKeeper2.png");
+
+    // Inject CSS using a <style> tag (since dynamic CSS strings aren't supported directly)
+    chrome.scripting.executeScript({
+        target: { tabId: tab.id },
+        func: (imageURL, opacity) => {
+            const style = document.createElement('style');
+            style.textContent = `
+                .payToPass:after { 
+                    background-image: url("${imageURL}"); 
+                }
+                .payToPass::before {
+                    background-color: rgba(0,0,0,${opacity}) !important;
+                }
+            `;
+            document.head.appendChild(style);
+        },
+        args: [imageURLPayToPass, opacity]
     });
 
-    chrome.tabs.executeScript(tab.id, {
-        file: 'pageOverlay.js'
-    }, function (tab) {
-        chrome.tabs.executeScript(tab.id, {
-            code: `
-            document.getElementById("payToPass_btn").style.display = 'block';
-            document.getElementById("SitekeeperOverlay").style.display = 'block';
-            document.getElementById("SitekeeperOverlay").setAttribute("data-html","You're trying to Access ` + siteData.hostname + `\\n Pay ` + siteData.cost + ` Gold to access for ` + siteData.passTime + ` Minutes ");
-            document.getElementById("SitekeeperOverlay").className = "payToPass"; `
+    // Inject external JS file
+    chrome.scripting.executeScript({
+        target: { tabId: tab.id },
+        files: [pageOverlayJS]
+    }, () => {
+        // After JS loads, run inline code to update DOM
+        chrome.scripting.executeScript({
+            target: { tabId: tab.id },
+            func: (hostname, cost, passTime) => {
+                document.getElementById("payToPass_btn").style.display = 'block';
+                const overlay = document.getElementById("SitekeeperOverlay");
+                overlay.style.display = 'block';
+                overlay.setAttribute(
+                    "data-html",
+                    `You're trying to Access ${hostname}\n Pay ${cost} Gold to access for ${passTime} Minutes`
+                );
+                overlay.className = "payToPass";
+            },
+            args: [siteData.hostname, siteData.cost, siteData.passTime]
         });
     });
 }
 
 //Create "Cant Afford To Visit" site overlay
 function cantAffordOverlay(tab, siteData) {
-    var opacity = Vars.UserData.TranspartOverlay ? "0.85" : "1";
-    var imageURLNoPass = chrome.runtime.getURL("/img/siteKeeper3.png");
-    chrome.tabs.insertCSS({
-        code: `
-        .noPass:after { background-image:url("` + imageURLNoPass + `"); }
-        .noPass::before {background-color:rgba(0,0,0,`+ opacity + `)}`
+    const opacity = Vars.UserData.TranspartOverlay ? "0.85" : "1";
+    const imageURLNoPass = chrome.runtime.getURL("/img/siteKeeper3.png");
+
+    // Inject CSS via <style> tag
+    chrome.scripting.executeScript({
+        target: { tabId: tab.id },
+        func: (imageURL, opacity) => {
+            const style = document.createElement('style');
+            style.textContent = `
+                .noPass:after {
+                    background-image: url("${imageURL}");
+                }
+                .noPass::before {
+                    background-color: rgba(0, 0, 0, ${opacity});
+                }
+            `;
+            document.head.appendChild(style);
+        },
+        args: [imageURLNoPass, opacity]
     });
 
-    chrome.tabs.executeScript(tab.id, {
-        file: 'pageOverlay.js'
-    }, function (tab) {
-        chrome.tabs.executeScript(tab.id, {
-            code: `
-            document.getElementById("SitekeeperOverlay").style.display = 'block'; 
-            document.getElementById("payToPass_btn").style.display = 'none';
-            document.getElementById("SitekeeperOverlay").setAttribute("data-html","You can't afford to visit ` + siteData.hostname + `\\n You shall not pass! ");
-            document.getElementById("SitekeeperOverlay").className = "noPass"; `
+    // Inject external JS file
+    chrome.scripting.executeScript({
+        target: { tabId: tab.id },
+        files: ['pageOverlay.js']
+    }, () => {
+        // Inject inline DOM update script
+        chrome.scripting.executeScript({
+            target: { tabId: tab.id },
+            func: (hostname) => {
+                const overlay = document.getElementById("SitekeeperOverlay");
+                overlay.style.display = 'block';
+                document.getElementById("payToPass_btn").style.display = 'none';
+                overlay.setAttribute(
+                    "data-html",
+                    `You can't afford to visit ${hostname}\nYou shall not pass!`
+                );
+                overlay.className = "noPass";
+            },
+            args: [siteData.hostname]
         });
     });
 }
@@ -651,7 +720,7 @@ function handleMessage(request, sender, sendResponse) {
 
 function executeFunctionByName(functionName /*, args */) {
     var args = Array.prototype.slice.call(arguments, 1);
-    var context = window;
+    var context = self;
     var namespaces = functionName.split(".");
     var func = namespaces.pop();
     for (var i = 0; i < namespaces.length; i++) {
@@ -761,11 +830,11 @@ function startPomodoro() {
 //runs during pomodoro session
 function duringPomodoro() {
     //Show time on icon badge 
-    chrome.browserAction.setBadgeBackgroundColor({
+    chrome.action.setBadgeBackgroundColor({
         color: "green"
     });
     var timeString = BROWSER === "Mozilla Firefox" ? shortTimeString(Vars.Timer) : Vars.Timer;
-    chrome.browserAction.setBadgeText({
+    chrome.action.setBadgeText({
         text: timeString
     });
     //Block current tab if necessary
@@ -840,10 +909,10 @@ function pomodoroEnds() {
     }
 
     //Badge
-    chrome.browserAction.setBadgeBackgroundColor({
+    chrome.action.setBadgeBackgroundColor({
         color: "green"
     });
-    chrome.browserAction.setBadgeText({
+    chrome.action.setBadgeText({
         text: "\u2713"
     });
 
@@ -890,11 +959,11 @@ function manualBreak() {
 //runs during Break session
 function duringBreak() {
     //Show time on icon badge 
-    chrome.browserAction.setBadgeBackgroundColor({
+    chrome.action.setBadgeBackgroundColor({
         color: "blue"
     });
     var timeString = BROWSER === "Mozilla Firefox" ? shortTimeString(Vars.Timer) : Vars.Timer;
-    chrome.browserAction.setBadgeText({
+    chrome.action.setBadgeText({
         text: timeString
     });
 }
@@ -942,10 +1011,10 @@ function startBreakExtension(duration) {
 //runs during Break session
 function duringBreakExtension() {
     //Show time on icon badge 
-    chrome.browserAction.setBadgeBackgroundColor({
+    chrome.action.setBadgeBackgroundColor({
         color: "red"
     });
-    chrome.browserAction.setBadgeText({
+    chrome.action.setBadgeText({
         text: Vars.Timer
     });
 }
@@ -988,7 +1057,7 @@ function stopTimer() {
 
     clearInterval(timerInterval);
     Vars.Timer = "00:00";
-    chrome.browserAction.setBadgeText({
+    chrome.action.setBadgeText({
         text: ''
     });
 
@@ -1052,35 +1121,47 @@ function CurrentTab(func) {
 
 //Block Site With Timer Overlay
 function blockSiteOverlay(tab) {
-    var opacity = Vars.UserData.TranspartOverlay ? "0.85" : "1";
-    var url = new URL(tab.url);
-    var message = "Stay Focused! Time Left: " + Vars.Timer;
+    const opacity = Vars.UserData.TranspartOverlay ? "0.85" : "1";
+    const url = new URL(tab.url);
+    const message = "Stay Focused! Time Left: " + Vars.Timer;
+
     if (GetBlockedSite(url.hostname) && !isInWhiteList(url)) {
-        chrome.tabs.executeScript({
-            code: `
-            document.body.classList.add('blockedSite');
-            document.body.setAttribute('data-html',"` + message + `");            
-            `
+        const imageURL = chrome.runtime.getURL("/img/siteKeeper.png");
+
+        // Inject JS to modify DOM
+        chrome.scripting.executeScript({
+            target: { tabId: tab.id },
+            func: (message, imageURL, opacity) => {
+                document.body.classList.add('blockedSite');
+                document.body.setAttribute('data-html', message);
+
+                const style = document.createElement('style');
+                style.textContent = `
+                    .blockedSite:after {
+                        background-image: url("${imageURL}");
+                    }
+                    .blockedSite:before {
+                        background-color: rgba(0, 0, 0, ${opacity});
+                    }
+                `;
+                document.head.appendChild(style);
+            },
+            args: [message, imageURL, opacity]
         });
-        var imageURL = chrome.runtime.getURL("/img/siteKeeper.png");
-        chrome.tabs.insertCSS({
-            code: `
-            .blockedSite:after {background-image:url("` + imageURL + `");}
-            .blockedSite:before{background-color:rgba(0,0,0,`+ opacity + `)}
-            `
-        });
-    };
+    }
 }
 
 //Remove Overlay from current Blocked Site
 function unblockSiteOverlay(tab) {
-    chrome.tabs.executeScript(tab.id, {
-        code: `document.body.className = document.body.className.replace( "blockedSite", '' );
-            var blockElementExists = document.getElementById("SitekeeperOverlay");
-            if(blockElementExists){
-                document.getElementById("SitekeeperOverlay").style.display = 'none'; 
+    chrome.scripting.executeScript({
+        target: { tabId: tab.id },
+        func: () => {
+            document.body.className = document.body.className.replace("blockedSite", '');
+            const blockElementExists = document.getElementById("SitekeeperOverlay");
+            if (blockElementExists) {
+                blockElementExists.style.display = 'none';
             }
-            `
+        }
     });
 }
 
