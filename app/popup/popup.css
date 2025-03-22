@@ -7,7 +7,7 @@
 @font-face {
     font-family: 'pixeled';
     /* src: url('fonts/pixeled/pixeled-webfont.woff2') format('woff2'), url('fonts/pixeled/pixeled-webfont.woff') format('woff'); */
-    src: url('fonts/pixeled/Simpletown.ttf') format('truetype');
+    src: url('../fonts/pixeled/Simpletown.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }

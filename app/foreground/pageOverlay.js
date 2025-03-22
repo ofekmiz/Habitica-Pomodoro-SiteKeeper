@@ -4,7 +4,7 @@
 // Several foreground scripts can be declared
 // and injected into the same or different pages.
 
-console.log("Hbitiac bomodoro manifest V3 content script)")
+console.log("Hbitiac bomodoro manifest V3 content script")
 
 var currentHostname = window.location.hostname;
 block = document.createElement('div');

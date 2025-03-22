@@ -340,8 +340,8 @@ function AddSiteToTable(site, fadein) {
         '<div class="siteDuration"><span class="hourglass_icon"></span>' + duration + '</div>' +
         '</a></td>' +
         '<td><div class="hostname">' + site.hostname + passExpiryElement + '</div></td>' +
-        '<td><a class="edit"><img src="img/pencil.png"></a></td>' +
-        '<td><a class="delete"><img src="img/trash.png"></a></td>' +
+        '<td><a class="edit"><img src="../img/pencil.png"></a></td>' +
+        '<td><a class="delete"><img src="../img/trash.png"></a></td>' +
         '</tr>' +
         '<tr class="cost-duration-input" style="display:none;">' +
         '<td style="white-space:nowrap;text-align:center;" colspan="4">' +

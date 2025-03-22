@@ -81,8 +81,8 @@ var Vars = {
 // -------------------------background variables----------------------------- //
 var currentAmbientAudio = null; //current playing ambient sound
 const BROWSER = getBrowser();
-const pageOverlayCSS = "foreground/pageOverlay.css";
-const pageOverlayJS = "foreground/pageOverlay.js";
+const PageOverlayCSS = "foreground/pageOverlay.css";
+const PageOverlayJS = "foreground/pageOverlay.js";
 // -------------------------------------------------------------------------- //
 
 function UserSettings(copyFrom) {
@@ -146,6 +146,7 @@ function GetSiteCost(site) {
     return cost;
 }
 function GetSitePassDuration(site) {
+    if(!site) return 0;
     var duration = site.passDuration ? site.passDuration : 30;
     return duration;
 }
@@ -250,7 +251,7 @@ const callbackTabActive = function (details) {
     chrome.tabs.get(details.tabId, function (tab) {
         chrome.scripting.insertCSS({
             target: { tabId: tab.id },
-            files: [pageOverlayCSS]
+            files: [PageOverlayCSS]
         });
 
         mainSiteBlockFunction(tab);
@@ -269,7 +270,7 @@ function callbackTabUpdate(tabId) {
         // Insert CSS
         chrome.scripting.insertCSS({
             target: { tabId: tab.id },
-            files: [pageOverlayCSS]
+            files: [PageOverlayCSS]
         });
 
         mainSiteBlockFunction(tab);
@@ -385,7 +386,7 @@ function payToPassOverlay(tab, siteData) {
     // Inject external JS file
     chrome.scripting.executeScript({
         target: { tabId: tab.id },
-        files: [pageOverlayJS]
+        files: [PageOverlayJS]
     }, () => {
         // After JS loads, run inline code to update DOM
         chrome.scripting.executeScript({
@@ -431,7 +432,7 @@ function cantAffordOverlay(tab, siteData) {
     // Inject external JS file
     chrome.scripting.executeScript({
         target: { tabId: tab.id },
-        files: ['pageOverlay.js']
+        files: [PageOverlayJS]
     }, () => {
         // Inject inline DOM update script
         chrome.scripting.executeScript({
@@ -520,35 +521,55 @@ function callAPI(method, route, postData) {
     return callHabiticaAPI(serverUrl + route, Consts.xClientHeader, Vars.UserData.Credentials, method, postData);
 }
 
-function getData(silent, credentials, serverPath) {
+async function getData(silent, credentials, serverPath) {
     if (!Vars.UserData.ConnectHabitica) {
         return null;
     }
-    var serverUrl = Vars.UserData.developerServerUrl && Vars.UserData.developerServerUrl !== "" ? Vars.UserData.developerServerUrl : Consts.serverUrl;
-    var xhr = getHabiticaData(serverUrl + serverPath, Consts.xClientHeader, credentials);
-    Vars.ServerResponse = xhr.status;
-    if (xhr.status == 401) {
-        console.log("Habitica Credentials Error 404");
-        return null;
-    } else if (xhr.status != 200) {
-        if (!silent) {
-            chrome.notifications.create(Consts.NotificationId, {
-                type: "basic",
-                iconUrl: "img/icon.png",
-                title: "Habitica Connection Error",
-                message: "The service might be temporarily unavailable. Contact the developer if it persists. Error =" +
-                    xhr.status
-            },
-                function () { });
+
+    const serverUrl = Vars.UserData.developerServerUrl && Vars.UserData.developerServerUrl !== ""
+        ? Vars.UserData.developerServerUrl
+        : Consts.serverUrl;
+
+    try {
+        const response = await fetch(serverUrl + serverPath, {
+            method: "GET",
+            headers: {
+                "x-client": Consts.xClientHeader,
+                "x-api-user": credentials.uid,
+                "x-api-key": credentials.apiToken
+            }
+        });
+
+        Vars.ServerResponse = response.status;
+
+        if (response.status === 401) {
+            console.log("Habitica Credentials Error 401");
+            return null;
         }
+
+        if (response.status !== 200) {
+            if (!silent) {
+                chrome.notifications.create(Consts.NotificationId, {
+                    type: "basic",
+                    iconUrl: "img/icon.png",
+                    title: "Habitica Connection Error",
+                    message: "The service might be temporarily unavailable. Contact the developer if it persists. Error = " + response.status
+                });
+            }
+            return null;
+        }
+
+        return await response.json();
+
+    } catch (error) {
+        console.error("Habitica Fetch Error:", error);
         return null;
     }
-    return JSON.parse(xhr.responseText);
 }
 
-function FetchHabiticaData(skipTasks) {
+async function FetchHabiticaData(skipTasks) {
     var credentials = Vars.UserData.Credentials;
-    var userObj = getData(true, credentials, Consts.serverPathUser);
+    var userObj = await getData(true, credentials, Consts.serverPathUser);
     if (userObj == null) return;
     else {
         Vars.Monies = userObj.data["stats"]["gp"];
@@ -560,7 +581,7 @@ function FetchHabiticaData(skipTasks) {
 
         //get custom pomodoro tasks list (all habits)
         var allHabits;
-        allHabits = getData(true, credentials, Consts.serverPathUserHabits);
+        allHabits = await getData(true, credentials, Consts.serverPathUserHabits);
         console.log(allHabits);
         if (allHabits.success) {
             Vars.PomodoroTaskCustomList = [];
@@ -577,7 +598,7 @@ function FetchHabiticaData(skipTasks) {
 
         //get pomodoro task id
         if (!Vars.UserData.CustomPomodoroTask) {
-            tasksObj = getData(true, credentials, Consts.serverPathPomodoroHabit);
+            tasksObj = await getData(true, credentials, Consts.serverPathPomodoroHabit);
             if (tasksObj && tasksObj.data["alias"] == Consts.PomodoroHabitTemplate.alias) {
                 Vars.PomodoroTaskId = tasksObj.data.id;
             } else {
@@ -595,7 +616,7 @@ function FetchHabiticaData(skipTasks) {
 
         //get pomodoro Set task id
         if (!Vars.UserData.CustomSetTask) {
-            tasksObj = getData(true, credentials, Consts.serverPathPomodoroSetHabit);
+            tasksObj = await getData(true, credentials, Consts.serverPathPomodoroSetHabit);
             if (tasksObj && tasksObj.data["alias"] == Consts.PomodoroSetHabitTemplate.alias) {
                 Vars.PomodoroSetTaskId = tasksObj.data.id;
             } else {
@@ -612,7 +633,7 @@ function FetchHabiticaData(skipTasks) {
         }
 
         //Reward task update/create
-        tasksObj = getData(true, credentials, Consts.serverPathTask);
+        tasksObj = await getData(true, credentials, Consts.serverPathTask);
         if (tasksObj && tasksObj.data["alias"] == "sitepass") {
             Vars.RewardTask = tasksObj.data;
             //UpdateRewardTask(0, false);
@@ -840,9 +861,9 @@ function duringPomodoro() {
     //Block current tab if necessary
     CurrentTab(blockSiteOverlay);
 
-    if (currentAmbientAudio instanceof Audio && currentAmbientAudio.paused) {
-        playSound(Vars.UserData.ambientSound, Vars.UserData.ambientSoundVolume, true);
-    }
+    // if (currentAmbientAudio instanceof Audio && currentAmbientAudio.paused) {
+    //     playSound(Vars.UserData.ambientSound, Vars.UserData.ambientSoundVolume, true);
+    // }
 }
 
 function setTodaysHistogram(pomodoros, minutes) {
@@ -1175,6 +1196,7 @@ function notifyHabitica(msg) {
 }
 
 function playSound(soundFileName, volume, loop) {
+    return
     if (soundFileName != "None") {
         var myAudio = new Audio(chrome.runtime.getURL("audio/" + soundFileName)) || false;
         if (myAudio) {
@@ -1190,6 +1212,7 @@ function playSound(soundFileName, volume, loop) {
 }
 
 function stopAmbientSound() {
+    return 
     if (currentAmbientAudio instanceof Audio) {
         currentAmbientAudio.pause();
         currentAmbientAudio.currentTime = 0;
@@ -1198,6 +1221,7 @@ function stopAmbientSound() {
 
 var ambientSampleTimeout;
 function playAmbientSample() {
+    return
     stopAmbientSound();
     clearTimeout(ambientSampleTimeout);
     setTimeout(function () {

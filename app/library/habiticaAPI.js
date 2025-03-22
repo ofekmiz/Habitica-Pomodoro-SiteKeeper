@@ -23,21 +23,33 @@ async function callHabiticaAPI(serverPathUrl,xClientHeader,credentials,method,po
       return response.json(); // parses JSON response into native JavaScript objects
 }
 
-async function getHabiticaData(serverPathUrl,xClientHeader,credentials){
-    if(!serverPathUrl || !xClientHeader || !credentials){
+async function getHabiticaData(serverPathUrl, xClientHeader, credentials) {
+    if (!serverPathUrl || !xClientHeader || !credentials) {
         return false;
     }
-    var xhr = new XMLHttpRequest();
-    xhr.open("GET", serverPathUrl, false);
-    xhr.setRequestHeader('x-client', xClientHeader);
-    xhr.setRequestHeader("x-api-user", credentials.uid);
-    xhr.setRequestHeader("x-api-key", credentials.apiToken);
+
     try {
-        xhr.send();
+        const response = await fetch(serverPathUrl, {
+            method: "GET",
+            headers: {
+                'x-client': xClientHeader,
+                'x-api-user': credentials.uid,
+                'x-api-key': credentials.apiToken
+            }
+        });
+
+        if (!response.ok) {
+            console.error("Failed to fetch Habitica data:", response.statusText);
+            return false;
+        }
+
+        const data = await response.json(); // or text(), depending on expected format
+        console.log("Fetched Habitica Data:",data);
+        return data;
     } catch (e) {
-        console.log(e);
+        console.error("Fetch error:", e);
+        return false;
     }
-    return xhr;
 }
 
 
