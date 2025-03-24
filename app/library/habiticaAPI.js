@@ -18,7 +18,7 @@ async function callHabiticaAPI(serverPathUrl,xClientHeader,credentials,method,po
         },
 
         referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-        body: JSON.stringify(data), // body data type must match "Content-Type" header
+        body: JSON.stringify(postData), // body data type must match "Content-Type" header
       });
       return response.json(); // parses JSON response into native JavaScript objects
 }
@@ -51,6 +51,8 @@ async function getHabiticaData(serverPathUrl, xClientHeader, credentials) {
         return false;
     }
 }
+
+
 
 
 //Manifest V3 does not support XMLHttpRequest, use this for manifest V2 only
@@ -86,3 +88,4 @@ function getHabiticaData_MV2(serverPathUrl,xClientHeader,credentials){
     }
     return xhr;
 }
+

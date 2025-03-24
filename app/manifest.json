@@ -28,15 +28,17 @@
     },
     "content_scripts": [{
         "js": ["foreground/pageOverlay.js"],
-        "matches": ["*://*/*"]
+        "matches": ["<all_urls>"]
     }],
     "web_accessible_resources": [{
         "resources":[
             "img/siteKeeper.png",
             "img/siteKeeper2.png",
-            "img/siteKeeper3.png"
+            "img/siteKeeper3.png",
+            "foreground/soundManager.html",
+            "audio/*"
         ],
-        "matches": ["*://*/*"]
+        "matches": ["<all_urls>"]
     }],
     "commands": {
         "PomodoroHotKey": {

@@ -146,7 +146,7 @@ function GetSiteCost(site) {
     return cost;
 }
 function GetSitePassDuration(site) {
-    if(!site) return 0;
+    if(!site) return 30;
     var duration = site.passDuration ? site.passDuration : 30;
     return duration;
 }
@@ -513,12 +513,12 @@ function muteBlockedtabs() {
 }
 
 // ----- Habitica Api general call ----- //
-function callAPI(method, route, postData) {
+async function callAPI(method, route, postData) {
     if (!Vars.UserData.ConnectHabitica) {
         return null;
     }
     var serverUrl = Vars.UserData.developerServerUrl && Vars.UserData.developerServerUrl !== "" ? Vars.UserData.developerServerUrl : Consts.serverUrl;
-    return callHabiticaAPI(serverUrl + route, Consts.xClientHeader, Vars.UserData.Credentials, method, postData);
+    return await callHabiticaAPI(serverUrl + route, Consts.xClientHeader, Vars.UserData.Credentials, method, postData);
 }
 
 async function getData(silent, credentials, serverPath) {
@@ -602,7 +602,7 @@ async function FetchHabiticaData(skipTasks) {
             if (tasksObj && tasksObj.data["alias"] == Consts.PomodoroHabitTemplate.alias) {
                 Vars.PomodoroTaskId = tasksObj.data.id;
             } else {
-                var result = CreatePomodoroHabit();
+                var result =await CreatePomodoroHabit();
                 if (result.error) {
                     notify("ERROR", result.error);
                 } else {
@@ -620,7 +620,7 @@ async function FetchHabiticaData(skipTasks) {
             if (tasksObj && tasksObj.data["alias"] == Consts.PomodoroSetHabitTemplate.alias) {
                 Vars.PomodoroSetTaskId = tasksObj.data.id;
             } else {
-                var result = CreatePomodoroSetHabit();
+                var result = await CreatePomodoroSetHabit();
                 if (result.error) {
                     notify("ERROR", result.error);
                 } else {
@@ -639,34 +639,53 @@ async function FetchHabiticaData(skipTasks) {
             //UpdateRewardTask(0, false);
             return;
         }
-        UpdateRewardTask(0, true);
+        await UpdateRewardTask(0, true);
     }
 }
 
-function UpdateRewardTask(cost, create) {
+async function UpdateRewardTask(cost, create) {
     Vars.RewardTask.value = cost;
-    var xhr = new XMLHttpRequest();
-    var serverUrl = Vars.UserData.developerServerUrl && Vars.UserData.developerServerUrl !== "" ? Vars.UserData.developerServerUrl : Consts.serverUrl;
-    if (create) {
-        xhr.open("POST", serverUrl + Consts.serverPathUserTasks, false);
-    } else {
-        xhr.open("PUT", serverUrl + Consts.serverPathTask, false);
-    }
-    xhr.setRequestHeader('x-client', Consts.xClientHeader);
-    xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.setRequestHeader("x-api-user", Vars.UserData.Credentials.uid);
-    xhr.setRequestHeader("x-api-key", Vars.UserData.Credentials.apiToken);
-    var data = {
-        "data": Vars.RewardTask
-    }
-    xhr.send(JSON.stringify(Vars.RewardTask));
-    Vars.RewardTask = JSON.parse(xhr.responseText).data;
 
+    const serverUrl = Vars.UserData.developerServerUrl && Vars.UserData.developerServerUrl !== ""
+        ? Vars.UserData.developerServerUrl
+        : Consts.serverUrl;
+
+    const url = create
+        ? serverUrl + Consts.serverPathUserTasks
+        : serverUrl + Consts.serverPathTask;
+
+    const method = create ? "POST" : "PUT";
+
+    try {
+        const response = await fetch(url, {
+            method: method,
+            headers: {
+                'x-client': Consts.xClientHeader,
+                'Content-Type': 'application/json',
+                'x-api-user': Vars.UserData.Credentials.uid,
+                'x-api-key': Vars.UserData.Credentials.apiToken
+            },
+            body: JSON.stringify(Vars.RewardTask)
+        });
+
+        if (!response.ok) {
+            console.error(`[UpdateRewardTask] Server error: ${response.status} ${response.statusText}`);
+            return false;
+        }
+
+        const json = await response.json();
+        Vars.RewardTask = json.data;
+        return true;
+
+    } catch (error) {
+        console.error("[UpdateRewardTask] Fetch error:", error);
+        return false;
+    }
 }
 
-function CreatePomodoroHabit() {
+async function CreatePomodoroHabit() {
     var data = JSON.stringify(Consts.PomodoroHabitTemplate);
-    var p = JSON.parse(callAPI("POST", Consts.serverPathUserTasks, data));
+    var p = JSON.parse(await callAPI("POST", Consts.serverPathUserTasks, data));
     if (p.success != true) {
         return {
             error: 'Failed to Create Pomodoro Habit task'
@@ -676,9 +695,9 @@ function CreatePomodoroHabit() {
     }
 }
 
-function CreatePomodoroSetHabit() {
+async function CreatePomodoroSetHabit() {
     var data = JSON.stringify(Consts.PomodoroSetHabitTemplate);
-    var p = JSON.parse(callAPI("POST", Consts.serverPathUserTasks, data));
+    var p = JSON.parse(await callAPI("POST", Consts.serverPathUserTasks, data));
     if (p.success != true) {
         return {
             error: 'Failed to Create Pomodoro Set Habit task'
@@ -701,7 +720,7 @@ chrome.runtime.onConnect.addListener(function (port) {
 
 });
 
-function handleMessage(request, sender, sendResponse) {
+async function handleMessage(request, sender, sendResponse) {
 
     var response = { complete: true };
 
@@ -751,9 +770,9 @@ function executeFunctionByName(functionName /*, args */) {
 }
 
 //-------------------------------------------------------------------------------------------
-function ConfirmPurchase(site) {
+async function ConfirmPurchase(site) {
     UpdateRewardTask(site.cost, false);
-    var p = JSON.parse(callAPI("POST", Consts.serverPathTask + "/score/down"));
+    var p = JSON.parse(await callAPI("POST", Consts.serverPathTask + "/score/down"));
     if (p.success != true) {
         notify("ERROR", 'Failed to pay ' + site.cost + 'coins for ' + site.hostname + ' in Habitica');
     } else {
@@ -764,8 +783,8 @@ function ConfirmPurchase(site) {
 }
 
 //direction 'up' or 'down'
-function ScoreHabit(habitId, direction) {
-    var p = JSON.parse(callAPI("POST", '/tasks/' + habitId + '/score/' + direction));
+async function ScoreHabit(habitId, direction) {
+    var p = JSON.parse(await callAPI("POST", '/tasks/' + habitId + '/score/' + direction));
     if (p.success != true) {
         return {
             error: 'Failed to score task ' + habitId + ', doublecheck its ID'
@@ -860,10 +879,8 @@ function duringPomodoro() {
     });
     //Block current tab if necessary
     CurrentTab(blockSiteOverlay);
-
-    // if (currentAmbientAudio instanceof Audio && currentAmbientAudio.paused) {
-    //     playSound(Vars.UserData.ambientSound, Vars.UserData.ambientSoundVolume, true);
-    // }
+    playSound(Vars.UserData.ambientSound, Vars.UserData.ambientSoundVolume, true);
+    
 }
 
 function setTodaysHistogram(pomodoros, minutes) {
@@ -1083,7 +1100,7 @@ function stopTimer() {
     });
 
     CurrentTab(unblockSiteOverlay); //if current tab is blocked, unblock it
-    CurrentTab(mainSiteBlockFunction); //ConfirmPurchase check
+    CurrentTab(mainSiteBlockFunction); //Confirm Purchase check
     Vars.TimerRunnig = false;
     Vars.onBreak = false;
     Vars.onBreakExtension = false;
@@ -1187,47 +1204,12 @@ function unblockSiteOverlay(tab) {
 }
 
 //Sends Private Message to the user in Habitica (Used as notification in the mobile app!)
-function notifyHabitica(msg) {
+async function notifyHabitica(msg) {
     var data = {
         message: msg,
         toUserId: Vars.UserData.Credentials.uid
     };
-    callAPI("POST", 'members/send-private-message', JSON.stringify(data));
-}
-
-function playSound(soundFileName, volume, loop) {
-    return
-    if (soundFileName != "None") {
-        var myAudio = new Audio(chrome.runtime.getURL("audio/" + soundFileName)) || false;
-        if (myAudio) {
-            myAudio.volume = volume;
-            myAudio.play();
-        }
-        if (myAudio && loop && currentAmbientAudio != myAudio) {
-            stopAmbientSound();
-            currentAmbientAudio = myAudio;
-            myAudio.loop = true;
-        }
-    }
-}
-
-function stopAmbientSound() {
-    return 
-    if (currentAmbientAudio instanceof Audio) {
-        currentAmbientAudio.pause();
-        currentAmbientAudio.currentTime = 0;
-    }
-}
-
-var ambientSampleTimeout;
-function playAmbientSample() {
-    return
-    stopAmbientSound();
-    clearTimeout(ambientSampleTimeout);
-    setTimeout(function () {
-        playSound(Vars.UserData.ambientSound, Vars.UserData.ambientSoundVolume, true);
-    }, 100);
-    ambientSampleTimeout = setTimeout(() => { stopAmbientSound() }, 3000);
+    await callAPI("POST", 'members/send-private-message', JSON.stringify(data));
 }
 
 function isFreePassTimeNow() {
@@ -1241,4 +1223,50 @@ function isFreePassTimeNow() {
         }
     }
     return false;
+}
+
+//Requests for Sound Manager
+
+let soundTabId = null;
+
+function ensureSoundManagerTab(callback) {
+  if (soundTabId !== null) return callback(soundTabId);
+
+  chrome.tabs.create({
+    url: chrome.runtime.getURL("foreground/soundManager.html"),
+    active: false,
+    pinned: true
+  }, (tab) => {
+    soundTabId = tab.id;
+    callback(tab.id);
+  });
+}
+
+function playSound(filename, volume = 1, loop = false) {
+    ensureSoundManagerTab((tabId) => {
+        chrome.tabs.sendMessage(tabId, {
+            type: "playSound",
+            soundFileName: filename,
+            volume,
+            loop
+        });
+    });
+}
+
+function stopAmbientSound() {
+    ensureSoundManagerTab((tabId) => {
+        chrome.tabs.sendMessage(tabId, {
+            type: "stopAmbientSound"
+        });
+    });
+}
+
+function playAmbientSample(filename, volume = 1) {
+    ensureSoundManagerTab((tabId) => {
+        chrome.tabs.sendMessage(tabId, {
+            type: "playAmbientSample",
+            soundFileName: filename,
+            volume
+        });
+    });
 }
