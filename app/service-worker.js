@@ -1225,48 +1225,43 @@ function isFreePassTimeNow() {
     return false;
 }
 
-//Requests for Sound Manager
-
-let soundTabId = null;
-
-function ensureSoundManagerTab(callback) {
-  if (soundTabId !== null) return callback(soundTabId);
-
-  chrome.tabs.create({
-    url: chrome.runtime.getURL("foreground/soundManager.html"),
-    active: false,
-    pinned: true
-  }, (tab) => {
-    soundTabId = tab.id;
-    callback(tab.id);
-  });
-}
-
-function playSound(filename, volume = 1, loop = false) {
-    ensureSoundManagerTab((tabId) => {
-        chrome.tabs.sendMessage(tabId, {
-            type: "playSound",
-            soundFileName: filename,
-            volume,
-            loop
-        });
+//---Offscreen Sound Manager---
+// Ensure offscreen audio page exists
+async function ensureOffscreenDocument() {
+    const exists = await chrome.offscreen.hasDocument();
+    if (!exists) {
+      await chrome.offscreen.createDocument({
+        url: "offscreen/soundManager.html",
+        reasons: [chrome.offscreen.Reason.AUDIO_PLAYBACK],
+        justification: "Play ambient audio in background"
+      });
+    }
+  }
+  
+  // Play a sound
+  async function playSound(filename, volume = 1, loop = false) {
+    await ensureOffscreenDocument();
+    await chrome.runtime.sendMessage({
+      type: "playSound",
+      soundFileName: filename,
+      volume,
+      loop
     });
-}
-
-function stopAmbientSound() {
-    ensureSoundManagerTab((tabId) => {
-        chrome.tabs.sendMessage(tabId, {
-            type: "stopAmbientSound"
-        });
+  }
+  
+  // Stop ambient sound
+  async function stopAmbientSound() {
+    await ensureOffscreenDocument();
+    await chrome.runtime.sendMessage({ type: "stopAmbientSound" });
+  }
+  
+  // Play an ambient sample (preview for 3s)
+  async function playAmbientSample(filename, volume = 1) {
+    await ensureOffscreenDocument();
+    await chrome.runtime.sendMessage({
+      type: "playAmbientSample",
+      soundFileName: filename,
+      volume
     });
-}
-
-function playAmbientSample(filename, volume = 1) {
-    ensureSoundManagerTab((tabId) => {
-        chrome.tabs.sendMessage(tabId, {
-            type: "playAmbientSample",
-            soundFileName: filename,
-            volume
-        });
-    });
-}
+  }
+  //---END Offscreen Sound Manager---
