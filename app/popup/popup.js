@@ -264,7 +264,7 @@ function onPopupPageLoad() {
     });
 
     $('#ambientSound').on('change', function () {
-        runBackgroundFunction("playAmbientSample");
+        runBackgroundFunction("playAmbientSample",[this.value, Vars.UserData.ambientSoundVolume]);
     });
 
     $('#pomodoroEndSoundVolume').mouseup(function () {
@@ -276,7 +276,7 @@ function onPopupPageLoad() {
     });
 
     $('#ambientSoundVolume').mouseup(function () {
-        runBackgroundFunction("playAmbientSample");
+        runBackgroundFunction("playAmbientSample",[Vars.UserData.ambientSound, Vars.UserData.ambientSoundVolume]);
     });
 
     //History Update

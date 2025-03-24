@@ -21,15 +21,13 @@ function playSound(soundFileName, volume, loop) {
         }
 
         myAudio.volume = volume ?? 1;
-        myAudio.play();
+        myAudio?.play();
 
     }
 }
 
-// if (currentAmbientAudio instanceof Audio && currentAmbientAudio.paused) {
-
 function stopAmbientSound() {
-    myAudio?.pause();
+    myAudio?.pause(); // make sure no soumds leftovers are left
     if (currentAmbientAudio instanceof Audio) {
         currentAmbientAudio.pause();
         currentAmbientAudio.currentTime = 0;
