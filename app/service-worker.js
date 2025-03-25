@@ -685,7 +685,7 @@ async function UpdateRewardTask(cost, create) {
 
 async function CreatePomodoroHabit() {
     var data = JSON.stringify(Consts.PomodoroHabitTemplate);
-    var p = JSON.parse(await callAPI("POST", Consts.serverPathUserTasks, data));
+    var p = await callAPI("POST", Consts.serverPathUserTasks, data)
     if (p.success != true) {
         return {
             error: 'Failed to Create Pomodoro Habit task'
@@ -697,7 +697,7 @@ async function CreatePomodoroHabit() {
 
 async function CreatePomodoroSetHabit() {
     var data = JSON.stringify(Consts.PomodoroSetHabitTemplate);
-    var p = JSON.parse(await callAPI("POST", Consts.serverPathUserTasks, data));
+    var p = await callAPI("POST", Consts.serverPathUserTasks, data);
     if (p.success != true) {
         return {
             error: 'Failed to Create Pomodoro Set Habit task'
@@ -772,7 +772,7 @@ function executeFunctionByName(functionName /*, args */) {
 //-------------------------------------------------------------------------------------------
 async function ConfirmPurchase(site) {
     UpdateRewardTask(site.cost, false);
-    var p = JSON.parse(await callAPI("POST", Consts.serverPathTask + "/score/down"));
+    var p = await callAPI("POST", Consts.serverPathTask + "/score/down");
     if (p.success != true) {
         notify("ERROR", 'Failed to pay ' + site.cost + 'coins for ' + site.hostname + ' in Habitica');
     } else {
@@ -784,7 +784,7 @@ async function ConfirmPurchase(site) {
 
 //direction 'up' or 'down'
 async function ScoreHabit(habitId, direction) {
-    var p = JSON.parse(await callAPI("POST", '/tasks/' + habitId + '/score/' + direction));
+    var p = await callAPI("POST", '/tasks/' + habitId + '/score/' + direction)
     if (p.success != true) {
         return {
             error: 'Failed to score task ' + habitId + ', doublecheck its ID'

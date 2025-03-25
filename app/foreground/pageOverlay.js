@@ -4,7 +4,7 @@
 // Several foreground scripts can be declared
 // and injected into the same or different pages.
 
-console.log("Hbitiac bomodoro manifest V3 content script")
+console.log("Hbitiac pomodoro manifest V3 content script")
 
 var currentHostname = window.location.hostname;
 block = document.createElement('div');
@@ -17,7 +17,7 @@ document.getElementById("SitekeeperOverlay").append(btn);
 
 btn.onclick = function(){
     chrome.runtime.sendMessage({sender:"pageOverlay",msg:"Confirm_Purchase",hostname:currentHostname});
-    btn.innerHTML =  "&#10004 Loading...";
+    btn.innerHTML = "Loading...";
     setTimeout(function(){ location.reload(); }, 1500);
 };
 createReloadBtn();
