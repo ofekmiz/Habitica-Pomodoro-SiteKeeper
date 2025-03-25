@@ -34,7 +34,7 @@ var Consts = {
         type: "reward"
     },
     PomodoroHabitTemplate: {
-        text: ":tomato: Pomodoro",
+        text: "Pomodoro",
         type: "habit",
         alias: "sitepassPomodoro",
         notes: "Habit utilized by Habitica SiteKeeper. " +
@@ -42,7 +42,7 @@ var Consts = {
         priority: 1
     },
     PomodoroSetHabitTemplate: {
-        text: ":tomato::tomato::tomato: Pomodoro Combo!",
+        text: "Pomodoro Combo!",
         type: "habit",
         alias: "sitepassPomodoroSet",
         notes: "Habit utilized by Habitica SiteKeeper. " +
@@ -685,7 +685,7 @@ async function UpdateRewardTask(cost, create) {
 
 async function CreatePomodoroHabit() {
     var data = JSON.stringify(Consts.PomodoroHabitTemplate);
-    var p = await callAPI("POST", Consts.serverPathUserTasks, data)
+    var p = await callAPI("POST", Consts.serverPathUserTasks, Consts.PomodoroHabitTemplate)
     if (p.success != true) {
         return {
             error: 'Failed to Create Pomodoro Habit task'
@@ -697,7 +697,7 @@ async function CreatePomodoroHabit() {
 
 async function CreatePomodoroSetHabit() {
     var data = JSON.stringify(Consts.PomodoroSetHabitTemplate);
-    var p = await callAPI("POST", Consts.serverPathUserTasks, data);
+    var p = await callAPI("POST", Consts.serverPathUserTasks, Consts.PomodoroSetHabitTemplate);
     if (p.success != true) {
         return {
             error: 'Failed to Create Pomodoro Set Habit task'
@@ -1209,7 +1209,7 @@ async function notifyHabitica(msg) {
         message: msg,
         toUserId: Vars.UserData.Credentials.uid
     };
-    await callAPI("POST", 'members/send-private-message', JSON.stringify(data));
+    await callAPI("POST", 'members/send-private-message', data);
 }
 
 function isFreePassTimeNow() {
