@@ -643,45 +643,49 @@ async function FetchHabiticaData(skipTasks) {
     }
 }
 
+//WAS HERE WIP
 async function UpdateRewardTask(cost, create) {
     Vars.RewardTask.value = cost;
-
+  
     const serverUrl = Vars.UserData.developerServerUrl && Vars.UserData.developerServerUrl !== ""
-        ? Vars.UserData.developerServerUrl
-        : Consts.serverUrl;
-
+      ? Vars.UserData.developerServerUrl
+      : Consts.serverUrl;
+  
     const url = create
-        ? serverUrl + Consts.serverPathUserTasks
-        : serverUrl + Consts.serverPathTask;
-
+      ? serverUrl + Consts.serverPathUserTasks
+      : `${serverUrl}/tasks/${Vars.RewardTask.id}`; //PUT to specific task
+  
     const method = create ? "POST" : "PUT";
-
+  
     try {
-        const response = await fetch(url, {
-            method: method,
-            headers: {
-                'x-client': Consts.xClientHeader,
-                'Content-Type': 'application/json',
-                'x-api-user': Vars.UserData.Credentials.uid,
-                'x-api-key': Vars.UserData.Credentials.apiToken
-            },
-            body: JSON.stringify(Vars.RewardTask)
-        });
-
-        if (!response.ok) {
-            console.error(`[UpdateRewardTask] Server error: ${response.status} ${response.statusText}`);
-            return false;
-        }
-
-        const json = await response.json();
-        Vars.RewardTask = json.data;
-        return true;
-
-    } catch (error) {
-        console.error("[UpdateRewardTask] Fetch error:", error);
+      console.log(`[UpdateRewardTask] ${method} to ${url}`, Vars.RewardTask);
+  
+      const response = await fetch(url, {
+        method,
+        headers: {
+          'x-client': Consts.xClientHeader,
+          'Content-Type': 'application/json',
+          'x-api-user': Vars.UserData.Credentials.uid,
+          'x-api-key': Vars.UserData.Credentials.apiToken
+        },
+        body: JSON.stringify(Vars.RewardTask)
+      });
+  
+      if (!response.ok) {
+        const text = await response.text();
+        console.error(`[UpdateRewardTask] Server error: ${response.status} ${response.statusText}`, text);
         return false;
+      }
+  
+      const json = await response.json();
+      Vars.RewardTask = json.data; //updated task object (with id)
+      return true;
+  
+    } catch (error) {
+      console.error("[UpdateRewardTask] Fetch error:", error);
+      return false;
     }
-}
+  }
 
 async function CreatePomodoroHabit() {
     var data = JSON.stringify(Consts.PomodoroHabitTemplate);
