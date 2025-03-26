@@ -72,6 +72,7 @@ var Vars = {
     Timer: "00:00",
     TimerValue: 0, //in seconds
     TimerRunnig: false,
+    TimerFreeze: false, //(Pause)
     onBreak: false,
     onBreakExtension: false,
     PomoSetCounter: 0,
@@ -812,7 +813,10 @@ chrome.commands.onCommand.addListener(function (command) {
 });
 
 function ActivatePomodoro() {
-    if (Vars.onBreak && !Vars.TimerRunnig) {
+    if(Vars.TimerFreeze){
+        pomoUnFreeze();
+    }
+    else if (Vars.onBreak && !Vars.TimerRunnig) {
         startBreak();
     }
     else if (!Vars.TimerRunnig || Vars.onBreak || Vars.onBreakExtension) {
@@ -837,6 +841,7 @@ var timerInterval; //Used for timer interval in startTimer() function.
  * @param {function} endTimerFunction this function runs when timer reachs 00:00.
  */
 function startTimer(duration, duringTimerFunction, endTimerFunction) {
+
     var timer = duration;
     var duringTimer = function () {
         duringTimerFunction()
@@ -844,7 +849,7 @@ function startTimer(duration, duringTimerFunction, endTimerFunction) {
     var endTimer = function () {
         endTimerFunction()
     };
-
+    
     timerInterval = setInterval(function () {
 
         Vars.Timer = secondsToTimeString(timer);
@@ -867,6 +872,7 @@ function startPomodoro() {
     var duration = 60 * Vars.UserData.PomoDurationMins;
     Vars.TimerRunnig = true;
     Vars.onBreak = false;
+    Vars.TimerFreeze = false;
     startTimer(duration, duringPomodoro, pomodoroEnds);
     muteBlockedtabs();
     playSound(Vars.UserData.ambientSound, Vars.UserData.ambientSoundVolume, true);
@@ -885,7 +891,6 @@ function duringPomodoro() {
     //Block current tab if necessary
     CurrentTab(blockSiteOverlay);
     playSound(Vars.UserData.ambientSound, Vars.UserData.ambientSoundVolume, true);
-    
 }
 
 function setTodaysHistogram(pomodoros, minutes) {
@@ -964,6 +969,7 @@ async function pomodoroEnds() {
 
     //play sound
     playSound(Vars.UserData.pomodoroEndSound, Vars.UserData.pomodoroEndSoundVolume, false);
+    Vars.TimerFreeze = false;
 }
 
 //start break session - duration in seconds
@@ -978,6 +984,7 @@ function startBreak() {
     stopTimer();
     Vars.TimerRunnig = true;
     Vars.onBreak = true;
+    Vars.TimerFreeze = false;
     startTimer(duration, duringBreak, breakEnds);
 }
 
@@ -1042,6 +1049,7 @@ function breakEnds() {
 function startBreakExtension(duration) {
     stopTimer();
     Vars.TimerRunnig = true;
+    Vars.TimerFreeze = false;
     Vars.onBreakExtension = true;
     Vars.onBreak = true;
     var endFunc = Vars.UserData.ResetPomoAfterBreak ? (() => { pomodoroInterupted(true) }) : pomodoroInterupted;
@@ -1110,12 +1118,25 @@ function stopTimer() {
     Vars.onBreak = false;
     Vars.onBreakExtension = false;
     Vars.onManualTakeBreak = false;
+    Vars.TimerFreeze = false;
 
 }
 
-//Pause timer
+//Pause timer (not like freeze, e,g pause before starting break)
 function pauseTimer() {
     clearInterval(timerInterval);
+}
+
+//Freeze pomodoro timer (pause)
+function pomoFreeze() {
+    Vars.TimerFreeze = true;
+    pauseTimer();
+    stopAmbientSound();
+}
+
+function pomoUnFreeze(){
+    Vars.TimerFreeze=false;
+    startTimer(Vars.TimerValue, duringPomodoro, pomodoroEnds);
 }
 
 //Stop timer - reset to start position
@@ -1123,6 +1144,7 @@ function pomoReset() {
     stopAmbientSound();
     stopTimer();
     Vars.PomoSetCounter = 0; //Reset Pomo set Count
+    Vars.TimerFreeze = false;
 }
 
 //End pomodoro and start a break
@@ -1134,7 +1156,10 @@ function skipToBreak() {
     Vars.PomoSetCounter++; //Updae set counter
     startBreak();
     notify(title, msg);
+    Vars.TimerFreeze = false;
 }
+
+
 
 //Create Chrome Notification
 function notify(title, message, callback) {

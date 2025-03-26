@@ -686,26 +686,35 @@ function updateTimerDisplay() {
         $("#PomoFreeze").hide();
         $("#SiteTable tbody").toggleClass('blocked', false);
     }
-    else if (Vars.TimerRunnig) { //---Pomodoro running---
+    else if (Vars.TimerRunnig) { //---Pomodoro running or freeze---
+        
         $(".unBlockSite").hide();
-        $('#pomodoro').css("background-color", "green");
-        $('#pomodoro').css("color", "lightgreen");
-        tomatoSetClass("tomatoProgress");
         $("#SiteTable tbody").toggleClass('blocked', true);
         $("#PomoStop").hide();
         $("#QuickSettings").hide();
 
-        if (Vars.UserData.showSkipToBreak) {
+        if(Vars.TimerFreeze){
+            tomatoSetClass("tomatoFreeze");
+            $('#pomodoro').css("background-color", "lightsteelblue");
+            $('#pomodoro').css("color", "steelblue");
+        }else{
+            tomatoSetClass("tomatoProgress");
+            $('#pomodoro').css("background-color", "green");
+            $('#pomodoro').css("color", "lightgreen");
+        }
+
+        if (Vars.UserData.showSkipToBreak && !Vars.TimerFreeze) {
             $("#SkipToBreak").show();
         } else {
             $("#SkipToBreak").hide();
         }
         
-        if (Vars.UserData.showFreeze) {
+        if (Vars.UserData.showFreeze && !Vars.TimerFreeze) {
             $("#PomoFreeze").show();
         } else {
             $("#PomoFreeze").hide();
         }
+
     } else { //---pomodoro not running---
         $(".unBlockSite").show();
         $("#QuickSettings").show();
@@ -719,7 +728,7 @@ function updateTimerDisplay() {
     }
 }
 
-var TOMATO_CLASSES = ["tomatoProgress", "tomatoWait", "tomatoBreak", "tomatoWin", "tomatoWarning"];
+var TOMATO_CLASSES = ["tomatoProgress", "tomatoWait", "tomatoBreak", "tomatoWin", "tomatoWarning","tomatoFreeze"];
 function tomatoSetClass(className) {
     TOMATO_CLASSES.forEach(function (entry) {
         $('.tomato').toggleClass(entry, false);

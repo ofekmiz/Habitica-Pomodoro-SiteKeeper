@@ -5,8 +5,6 @@ let myAudio = null;
 
 function playSound(soundFileName, volume, loop) {
     if (soundFileName && soundFileName !== "None") {
-        
-        myAudio?.pause();
         myAudio = new Audio(chrome.runtime.getURL("../audio/" + soundFileName));
         
         console.log(loop,myAudio?.src,currentAmbientAudio?.src,currentAmbientAudio?.src == myAudio?.src,currentAmbientAudio?.paused)
@@ -15,7 +13,7 @@ function playSound(soundFileName, volume, loop) {
             return;
         }  
         
-        if (loop && currentAmbientAudio?.src !== myAudio?.src) {
+        if (loop && currentAmbientAudio?.src !== myAudio?.src || currentAmbientAudio.paused) {
             stopAmbientSound();
             currentAmbientAudio = myAudio;
         }
