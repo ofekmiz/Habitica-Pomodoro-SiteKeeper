@@ -4,7 +4,7 @@
 // Several foreground scripts can be declared
 // and injected into the same or different pages.
 
-console.log("Hbitiac pomodoro manifest V3 content script")
+console.log("Habitiaca pomodoro manifest V3 content script")
 
 var currentHostname = window.location.hostname;
 block = document.createElement('div');
@@ -20,7 +20,7 @@ btn.onclick = function(){
     btn.innerHTML = "Loading...";
     setTimeout(function(){ location.reload(); }, 1500);
 };
-createReloadBtn();
+
 
 function createReloadBtn(){
     var reload = document.createElement('div');
