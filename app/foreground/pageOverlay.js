@@ -21,7 +21,7 @@ btn.onclick = function(){
     setTimeout(function(){ location.reload(); }, 1500);
 };
 
-
+//Optional
 function createReloadBtn(){
     var reload = document.createElement('div');
     reload.setAttribute("id", "reload_btn");

@@ -118,6 +118,7 @@ function UserSettings(copyFrom) {
     this.TranspartOverlay = copyFrom ? copyFrom.TranspartOverlay : true;
     this.TickSound = copyFrom ? copyFrom.TickSound : false;
     this.showSkipToBreak = copyFrom ? copyFrom.showSkipToBreak : false;
+    this.showFreeze = copyFrom ? copyFrom.showSkipToBreak : false;
     this.pomodoroEndSound = copyFrom ? copyFrom.pomodoroEndSound : "None";
     this.breakEndSound = copyFrom ? copyFrom.breakEndSound : "None";
     this.ambientSound = copyFrom ? copyFrom.ambientSound : "None";

@@ -181,6 +181,10 @@ function onPopupPageLoad() {
         runBackgroundFunction("skipToBreak");
     });
 
+    //Pomodoro FREEZE button
+    $("#PomoFreeze").click(function () {
+        runBackgroundFunction("pomoFreeze");
+    });
 
     //Refresh stats button
     $("#RefreshStats").click(function () {
@@ -447,6 +451,7 @@ function CredentialFields() {
     $("#TranspartOverlay").prop('checked', Vars.UserData.TranspartOverlay);
     $("#TickSound").prop('checked', Vars.UserData.TickSound);
     $("#showSkipToBreak").prop('checked', Vars.UserData.showSkipToBreak);
+    $("#showFreeze").prop('checked', Vars.UserData.showFreeze);
     $("#pomodoroEndSound").val(Vars.UserData.pomodoroEndSound);
     $("#breakEndSound").val(Vars.UserData.breakEndSound);
     $("#ambientSound").val(Vars.UserData.ambientSound);
@@ -504,6 +509,7 @@ function CredentialFields() {
     $("#TranspartOverlay").click(function () { updateCredentials(); });
     $("#TickSound").click(function () { updateCredentials(); });
     $("#showSkipToBreak").click(function () { updateCredentials(); });
+    $("#showFreeze").click(function () { updateCredentials(); });
     $("#pomodoroEndSound").click(function () { updateCredentials(); });
     $("#breakEndSound").click(function () { updateCredentials(); });
     $("#ambientSound").click(function () { updateCredentials(); });
@@ -618,6 +624,7 @@ function updateCredentials() {
     Vars.UserData.TranspartOverlay = $("#TranspartOverlay").prop('checked');
     Vars.UserData.TickSound = $("#TickSound").prop('checked');
     Vars.UserData.showSkipToBreak = $("#showSkipToBreak").prop('checked');
+    Vars.UserData.showFreeze = $("#showFreeze").prop('checked');
     Vars.UserData.pomodoroEndSound = $("#pomodoroEndSound").val();
     Vars.UserData.breakEndSound = $("#breakEndSound").val();
     Vars.UserData.ambientSound = $("#ambientSound").val();
@@ -655,6 +662,7 @@ function updateTimerDisplay() {
             $("#PomoStop").show();
         }
         $("#SkipToBreak").hide();
+        $("#PomoFreeze").hide();
     }
     else if (Vars.onBreak) {
         $(".unBlockSite").show();
@@ -675,6 +683,7 @@ function updateTimerDisplay() {
             $("#PomoStop").hide();
         }
         $("#SkipToBreak").hide();
+        $("#PomoFreeze").hide();
         $("#SiteTable tbody").toggleClass('blocked', false);
     }
     else if (Vars.TimerRunnig) { //---Pomodoro running---
@@ -691,6 +700,12 @@ function updateTimerDisplay() {
         } else {
             $("#SkipToBreak").hide();
         }
+        
+        if (Vars.UserData.showFreeze) {
+            $("#PomoFreeze").show();
+        } else {
+            $("#PomoFreeze").hide();
+        }
     } else { //---pomodoro not running---
         $(".unBlockSite").show();
         $("#QuickSettings").show();
@@ -700,6 +715,7 @@ function updateTimerDisplay() {
         $("#SiteTable tbody").toggleClass('blocked', false);
         $("#PomoStop").hide();
         $("#SkipToBreak").hide();
+        $("#PomoFreeze").hide();
     }
 }
 
