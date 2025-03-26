@@ -916,7 +916,7 @@ function clearHistogram() {
 }
 
 //runs When Pomodoro Timer Ends
-function pomodoroEnds() {
+async function pomodoroEnds() {
 
     stopTimer();
     stopAmbientSound();
@@ -926,8 +926,8 @@ function pomodoroEnds() {
     var setComplete = Vars.PomoSetCounter >= Vars.UserData.PomoSetNum - 1;
     //If Pomodoro / Pomodoro Set Habit + is enabled
     if (Vars.UserData.PomoHabitPlus || (setComplete && Vars.UserData.PomoSetHabitPlus)) {
-        FetchHabiticaData(true);
-        var result = (setComplete && Vars.UserData.PomoSetHabitPlus) ? ScoreHabit(Vars.PomodoroSetTaskId, 'up') : ScoreHabit(Vars.PomodoroTaskId, 'up');
+        await FetchHabiticaData(true);
+        var result = (setComplete && Vars.UserData.PomoSetHabitPlus) ? await ScoreHabit(Vars.PomodoroSetTaskId, 'up') : await ScoreHabit(Vars.PomodoroTaskId, 'up');
         if (!result.error) {
             var deltaGold = (result.gp - Vars.Monies).toFixed(2);
             var deltaExp = (result.exp - Vars.Exp).toFixed(2);
@@ -1062,7 +1062,7 @@ function duringBreakExtension() {
 }
 
 //runs when pomodoro is interupted (stoped before timer ends/break extension over)
-function pomodoroInterupted(breakPomoStreak) {
+async function pomodoroInterupted(breakPomoStreak) {
 
     stopAmbientSound();
 
@@ -1080,8 +1080,8 @@ function pomodoroInterupted(breakPomoStreak) {
     }
 
     if (Vars.UserData.PomoHabitMinus || failedBreakExtension) {
-        FetchHabiticaData(true);
-        var result = ScoreHabit(Vars.PomodoroTaskId, 'down');
+        await FetchHabiticaData(true);
+        var result = await ScoreHabit(Vars.PomodoroTaskId, 'down');
         var msg = "";
         if (!result.error) {
             var deltaHp = (result.hp - Vars.Hp).toFixed(2);
