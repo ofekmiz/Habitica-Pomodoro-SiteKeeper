@@ -27,10 +27,6 @@
     "background": {
         "service_worker": "service-worker.js"
     },
-    "content_scripts": [{
-        "js": ["foreground/pageOverlay.js"],
-        "matches": ["<all_urls>"]
-    }],
     "web_accessible_resources": [{
         "resources":[
             "img/siteKeeper.png",

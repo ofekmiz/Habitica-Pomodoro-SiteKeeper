@@ -124,17 +124,24 @@ function onPopupPageLoad() {
 
     //Menu
     $(".menu-item").change(function () {
+       
         window.scrollTo(0, 0);
         var selected = $(this).find("input");
+        console.log( "HIII");
         var menu_container = $(this).attr("menu-container-id");
-        $(".menu-item label input").not(selected).attr("checked", false);
+
         $(".menu-container").hide();
         $(".menu-item").removeClass("selected");
         $("#SaveButton").hide();
+
         if ($(selected).is(':checked')) {
+            $(".menu-item label input").prop( "checked", false );
+            selected.prop( "checked", true );  
             $("#" + menu_container).fadeIn();
             $("#SaveButton").slideDown();
             $(this).addClass("selected");
+        }else{
+            $(".menu-item label input").prop( "checked", false );
         }
         if (menu_container == "Settings") {
             $("#SaveButton").html("<span>&#9998;&nbsp;</span>SAVE &nbsp;&nbsp;");
