@@ -142,6 +142,7 @@ function onPopupPageLoad() {
             $(this).addClass("selected");
         }else{
             $(".menu-item label input").prop( "checked", false );
+            $("#SaveButton").hide();
         }
         if (menu_container == "Settings") {
             $("#SaveButton").html("<span>&#9998;&nbsp;</span>SAVE &nbsp;&nbsp;");
