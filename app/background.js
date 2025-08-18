@@ -447,6 +447,14 @@ function callAPI(method, route, postData) {
     if (!Vars.UserData.ConnectHabitica) {
         return null;
     }
+    
+    // Check if credentials are properly set
+    if (!Vars.UserData.Credentials || !Vars.UserData.Credentials.uid || !Vars.UserData.Credentials.apiToken || 
+        Vars.UserData.Credentials.uid.trim() === "" || Vars.UserData.Credentials.apiToken.trim() === "") {
+        console.log("Habitica API: Cannot make API call - credentials not configured");
+        return null;
+    }
+    
     var serverUrl = Vars.UserData.developerServerUrl && Vars.UserData.developerServerUrl !== "" ? Vars.UserData.developerServerUrl : Consts.serverUrl;
     return callHabiticaAPI(serverUrl + route, Consts.xClientHeader, Vars.UserData.Credentials, method, postData);
 }
@@ -455,11 +463,36 @@ function getData(silent, credentials, serverPath) {
     if (!Vars.UserData.ConnectHabitica) {
         return null;
     }
+    
+    // Check if credentials are properly set
+    if (!credentials || !credentials.uid || !credentials.apiToken || 
+        credentials.uid.trim() === "" || credentials.apiToken.trim() === "") {
+        if (!silent) {
+            chrome.notifications.create(Consts.NotificationId, {
+                type: "basic",
+                iconUrl: "img/icon.png",
+                title: "Habitica Connection Error",
+                message: "Please configure your Habitica User ID and API Token in the extension settings."
+            },
+                function () { });
+        }
+        return null;
+    }
+    
     var serverUrl = Vars.UserData.developerServerUrl && Vars.UserData.developerServerUrl !== "" ? Vars.UserData.developerServerUrl : Consts.serverUrl;
     var xhr = getHabiticaData(serverUrl + serverPath, Consts.xClientHeader, credentials);
     Vars.ServerResponse = xhr.status;
     if (xhr.status == 401) {
-        console.log("Habitica Credentials Error 404");
+        console.log("Habitica Credentials Error 401");
+        if (!silent) {
+            chrome.notifications.create(Consts.NotificationId, {
+                type: "basic",
+                iconUrl: "img/icon.png",
+                title: "Habitica Authentication Error",
+                message: "Invalid User ID or API Token. Please check your credentials in the extension settings."
+            },
+                function () { });
+        }
         return null;
     } else if (xhr.status != 200) {
         if (!silent) {
@@ -554,6 +587,13 @@ function FetchHabiticaData(skipTasks) {
 }
 
 function UpdateRewardTask(cost, create) {
+    // Check if credentials are properly set
+    if (!Vars.UserData.Credentials || !Vars.UserData.Credentials.uid || !Vars.UserData.Credentials.apiToken || 
+        Vars.UserData.Credentials.uid.trim() === "" || Vars.UserData.Credentials.apiToken.trim() === "") {
+        console.log("Habitica API: Cannot update reward task - credentials not configured");
+        return;
+    }
+    
     Vars.RewardTask.value = cost;
     var xhr = new XMLHttpRequest();
     var serverUrl = Vars.UserData.developerServerUrl && Vars.UserData.developerServerUrl !== "" ? Vars.UserData.developerServerUrl : Consts.serverUrl;
