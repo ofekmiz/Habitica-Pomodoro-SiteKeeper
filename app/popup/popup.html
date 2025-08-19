@@ -7,14 +7,14 @@
 
         <title>Habitica SiteKeeper</title>
         <!-- CSS -->
-        <link rel="stylesheet" type="text/css" href="app.css">
+        <link rel="stylesheet" type="text/css" href="popup.css">
         <link href="https://fonts.googleapis.com/css2?family=Orbitron&family=Oxanium:wght@200;300&display=swap"
                 rel="stylesheet">
         <!-- SCRIPTS -->
-        <script src="jquery.min.js"></script>
-        <script src="Chart.bundle.min.js"></script>
-        <script src="utility.js"></script>
-        <script src="backgroundMessaging.js"></script>
+        <script src="../library/jquery.min.js"></script>
+        <script src="../library/Chart.bundle.min.js"></script>
+        <script src="../library/utility.js"></script>
+        <script src="../library/communication.js"></script>
         <script src="popup.js"></script>
 
 </head>
@@ -71,6 +71,10 @@
                                         <label><input type="checkbox" id="showSkipToBreak">Skip to break button</label>
                                         <span class="small_icon help_icon tooltip"
                                                 data-tip=" shows &#9658; button that lets you skip the current pomodoro session (with no habitica rewards)"></span>
+                                        <br>
+                                        <label><input type="checkbox" id="showFreeze">Freeze pomodoro button (pause)</label>
+                                        <span class="small_icon help_icon tooltip"
+                                                data-tip=" shows &#10052; button that lets you freeze(pause) the pomodoro timer"></span>
                                         <br>
                                         <hr>
                                         <label><b>Short Break duration </b><input id="BreakDuration"
@@ -244,7 +248,7 @@
                                         your data.
                                 </span>
                                 <div class="HistoryFlex">
-                                        <a class="settingButton" href="FullHistory.html" target="_blank"
+                                        <a class="settingButton" href="fullHistory.html" target="_blank"
                                                 class="settingButton" id="BackupHistogram">
                                                 <span style="margin-top:-1px" class="fullScreen_Icon small_icon"></span>
                                                 &nbsp;&nbsp;Full History & Backup
@@ -366,10 +370,13 @@
 
                         <!-- Pomodoro Timer -->
                         <div id="pomodoro">
+                                <div id="TopLeftPomoButtons">
+                                        <div id="PomoStop" title="End Session">X</div>
+                                        <div id="SkipToBreak" title="Skip to break">&#9658;&#9658;</div>
+                                        <div id="PomoFreeze" title="Freeze Pomodoro">&#10052;</div>
+                                </div>
+                                <div id="PopupNewWindow" title="Open in new window"></div>
                                 <div id="QuickSettings"></div>
-                                <div id="PopupNewWindow" title="open in new window"></div>
-                                <div id="PomoStop">X</div>
-                                <div id="SkipToBreak">&#9658;&#9658;</div>
                                 <span id="PomoButton" data-pomodoros="0" class="tomato"></span><span id="Time"
                                         data-pomodoros-set="0/4">00:00</span>
                         </div>

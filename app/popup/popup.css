@@ -7,7 +7,7 @@
 @font-face {
     font-family: 'pixeled';
     /* src: url('fonts/pixeled/pixeled-webfont.woff2') format('woff2'), url('fonts/pixeled/pixeled-webfont.woff') format('woff'); */
-    src: url('fonts/pixeled/Simpletown.ttf') format('truetype');
+    src: url('../fonts/pixeled/Simpletown.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
@@ -176,7 +176,7 @@ a {
 }
 
 .warning_icon {
-    background-image: url(img/warning.png);
+    background-image: url(../img/warning.png);
     background-repeat: no-repeat;
     width: 24px;
     height: 24px;
@@ -189,7 +189,7 @@ a {
 }
 
 .gold_icon {
-    background-image: url(img/coin.png);
+    background-image: url(../img/coin.png);
     background-repeat: no-repeat;
     width: 25px;
     height: 25px;
@@ -201,7 +201,7 @@ a {
 }
 
 .buy .gold_icon {
-    background-image: url(img/coin.png);
+    background-image: url(../img/coin.png);
     background-repeat: no-repeat;
     width: 16px;
     height: 16px;
@@ -242,7 +242,7 @@ a {
 }
 
 .hp_icon {
-    background-image: url(img/heart.png);
+    background-image: url(../img/heart.png);
     background-repeat: no-repeat;
     width: 25px;
     height: 25px;
@@ -254,7 +254,7 @@ a {
 }
 
 .refresh_icon {
-    background-image: url(img/refresh.png);
+    background-image: url(../img/refresh.png);
     background-repeat: no-repeat;
     width: 25px;
     height: 25px;
@@ -305,29 +305,29 @@ a.delete {
 }
 
 .block_Icon {
-    background-image: url(img/stop.png);
+    background-image: url(../img/stop.png);
     margin-right: 6px;
 }
 
 .unblock_Icon {
-    background-image: url(img/tick.png);
+    background-image: url(../img/tick.png);
     margin-right: 6px;
 }
 
 .bug_icon {
-    background-image: url(img/bug.png);
+    background-image: url(../img/bug.png);
 }
 
 .settings_icon {
-    background-image: url(img/settings.png);
+    background-image: url(../img/settings.png);
 }
 
 .history_icon {
-    background-image: url(img/history.png);
+    background-image: url(../img/history.png);
 }
 
 .help_icon {
-    background-image: url(img/question.png);
+    background-image: url(../img/question.png);
 }
 
 .help_icon.tooltip {
@@ -335,19 +335,19 @@ a.delete {
 }
 
 .rate_icon {
-    background-image: url(img/star.png);
+    background-image: url(../img/star.png);
 }
 
 .donate_icon {
-    background-image: url(img/coffee.png);
+    background-image: url(../img/coffee.png);
 }
 
 .trash_icon {
-    background-image: url(img/trash2.png);
+    background-image: url(../img/trash2.png);
 }
 
 .habitica_small_icon {
-    background-image: url(img/habitica_small.png);
+    background-image: url(../img/habitica_small.png);
 }
 
 .habitica_small_icon.small_icon, .help_icon.tooltip {
@@ -360,13 +360,13 @@ a.delete {
 }
 
 .donate_btn_icon {
-    background-image: url(img/Coffee_btn.png);
+    background-image: url(../img/Coffee_btn.png);
     margin-left: -5px;
     margin-top: 2px;
 }
 
 .habitica_icon {
-    background-image: url(img/habitica.png);
+    background-image: url(../img/habitica.png);
     background-repeat: no-repeat;
     width: 25px;
     height: 25px;
@@ -424,15 +424,15 @@ a.delete {
 }
 
 .tomatoProgress {
-    background-image: url(img/pomodoroProgress.png);
+    background-image: url(../img/pomodoroProgress.png);
 }
 
 .tomatoProgress:hover {
-    background-image: url(img/pomodoroQuit.png);
+    background-image: url(../img/pomodoroQuit.png);
 }
 
 .tomatoWait {
-    background-image: url(img/pomodoroWait.png);
+    background-image: url(../img/pomodoroWait.png);
 }
 
 .tomatoWait:not(:hover):after, .tomatoWin:not(:hover):after {
@@ -447,79 +447,103 @@ a.delete {
 }
 
 .tomatoWait:hover {
-    background-image: url(img/pomodoroStart.png);
+    background-image: url(../img/pomodoroStart.png);
 }
 
 .tomatoBreak {
-    background-image: url(img/pomodoroBreak.png);
+    background-image: url(../img/pomodoroBreak.png);
 }
 
 .tomatoBreak:hover {
-    background-image: url(img/pomodoroStart.png);
+    background-image: url(../img/pomodoroStart.png);
 }
 
 .tomatoWin {
-    background-image: url(img/pomodoroWin.png);
+    background-image: url(../img/pomodoroWin.png);
 }
 
 .tomatoWin:hover {
-    background-image: url(img/pomodoroBreak.png);
+    background-image: url(../img/pomodoroBreak.png);
 }
 
 .tomatoWarning {
-    background-image: url(img/pomodoroWarning.png);
+    background-image: url(../img/pomodoroWarning.png);
 }
 
 .tomatoWarning:hover {
-    background-image: url(img/pomodoroStart.png);
+    background-image: url(../img/pomodoroStart.png);
+}
+
+.tomatoFreeze {
+    background-image: url(../img/pomodoroFreeze.png);
+}
+
+.tomatoFreeze:hover {
+    background-image: url(../img/pomodoroStart.png);
 }
 
 #PomoStop:hover+.tomatoBreak, #PomoStop:hover+.tomatoWin {
-    background-image: url(img/pomodoroProtectStop.png);
+    background-image: url(../img/pomodoroProtectStop.png);
 }
 
-#PomoStop:hover+.tomatoWin:after {
-    content: "";
+div#TopLeftPomoButtons {
+    display: flex;
+    width: 100%;
+    height: 25px;
+    position: absolute;
+    margin-top: -10px;
+    margin-left: -8px;
+    align-items: center;
+    gap:5px;
 }
+
 
 #PomoStop {
     display: block;
-    width: 10px;
+    width: 20px;
     cursor: pointer;
-    position: absolute;
 }
 
 #PomoStop:hover {
     color: white;
 }
 
-#PomoStop, #SkipToBreak {
-    margin-left: -5px;
-    margin-top: -5px
+#SkipToBreak:hover++.tomatoProgress {
+    background-image: url(../img/pomodoroBreak.png);
 }
 
-#SkipToBreak:hover+.tomatoProgress {
-    background-image: url(img/pomodoroBreak.png);
+#PomoFreeze:hover+.tomatoProgress {
+    background-image: url(../img/pomodoroFreeze.png);
 }
 
-#SkipToBreak:hover+.tomatoWin:after {
+#SkipToBreak:hover+.tomatoWin:after,#PomoFreeze:hover+.tomatoWin:after {
     content: "";
 }
 
-#SkipToBreak {
+#PomoStop:hover+.tomatoWin:after {
+    content: "";
+}
+
+#SkipToBreak{
     display: block;
-    width: 10px;
+    width: 20px;
     cursor: pointer;
-    position: absolute;
     letter-spacing: -7px;
 }
 
-#SkipToBreak:hover {
+#PomoFreeze {
+    display: block;
+    width: 18px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+#SkipToBreak:hover, #PomoFreeze:hover {
     color: white;
 }
 
 #QuickSettings {
-    background-image: url(img/quickSettings.png);
+    background-image: url(../img/quickSettings.png);
     background-size: 18px;
     background-repeat: no-repeat;
     background-position: center;
@@ -573,7 +597,7 @@ a.delete {
     width: 100%;
     height: 62px;
     position: absolute;
-    background-image: url(img/chainLock.png);
+    background-image: url(../img/chainLock.png);
     background-repeat: no-repeat;
     background-position-x: center;
 }
@@ -1295,27 +1319,27 @@ input[name="innerMenu"]:checked+label {
 }
 
 label[for="MenuHabiticaSettings"] .innerMenuIcon {
-    background-image: url(img/habitica2.png);
+    background-image: url(../img/habitica2.png);
 }
 
 label[for="MenuBlockerSettings"] .innerMenuIcon {
-    background-image: url(img/Shield.png);
+    background-image: url(../img/Shield.png);
 }
 
 label[for="MenuTimerSettings"] .innerMenuIcon {
-    background-image: url(img/Timer.png);
+    background-image: url(../img/Timer.png);
 }
 
 input:checked+label[for="MenuHabiticaSettings"] .innerMenuIcon {
-    background-image: url(img/habitica3.png);
+    background-image: url(../img/habitica3.png);
 }
 
 input:checked+label[for="MenuBlockerSettings"] .innerMenuIcon {
-    background-image: url(img/Shield2.png);
+    background-image: url(../img/Shield2.png);
 }
 
 input:checked+label[for="MenuTimerSettings"] .innerMenuIcon {
-    background-image: url(img/Timer2.png);
+    background-image: url(../img/Timer2.png);
 }
 
 div.HistoryFlex {
@@ -1530,7 +1554,7 @@ input#selectHistogramFile:hover:before {
 }
 
 .settingButton:hover .trash_icon {
-    background-image: url(img/trash3.png);
+    background-image: url(../img/trash3.png);
 }
 
 #WeekdayChartTitle {

@@ -124,17 +124,25 @@ function onPopupPageLoad() {
 
     //Menu
     $(".menu-item").change(function () {
+       
         window.scrollTo(0, 0);
         var selected = $(this).find("input");
+        console.log( "HIII");
         var menu_container = $(this).attr("menu-container-id");
-        $(".menu-item label input").not(selected).attr("checked", false);
+
         $(".menu-container").hide();
         $(".menu-item").removeClass("selected");
         $("#SaveButton").hide();
+
         if ($(selected).is(':checked')) {
+            $(".menu-item label input").prop( "checked", false );
+            selected.prop( "checked", true );  
             $("#" + menu_container).fadeIn();
             $("#SaveButton").slideDown();
             $(this).addClass("selected");
+        }else{
+            $(".menu-item label input").prop( "checked", false );
+            $("#SaveButton").hide();
         }
         if (menu_container == "Settings") {
             $("#SaveButton").html("<span>&#9998;&nbsp;</span>SAVE &nbsp;&nbsp;");
@@ -181,6 +189,10 @@ function onPopupPageLoad() {
         runBackgroundFunction("skipToBreak");
     });
 
+    //Pomodoro FREEZE button
+    $("#PomoFreeze").click(function () {
+        runBackgroundFunction("pomoFreeze");
+    });
 
     //Refresh stats button
     $("#RefreshStats").click(function () {
@@ -237,7 +249,7 @@ function onPopupPageLoad() {
     //block table message
     var tbl = $('#SiteTable');
     if ($('#SiteTable tr').length == 0) {
-        tbl.append(`<p id="welcomeInfo">Navigate to the sites you want to block during Pomodoro and click on 'Block Site'.<br><br> If Habitia is connected, choose a cost for visiting the site (cost 0 is blocked only during Pomodoro).</p>`);
+        tbl.append(`<p id="welcomeInfo">Navigate to the sites you want to block during Pomodoro and click on 'Block Site'.<br><br> If Habitica is connected, choose a cost for visiting the site (cost 0 is blocked only during Pomodoro).</p>`);
     }
 
     // Save Button
@@ -264,7 +276,7 @@ function onPopupPageLoad() {
     });
 
     $('#ambientSound').on('change', function () {
-        runBackgroundFunction("playAmbientSample");
+        runBackgroundFunction("playAmbientSample",[this.value, Vars.UserData.ambientSoundVolume]);
     });
 
     $('#pomodoroEndSoundVolume').mouseup(function () {
@@ -276,7 +288,7 @@ function onPopupPageLoad() {
     });
 
     $('#ambientSoundVolume').mouseup(function () {
-        runBackgroundFunction("playAmbientSample");
+        runBackgroundFunction("playAmbientSample",[Vars.UserData.ambientSound, Vars.UserData.ambientSoundVolume]);
     });
 
     //History Update
@@ -340,8 +352,8 @@ function AddSiteToTable(site, fadein) {
         '<div class="siteDuration"><span class="hourglass_icon"></span>' + duration + '</div>' +
         '</a></td>' +
         '<td><div class="hostname">' + site.hostname + passExpiryElement + '</div></td>' +
-        '<td><a class="edit"><img src="img/pencil.png"></a></td>' +
-        '<td><a class="delete"><img src="img/trash.png"></a></td>' +
+        '<td><a class="edit"><img src="../img/pencil.png"></a></td>' +
+        '<td><a class="delete"><img src="../img/trash.png"></a></td>' +
         '</tr>' +
         '<tr class="cost-duration-input" style="display:none;">' +
         '<td style="white-space:nowrap;text-align:center;" colspan="4">' +
@@ -447,6 +459,7 @@ function CredentialFields() {
     $("#TranspartOverlay").prop('checked', Vars.UserData.TranspartOverlay);
     $("#TickSound").prop('checked', Vars.UserData.TickSound);
     $("#showSkipToBreak").prop('checked', Vars.UserData.showSkipToBreak);
+    $("#showFreeze").prop('checked', Vars.UserData.showFreeze);
     $("#pomodoroEndSound").val(Vars.UserData.pomodoroEndSound);
     $("#breakEndSound").val(Vars.UserData.breakEndSound);
     $("#ambientSound").val(Vars.UserData.ambientSound);
@@ -504,6 +517,7 @@ function CredentialFields() {
     $("#TranspartOverlay").click(function () { updateCredentials(); });
     $("#TickSound").click(function () { updateCredentials(); });
     $("#showSkipToBreak").click(function () { updateCredentials(); });
+    $("#showFreeze").click(function () { updateCredentials(); });
     $("#pomodoroEndSound").click(function () { updateCredentials(); });
     $("#breakEndSound").click(function () { updateCredentials(); });
     $("#ambientSound").click(function () { updateCredentials(); });
@@ -618,6 +632,7 @@ function updateCredentials() {
     Vars.UserData.TranspartOverlay = $("#TranspartOverlay").prop('checked');
     Vars.UserData.TickSound = $("#TickSound").prop('checked');
     Vars.UserData.showSkipToBreak = $("#showSkipToBreak").prop('checked');
+    Vars.UserData.showFreeze = $("#showFreeze").prop('checked');
     Vars.UserData.pomodoroEndSound = $("#pomodoroEndSound").val();
     Vars.UserData.breakEndSound = $("#breakEndSound").val();
     Vars.UserData.ambientSound = $("#ambientSound").val();
@@ -655,6 +670,7 @@ function updateTimerDisplay() {
             $("#PomoStop").show();
         }
         $("#SkipToBreak").hide();
+        $("#PomoFreeze").hide();
     }
     else if (Vars.onBreak) {
         $(".unBlockSite").show();
@@ -675,22 +691,38 @@ function updateTimerDisplay() {
             $("#PomoStop").hide();
         }
         $("#SkipToBreak").hide();
+        $("#PomoFreeze").hide();
         $("#SiteTable tbody").toggleClass('blocked', false);
     }
-    else if (Vars.TimerRunnig) { //---Pomodoro running---
+    else if (Vars.TimerRunnig) { //---Pomodoro running or freeze---
+        
         $(".unBlockSite").hide();
-        $('#pomodoro').css("background-color", "green");
-        $('#pomodoro').css("color", "lightgreen");
-        tomatoSetClass("tomatoProgress");
         $("#SiteTable tbody").toggleClass('blocked', true);
         $("#PomoStop").hide();
         $("#QuickSettings").hide();
 
-        if (Vars.UserData.showSkipToBreak) {
+        if(Vars.TimerFreeze){
+            tomatoSetClass("tomatoFreeze");
+            $('#pomodoro').css("background-color", "lightsteelblue");
+            $('#pomodoro').css("color", "steelblue");
+        }else{
+            tomatoSetClass("tomatoProgress");
+            $('#pomodoro').css("background-color", "green");
+            $('#pomodoro').css("color", "lightgreen");
+        }
+
+        if (Vars.UserData.showSkipToBreak && !Vars.TimerFreeze) {
             $("#SkipToBreak").show();
         } else {
             $("#SkipToBreak").hide();
         }
+        
+        if (Vars.UserData.showFreeze && !Vars.TimerFreeze) {
+            $("#PomoFreeze").show();
+        } else {
+            $("#PomoFreeze").hide();
+        }
+
     } else { //---pomodoro not running---
         $(".unBlockSite").show();
         $("#QuickSettings").show();
@@ -700,10 +732,11 @@ function updateTimerDisplay() {
         $("#SiteTable tbody").toggleClass('blocked', false);
         $("#PomoStop").hide();
         $("#SkipToBreak").hide();
+        $("#PomoFreeze").hide();
     }
 }
 
-var TOMATO_CLASSES = ["tomatoProgress", "tomatoWait", "tomatoBreak", "tomatoWin", "tomatoWarning"];
+var TOMATO_CLASSES = ["tomatoProgress", "tomatoWait", "tomatoBreak", "tomatoWin", "tomatoWarning","tomatoFreeze"];
 function tomatoSetClass(className) {
     TOMATO_CLASSES.forEach(function (entry) {
         $('.tomato').toggleClass(entry, false);

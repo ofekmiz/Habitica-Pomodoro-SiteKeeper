@@ -1,4 +1,20 @@
+
 "use strict";
+
+// This is the service worker script, which executes in its own context
+// when the extension is installed or refreshed (or when you access its console).
+// It would correspond to the background script in chrome extensions v2.
+
+console.log("This prints to the console of the service worker (background script)")
+
+
+// Importing and using functionality from external files is also possible.
+// If you want to import a file that is deeper in the file hierarchy of your
+// extension, simply do `importScripts('path/to/file.js')`.
+// The path should be relative to the file `manifest.json`.
+importScripts('library/habiticaAPI.js');
+importScripts('library/utility.js')
+
 //------synced variables with popup.js , includes only data (not pointers nor functions)------//
 var Consts = {
     xClientHeader: "5a8238ab-1819-4f7f-a750-f23264719a2d-HabiticaPomodoroSiteKeeper",
@@ -18,7 +34,7 @@ var Consts = {
         type: "reward"
     },
     PomodoroHabitTemplate: {
-        text: ":tomato: Pomodoro",
+        text: "Pomodoro",
         type: "habit",
         alias: "sitepassPomodoro",
         notes: "Habit utilized by Habitica SiteKeeper. " +
@@ -26,7 +42,7 @@ var Consts = {
         priority: 1
     },
     PomodoroSetHabitTemplate: {
-        text: ":tomato::tomato::tomato: Pomodoro Combo!",
+        text: "Pomodoro Combo!",
         type: "habit",
         alias: "sitepassPomodoroSet",
         notes: "Habit utilized by Habitica SiteKeeper. " +
@@ -56,6 +72,7 @@ var Vars = {
     Timer: "00:00",
     TimerValue: 0, //in seconds
     TimerRunnig: false,
+    TimerFreeze: false, //(Pause)
     onBreak: false,
     onBreakExtension: false,
     PomoSetCounter: 0,
@@ -65,6 +82,8 @@ var Vars = {
 // -------------------------background variables----------------------------- //
 var currentAmbientAudio = null; //current playing ambient sound
 const BROWSER = getBrowser();
+const PageOverlayCSS = "foreground/pageOverlay.css";
+const PageOverlayJS = "foreground/pageOverlay.js";
 // -------------------------------------------------------------------------- //
 
 function UserSettings(copyFrom) {
@@ -100,6 +119,7 @@ function UserSettings(copyFrom) {
     this.TranspartOverlay = copyFrom ? copyFrom.TranspartOverlay : true;
     this.TickSound = copyFrom ? copyFrom.TickSound : false;
     this.showSkipToBreak = copyFrom ? copyFrom.showSkipToBreak : false;
+    this.showFreeze = copyFrom ? copyFrom.showFreeze : false;
     this.pomodoroEndSound = copyFrom ? copyFrom.pomodoroEndSound : "None";
     this.breakEndSound = copyFrom ? copyFrom.breakEndSound : "None";
     this.ambientSound = copyFrom ? copyFrom.ambientSound : "None";
@@ -128,6 +148,7 @@ function GetSiteCost(site) {
     return cost;
 }
 function GetSitePassDuration(site) {
+    if(!site) return 30;
     var duration = site.passDuration ? site.passDuration : 30;
     return duration;
 }
@@ -228,33 +249,38 @@ function isInWhiteList(siteUrl) {
     return false;
 }
 
-var callbackTabActive = function (details) {
-    chrome.tabs.get(details.tabId, function callback(tab) {
-        chrome.tabs.insertCSS({
-            file: "pageOverlay.css"
+const callbackTabActive = function (details) {
+    chrome.tabs.get(details.tabId, function (tab) {
+        chrome.scripting.insertCSS({
+            target: { tabId: tab.id },
+            files: [PageOverlayCSS]
         });
+
         mainSiteBlockFunction(tab);
 
-        //Pass Expiry time badge
+        // Pass Expiry time badge
         if (!Vars.TimerRunnig) {
-            var siteUrl = new URL(tab.url);
-            var site = GetBlockedSite(siteUrl.hostname);
+            const siteUrl = new URL(tab.url);
+            const site = GetBlockedSite(siteUrl.hostname);
             showPayToPassTimerBadge(site);
         }
     });
 };
 
 function callbackTabUpdate(tabId) {
-    chrome.tabs.get(tabId, function callback(tab) {
-        //css insert
-        chrome.tabs.insertCSS({
-            file: "pageOverlay.css"
+    chrome.tabs.get(tabId, function (tab) {
+        // Insert CSS
+        chrome.scripting.insertCSS({
+            target: { tabId: tab.id },
+            files: [PageOverlayCSS]
         });
+
         mainSiteBlockFunction(tab);
-        //Pass Expiry time badge
+
+        // Pass Expiry time badge
         if (!Vars.TimerRunnig) {
-            var siteUrl = new URL(tab.url);
-            var site = GetBlockedSite(siteUrl.hostname);
+            const siteUrl = new URL(tab.url);
+            const site = GetBlockedSite(siteUrl.hostname);
             showPayToPassTimerBadge(site);
         }
     });
@@ -308,16 +334,16 @@ function showPayToPassTimerBadge(site) {
         if (site && !Vars.TimerRunnig) {
             var remainingTime = getSitePassRemainingTime(site);
             if (remainingTime) {
-                chrome.browserAction.setBadgeBackgroundColor({
+                chrome.action.setBadgeBackgroundColor({
                     color: "#F18E02"
                 });
                 var timeString = BROWSER === "Mozilla Firefox" ? shortTimeString(remainingTime) : remainingTime;
-                chrome.browserAction.setBadgeText({
+                chrome.action.setBadgeText({
                     text: timeString
                 });
             } else {
                 if (Vars.Timer != Consts.POMODORO_DONE_TEXT) {
-                    chrome.browserAction.setBadgeText({
+                    chrome.action.setBadgeText({
                         text: ''
                     });
                 }
@@ -325,7 +351,7 @@ function showPayToPassTimerBadge(site) {
             }
         } else {
             if (Vars.Timer != Consts.POMODORO_DONE_TEXT) {
-                chrome.browserAction.setBadgeText({
+                chrome.action.setBadgeText({
                     text: ''
                 });
             }
@@ -338,46 +364,92 @@ function showPayToPassTimerBadge(site) {
 
 //Create "Pay X coins To Visit" site overlay
 function payToPassOverlay(tab, siteData) {
-    var opacity = Vars.UserData.TranspartOverlay ? "0.85" : "1";
-    var imageURLPayToPass = chrome.runtime.getURL("/img/siteKeeper2.png");
-    chrome.tabs.insertCSS({
-        code: `
-        .payToPass:after { background-image:url("` + imageURLPayToPass + `"); }
-        .payToPass::before {background-color:rgba(0,0,0,`+ opacity + `)!important}`
+    const opacity = Vars.UserData.TranspartOverlay ? "0.85" : "1";
+    const imageURLPayToPass = chrome.runtime.getURL("/img/siteKeeper2.png");
+
+    // Inject CSS using a <style> tag (since dynamic CSS strings aren't supported directly)
+    chrome.scripting.executeScript({
+        target: { tabId: tab.id },
+        func: (imageURL, opacity) => {
+            const style = document.createElement('style');
+            style.textContent = `
+                .payToPass:after { 
+                    background-image: url("${imageURL}"); 
+                }
+                .payToPass::before {
+                    background-color: rgba(0,0,0,${opacity}) !important;
+                }
+            `;
+            document.head.appendChild(style);
+        },
+        args: [imageURLPayToPass, opacity]
     });
 
-    chrome.tabs.executeScript(tab.id, {
-        file: 'pageOverlay.js'
-    }, function (tab) {
-        chrome.tabs.executeScript(tab.id, {
-            code: `
-            document.getElementById("payToPass_btn").style.display = 'block';
-            document.getElementById("SitekeeperOverlay").style.display = 'block';
-            document.getElementById("SitekeeperOverlay").setAttribute("data-html","You're trying to Access ` + siteData.hostname + `\\n Pay ` + siteData.cost + ` Gold to access for ` + siteData.passTime + ` Minutes ");
-            document.getElementById("SitekeeperOverlay").className = "payToPass"; `
+    // Inject external JS file
+    chrome.scripting.executeScript({
+        target: { tabId: tab.id },
+        files: [PageOverlayJS]
+    }, () => {
+        // After JS loads, run inline code to update DOM
+        chrome.scripting.executeScript({
+            target: { tabId: tab.id },
+            func: (hostname, cost, passTime) => {
+                document.getElementById("payToPass_btn").style.display = 'block';
+                const overlay = document.getElementById("SitekeeperOverlay");
+                overlay.style.display = 'block';
+                overlay.setAttribute(
+                    "data-html",
+                    `You're trying to Access ${hostname}\n Pay ${cost} Gold to access for ${passTime} Minutes`
+                );
+                overlay.className = "payToPass";
+            },
+            args: [siteData.hostname, siteData.cost, siteData.passTime]
         });
     });
 }
 
 //Create "Cant Afford To Visit" site overlay
 function cantAffordOverlay(tab, siteData) {
-    var opacity = Vars.UserData.TranspartOverlay ? "0.85" : "1";
-    var imageURLNoPass = chrome.runtime.getURL("/img/siteKeeper3.png");
-    chrome.tabs.insertCSS({
-        code: `
-        .noPass:after { background-image:url("` + imageURLNoPass + `"); }
-        .noPass::before {background-color:rgba(0,0,0,`+ opacity + `)}`
+    const opacity = Vars.UserData.TranspartOverlay ? "0.85" : "1";
+    const imageURLNoPass = chrome.runtime.getURL("/img/siteKeeper3.png");
+
+    // Inject CSS via <style> tag
+    chrome.scripting.executeScript({
+        target: { tabId: tab.id },
+        func: (imageURL, opacity) => {
+            const style = document.createElement('style');
+            style.textContent = `
+                .noPass:after {
+                    background-image: url("${imageURL}");
+                }
+                .noPass::before {
+                    background-color: rgba(0, 0, 0, ${opacity});
+                }
+            `;
+            document.head.appendChild(style);
+        },
+        args: [imageURLNoPass, opacity]
     });
 
-    chrome.tabs.executeScript(tab.id, {
-        file: 'pageOverlay.js'
-    }, function (tab) {
-        chrome.tabs.executeScript(tab.id, {
-            code: `
-            document.getElementById("SitekeeperOverlay").style.display = 'block'; 
-            document.getElementById("payToPass_btn").style.display = 'none';
-            document.getElementById("SitekeeperOverlay").setAttribute("data-html","You can't afford to visit ` + siteData.hostname + `\\n You shall not pass! ");
-            document.getElementById("SitekeeperOverlay").className = "noPass"; `
+    // Inject external JS file
+    chrome.scripting.executeScript({
+        target: { tabId: tab.id },
+        files: [PageOverlayJS]
+    }, () => {
+        // Inject inline DOM update script
+        chrome.scripting.executeScript({
+            target: { tabId: tab.id },
+            func: (hostname) => {
+                const overlay = document.getElementById("SitekeeperOverlay");
+                overlay.style.display = 'block';
+                document.getElementById("payToPass_btn").style.display = 'none';
+                overlay.setAttribute(
+                    "data-html",
+                    `You can't afford to visit ${hostname}\nYou shall not pass!`
+                );
+                overlay.className = "noPass";
+            },
+            args: [siteData.hostname]
         });
     });
 }
@@ -443,43 +515,63 @@ function muteBlockedtabs() {
 }
 
 // ----- Habitica Api general call ----- //
-function callAPI(method, route, postData) {
+async function callAPI(method, route, postData) {
     if (!Vars.UserData.ConnectHabitica) {
         return null;
     }
     var serverUrl = Vars.UserData.developerServerUrl && Vars.UserData.developerServerUrl !== "" ? Vars.UserData.developerServerUrl : Consts.serverUrl;
-    return callHabiticaAPI(serverUrl + route, Consts.xClientHeader, Vars.UserData.Credentials, method, postData);
+    return await callHabiticaAPI(serverUrl + route, Consts.xClientHeader, Vars.UserData.Credentials, method, postData);
 }
 
-function getData(silent, credentials, serverPath) {
+async function getData(silent, credentials, serverPath) {
     if (!Vars.UserData.ConnectHabitica) {
         return null;
     }
-    var serverUrl = Vars.UserData.developerServerUrl && Vars.UserData.developerServerUrl !== "" ? Vars.UserData.developerServerUrl : Consts.serverUrl;
-    var xhr = getHabiticaData(serverUrl + serverPath, Consts.xClientHeader, credentials);
-    Vars.ServerResponse = xhr.status;
-    if (xhr.status == 401) {
-        console.log("Habitica Credentials Error 404");
-        return null;
-    } else if (xhr.status != 200) {
-        if (!silent) {
-            chrome.notifications.create(Consts.NotificationId, {
-                type: "basic",
-                iconUrl: "img/icon.png",
-                title: "Habitica Connection Error",
-                message: "The service might be temporarily unavailable. Contact the developer if it persists. Error =" +
-                    xhr.status
-            },
-                function () { });
+
+    const serverUrl = Vars.UserData.developerServerUrl && Vars.UserData.developerServerUrl !== ""
+        ? Vars.UserData.developerServerUrl
+        : Consts.serverUrl;
+
+    try {
+        const response = await fetch(serverUrl + serverPath, {
+            method: "GET",
+            headers: {
+                "x-client": Consts.xClientHeader,
+                "x-api-user": credentials.uid,
+                "x-api-key": credentials.apiToken
+            }
+        });
+
+        Vars.ServerResponse = response.status;
+
+        if (response.status === 401) {
+            console.log("Habitica Credentials Error 401");
+            return null;
         }
+
+        if (response.status !== 200) {
+            if (!silent) {
+                chrome.notifications.create(Consts.NotificationId, {
+                    type: "basic",
+                    iconUrl: "img/icon.png",
+                    title: "Habitica Connection Error",
+                    message: "The service might be temporarily unavailable. Contact the developer if it persists. Error = " + response.status
+                });
+            }
+            return null;
+        }
+
+        return await response.json();
+
+    } catch (error) {
+        console.error("Habitica Fetch Error:", error);
         return null;
     }
-    return JSON.parse(xhr.responseText);
 }
 
-function FetchHabiticaData(skipTasks) {
+async function FetchHabiticaData(skipTasks) {
     var credentials = Vars.UserData.Credentials;
-    var userObj = getData(true, credentials, Consts.serverPathUser);
+    var userObj = await getData(true, credentials, Consts.serverPathUser);
     if (userObj == null) return;
     else {
         Vars.Monies = userObj.data["stats"]["gp"];
@@ -491,7 +583,7 @@ function FetchHabiticaData(skipTasks) {
 
         //get custom pomodoro tasks list (all habits)
         var allHabits;
-        allHabits = getData(true, credentials, Consts.serverPathUserHabits);
+        allHabits = await getData(true, credentials, Consts.serverPathUserHabits);
         console.log(allHabits);
         if (allHabits.success) {
             Vars.PomodoroTaskCustomList = [];
@@ -508,11 +600,11 @@ function FetchHabiticaData(skipTasks) {
 
         //get pomodoro task id
         if (!Vars.UserData.CustomPomodoroTask) {
-            tasksObj = getData(true, credentials, Consts.serverPathPomodoroHabit);
+            tasksObj = await getData(true, credentials, Consts.serverPathPomodoroHabit);
             if (tasksObj && tasksObj.data["alias"] == Consts.PomodoroHabitTemplate.alias) {
                 Vars.PomodoroTaskId = tasksObj.data.id;
             } else {
-                var result = CreatePomodoroHabit();
+                var result =await CreatePomodoroHabit();
                 if (result.error) {
                     notify("ERROR", result.error);
                 } else {
@@ -526,11 +618,11 @@ function FetchHabiticaData(skipTasks) {
 
         //get pomodoro Set task id
         if (!Vars.UserData.CustomSetTask) {
-            tasksObj = getData(true, credentials, Consts.serverPathPomodoroSetHabit);
+            tasksObj = await getData(true, credentials, Consts.serverPathPomodoroSetHabit);
             if (tasksObj && tasksObj.data["alias"] == Consts.PomodoroSetHabitTemplate.alias) {
                 Vars.PomodoroSetTaskId = tasksObj.data.id;
             } else {
-                var result = CreatePomodoroSetHabit();
+                var result = await CreatePomodoroSetHabit();
                 if (result.error) {
                     notify("ERROR", result.error);
                 } else {
@@ -543,40 +635,63 @@ function FetchHabiticaData(skipTasks) {
         }
 
         //Reward task update/create
-        tasksObj = getData(true, credentials, Consts.serverPathTask);
+        tasksObj = await getData(true, credentials, Consts.serverPathTask);
         if (tasksObj && tasksObj.data["alias"] == "sitepass") {
             Vars.RewardTask = tasksObj.data;
             //UpdateRewardTask(0, false);
             return;
         }
-        UpdateRewardTask(0, true);
+        await UpdateRewardTask(0, true);
     }
 }
 
-function UpdateRewardTask(cost, create) {
+//WAS HERE WIP
+async function UpdateRewardTask(cost, create) {
     Vars.RewardTask.value = cost;
-    var xhr = new XMLHttpRequest();
-    var serverUrl = Vars.UserData.developerServerUrl && Vars.UserData.developerServerUrl !== "" ? Vars.UserData.developerServerUrl : Consts.serverUrl;
-    if (create) {
-        xhr.open("POST", serverUrl + Consts.serverPathUserTasks, false);
-    } else {
-        xhr.open("PUT", serverUrl + Consts.serverPathTask, false);
+  
+    const serverUrl = Vars.UserData.developerServerUrl && Vars.UserData.developerServerUrl !== ""
+      ? Vars.UserData.developerServerUrl
+      : Consts.serverUrl;
+  
+    const url = create
+      ? serverUrl + Consts.serverPathUserTasks
+      : `${serverUrl}/tasks/${Vars.RewardTask.id}`; //PUT to specific task
+  
+    const method = create ? "POST" : "PUT";
+  
+    try {
+      console.log(`[UpdateRewardTask] ${method} to ${url}`, Vars.RewardTask);
+  
+      const response = await fetch(url, {
+        method,
+        headers: {
+          'x-client': Consts.xClientHeader,
+          'Content-Type': 'application/json',
+          'x-api-user': Vars.UserData.Credentials.uid,
+          'x-api-key': Vars.UserData.Credentials.apiToken
+        },
+        body: JSON.stringify(Vars.RewardTask)
+      });
+  
+      if (!response.ok) {
+        const text = await response.text();
+        console.error(`[UpdateRewardTask] Server error: ${response.status} ${response.statusText}`, text);
+        return false;
+      }
+  
+      const json = await response.json();
+      Vars.RewardTask = json.data; //updated task object (with id)
+      return true;
+  
+    } catch (error) {
+      console.error("[UpdateRewardTask] Fetch error:", error);
+      return false;
     }
-    xhr.setRequestHeader('x-client', Consts.xClientHeader);
-    xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.setRequestHeader("x-api-user", Vars.UserData.Credentials.uid);
-    xhr.setRequestHeader("x-api-key", Vars.UserData.Credentials.apiToken);
-    var data = {
-        "data": Vars.RewardTask
-    }
-    xhr.send(JSON.stringify(Vars.RewardTask));
-    Vars.RewardTask = JSON.parse(xhr.responseText).data;
+  }
 
-}
-
-function CreatePomodoroHabit() {
+async function CreatePomodoroHabit() {
     var data = JSON.stringify(Consts.PomodoroHabitTemplate);
-    var p = JSON.parse(callAPI("POST", Consts.serverPathUserTasks, data));
+    var p = await callAPI("POST", Consts.serverPathUserTasks, Consts.PomodoroHabitTemplate)
     if (p.success != true) {
         return {
             error: 'Failed to Create Pomodoro Habit task'
@@ -586,9 +701,9 @@ function CreatePomodoroHabit() {
     }
 }
 
-function CreatePomodoroSetHabit() {
+async function CreatePomodoroSetHabit() {
     var data = JSON.stringify(Consts.PomodoroSetHabitTemplate);
-    var p = JSON.parse(callAPI("POST", Consts.serverPathUserTasks, data));
+    var p = await callAPI("POST", Consts.serverPathUserTasks, Consts.PomodoroSetHabitTemplate);
     if (p.success != true) {
         return {
             error: 'Failed to Create Pomodoro Set Habit task'
@@ -611,7 +726,7 @@ chrome.runtime.onConnect.addListener(function (port) {
 
 });
 
-function handleMessage(request, sender, sendResponse) {
+async function handleMessage(request, sender, sendResponse) {
 
     var response = { complete: true };
 
@@ -651,7 +766,7 @@ function handleMessage(request, sender, sendResponse) {
 
 function executeFunctionByName(functionName /*, args */) {
     var args = Array.prototype.slice.call(arguments, 1);
-    var context = window;
+    var context = self;
     var namespaces = functionName.split(".");
     var func = namespaces.pop();
     for (var i = 0; i < namespaces.length; i++) {
@@ -661,9 +776,9 @@ function executeFunctionByName(functionName /*, args */) {
 }
 
 //-------------------------------------------------------------------------------------------
-function ConfirmPurchase(site) {
+async function ConfirmPurchase(site) {
     UpdateRewardTask(site.cost, false);
-    var p = JSON.parse(callAPI("POST", Consts.serverPathTask + "/score/down"));
+    var p = await callAPI("POST", Consts.serverPathTask + "/score/down");
     if (p.success != true) {
         notify("ERROR", 'Failed to pay ' + site.cost + 'coins for ' + site.hostname + ' in Habitica');
     } else {
@@ -674,8 +789,8 @@ function ConfirmPurchase(site) {
 }
 
 //direction 'up' or 'down'
-function ScoreHabit(habitId, direction) {
-    var p = JSON.parse(callAPI("POST", '/tasks/' + habitId + '/score/' + direction));
+async function ScoreHabit(habitId, direction) {
+    var p = await callAPI("POST", '/tasks/' + habitId + '/score/' + direction)
     if (p.success != true) {
         return {
             error: 'Failed to score task ' + habitId + ', doublecheck its ID'
@@ -698,7 +813,10 @@ chrome.commands.onCommand.addListener(function (command) {
 });
 
 function ActivatePomodoro() {
-    if (Vars.onBreak && !Vars.TimerRunnig) {
+    if(Vars.TimerFreeze){
+        pomoUnFreeze();
+    }
+    else if (Vars.onBreak && !Vars.TimerRunnig) {
         startBreak();
     }
     else if (!Vars.TimerRunnig || Vars.onBreak || Vars.onBreakExtension) {
@@ -723,6 +841,7 @@ var timerInterval; //Used for timer interval in startTimer() function.
  * @param {function} endTimerFunction this function runs when timer reachs 00:00.
  */
 function startTimer(duration, duringTimerFunction, endTimerFunction) {
+
     var timer = duration;
     var duringTimer = function () {
         duringTimerFunction()
@@ -730,7 +849,7 @@ function startTimer(duration, duringTimerFunction, endTimerFunction) {
     var endTimer = function () {
         endTimerFunction()
     };
-
+    
     timerInterval = setInterval(function () {
 
         Vars.Timer = secondsToTimeString(timer);
@@ -753,6 +872,7 @@ function startPomodoro() {
     var duration = 60 * Vars.UserData.PomoDurationMins;
     Vars.TimerRunnig = true;
     Vars.onBreak = false;
+    Vars.TimerFreeze = false;
     startTimer(duration, duringPomodoro, pomodoroEnds);
     muteBlockedtabs();
     playSound(Vars.UserData.ambientSound, Vars.UserData.ambientSoundVolume, true);
@@ -761,19 +881,16 @@ function startPomodoro() {
 //runs during pomodoro session
 function duringPomodoro() {
     //Show time on icon badge 
-    chrome.browserAction.setBadgeBackgroundColor({
+    chrome.action.setBadgeBackgroundColor({
         color: "green"
     });
     var timeString = BROWSER === "Mozilla Firefox" ? shortTimeString(Vars.Timer) : Vars.Timer;
-    chrome.browserAction.setBadgeText({
+    chrome.action.setBadgeText({
         text: timeString
     });
     //Block current tab if necessary
     CurrentTab(blockSiteOverlay);
-
-    if (currentAmbientAudio instanceof Audio && currentAmbientAudio.paused) {
-        playSound(Vars.UserData.ambientSound, Vars.UserData.ambientSoundVolume, true);
-    }
+    playSound(Vars.UserData.ambientSound, Vars.UserData.ambientSoundVolume, true);
 }
 
 function setTodaysHistogram(pomodoros, minutes) {
@@ -805,7 +922,7 @@ function clearHistogram() {
 }
 
 //runs When Pomodoro Timer Ends
-function pomodoroEnds() {
+async function pomodoroEnds() {
 
     stopTimer();
     stopAmbientSound();
@@ -815,8 +932,8 @@ function pomodoroEnds() {
     var setComplete = Vars.PomoSetCounter >= Vars.UserData.PomoSetNum - 1;
     //If Pomodoro / Pomodoro Set Habit + is enabled
     if (Vars.UserData.PomoHabitPlus || (setComplete && Vars.UserData.PomoSetHabitPlus)) {
-        FetchHabiticaData(true);
-        var result = (setComplete && Vars.UserData.PomoSetHabitPlus) ? ScoreHabit(Vars.PomodoroSetTaskId, 'up') : ScoreHabit(Vars.PomodoroTaskId, 'up');
+        await FetchHabiticaData(true);
+        var result = (setComplete && Vars.UserData.PomoSetHabitPlus) ? await ScoreHabit(Vars.PomodoroSetTaskId, 'up') : await ScoreHabit(Vars.PomodoroTaskId, 'up');
         if (!result.error) {
             var deltaGold = (result.gp - Vars.Monies).toFixed(2);
             var deltaExp = (result.exp - Vars.Exp).toFixed(2);
@@ -840,10 +957,10 @@ function pomodoroEnds() {
     }
 
     //Badge
-    chrome.browserAction.setBadgeBackgroundColor({
+    chrome.action.setBadgeBackgroundColor({
         color: "green"
     });
-    chrome.browserAction.setBadgeText({
+    chrome.action.setBadgeText({
         text: "\u2713"
     });
 
@@ -852,6 +969,7 @@ function pomodoroEnds() {
 
     //play sound
     playSound(Vars.UserData.pomodoroEndSound, Vars.UserData.pomodoroEndSoundVolume, false);
+    Vars.TimerFreeze = false;
 }
 
 //start break session - duration in seconds
@@ -866,6 +984,7 @@ function startBreak() {
     stopTimer();
     Vars.TimerRunnig = true;
     Vars.onBreak = true;
+    Vars.TimerFreeze = false;
     startTimer(duration, duringBreak, breakEnds);
 }
 
@@ -890,11 +1009,11 @@ function manualBreak() {
 //runs during Break session
 function duringBreak() {
     //Show time on icon badge 
-    chrome.browserAction.setBadgeBackgroundColor({
+    chrome.action.setBadgeBackgroundColor({
         color: "blue"
     });
     var timeString = BROWSER === "Mozilla Firefox" ? shortTimeString(Vars.Timer) : Vars.Timer;
-    chrome.browserAction.setBadgeText({
+    chrome.action.setBadgeText({
         text: timeString
     });
 }
@@ -930,6 +1049,7 @@ function breakEnds() {
 function startBreakExtension(duration) {
     stopTimer();
     Vars.TimerRunnig = true;
+    Vars.TimerFreeze = false;
     Vars.onBreakExtension = true;
     Vars.onBreak = true;
     var endFunc = Vars.UserData.ResetPomoAfterBreak ? (() => { pomodoroInterupted(true) }) : pomodoroInterupted;
@@ -942,16 +1062,16 @@ function startBreakExtension(duration) {
 //runs during Break session
 function duringBreakExtension() {
     //Show time on icon badge 
-    chrome.browserAction.setBadgeBackgroundColor({
+    chrome.action.setBadgeBackgroundColor({
         color: "red"
     });
-    chrome.browserAction.setBadgeText({
+    chrome.action.setBadgeText({
         text: Vars.Timer
     });
 }
 
 //runs when pomodoro is interupted (stoped before timer ends/break extension over)
-function pomodoroInterupted(breakPomoStreak) {
+async function pomodoroInterupted(breakPomoStreak) {
 
     stopAmbientSound();
 
@@ -969,8 +1089,8 @@ function pomodoroInterupted(breakPomoStreak) {
     }
 
     if (Vars.UserData.PomoHabitMinus || failedBreakExtension) {
-        FetchHabiticaData(true);
-        var result = ScoreHabit(Vars.PomodoroTaskId, 'down');
+        await FetchHabiticaData(true);
+        var result = await ScoreHabit(Vars.PomodoroTaskId, 'down');
         var msg = "";
         if (!result.error) {
             var deltaHp = (result.hp - Vars.Hp).toFixed(2);
@@ -988,22 +1108,35 @@ function stopTimer() {
 
     clearInterval(timerInterval);
     Vars.Timer = "00:00";
-    chrome.browserAction.setBadgeText({
+    chrome.action.setBadgeText({
         text: ''
     });
 
     CurrentTab(unblockSiteOverlay); //if current tab is blocked, unblock it
-    CurrentTab(mainSiteBlockFunction); //ConfirmPurchase check
+    CurrentTab(mainSiteBlockFunction); //Confirm Purchase check
     Vars.TimerRunnig = false;
     Vars.onBreak = false;
     Vars.onBreakExtension = false;
     Vars.onManualTakeBreak = false;
+    Vars.TimerFreeze = false;
 
 }
 
-//Pause timer
+//Pause timer (not like freeze, e,g pause before starting break)
 function pauseTimer() {
     clearInterval(timerInterval);
+}
+
+//Freeze pomodoro timer (pause)
+function pomoFreeze() {
+    Vars.TimerFreeze = true;
+    pauseTimer();
+    stopAmbientSound();
+}
+
+function pomoUnFreeze(){
+    Vars.TimerFreeze=false;
+    startTimer(Vars.TimerValue, duringPomodoro, pomodoroEnds);
 }
 
 //Stop timer - reset to start position
@@ -1011,6 +1144,7 @@ function pomoReset() {
     stopAmbientSound();
     stopTimer();
     Vars.PomoSetCounter = 0; //Reset Pomo set Count
+    Vars.TimerFreeze = false;
 }
 
 //End pomodoro and start a break
@@ -1022,7 +1156,10 @@ function skipToBreak() {
     Vars.PomoSetCounter++; //Updae set counter
     startBreak();
     notify(title, msg);
+    Vars.TimerFreeze = false;
 }
+
+
 
 //Create Chrome Notification
 function notify(title, message, callback) {
@@ -1052,77 +1189,57 @@ function CurrentTab(func) {
 
 //Block Site With Timer Overlay
 function blockSiteOverlay(tab) {
-    var opacity = Vars.UserData.TranspartOverlay ? "0.85" : "1";
-    var url = new URL(tab.url);
-    var message = "Stay Focused! Time Left: " + Vars.Timer;
+    const opacity = Vars.UserData.TranspartOverlay ? "0.85" : "1";
+    const url = new URL(tab.url);
+    const message = "Stay Focused! Time Left: " + Vars.Timer;
+
     if (GetBlockedSite(url.hostname) && !isInWhiteList(url)) {
-        chrome.tabs.executeScript({
-            code: `
-            document.body.classList.add('blockedSite');
-            document.body.setAttribute('data-html',"` + message + `");            
-            `
+        const imageURL = chrome.runtime.getURL("/img/siteKeeper.png");
+
+        // Inject JS to modify DOM
+        chrome.scripting.executeScript({
+            target: { tabId: tab.id },
+            func: (message, imageURL, opacity) => {
+                document.body.classList.add('blockedSite');
+                document.body.setAttribute('data-html', message);
+
+                const style = document.createElement('style');
+                style.textContent = `
+                    .blockedSite:after {
+                        background-image: url("${imageURL}");
+                    }
+                    .blockedSite:before {
+                        background-color: rgba(0, 0, 0, ${opacity});
+                    }
+                `;
+                document.head.appendChild(style);
+            },
+            args: [message, imageURL, opacity]
         });
-        var imageURL = chrome.runtime.getURL("/img/siteKeeper.png");
-        chrome.tabs.insertCSS({
-            code: `
-            .blockedSite:after {background-image:url("` + imageURL + `");}
-            .blockedSite:before{background-color:rgba(0,0,0,`+ opacity + `)}
-            `
-        });
-    };
+    }
 }
 
 //Remove Overlay from current Blocked Site
 function unblockSiteOverlay(tab) {
-    chrome.tabs.executeScript(tab.id, {
-        code: `document.body.className = document.body.className.replace( "blockedSite", '' );
-            var blockElementExists = document.getElementById("SitekeeperOverlay");
-            if(blockElementExists){
-                document.getElementById("SitekeeperOverlay").style.display = 'none'; 
+    chrome.scripting.executeScript({
+        target: { tabId: tab.id },
+        func: () => {
+            document.body.className = document.body.className.replace("blockedSite", '');
+            const blockElementExists = document.getElementById("SitekeeperOverlay");
+            if (blockElementExists) {
+                blockElementExists.style.display = 'none';
             }
-            `
+        }
     });
 }
 
 //Sends Private Message to the user in Habitica (Used as notification in the mobile app!)
-function notifyHabitica(msg) {
+async function notifyHabitica(msg) {
     var data = {
         message: msg,
         toUserId: Vars.UserData.Credentials.uid
     };
-    callAPI("POST", 'members/send-private-message', JSON.stringify(data));
-}
-
-function playSound(soundFileName, volume, loop) {
-    if (soundFileName != "None") {
-        var myAudio = new Audio(chrome.runtime.getURL("audio/" + soundFileName)) || false;
-        if (myAudio) {
-            myAudio.volume = volume;
-            myAudio.play();
-        }
-        if (myAudio && loop && currentAmbientAudio != myAudio) {
-            stopAmbientSound();
-            currentAmbientAudio = myAudio;
-            myAudio.loop = true;
-        }
-    }
-}
-
-function stopAmbientSound() {
-    if (currentAmbientAudio instanceof Audio) {
-        currentAmbientAudio.pause();
-        currentAmbientAudio.currentTime = 0;
-    }
-}
-
-var ambientSampleTimeout;
-function playAmbientSample() {
-    stopAmbientSound();
-    clearTimeout(ambientSampleTimeout);
-    setTimeout(function () {
-        playSound(Vars.UserData.ambientSound, Vars.UserData.ambientSoundVolume, true);
-    }, 100);
-    ambientSampleTimeout = setTimeout(() => { stopAmbientSound() }, 3000);
+    await callAPI("POST", 'members/send-private-message', data);
 }
 
 function isFreePassTimeNow() {
@@ -1137,3 +1254,44 @@ function isFreePassTimeNow() {
     }
     return false;
 }
+
+//---Offscreen Sound Manager---
+// Ensure offscreen audio page exists
+async function ensureOffscreenDocument() {
+    const exists = await chrome.offscreen.hasDocument();
+    if (!exists) {
+      await chrome.offscreen.createDocument({
+        url: "offscreen/soundManager.html",
+        reasons: [chrome.offscreen.Reason.AUDIO_PLAYBACK],
+        justification: "Play ambient audio in background"
+      });
+    }
+  }
+  
+  // Play a sound
+  async function playSound(filename, volume = 1, loop = false) {
+    await ensureOffscreenDocument();
+    await chrome.runtime.sendMessage({
+      type: "playSound",
+      soundFileName: filename,
+      volume,
+      loop
+    });
+  }
+  
+  // Stop ambient sound
+  async function stopAmbientSound() {
+    await ensureOffscreenDocument();
+    await chrome.runtime.sendMessage({ type: "stopAmbientSound" });
+  }
+  
+  // Play an ambient sample (preview for 3s)
+  async function playAmbientSample(filename, volume = 1) {
+    await ensureOffscreenDocument();
+    await chrome.runtime.sendMessage({
+      type: "playAmbientSample",
+      soundFileName: filename,
+      volume
+    });
+  }
+  //---END Offscreen Sound Manager---
