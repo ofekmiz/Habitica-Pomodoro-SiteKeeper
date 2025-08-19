@@ -1,9 +1,12 @@
 
 async function callHabiticaAPI(serverPathUrl,xClientHeader,credentials,method,postData) {
-    if(!serverPathUrl || !xClientHeader || !credentials){
+
+    // Validate that credentials have the required fields
+    if(!serverPathUrl || !xClientHeader || !credentials || !credentials.uid || !credentials.apiToken || credentials.uid.trim() === "" || credentials.apiToken.trim() === ""){
+        console.log("Habitica API: Missing or empty credentials");
         return false;
     }
-
+    
     const response = await fetch(serverPathUrl, {
         method: method, // *GET, POST, PUT, DELETE, etc.
         mode: "cors", // no-cors, *cors, same-origin
@@ -24,8 +27,15 @@ async function callHabiticaAPI(serverPathUrl,xClientHeader,credentials,method,po
 }
 
 async function getHabiticaData(serverPathUrl, xClientHeader, credentials) {
-    if (!serverPathUrl || !xClientHeader || !credentials) {
-        return false;
+
+    // Validate that credentials have the required fields
+    if(!serverPathUrl || !xClientHeader || !credentials || !credentials.uid || !credentials.apiToken || credentials.uid.trim() === "" || credentials.apiToken.trim() === ""){
+        console.log("Habitica API: Missing or empty credentials");
+        var mockXhr = {
+            status: 401,
+            responseText: '{"error": "Missing authentication headers"}'
+        };
+        return mockXhr;
     }
 
     try {
@@ -37,12 +47,12 @@ async function getHabiticaData(serverPathUrl, xClientHeader, credentials) {
                 'x-api-key': credentials.apiToken
             }
         });
-
+        
         if (!response.ok) {
             console.error("Failed to fetch Habitica data:", response.statusText);
             return false;
         }
-
+        
         const data = await response.json(); // or text(), depending on expected format
         console.log("Fetched Habitica Data:",data);
         return data;
@@ -50,42 +60,5 @@ async function getHabiticaData(serverPathUrl, xClientHeader, credentials) {
         console.error("Fetch error:", e);
         return false;
     }
-}
-
-
-
-
-//Manifest V3 does not support XMLHttpRequest, use this for manifest V2 only
-function callHabiticaAPI_MV2(serverPathUrl,xClientHeader,credentials,method,postData) {
-    if(!serverPathUrl || !xClientHeader || !credentials){
-        return false;
-    }
-    var xhr = new XMLHttpRequest();
-    xhr.open(method, serverPathUrl, false);
-    xhr.setRequestHeader('x-client', xClientHeader);
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.setRequestHeader('x-api-user', credentials.uid);
-    xhr.setRequestHeader('x-api-key', credentials.apiToken);
-    if (typeof postData !== 'undefined') xhr.send(postData);
-    else xhr.send();
-    return (xhr.responseText);
-}
-
-//Manifest V3 does not support XMLHttpRequest, use this for manifest V2 only
-function getHabiticaData_MV2(serverPathUrl,xClientHeader,credentials){
-    if(!serverPathUrl || !xClientHeader || !credentials){
-        return false;
-    }
-    var xhr = new XMLHttpRequest();
-    xhr.open("GET", serverPathUrl, false);
-    xhr.setRequestHeader('x-client', xClientHeader);
-    xhr.setRequestHeader("x-api-user", credentials.uid);
-    xhr.setRequestHeader("x-api-key", credentials.apiToken);
-    try {
-        xhr.send();
-    } catch (e) {
-        console.log(e);
-    }
-    return xhr;
 }
 

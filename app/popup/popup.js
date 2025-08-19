@@ -428,6 +428,12 @@ function CredentialFields() {
         $("#CredError").slideDown();
     }
 
+    // Also show error if credentials are missing but Habitica is enabled
+    if (Vars.UserData.ConnectHabitica && (!Vars.UserData.Credentials.uid || !Vars.UserData.Credentials.apiToken || 
+        Vars.UserData.Credentials.uid.trim() === "" || Vars.UserData.Credentials.apiToken.trim() === "")) {
+        $("#CredError").slideDown();
+    }
+
     //Come on, Google!
 
     //Set Options according to UserData in background.js
