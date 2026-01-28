@@ -34,7 +34,7 @@ var Consts = {
         type: "reward"
     },
     PomodoroHabitTemplate: {
-        text: "Pomodoro",
+        text: "🍅🍅 Pomodoro",
         type: "habit",
         alias: "sitepassPomodoro",
         notes: "Habit utilized by Habitica SiteKeeper. " +
@@ -42,7 +42,7 @@ var Consts = {
         priority: 1
     },
     PomodoroSetHabitTemplate: {
-        text: "Pomodoro Combo!",
+        text: "🍅🍅 Pomodoro Combo! 🍅🍅",
         type: "habit",
         alias: "sitepassPomodoroSet",
         notes: "Habit utilized by Habitica SiteKeeper. " +
@@ -165,6 +165,18 @@ function isSitePassExpired(site) {
     return site.passExpiry <= Date.now();
 }
 
+// Safely parse a URL string and return a URL object only for http(s) URLs
+function parseUrlSafe(urlString) {
+    try {
+        if (!urlString) return null;
+        const u = new URL(urlString);
+        if (u.protocol === 'http:' || u.protocol === 'https:') return u;
+        return null;
+    } catch (e) {
+        return null;
+    }
+}
+
 function RemoveBlockedSite(site) {
     if (site.hostname) {
         delete Vars.UserData.BlockedSites[site.hostname];
@@ -260,9 +272,13 @@ const callbackTabActive = function (details) {
 
         // Pass Expiry time badge
         if (!Vars.TimerRunnig) {
-            const siteUrl = new URL(tab.url);
-            const site = GetBlockedSite(siteUrl.hostname);
-            showPayToPassTimerBadge(site);
+            const siteUrl = parseUrlSafe(tab.url);
+            if (siteUrl) {
+                const site = GetBlockedSite(siteUrl.hostname);
+                showPayToPassTimerBadge(site);
+            } else {
+                showPayToPassTimerBadge(null);
+            }
         }
     });
 };
@@ -279,9 +295,13 @@ function callbackTabUpdate(tabId) {
 
         // Pass Expiry time badge
         if (!Vars.TimerRunnig) {
-            const siteUrl = new URL(tab.url);
-            const site = GetBlockedSite(siteUrl.hostname);
-            showPayToPassTimerBadge(site);
+            const siteUrl = parseUrlSafe(tab.url);
+            if (siteUrl) {
+                const site = GetBlockedSite(siteUrl.hostname);
+                showPayToPassTimerBadge(site);
+            } else {
+                showPayToPassTimerBadge(null);
+            }
         }
     });
 }
@@ -290,7 +310,8 @@ function callbackTabUpdate(tabId) {
 function mainSiteBlockFunction(tab) {
     if (!Vars.TimerRunnig || Vars.onBreak) {
         unblockSiteOverlay(tab);
-        var siteUrl = new URL(tab.url);
+        var siteUrl = parseUrlSafe(tab.url);
+        if (!siteUrl) return; // nothing to do for non-http(s) tabs
         var checkSite = checkBlockedUrl(siteUrl);
 
         //block - Pay to pass or can't afford page
@@ -469,6 +490,25 @@ chrome.storage.sync.get(Consts.userDataKey, function (result) {
     if (result[Consts.userDataKey]) {
         Vars.UserData = new UserSettings(result[Consts.userDataKey]);
         FetchHabiticaData();
+        // Ensure periodic validation alarm exists and run an initial validation
+        try {
+            if (chrome.alarms && typeof chrome.alarms.create === 'function') {
+                chrome.alarms.create('pomodoro_validate', { periodInMinutes: 360 });
+            } else {
+                console.warn('chrome.alarms API not available; skipping alarm creation');
+            }
+        } catch (e) {
+            console.warn('Failed to create pomodoro_validate alarm', e);
+        }
+        // Run a validation pass immediately (don't block storage callback)
+        ValidateStoredPomodoroIds();
+    }
+});
+
+// Periodic alarm listener to validate stored Pomodoro IDs
+chrome.alarms && chrome.alarms.onAlarm.addListener((alarm) => {
+    if (alarm && alarm.name === 'pomodoro_validate') {
+        ValidateStoredPomodoroIds();
     }
 });
 
@@ -488,7 +528,9 @@ function muteBlockedtabs() {
             currentWindow: true
         }, function (tabs) {
             for (var i = 0; i < tabs.length; i++) {
-                var hostname = new URL(tabs[i].url).hostname;
+                const parsed = parseUrlSafe(tabs[i].url);
+                if (!parsed) continue;
+                var hostname = parsed.hostname;
                 var site = GetBlockedSite(hostname);
                 if (!site) {
                     chrome.tabs.update(tabs[i].id, {
@@ -667,6 +709,8 @@ async function FetchHabiticaData(skipTasks) {
             Vars.PomodoroSetTaskId = Vars.UserData.PomodoroSetTaskId;
         }
 
+        // (removed emoji updater)
+
         //Reward task update/create
         tasksObj = await getData(true, credentials, Consts.serverPathTask);
         if (tasksObj && tasksObj.data["alias"] == "sitepass") {
@@ -686,71 +730,364 @@ async function UpdateRewardTask(cost, create) {
         console.log("Habitica API: Cannot update reward task - credentials not configured");
         return;
     }
+        const serverUrl = Vars.UserData.developerServerUrl && Vars.UserData.developerServerUrl !== ""
+            ? Vars.UserData.developerServerUrl
+            : Consts.serverUrl;
 
-    Vars.RewardTask.value = cost;
-  
-    const serverUrl = Vars.UserData.developerServerUrl && Vars.UserData.developerServerUrl !== ""
-      ? Vars.UserData.developerServerUrl
-      : Consts.serverUrl;
-  
-    const url = create
-      ? serverUrl + Consts.serverPathUserTasks
-      : `${serverUrl}/tasks/${Vars.RewardTask.id}`; //PUT to specific task
-  
-    const method = create ? "POST" : "PUT";
-  
-    try {
-      console.log(`[UpdateRewardTask] ${method} to ${url}`, Vars.RewardTask);
-  
-      const response = await fetch(url, {
-        method,
-        headers: {
-          'x-client': Consts.xClientHeader,
-          'Content-Type': 'application/json',
-          'x-api-user': Vars.UserData.Credentials.uid,
-          'x-api-key': Vars.UserData.Credentials.apiToken
-        },
-        body: JSON.stringify(Vars.RewardTask)
-      });
+        const normalizedServerUrl = serverUrl.replace(/\/$/, '');
+        const url = create
+            ? normalizedServerUrl + '/' + Consts.serverPathUserTasks.replace(/^\//, '')
+            : `${normalizedServerUrl}/tasks/${Vars.RewardTask.id}`; //PUT to specific task
 
-      if (!response.ok) {
-        const text = await response.text();
-        console.error(`[UpdateRewardTask] Server error: ${response.status} ${response.statusText}`, text);
-        return false;
-      }
-  
-      const json = await response.json();
-      Vars.RewardTask = json.data; //updated task object (with id)
-      return true;
-  
-    } catch (error) {
-      console.error("[UpdateRewardTask] Fetch error:", error);
-      return false;
-    }
+        const method = create ? "POST" : "PUT";
+
+        try {
+            // Build a safe payload. For updates (PUT) send only a numeric `value` field to avoid
+            // accidentally sending an id/string as the value. For creates, send the full task data
+            // but strip server-generated ids.
+            let payload;
+            if (create) {
+                payload = Object.assign({}, Vars.RewardTask);
+                delete payload.id;
+                delete payload._id;
+            } else {
+                // coerce cost to number; if invalid, fall back to current numeric value or 0
+                const n = Number(cost);
+                const safeValue = (!isNaN(n)) ? n : (Number(Vars.RewardTask.value) || 0);
+                payload = { value: safeValue };
+            }
+
+            console.log(`[UpdateRewardTask] ${method} to ${url}`, payload);
+
+            const response = await fetch(url, {
+                method,
+                headers: {
+                    'x-client': Consts.xClientHeader,
+                    'Content-Type': 'application/json',
+                    'x-api-user': Vars.UserData.Credentials.uid,
+                    'x-api-key': Vars.UserData.Credentials.apiToken
+                },
+                body: JSON.stringify(payload)
+            });
+
+            if (!response.ok) {
+                const text = await response.text();
+                console.error(`[UpdateRewardTask] Server error: ${response.status} ${response.statusText}`, text);
+                return false;
+            }
+
+            const json = await response.json();
+            Vars.RewardTask = json.data; //updated task object (with id)
+            return true;
+
+        } catch (error) {
+            console.error("[UpdateRewardTask] Fetch error:", error);
+            return false;
+        }
   }
 
 async function CreatePomodoroHabit() {
-    var data = JSON.stringify(Consts.PomodoroHabitTemplate);
-    var p = await callAPI("POST", Consts.serverPathUserTasks, Consts.PomodoroHabitTemplate)
-    if (p.success != true) {
-        return {
-            error: 'Failed to Create Pomodoro Habit task'
-        };
-    } else {
-        return p.data.id;
+    // Try to create the Pomodoro habit. If the server rejects (400), fall back
+    // to searching the user's tasks for an existing task with the expected alias
+    // and return that id instead of failing. This handles cases where a task
+    // already exists but the POST was rejected due to validation or duplicate alias.
+    try {
+        var p = await callAPI("POST", Consts.serverPathUserTasks, Consts.PomodoroHabitTemplate);
+        if (p && p.success === true && p.data && p.data.id) {
+            const id = p.data.id;
+            Vars.PomodoroTaskId = id;
+            Vars.UserData.PomodoroTaskId = id;
+            try {
+                chrome.storage.sync.set({ [Consts.userDataKey]: Vars.UserData }, function () {
+                    console.log('Persisted PomodoroTaskId to storage', id);
+                });
+            } catch (e) {
+                console.warn('CreatePomodoroHabit: failed to persist id', e);
+            }
+            return id;
+        }
+    } catch (e) {
+        console.warn('CreatePomodoroHabit: POST failed', e);
     }
+
+    // Fallback: list user tasks and find one matching the alias
+    try {
+        const list = await getData(true, Vars.UserData.Credentials, Consts.serverPathUserTasks);
+        if (list && list.success && Array.isArray(list.data)) {
+            for (let i = 0; i < list.data.length; i++) {
+                const t = list.data[i];
+                if (t && t.alias === Consts.PomodoroHabitTemplate.alias) {
+                    const id = t.id;
+                    Vars.PomodoroTaskId = id;
+                    Vars.UserData.PomodoroTaskId = id;
+                    try {
+                        chrome.storage.sync.set({ [Consts.userDataKey]: Vars.UserData }, function () {
+                            console.log('Persisted PomodoroTaskId (fallback) to storage', id);
+                        });
+                    } catch (e) {
+                        console.warn('CreatePomodoroHabit fallback: failed to persist id', e);
+                    }
+                    return id;
+                }
+            }
+        }
+    } catch (e) {
+        console.warn('CreatePomodoroHabit fallback search failed', e);
+    }
+
+    return { error: 'Failed to Create Pomodoro Habit task' };
 }
 
+// (EnsurePomodoroTitlesHaveEmoji removed)
+
 async function CreatePomodoroSetHabit() {
-    var data = JSON.stringify(Consts.PomodoroSetHabitTemplate);
-    var p = await callAPI("POST", Consts.serverPathUserTasks, Consts.PomodoroSetHabitTemplate);
-    if (p.success != true) {
-        return {
-            error: 'Failed to Create Pomodoro Set Habit task'
-        };
-    } else {
-        return p.data.id;
+    try {
+        var p = await callAPI("POST", Consts.serverPathUserTasks, Consts.PomodoroSetHabitTemplate);
+        if (p && p.success === true && p.data && p.data.id) {
+            const id = p.data.id;
+            Vars.PomodoroSetTaskId = id;
+            Vars.UserData.PomodoroSetTaskId = id;
+            try {
+                chrome.storage.sync.set({ [Consts.userDataKey]: Vars.UserData }, function () {
+                    console.log('Persisted PomodoroSetTaskId to storage', id);
+                });
+            } catch (e) {
+                console.warn('CreatePomodoroSetHabit: failed to persist id', e);
+            }
+            return id;
+        }
+    } catch (e) {
+        console.warn('CreatePomodoroSetHabit: POST failed', e);
     }
+
+    // Fallback: search for existing task with matching alias
+    try {
+        const list = await getData(true, Vars.UserData.Credentials, Consts.serverPathUserTasks);
+        if (list && list.success && Array.isArray(list.data)) {
+            for (let i = 0; i < list.data.length; i++) {
+                const t = list.data[i];
+                if (t && t.alias === Consts.PomodoroSetHabitTemplate.alias) {
+                    const id = t.id;
+                    Vars.PomodoroSetTaskId = id;
+                    Vars.UserData.PomodoroSetTaskId = id;
+                    try {
+                        chrome.storage.sync.set({ [Consts.userDataKey]: Vars.UserData }, function () {
+                            console.log('Persisted PomodoroSetTaskId (fallback) to storage', id);
+                        });
+                    } catch (e) {
+                        console.warn('CreatePomodoroSetHabit fallback: failed to persist id', e);
+                    }
+                    return id;
+                }
+            }
+        }
+    } catch (e) {
+        console.warn('CreatePomodoroSetHabit fallback search failed', e);
+    }
+
+    return { error: 'Failed to Create Pomodoro Set Habit task' };
+}
+
+// Update only the `text` field of existing Pomodoro tasks on Habitica (no scoring).
+// This is a manual helper you can run from the Service Worker console or via
+// `runBackgroundFunction("UpdatePomodoroTitlesOnServer", [])` from the popup.
+async function UpdatePomodoroTitlesOnServer() {
+    const results = { updated: [], errors: [] };
+
+    try {
+        if (!Vars.UserData || !Vars.UserData.Credentials) {
+            results.errors.push('No credentials configured');
+            return results;
+        }
+
+        // Helper to update a single task's title
+        async function updateOne(id, text) {
+            if (!id) return { skipped: true };
+            try {
+                const resp = await callAPI('PUT', 'tasks/' + id, { text: text });
+                if (resp && resp.success) {
+                    results.updated.push({ id: id, text: text });
+                    return { id: id, success: true };
+                } else {
+                    results.errors.push({ id: id, reason: resp });
+                    return { id: id, success: false, reason: resp };
+                }
+            } catch (e) {
+                results.errors.push({ id: id, error: String(e) });
+                return { id: id, success: false, error: String(e) };
+            }
+        }
+
+        // Update the main Pomodoro task title
+        await updateOne(Vars.PomodoroTaskId, Consts.PomodoroHabitTemplate.text);
+        // Update the Pomodoro set/combo task title
+        await updateOne(Vars.PomodoroSetTaskId, Consts.PomodoroSetHabitTemplate.text);
+
+    } catch (e) {
+        results.errors.push(String(e));
+    }
+
+    console.log('UpdatePomodoroTitlesOnServer result:', results);
+    return results;
+}
+
+// Validate stored Pomodoro IDs: ensure the stored tasks still exist and match
+// the expected alias/text. If missing or mismatched, recreate via the
+// create flows and persist the new IDs to storage.
+async function ValidateStoredPomodoroIds() {
+    if (!Vars.UserData || !Vars.UserData.Credentials) return;
+    const creds = Vars.UserData.Credentials;
+
+    async function checkAndFix(idKey, templateAlias, templateText, createFn) {
+        const storedId = Vars.UserData[idKey] || Vars[idKey];
+        if (!storedId) {
+            // No stored id — attempt to find or create
+            const created = await createFn();
+            if (created && !created.error) {
+                Vars[idKey] = created;
+                Vars.UserData[idKey] = created;
+                chrome.storage.sync.set({ [Consts.userDataKey]: Vars.UserData }, () => {
+                    console.log('ValidateStoredPomodoroIds: persisted new', idKey, created);
+                });
+            }
+            return;
+        }
+
+        try {
+            const taskResp = await getData(true, creds, 'tasks/' + storedId);
+            if (taskResp && taskResp.success && taskResp.data) {
+                const t = taskResp.data;
+                if (t.alias === templateAlias || t.text === templateText) {
+                    // Stored id is valid — ensure runtime vars reflect it
+                    Vars[idKey] = storedId;
+                    Vars.UserData[idKey] = storedId;
+                    return;
+                }
+                console.log('ValidateStoredPomodoroIds: stored id mismatch', idKey, storedId, 'server alias/text:', t.alias, t.text);
+            } else {
+                console.log('ValidateStoredPomodoroIds: stored id not found on server', idKey, storedId);
+            }
+        } catch (e) {
+            console.warn('ValidateStoredPomodoroIds: check failed for', idKey, storedId, e);
+        }
+
+        // If we reach here, the stored id is invalid or mismatched — recreate
+        try {
+            const result = await createFn();
+            if (result && !result.error) {
+                Vars[idKey] = result;
+                Vars.UserData[idKey] = result;
+                chrome.storage.sync.set({ [Consts.userDataKey]: Vars.UserData }, () => {
+                    console.log('ValidateStoredPomodoroIds: recreated and persisted', idKey, result);
+                });
+            } else {
+                console.warn('ValidateStoredPomodoroIds: recreate failed for', idKey, result);
+            }
+        } catch (e) {
+            console.warn('ValidateStoredPomodoroIds: recreate exception for', idKey, e);
+        }
+    }
+
+    await checkAndFix('PomodoroTaskId', Consts.PomodoroHabitTemplate.alias, Consts.PomodoroHabitTemplate.text, CreatePomodoroHabit);
+    await checkAndFix('PomodoroSetTaskId', Consts.PomodoroSetHabitTemplate.alias, Consts.PomodoroSetHabitTemplate.text, CreatePomodoroSetHabit);
+}
+
+// Scan Habitica tasks for Pomodoro duplicates (non-destructive). Returns an
+// object with arrays for `pomodoro` and `pomodoroSet` matches.
+async function ScanPomodoroDuplicates() {
+    if (!Vars.UserData || !Vars.UserData.Credentials) {
+        console.warn('ScanPomodoroDuplicates: no credentials configured');
+        return null;
+    }
+
+    const list = await getData(true, Vars.UserData.Credentials, Consts.serverPathUserTasks);
+    const result = { pomodoro: [], pomodoroSet: [], otherMatches: [] };
+    if (!list || !list.success || !Array.isArray(list.data)) return result;
+
+    for (const t of list.data) {
+        if (!t || !t.id) continue;
+        const text = (t.text || '').toString();
+        const alias = t.alias || '';
+
+        // Match primary pomodoro habit by alias or by containing Pomodoro emoji/text
+        const isPomodoroAlias = alias === Consts.PomodoroHabitTemplate.alias;
+        const isPomodoroText = /pomodoro/i.test(text) || text.indexOf('🍅') !== -1;
+        if (isPomodoroAlias || isPomodoroText) result.pomodoro.push({ id: t.id, text: text, alias: alias });
+
+        // Match pomodoro set/combo by alias or text hints
+        const isSetAlias = alias === Consts.PomodoroSetHabitTemplate.alias;
+        const isSetText = /combo/i.test(text) || /set/i.test(text) && text.indexOf('🍅') !== -1;
+        if (isSetAlias || isSetText) result.pomodoroSet.push({ id: t.id, text: text, alias: alias });
+
+        if ((isPomodoroAlias || isPomodoroText || isSetAlias || isSetText) && !(isPomodoroAlias || isSetAlias || isPomodoroText || isSetText)) {
+            result.otherMatches.push({ id: t.id, text: text, alias: alias });
+        }
+    }
+
+    // Log findings for convenience
+    console.log('ScanPomodoroDuplicates result:', result);
+    return result;
+}
+
+// Clean duplicates: keep `preferredPomodoroId` and `preferredSetId` when provided,
+// or fallback to persisted IDs. Deletes other matching tasks. Use cautiously.
+async function CleanPomodoroDuplicates(preferredPomodoroId, preferredSetId) {
+    if (!Vars.UserData || !Vars.UserData.Credentials) {
+        console.warn('CleanPomodoroDuplicates: no credentials configured');
+        return { error: 'No credentials' };
+    }
+
+    const scan = await ScanPomodoroDuplicates();
+    if (!scan) return { error: 'Scan failed' };
+
+    // Helper to delete extras in a group, keeping one id
+    async function deleteExtras(group, keepId) {
+        const deleted = [];
+        for (const item of group) {
+            if (item.id === keepId) continue;
+            try {
+                const resp = await callAPI('DELETE', 'tasks/' + item.id);
+                if (resp && resp.success) {
+                    deleted.push(item.id);
+                    console.log('Deleted duplicate task', item.id, item.text);
+                } else {
+                    console.warn('Failed to delete task', item.id, resp);
+                }
+            } catch (e) {
+                console.warn('Exception deleting task', item.id, e);
+            }
+        }
+        return deleted;
+    }
+
+    // Determine keep ids
+    const keepPomodoro = preferredPomodoroId || Vars.UserData.PomodoroTaskId || Vars.PomodoroTaskId || (scan.pomodoro[0] && scan.pomodoro[0].id);
+    const keepSet = preferredSetId || Vars.UserData.PomodoroSetTaskId || Vars.PomodoroSetTaskId || (scan.pomodoroSet[0] && scan.pomodoroSet[0].id);
+
+    const result = { deleted: { pomodoro: [], pomodoroSet: [] }, kept: { pomodoro: keepPomodoro, pomodoroSet: keepSet } };
+
+    if (Array.isArray(scan.pomodoro) && scan.pomodoro.length > 1) {
+        result.deleted.pomodoro = await deleteExtras(scan.pomodoro, keepPomodoro);
+    }
+    if (Array.isArray(scan.pomodoroSet) && scan.pomodoroSet.length > 1) {
+        result.deleted.pomodoroSet = await deleteExtras(scan.pomodoroSet, keepSet);
+    }
+
+    // Persist chosen kept ids
+    if (keepPomodoro) Vars.UserData.PomodoroTaskId = keepPomodoro, Vars.PomodoroTaskId = keepPomodoro;
+    if (keepSet) Vars.UserData.PomodoroSetTaskId = keepSet, Vars.PomodoroSetTaskId = keepSet;
+    try {
+        chrome.storage.sync.set({ [Consts.userDataKey]: Vars.UserData }, () => {
+            console.log('CleanPomodoroDuplicates: persisted kept IDs', result.kept);
+        });
+    } catch (e) {
+        console.warn('CleanPomodoroDuplicates: failed to persist kept IDs', e);
+    }
+
+    // Run a quick validation after cleanup
+    await ValidateStoredPomodoroIds();
+    console.log('CleanPomodoroDuplicates result:', result);
+    return result;
 }
 
 //------------------Handle messaging, communication with popup and overlay-----------------------------
@@ -788,6 +1125,26 @@ async function handleMessage(request, sender, sendResponse) {
             Vars = request.data.vars;
         }
         else if (request.msg === "run_function") {
+            // If the popup asks to run FetchHabiticaData but the worker hasn't yet
+            // initialised `Vars.UserData` from storage, load it first to ensure
+            // credentials and developerServerUrl are available for API calls.
+            if (request.functionName === 'FetchHabiticaData') {
+                if (!Vars.UserData || !Vars.UserData.Credentials || !Vars.UserData.Credentials.uid) {
+                    try {
+                        await new Promise((resolve) => {
+                            chrome.storage.sync.get(Consts.userDataKey, function (result) {
+                                if (result && result[Consts.userDataKey]) {
+                                    Vars.UserData = new UserSettings(result[Consts.userDataKey]);
+                                }
+                                resolve();
+                            });
+                        });
+                    } catch (e) {
+                        console.warn('Failed to lazy-load UserData before FetchHabiticaData', e);
+                    }
+                }
+            }
+
             if (request.args) {
                 //what spread(...) is doing here is taking the array element and expanding or unpacking it into a list of arguments
                 response = { result: executeFunctionByName(request.functionName, ...request.args), complete: true };
@@ -1230,7 +1587,8 @@ function CurrentTab(func) {
 //Block Site With Timer Overlay
 function blockSiteOverlay(tab) {
     const opacity = Vars.UserData.TranspartOverlay ? "0.85" : "1";
-    const url = new URL(tab.url);
+    const url = parseUrlSafe(tab.url);
+    if (!url) return; // ignore non-http(s) tabs
     const message = "Stay Focused! Time Left: " + Vars.Timer;
 
     if (GetBlockedSite(url.hostname) && !isInWhiteList(url)) {

@@ -11,7 +11,8 @@ const BROWSER = getBrowser();
 
 //----- on popup load -----//
 document.addEventListener("DOMContentLoaded", async function () {
-    await runBackgroundFunction("FetchHabiticaData", [true]);
+    // Fetch full Habitica data including tasks so missing Pomodoro tasks are recreated automatically
+    await runBackgroundFunction("FetchHabiticaData", [false]);
     await getBackgroundData();
     console.log("Vars", Vars);
     onPopupPageLoad();
@@ -68,7 +69,12 @@ function onPopupPageLoad() {
     });
 
     getCurrentTabUrl(function (url) {
-        CurrentTabHostname = new URL(url).hostname;
+        try {
+            const u = new URL(url);
+            CurrentTabHostname = (u.protocol === 'http:' || u.protocol === 'https:') ? u.hostname : "";
+        } catch (e) {
+            CurrentTabHostname = "";
+        }
         UpdateBlockCommand();
     });
 

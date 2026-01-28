@@ -7,23 +7,38 @@ async function callHabiticaAPI(serverPathUrl,xClientHeader,credentials,method,po
         return false;
     }
     
-    const response = await fetch(serverPathUrl, {
-        method: method, // *GET, POST, PUT, DELETE, etc.
-        mode: "cors", // no-cors, *cors, same-origin
-        cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-        credentials: "same-origin", // include, *same-origin, omit
-        headers: {
-          'x-client': "application/json",
-          'Content-Type': 'application/json',
-          'x-api-user': credentials.uid,
-          'x-api-key':credentials.apiToken
+    try {
+        const options = {
+            method: method, // *GET, POST, PUT, DELETE, etc.
+            mode: "cors",
+            cache: "no-cache",
+            credentials: "omit",
+            headers: {
+                'x-client': xClientHeader,
+                'Content-Type': 'application/json',
+                'x-api-user': credentials.uid,
+                'x-api-key': credentials.apiToken
+            },
+            referrerPolicy: "no-referrer"
+        };
 
-        },
+        // Only include a body for methods that support it and when postData is provided
+        if (postData && method && method.toUpperCase() !== 'GET') {
+            options.body = JSON.stringify(postData);
+        }
 
-        referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-        body: JSON.stringify(postData), // body data type must match "Content-Type" header
-      });
-      return response.json(); // parses JSON response into native JavaScript objects
+        const response = await fetch(serverPathUrl, options);
+
+        if (!response.ok) {
+            console.error('Habitica API request failed:', response.status, response.statusText);
+            return false;
+        }
+
+        return await response.json();
+    } catch (err) {
+        console.error('Habitica API fetch error:', err);
+        return false;
+    }
 }
 
 async function getHabiticaData(serverPathUrl, xClientHeader, credentials) {

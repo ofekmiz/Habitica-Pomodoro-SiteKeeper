@@ -486,6 +486,8 @@ a.delete {
     background-image: url(../img/pomodoroProtectStop.png);
 }
 
+/* (reverted) Previously forced emoji display; removed to restore image-based tomato */
+
 div#TopLeftPomoButtons {
     display: flex;
     width: 100%;
