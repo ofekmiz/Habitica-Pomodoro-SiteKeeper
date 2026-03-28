@@ -2,7 +2,6 @@ name: Playwright E2E (Chromium + Extension)
 
 on:
   pull_request:
-    branches: [master, main]
   # Allows running the workflow manually from the Actions tab
   workflow_dispatch:
 
