@@ -1,0 +1,7302 @@
+{
+    "2023-01-01": {
+        "minutes": 201.4,
+        "pomodoros": 8,
+        "weekday": "Sunday"
+    },
+    "2023-01-02": {
+        "minutes": 177.8,
+        "pomodoros": 7,
+        "weekday": "Monday"
+    },
+    "2023-01-03": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Tuesday"
+    },
+    "2023-01-04": {
+        "minutes": 51.1,
+        "pomodoros": 2,
+        "weekday": "Wednesday"
+    },
+    "2023-01-05": {
+        "minutes": 179.4,
+        "pomodoros": 7,
+        "weekday": "Thursday"
+    },
+    "2023-01-06": {
+        "minutes": 177.5,
+        "pomodoros": 7,
+        "weekday": "Friday"
+    },
+    "2023-01-07": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Saturday"
+    },
+    "2023-01-08": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Sunday"
+    },
+    "2023-01-09": {
+        "minutes": 54.9,
+        "pomodoros": 2,
+        "weekday": "Monday"
+    },
+    "2023-01-10": {
+        "minutes": 202.6,
+        "pomodoros": 8,
+        "weekday": "Tuesday"
+    },
+    "2023-01-11": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Wednesday"
+    },
+    "2023-01-12": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Thursday"
+    },
+    "2023-01-13": {
+        "minutes": 154.6,
+        "pomodoros": 6,
+        "weekday": "Friday"
+    },
+    "2023-01-14": {
+        "minutes": 200.3,
+        "pomodoros": 8,
+        "weekday": "Saturday"
+    },
+    "2023-01-15": {
+        "minutes": 28.6,
+        "pomodoros": 1,
+        "weekday": "Sunday"
+    },
+    "2023-01-16": {
+        "minutes": 127.6,
+        "pomodoros": 5,
+        "weekday": "Monday"
+    },
+    "2023-01-17": {
+        "minutes": 50,
+        "pomodoros": 2,
+        "weekday": "Tuesday"
+    },
+    "2023-01-18": {
+        "minutes": 177.8,
+        "pomodoros": 7,
+        "weekday": "Wednesday"
+    },
+    "2023-01-19": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Thursday"
+    },
+    "2023-01-20": {
+        "minutes": 129.6,
+        "pomodoros": 5,
+        "weekday": "Friday"
+    },
+    "2023-01-21": {
+        "minutes": 100.2,
+        "pomodoros": 4,
+        "weekday": "Saturday"
+    },
+    "2023-01-22": {
+        "minutes": 200.4,
+        "pomodoros": 8,
+        "weekday": "Sunday"
+    },
+    "2023-01-23": {
+        "minutes": 26.6,
+        "pomodoros": 1,
+        "weekday": "Monday"
+    },
+    "2023-01-24": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Tuesday"
+    },
+    "2023-01-25": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Wednesday"
+    },
+    "2023-01-26": {
+        "minutes": 153.7,
+        "pomodoros": 6,
+        "weekday": "Thursday"
+    },
+    "2023-01-27": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Friday"
+    },
+    "2023-01-28": {
+        "minutes": 76.3,
+        "pomodoros": 3,
+        "weekday": "Saturday"
+    },
+    "2023-01-29": {
+        "minutes": 103.4,
+        "pomodoros": 4,
+        "weekday": "Sunday"
+    },
+    "2023-01-30": {
+        "minutes": 129.8,
+        "pomodoros": 5,
+        "weekday": "Monday"
+    },
+    "2023-01-31": {
+        "minutes": 128.4,
+        "pomodoros": 5,
+        "weekday": "Tuesday"
+    },
+    "2023-02-01": {
+        "minutes": 202.3,
+        "pomodoros": 8,
+        "weekday": "Wednesday"
+    },
+    "2023-02-02": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Thursday"
+    },
+    "2023-02-03": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Friday"
+    },
+    "2023-02-04": {
+        "minutes": 152.7,
+        "pomodoros": 6,
+        "weekday": "Saturday"
+    },
+    "2023-02-05": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Sunday"
+    },
+    "2023-02-06": {
+        "minutes": 200.4,
+        "pomodoros": 8,
+        "weekday": "Monday"
+    },
+    "2023-02-07": {
+        "minutes": 28.3,
+        "pomodoros": 1,
+        "weekday": "Tuesday"
+    },
+    "2023-02-08": {
+        "minutes": 53.9,
+        "pomodoros": 2,
+        "weekday": "Wednesday"
+    },
+    "2023-02-09": {
+        "minutes": 154.8,
+        "pomodoros": 6,
+        "weekday": "Thursday"
+    },
+    "2023-02-10": {
+        "minutes": 127.9,
+        "pomodoros": 5,
+        "weekday": "Friday"
+    },
+    "2023-02-11": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Saturday"
+    },
+    "2023-02-12": {
+        "minutes": 178.2,
+        "pomodoros": 7,
+        "weekday": "Sunday"
+    },
+    "2023-02-13": {
+        "minutes": 126.5,
+        "pomodoros": 5,
+        "weekday": "Monday"
+    },
+    "2023-02-14": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Tuesday"
+    },
+    "2023-02-15": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Wednesday"
+    },
+    "2023-02-16": {
+        "minutes": 128.6,
+        "pomodoros": 5,
+        "weekday": "Thursday"
+    },
+    "2023-02-17": {
+        "minutes": 28.9,
+        "pomodoros": 1,
+        "weekday": "Friday"
+    },
+    "2023-02-18": {
+        "minutes": 104.5,
+        "pomodoros": 4,
+        "weekday": "Saturday"
+    },
+    "2023-02-19": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Sunday"
+    },
+    "2023-02-20": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Monday"
+    },
+    "2023-02-21": {
+        "minutes": 154.5,
+        "pomodoros": 6,
+        "weekday": "Tuesday"
+    },
+    "2023-02-22": {
+        "minutes": 152,
+        "pomodoros": 6,
+        "weekday": "Wednesday"
+    },
+    "2023-02-23": {
+        "minutes": 101.1,
+        "pomodoros": 4,
+        "weekday": "Thursday"
+    },
+    "2023-02-24": {
+        "minutes": 125,
+        "pomodoros": 5,
+        "weekday": "Friday"
+    },
+    "2023-02-25": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Saturday"
+    },
+    "2023-02-26": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Sunday"
+    },
+    "2023-02-27": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Monday"
+    },
+    "2023-02-28": {
+        "minutes": 78.1,
+        "pomodoros": 3,
+        "weekday": "Tuesday"
+    },
+    "2023-03-01": {
+        "minutes": 129,
+        "pomodoros": 5,
+        "weekday": "Wednesday"
+    },
+    "2023-03-02": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Thursday"
+    },
+    "2023-03-03": {
+        "minutes": 50.5,
+        "pomodoros": 2,
+        "weekday": "Friday"
+    },
+    "2023-03-04": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Saturday"
+    },
+    "2023-03-05": {
+        "minutes": 175.2,
+        "pomodoros": 7,
+        "weekday": "Sunday"
+    },
+    "2023-03-06": {
+        "minutes": 126.6,
+        "pomodoros": 5,
+        "weekday": "Monday"
+    },
+    "2023-03-07": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Tuesday"
+    },
+    "2023-03-08": {
+        "minutes": 103.8,
+        "pomodoros": 4,
+        "weekday": "Wednesday"
+    },
+    "2023-03-09": {
+        "minutes": 76.9,
+        "pomodoros": 3,
+        "weekday": "Thursday"
+    },
+    "2023-03-10": {
+        "minutes": 29.6,
+        "pomodoros": 1,
+        "weekday": "Friday"
+    },
+    "2023-03-11": {
+        "minutes": 27.1,
+        "pomodoros": 1,
+        "weekday": "Saturday"
+    },
+    "2023-03-12": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Sunday"
+    },
+    "2023-03-13": {
+        "minutes": 29.3,
+        "pomodoros": 1,
+        "weekday": "Monday"
+    },
+    "2023-03-14": {
+        "minutes": 125.3,
+        "pomodoros": 5,
+        "weekday": "Tuesday"
+    },
+    "2023-03-15": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Wednesday"
+    },
+    "2023-03-16": {
+        "minutes": 27.4,
+        "pomodoros": 1,
+        "weekday": "Thursday"
+    },
+    "2023-03-17": {
+        "minutes": 76,
+        "pomodoros": 3,
+        "weekday": "Friday"
+    },
+    "2023-03-18": {
+        "minutes": 52.6,
+        "pomodoros": 2,
+        "weekday": "Saturday"
+    },
+    "2023-03-19": {
+        "minutes": 78,
+        "pomodoros": 3,
+        "weekday": "Sunday"
+    },
+    "2023-03-20": {
+        "minutes": 78.4,
+        "pomodoros": 3,
+        "weekday": "Monday"
+    },
+    "2023-03-21": {
+        "minutes": 50.3,
+        "pomodoros": 2,
+        "weekday": "Tuesday"
+    },
+    "2023-03-22": {
+        "minutes": 127.4,
+        "pomodoros": 5,
+        "weekday": "Wednesday"
+    },
+    "2023-03-23": {
+        "minutes": 75.9,
+        "pomodoros": 3,
+        "weekday": "Thursday"
+    },
+    "2023-03-24": {
+        "minutes": 127.3,
+        "pomodoros": 5,
+        "weekday": "Friday"
+    },
+    "2023-03-25": {
+        "minutes": 179,
+        "pomodoros": 7,
+        "weekday": "Saturday"
+    },
+    "2023-03-26": {
+        "minutes": 53,
+        "pomodoros": 2,
+        "weekday": "Sunday"
+    },
+    "2023-03-27": {
+        "minutes": 204.1,
+        "pomodoros": 8,
+        "weekday": "Monday"
+    },
+    "2023-03-28": {
+        "minutes": 104.6,
+        "pomodoros": 4,
+        "weekday": "Tuesday"
+    },
+    "2023-03-29": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Wednesday"
+    },
+    "2023-03-30": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Thursday"
+    },
+    "2023-03-31": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Friday"
+    },
+    "2023-04-01": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Saturday"
+    },
+    "2023-04-02": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Sunday"
+    },
+    "2023-04-03": {
+        "minutes": 27,
+        "pomodoros": 1,
+        "weekday": "Monday"
+    },
+    "2023-04-04": {
+        "minutes": 178.3,
+        "pomodoros": 7,
+        "weekday": "Tuesday"
+    },
+    "2023-04-05": {
+        "minutes": 75.3,
+        "pomodoros": 3,
+        "weekday": "Wednesday"
+    },
+    "2023-04-06": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Thursday"
+    },
+    "2023-04-07": {
+        "minutes": 104.1,
+        "pomodoros": 4,
+        "weekday": "Friday"
+    },
+    "2023-04-08": {
+        "minutes": 80,
+        "pomodoros": 3,
+        "weekday": "Saturday"
+    },
+    "2023-04-09": {
+        "minutes": 100.7,
+        "pomodoros": 4,
+        "weekday": "Sunday"
+    },
+    "2023-04-10": {
+        "minutes": 54.7,
+        "pomodoros": 2,
+        "weekday": "Monday"
+    },
+    "2023-04-11": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Tuesday"
+    },
+    "2023-04-12": {
+        "minutes": 26.5,
+        "pomodoros": 1,
+        "weekday": "Wednesday"
+    },
+    "2023-04-13": {
+        "minutes": 52.7,
+        "pomodoros": 2,
+        "weekday": "Thursday"
+    },
+    "2023-04-14": {
+        "minutes": 153.3,
+        "pomodoros": 6,
+        "weekday": "Friday"
+    },
+    "2023-04-15": {
+        "minutes": 125.4,
+        "pomodoros": 5,
+        "weekday": "Saturday"
+    },
+    "2023-04-16": {
+        "minutes": 25.6,
+        "pomodoros": 1,
+        "weekday": "Sunday"
+    },
+    "2023-04-17": {
+        "minutes": 77.7,
+        "pomodoros": 3,
+        "weekday": "Monday"
+    },
+    "2023-04-18": {
+        "minutes": 53.2,
+        "pomodoros": 2,
+        "weekday": "Tuesday"
+    },
+    "2023-04-19": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Wednesday"
+    },
+    "2023-04-20": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Thursday"
+    },
+    "2023-04-21": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Friday"
+    },
+    "2023-04-22": {
+        "minutes": 176.9,
+        "pomodoros": 7,
+        "weekday": "Saturday"
+    },
+    "2023-04-23": {
+        "minutes": 77.5,
+        "pomodoros": 3,
+        "weekday": "Sunday"
+    },
+    "2023-04-24": {
+        "minutes": 78.2,
+        "pomodoros": 3,
+        "weekday": "Monday"
+    },
+    "2023-04-25": {
+        "minutes": 77.5,
+        "pomodoros": 3,
+        "weekday": "Tuesday"
+    },
+    "2023-04-26": {
+        "minutes": 178.4,
+        "pomodoros": 7,
+        "weekday": "Wednesday"
+    },
+    "2023-04-27": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Thursday"
+    },
+    "2023-04-28": {
+        "minutes": 202.1,
+        "pomodoros": 8,
+        "weekday": "Friday"
+    },
+    "2023-04-29": {
+        "minutes": 177.7,
+        "pomodoros": 7,
+        "weekday": "Saturday"
+    },
+    "2023-04-30": {
+        "minutes": 53.2,
+        "pomodoros": 2,
+        "weekday": "Sunday"
+    },
+    "2023-05-01": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Monday"
+    },
+    "2023-05-02": {
+        "minutes": 50.5,
+        "pomodoros": 2,
+        "weekday": "Tuesday"
+    },
+    "2023-05-03": {
+        "minutes": 103.5,
+        "pomodoros": 4,
+        "weekday": "Wednesday"
+    },
+    "2023-05-04": {
+        "minutes": 152.9,
+        "pomodoros": 6,
+        "weekday": "Thursday"
+    },
+    "2023-05-05": {
+        "minutes": 176,
+        "pomodoros": 7,
+        "weekday": "Friday"
+    },
+    "2023-05-06": {
+        "minutes": 54.2,
+        "pomodoros": 2,
+        "weekday": "Saturday"
+    },
+    "2023-05-07": {
+        "minutes": 151.9,
+        "pomodoros": 6,
+        "weekday": "Sunday"
+    },
+    "2023-05-08": {
+        "minutes": 200.3,
+        "pomodoros": 8,
+        "weekday": "Monday"
+    },
+    "2023-05-09": {
+        "minutes": 175.2,
+        "pomodoros": 7,
+        "weekday": "Tuesday"
+    },
+    "2023-05-10": {
+        "minutes": 79.4,
+        "pomodoros": 3,
+        "weekday": "Wednesday"
+    },
+    "2023-05-11": {
+        "minutes": 128.7,
+        "pomodoros": 5,
+        "weekday": "Thursday"
+    },
+    "2023-05-12": {
+        "minutes": 151.4,
+        "pomodoros": 6,
+        "weekday": "Friday"
+    },
+    "2023-05-13": {
+        "minutes": 203.6,
+        "pomodoros": 8,
+        "weekday": "Saturday"
+    },
+    "2023-05-14": {
+        "minutes": 79.7,
+        "pomodoros": 3,
+        "weekday": "Sunday"
+    },
+    "2023-05-15": {
+        "minutes": 129.3,
+        "pomodoros": 5,
+        "weekday": "Monday"
+    },
+    "2023-05-16": {
+        "minutes": 101.9,
+        "pomodoros": 4,
+        "weekday": "Tuesday"
+    },
+    "2023-05-17": {
+        "minutes": 29,
+        "pomodoros": 1,
+        "weekday": "Wednesday"
+    },
+    "2023-05-18": {
+        "minutes": 129,
+        "pomodoros": 5,
+        "weekday": "Thursday"
+    },
+    "2023-05-19": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Friday"
+    },
+    "2023-05-20": {
+        "minutes": 128.9,
+        "pomodoros": 5,
+        "weekday": "Saturday"
+    },
+    "2023-05-21": {
+        "minutes": 176.2,
+        "pomodoros": 7,
+        "weekday": "Sunday"
+    },
+    "2023-05-22": {
+        "minutes": 202.2,
+        "pomodoros": 8,
+        "weekday": "Monday"
+    },
+    "2023-05-23": {
+        "minutes": 52.6,
+        "pomodoros": 2,
+        "weekday": "Tuesday"
+    },
+    "2023-05-24": {
+        "minutes": 100.1,
+        "pomodoros": 4,
+        "weekday": "Wednesday"
+    },
+    "2023-05-25": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Thursday"
+    },
+    "2023-05-26": {
+        "minutes": 200,
+        "pomodoros": 8,
+        "weekday": "Friday"
+    },
+    "2023-05-27": {
+        "minutes": 27.3,
+        "pomodoros": 1,
+        "weekday": "Saturday"
+    },
+    "2023-05-28": {
+        "minutes": 101.2,
+        "pomodoros": 4,
+        "weekday": "Sunday"
+    },
+    "2023-05-29": {
+        "minutes": 125.7,
+        "pomodoros": 5,
+        "weekday": "Monday"
+    },
+    "2023-05-30": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Tuesday"
+    },
+    "2023-05-31": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Wednesday"
+    },
+    "2023-06-01": {
+        "minutes": 51.1,
+        "pomodoros": 2,
+        "weekday": "Thursday"
+    },
+    "2023-06-02": {
+        "minutes": 104.3,
+        "pomodoros": 4,
+        "weekday": "Friday"
+    },
+    "2023-06-03": {
+        "minutes": 176.2,
+        "pomodoros": 7,
+        "weekday": "Saturday"
+    },
+    "2023-06-04": {
+        "minutes": 151.2,
+        "pomodoros": 6,
+        "weekday": "Sunday"
+    },
+    "2023-06-05": {
+        "minutes": 29.7,
+        "pomodoros": 1,
+        "weekday": "Monday"
+    },
+    "2023-06-06": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Tuesday"
+    },
+    "2023-06-07": {
+        "minutes": 25.9,
+        "pomodoros": 1,
+        "weekday": "Wednesday"
+    },
+    "2023-06-08": {
+        "minutes": 177.4,
+        "pomodoros": 7,
+        "weekday": "Thursday"
+    },
+    "2023-06-09": {
+        "minutes": 100.8,
+        "pomodoros": 4,
+        "weekday": "Friday"
+    },
+    "2023-06-10": {
+        "minutes": 79.7,
+        "pomodoros": 3,
+        "weekday": "Saturday"
+    },
+    "2023-06-11": {
+        "minutes": 178.3,
+        "pomodoros": 7,
+        "weekday": "Sunday"
+    },
+    "2023-06-12": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Monday"
+    },
+    "2023-06-13": {
+        "minutes": 103.6,
+        "pomodoros": 4,
+        "weekday": "Tuesday"
+    },
+    "2023-06-14": {
+        "minutes": 50.8,
+        "pomodoros": 2,
+        "weekday": "Wednesday"
+    },
+    "2023-06-15": {
+        "minutes": 178.8,
+        "pomodoros": 7,
+        "weekday": "Thursday"
+    },
+    "2023-06-16": {
+        "minutes": 125.1,
+        "pomodoros": 5,
+        "weekday": "Friday"
+    },
+    "2023-06-17": {
+        "minutes": 126.4,
+        "pomodoros": 5,
+        "weekday": "Saturday"
+    },
+    "2023-06-18": {
+        "minutes": 204.9,
+        "pomodoros": 8,
+        "weekday": "Sunday"
+    },
+    "2023-06-19": {
+        "minutes": 125.9,
+        "pomodoros": 5,
+        "weekday": "Monday"
+    },
+    "2023-06-20": {
+        "minutes": 27.4,
+        "pomodoros": 1,
+        "weekday": "Tuesday"
+    },
+    "2023-06-21": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Wednesday"
+    },
+    "2023-06-22": {
+        "minutes": 126.4,
+        "pomodoros": 5,
+        "weekday": "Thursday"
+    },
+    "2023-06-23": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Friday"
+    },
+    "2023-06-24": {
+        "minutes": 202,
+        "pomodoros": 8,
+        "weekday": "Saturday"
+    },
+    "2023-06-25": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Sunday"
+    },
+    "2023-06-26": {
+        "minutes": 52.9,
+        "pomodoros": 2,
+        "weekday": "Monday"
+    },
+    "2023-06-27": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Tuesday"
+    },
+    "2023-06-28": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Wednesday"
+    },
+    "2023-06-29": {
+        "minutes": 203.5,
+        "pomodoros": 8,
+        "weekday": "Thursday"
+    },
+    "2023-06-30": {
+        "minutes": 77.7,
+        "pomodoros": 3,
+        "weekday": "Friday"
+    },
+    "2023-07-01": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Saturday"
+    },
+    "2023-07-02": {
+        "minutes": 127.5,
+        "pomodoros": 5,
+        "weekday": "Sunday"
+    },
+    "2023-07-03": {
+        "minutes": 79,
+        "pomodoros": 3,
+        "weekday": "Monday"
+    },
+    "2023-07-04": {
+        "minutes": 151,
+        "pomodoros": 6,
+        "weekday": "Tuesday"
+    },
+    "2023-07-05": {
+        "minutes": 178.2,
+        "pomodoros": 7,
+        "weekday": "Wednesday"
+    },
+    "2023-07-06": {
+        "minutes": 101.4,
+        "pomodoros": 4,
+        "weekday": "Thursday"
+    },
+    "2023-07-07": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Friday"
+    },
+    "2023-07-08": {
+        "minutes": 153.7,
+        "pomodoros": 6,
+        "weekday": "Saturday"
+    },
+    "2023-07-09": {
+        "minutes": 80,
+        "pomodoros": 3,
+        "weekday": "Sunday"
+    },
+    "2023-07-10": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Monday"
+    },
+    "2023-07-11": {
+        "minutes": 177.9,
+        "pomodoros": 7,
+        "weekday": "Tuesday"
+    },
+    "2023-07-12": {
+        "minutes": 29,
+        "pomodoros": 1,
+        "weekday": "Wednesday"
+    },
+    "2023-07-13": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Thursday"
+    },
+    "2023-07-14": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Friday"
+    },
+    "2023-07-15": {
+        "minutes": 151.8,
+        "pomodoros": 6,
+        "weekday": "Saturday"
+    },
+    "2023-07-16": {
+        "minutes": 79.4,
+        "pomodoros": 3,
+        "weekday": "Sunday"
+    },
+    "2023-07-17": {
+        "minutes": 152.2,
+        "pomodoros": 6,
+        "weekday": "Monday"
+    },
+    "2023-07-18": {
+        "minutes": 54,
+        "pomodoros": 2,
+        "weekday": "Tuesday"
+    },
+    "2023-07-19": {
+        "minutes": 152,
+        "pomodoros": 6,
+        "weekday": "Wednesday"
+    },
+    "2023-07-20": {
+        "minutes": 125.4,
+        "pomodoros": 5,
+        "weekday": "Thursday"
+    },
+    "2023-07-21": {
+        "minutes": 77.8,
+        "pomodoros": 3,
+        "weekday": "Friday"
+    },
+    "2023-07-22": {
+        "minutes": 125.3,
+        "pomodoros": 5,
+        "weekday": "Saturday"
+    },
+    "2023-07-23": {
+        "minutes": 51.4,
+        "pomodoros": 2,
+        "weekday": "Sunday"
+    },
+    "2023-07-24": {
+        "minutes": 76.9,
+        "pomodoros": 3,
+        "weekday": "Monday"
+    },
+    "2023-07-25": {
+        "minutes": 176.6,
+        "pomodoros": 7,
+        "weekday": "Tuesday"
+    },
+    "2023-07-26": {
+        "minutes": 54.8,
+        "pomodoros": 2,
+        "weekday": "Wednesday"
+    },
+    "2023-07-27": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Thursday"
+    },
+    "2023-07-28": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Friday"
+    },
+    "2023-07-29": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Saturday"
+    },
+    "2023-07-30": {
+        "minutes": 75.3,
+        "pomodoros": 3,
+        "weekday": "Sunday"
+    },
+    "2023-07-31": {
+        "minutes": 27.6,
+        "pomodoros": 1,
+        "weekday": "Monday"
+    },
+    "2023-08-01": {
+        "minutes": 104.1,
+        "pomodoros": 4,
+        "weekday": "Tuesday"
+    },
+    "2023-08-02": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Wednesday"
+    },
+    "2023-08-03": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Thursday"
+    },
+    "2023-08-04": {
+        "minutes": 77.2,
+        "pomodoros": 3,
+        "weekday": "Friday"
+    },
+    "2023-08-05": {
+        "minutes": 104.5,
+        "pomodoros": 4,
+        "weekday": "Saturday"
+    },
+    "2023-08-06": {
+        "minutes": 29,
+        "pomodoros": 1,
+        "weekday": "Sunday"
+    },
+    "2023-08-07": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Monday"
+    },
+    "2023-08-08": {
+        "minutes": 200.7,
+        "pomodoros": 8,
+        "weekday": "Tuesday"
+    },
+    "2023-08-09": {
+        "minutes": 178.6,
+        "pomodoros": 7,
+        "weekday": "Wednesday"
+    },
+    "2023-08-10": {
+        "minutes": 201.5,
+        "pomodoros": 8,
+        "weekday": "Thursday"
+    },
+    "2023-08-11": {
+        "minutes": 126.1,
+        "pomodoros": 5,
+        "weekday": "Friday"
+    },
+    "2023-08-12": {
+        "minutes": 125.7,
+        "pomodoros": 5,
+        "weekday": "Saturday"
+    },
+    "2023-08-13": {
+        "minutes": 152.4,
+        "pomodoros": 6,
+        "weekday": "Sunday"
+    },
+    "2023-08-14": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Monday"
+    },
+    "2023-08-15": {
+        "minutes": 177.3,
+        "pomodoros": 7,
+        "weekday": "Tuesday"
+    },
+    "2023-08-16": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Wednesday"
+    },
+    "2023-08-17": {
+        "minutes": 154,
+        "pomodoros": 6,
+        "weekday": "Thursday"
+    },
+    "2023-08-18": {
+        "minutes": 128.3,
+        "pomodoros": 5,
+        "weekday": "Friday"
+    },
+    "2023-08-19": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Saturday"
+    },
+    "2023-08-20": {
+        "minutes": 52.1,
+        "pomodoros": 2,
+        "weekday": "Sunday"
+    },
+    "2023-08-21": {
+        "minutes": 54.5,
+        "pomodoros": 2,
+        "weekday": "Monday"
+    },
+    "2023-08-22": {
+        "minutes": 25.7,
+        "pomodoros": 1,
+        "weekday": "Tuesday"
+    },
+    "2023-08-23": {
+        "minutes": 77.7,
+        "pomodoros": 3,
+        "weekday": "Wednesday"
+    },
+    "2023-08-24": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Thursday"
+    },
+    "2023-08-25": {
+        "minutes": 27.2,
+        "pomodoros": 1,
+        "weekday": "Friday"
+    },
+    "2023-08-26": {
+        "minutes": 104.5,
+        "pomodoros": 4,
+        "weekday": "Saturday"
+    },
+    "2023-08-27": {
+        "minutes": 104.8,
+        "pomodoros": 4,
+        "weekday": "Sunday"
+    },
+    "2023-08-28": {
+        "minutes": 29.7,
+        "pomodoros": 1,
+        "weekday": "Monday"
+    },
+    "2023-08-29": {
+        "minutes": 50.5,
+        "pomodoros": 2,
+        "weekday": "Tuesday"
+    },
+    "2023-08-30": {
+        "minutes": 77.2,
+        "pomodoros": 3,
+        "weekday": "Wednesday"
+    },
+    "2023-08-31": {
+        "minutes": 128.5,
+        "pomodoros": 5,
+        "weekday": "Thursday"
+    },
+    "2023-09-01": {
+        "minutes": 176.6,
+        "pomodoros": 7,
+        "weekday": "Friday"
+    },
+    "2023-09-02": {
+        "minutes": 29.6,
+        "pomodoros": 1,
+        "weekday": "Saturday"
+    },
+    "2023-09-03": {
+        "minutes": 205,
+        "pomodoros": 8,
+        "weekday": "Sunday"
+    },
+    "2023-09-04": {
+        "minutes": 152.4,
+        "pomodoros": 6,
+        "weekday": "Monday"
+    },
+    "2023-09-05": {
+        "minutes": 151.7,
+        "pomodoros": 6,
+        "weekday": "Tuesday"
+    },
+    "2023-09-06": {
+        "minutes": 29.9,
+        "pomodoros": 1,
+        "weekday": "Wednesday"
+    },
+    "2023-09-07": {
+        "minutes": 76.4,
+        "pomodoros": 3,
+        "weekday": "Thursday"
+    },
+    "2023-09-08": {
+        "minutes": 150.9,
+        "pomodoros": 6,
+        "weekday": "Friday"
+    },
+    "2023-09-09": {
+        "minutes": 202.2,
+        "pomodoros": 8,
+        "weekday": "Saturday"
+    },
+    "2023-09-10": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Sunday"
+    },
+    "2023-09-11": {
+        "minutes": 103.9,
+        "pomodoros": 4,
+        "weekday": "Monday"
+    },
+    "2023-09-12": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Tuesday"
+    },
+    "2023-09-13": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Wednesday"
+    },
+    "2023-09-14": {
+        "minutes": 178.7,
+        "pomodoros": 7,
+        "weekday": "Thursday"
+    },
+    "2023-09-15": {
+        "minutes": 29.9,
+        "pomodoros": 1,
+        "weekday": "Friday"
+    },
+    "2023-09-16": {
+        "minutes": 154.3,
+        "pomodoros": 6,
+        "weekday": "Saturday"
+    },
+    "2023-09-17": {
+        "minutes": 100.6,
+        "pomodoros": 4,
+        "weekday": "Sunday"
+    },
+    "2023-09-18": {
+        "minutes": 27.2,
+        "pomodoros": 1,
+        "weekday": "Monday"
+    },
+    "2023-09-19": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Tuesday"
+    },
+    "2023-09-20": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Wednesday"
+    },
+    "2023-09-21": {
+        "minutes": 203.4,
+        "pomodoros": 8,
+        "weekday": "Thursday"
+    },
+    "2023-09-22": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Friday"
+    },
+    "2023-09-23": {
+        "minutes": 103.2,
+        "pomodoros": 4,
+        "weekday": "Saturday"
+    },
+    "2023-09-24": {
+        "minutes": 129.4,
+        "pomodoros": 5,
+        "weekday": "Sunday"
+    },
+    "2023-09-25": {
+        "minutes": 175.3,
+        "pomodoros": 7,
+        "weekday": "Monday"
+    },
+    "2023-09-26": {
+        "minutes": 151.8,
+        "pomodoros": 6,
+        "weekday": "Tuesday"
+    },
+    "2023-09-27": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Wednesday"
+    },
+    "2023-09-28": {
+        "minutes": 203.1,
+        "pomodoros": 8,
+        "weekday": "Thursday"
+    },
+    "2023-09-29": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Friday"
+    },
+    "2023-09-30": {
+        "minutes": 150.8,
+        "pomodoros": 6,
+        "weekday": "Saturday"
+    },
+    "2023-10-01": {
+        "minutes": 125.9,
+        "pomodoros": 5,
+        "weekday": "Sunday"
+    },
+    "2023-10-02": {
+        "minutes": 151.4,
+        "pomodoros": 6,
+        "weekday": "Monday"
+    },
+    "2023-10-03": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Tuesday"
+    },
+    "2023-10-04": {
+        "minutes": 28.4,
+        "pomodoros": 1,
+        "weekday": "Wednesday"
+    },
+    "2023-10-05": {
+        "minutes": 104.8,
+        "pomodoros": 4,
+        "weekday": "Thursday"
+    },
+    "2023-10-06": {
+        "minutes": 76.9,
+        "pomodoros": 3,
+        "weekday": "Friday"
+    },
+    "2023-10-07": {
+        "minutes": 76.3,
+        "pomodoros": 3,
+        "weekday": "Saturday"
+    },
+    "2023-10-08": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Sunday"
+    },
+    "2023-10-09": {
+        "minutes": 204.4,
+        "pomodoros": 8,
+        "weekday": "Monday"
+    },
+    "2023-10-10": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Tuesday"
+    },
+    "2023-10-11": {
+        "minutes": 101.4,
+        "pomodoros": 4,
+        "weekday": "Wednesday"
+    },
+    "2023-10-12": {
+        "minutes": 175.6,
+        "pomodoros": 7,
+        "weekday": "Thursday"
+    },
+    "2023-10-13": {
+        "minutes": 103.2,
+        "pomodoros": 4,
+        "weekday": "Friday"
+    },
+    "2023-10-14": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Saturday"
+    },
+    "2023-10-15": {
+        "minutes": 152.8,
+        "pomodoros": 6,
+        "weekday": "Sunday"
+    },
+    "2023-10-16": {
+        "minutes": 152.6,
+        "pomodoros": 6,
+        "weekday": "Monday"
+    },
+    "2023-10-17": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Tuesday"
+    },
+    "2023-10-18": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Wednesday"
+    },
+    "2023-10-19": {
+        "minutes": 177.3,
+        "pomodoros": 7,
+        "weekday": "Thursday"
+    },
+    "2023-10-20": {
+        "minutes": 54.9,
+        "pomodoros": 2,
+        "weekday": "Friday"
+    },
+    "2023-10-21": {
+        "minutes": 152.5,
+        "pomodoros": 6,
+        "weekday": "Saturday"
+    },
+    "2023-10-22": {
+        "minutes": 28.9,
+        "pomodoros": 1,
+        "weekday": "Sunday"
+    },
+    "2023-10-23": {
+        "minutes": 75.1,
+        "pomodoros": 3,
+        "weekday": "Monday"
+    },
+    "2023-10-24": {
+        "minutes": 28.4,
+        "pomodoros": 1,
+        "weekday": "Tuesday"
+    },
+    "2023-10-25": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Wednesday"
+    },
+    "2023-10-26": {
+        "minutes": 104.6,
+        "pomodoros": 4,
+        "weekday": "Thursday"
+    },
+    "2023-10-27": {
+        "minutes": 128.4,
+        "pomodoros": 5,
+        "weekday": "Friday"
+    },
+    "2023-10-28": {
+        "minutes": 28,
+        "pomodoros": 1,
+        "weekday": "Saturday"
+    },
+    "2023-10-29": {
+        "minutes": 179.6,
+        "pomodoros": 7,
+        "weekday": "Sunday"
+    },
+    "2023-10-30": {
+        "minutes": 26.1,
+        "pomodoros": 1,
+        "weekday": "Monday"
+    },
+    "2023-10-31": {
+        "minutes": 26.8,
+        "pomodoros": 1,
+        "weekday": "Tuesday"
+    },
+    "2023-11-01": {
+        "minutes": 203.6,
+        "pomodoros": 8,
+        "weekday": "Wednesday"
+    },
+    "2023-11-02": {
+        "minutes": 53.1,
+        "pomodoros": 2,
+        "weekday": "Thursday"
+    },
+    "2023-11-03": {
+        "minutes": 104.6,
+        "pomodoros": 4,
+        "weekday": "Friday"
+    },
+    "2023-11-04": {
+        "minutes": 78.5,
+        "pomodoros": 3,
+        "weekday": "Saturday"
+    },
+    "2023-11-05": {
+        "minutes": 176.6,
+        "pomodoros": 7,
+        "weekday": "Sunday"
+    },
+    "2023-11-06": {
+        "minutes": 28.1,
+        "pomodoros": 1,
+        "weekday": "Monday"
+    },
+    "2023-11-07": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Tuesday"
+    },
+    "2023-11-08": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Wednesday"
+    },
+    "2023-11-09": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Thursday"
+    },
+    "2023-11-10": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Friday"
+    },
+    "2023-11-11": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Saturday"
+    },
+    "2023-11-12": {
+        "minutes": 75.3,
+        "pomodoros": 3,
+        "weekday": "Sunday"
+    },
+    "2023-11-13": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Monday"
+    },
+    "2023-11-14": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Tuesday"
+    },
+    "2023-11-15": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Wednesday"
+    },
+    "2023-11-16": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Thursday"
+    },
+    "2023-11-17": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Friday"
+    },
+    "2023-11-18": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Saturday"
+    },
+    "2023-11-19": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Sunday"
+    },
+    "2023-11-20": {
+        "minutes": 153.9,
+        "pomodoros": 6,
+        "weekday": "Monday"
+    },
+    "2023-11-21": {
+        "minutes": 126.5,
+        "pomodoros": 5,
+        "weekday": "Tuesday"
+    },
+    "2023-11-22": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Wednesday"
+    },
+    "2023-11-23": {
+        "minutes": 100.1,
+        "pomodoros": 4,
+        "weekday": "Thursday"
+    },
+    "2023-11-24": {
+        "minutes": 203.8,
+        "pomodoros": 8,
+        "weekday": "Friday"
+    },
+    "2023-11-25": {
+        "minutes": 51.3,
+        "pomodoros": 2,
+        "weekday": "Saturday"
+    },
+    "2023-11-26": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Sunday"
+    },
+    "2023-11-27": {
+        "minutes": 204.1,
+        "pomodoros": 8,
+        "weekday": "Monday"
+    },
+    "2023-11-28": {
+        "minutes": 27.5,
+        "pomodoros": 1,
+        "weekday": "Tuesday"
+    },
+    "2023-11-29": {
+        "minutes": 203.4,
+        "pomodoros": 8,
+        "weekday": "Wednesday"
+    },
+    "2023-11-30": {
+        "minutes": 154.2,
+        "pomodoros": 6,
+        "weekday": "Thursday"
+    },
+    "2023-12-01": {
+        "minutes": 79.7,
+        "pomodoros": 3,
+        "weekday": "Friday"
+    },
+    "2023-12-02": {
+        "minutes": 102,
+        "pomodoros": 4,
+        "weekday": "Saturday"
+    },
+    "2023-12-03": {
+        "minutes": 75.6,
+        "pomodoros": 3,
+        "weekday": "Sunday"
+    },
+    "2023-12-04": {
+        "minutes": 151.4,
+        "pomodoros": 6,
+        "weekday": "Monday"
+    },
+    "2023-12-05": {
+        "minutes": 25.7,
+        "pomodoros": 1,
+        "weekday": "Tuesday"
+    },
+    "2023-12-06": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Wednesday"
+    },
+    "2023-12-07": {
+        "minutes": 102.4,
+        "pomodoros": 4,
+        "weekday": "Thursday"
+    },
+    "2023-12-08": {
+        "minutes": 102.2,
+        "pomodoros": 4,
+        "weekday": "Friday"
+    },
+    "2023-12-09": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Saturday"
+    },
+    "2023-12-10": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Sunday"
+    },
+    "2023-12-11": {
+        "minutes": 179.7,
+        "pomodoros": 7,
+        "weekday": "Monday"
+    },
+    "2023-12-12": {
+        "minutes": 52.1,
+        "pomodoros": 2,
+        "weekday": "Tuesday"
+    },
+    "2023-12-13": {
+        "minutes": 152.5,
+        "pomodoros": 6,
+        "weekday": "Wednesday"
+    },
+    "2023-12-14": {
+        "minutes": 51.2,
+        "pomodoros": 2,
+        "weekday": "Thursday"
+    },
+    "2023-12-15": {
+        "minutes": 102,
+        "pomodoros": 4,
+        "weekday": "Friday"
+    },
+    "2023-12-16": {
+        "minutes": 52.2,
+        "pomodoros": 2,
+        "weekday": "Saturday"
+    },
+    "2023-12-17": {
+        "minutes": 26.6,
+        "pomodoros": 1,
+        "weekday": "Sunday"
+    },
+    "2023-12-18": {
+        "minutes": 127.5,
+        "pomodoros": 5,
+        "weekday": "Monday"
+    },
+    "2023-12-19": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Tuesday"
+    },
+    "2023-12-20": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Wednesday"
+    },
+    "2023-12-21": {
+        "minutes": 103.3,
+        "pomodoros": 4,
+        "weekday": "Thursday"
+    },
+    "2023-12-22": {
+        "minutes": 25.3,
+        "pomodoros": 1,
+        "weekday": "Friday"
+    },
+    "2023-12-23": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Saturday"
+    },
+    "2023-12-24": {
+        "minutes": 52.1,
+        "pomodoros": 2,
+        "weekday": "Sunday"
+    },
+    "2023-12-25": {
+        "minutes": 79.2,
+        "pomodoros": 3,
+        "weekday": "Monday"
+    },
+    "2023-12-26": {
+        "minutes": 179.6,
+        "pomodoros": 7,
+        "weekday": "Tuesday"
+    },
+    "2023-12-27": {
+        "minutes": 151.1,
+        "pomodoros": 6,
+        "weekday": "Wednesday"
+    },
+    "2023-12-28": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Thursday"
+    },
+    "2023-12-29": {
+        "minutes": 201.9,
+        "pomodoros": 8,
+        "weekday": "Friday"
+    },
+    "2023-12-30": {
+        "minutes": 28.1,
+        "pomodoros": 1,
+        "weekday": "Saturday"
+    },
+    "2023-12-31": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Sunday"
+    },
+    "2024-01-01": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Monday"
+    },
+    "2024-01-02": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Tuesday"
+    },
+    "2024-01-03": {
+        "minutes": 179.8,
+        "pomodoros": 7,
+        "weekday": "Wednesday"
+    },
+    "2024-01-04": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Thursday"
+    },
+    "2024-01-05": {
+        "minutes": 55,
+        "pomodoros": 2,
+        "weekday": "Friday"
+    },
+    "2024-01-06": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Saturday"
+    },
+    "2024-01-07": {
+        "minutes": 154.8,
+        "pomodoros": 6,
+        "weekday": "Sunday"
+    },
+    "2024-01-08": {
+        "minutes": 201.5,
+        "pomodoros": 8,
+        "weekday": "Monday"
+    },
+    "2024-01-09": {
+        "minutes": 202.9,
+        "pomodoros": 8,
+        "weekday": "Tuesday"
+    },
+    "2024-01-10": {
+        "minutes": 152.8,
+        "pomodoros": 6,
+        "weekday": "Wednesday"
+    },
+    "2024-01-11": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Thursday"
+    },
+    "2024-01-12": {
+        "minutes": 75.8,
+        "pomodoros": 3,
+        "weekday": "Friday"
+    },
+    "2024-01-13": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Saturday"
+    },
+    "2024-01-14": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Sunday"
+    },
+    "2024-01-15": {
+        "minutes": 154.4,
+        "pomodoros": 6,
+        "weekday": "Monday"
+    },
+    "2024-01-16": {
+        "minutes": 102.2,
+        "pomodoros": 4,
+        "weekday": "Tuesday"
+    },
+    "2024-01-17": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Wednesday"
+    },
+    "2024-01-18": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Thursday"
+    },
+    "2024-01-19": {
+        "minutes": 51.6,
+        "pomodoros": 2,
+        "weekday": "Friday"
+    },
+    "2024-01-20": {
+        "minutes": 79.5,
+        "pomodoros": 3,
+        "weekday": "Saturday"
+    },
+    "2024-01-21": {
+        "minutes": 128,
+        "pomodoros": 5,
+        "weekday": "Sunday"
+    },
+    "2024-01-22": {
+        "minutes": 53.7,
+        "pomodoros": 2,
+        "weekday": "Monday"
+    },
+    "2024-01-23": {
+        "minutes": 26.6,
+        "pomodoros": 1,
+        "weekday": "Tuesday"
+    },
+    "2024-01-24": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Wednesday"
+    },
+    "2024-01-25": {
+        "minutes": 204.7,
+        "pomodoros": 8,
+        "weekday": "Thursday"
+    },
+    "2024-01-26": {
+        "minutes": 102.7,
+        "pomodoros": 4,
+        "weekday": "Friday"
+    },
+    "2024-01-27": {
+        "minutes": 103.5,
+        "pomodoros": 4,
+        "weekday": "Saturday"
+    },
+    "2024-01-28": {
+        "minutes": 54.8,
+        "pomodoros": 2,
+        "weekday": "Sunday"
+    },
+    "2024-01-29": {
+        "minutes": 51.8,
+        "pomodoros": 2,
+        "weekday": "Monday"
+    },
+    "2024-01-30": {
+        "minutes": 29.5,
+        "pomodoros": 1,
+        "weekday": "Tuesday"
+    },
+    "2024-01-31": {
+        "minutes": 78.8,
+        "pomodoros": 3,
+        "weekday": "Wednesday"
+    },
+    "2024-02-01": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Thursday"
+    },
+    "2024-02-02": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Friday"
+    },
+    "2024-02-03": {
+        "minutes": 176.9,
+        "pomodoros": 7,
+        "weekday": "Saturday"
+    },
+    "2024-02-04": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Sunday"
+    },
+    "2024-02-05": {
+        "minutes": 175.8,
+        "pomodoros": 7,
+        "weekday": "Monday"
+    },
+    "2024-02-06": {
+        "minutes": 102.7,
+        "pomodoros": 4,
+        "weekday": "Tuesday"
+    },
+    "2024-02-07": {
+        "minutes": 101.2,
+        "pomodoros": 4,
+        "weekday": "Wednesday"
+    },
+    "2024-02-08": {
+        "minutes": 75.8,
+        "pomodoros": 3,
+        "weekday": "Thursday"
+    },
+    "2024-02-09": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Friday"
+    },
+    "2024-02-10": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Saturday"
+    },
+    "2024-02-11": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Sunday"
+    },
+    "2024-02-12": {
+        "minutes": 201.9,
+        "pomodoros": 8,
+        "weekday": "Monday"
+    },
+    "2024-02-13": {
+        "minutes": 151.1,
+        "pomodoros": 6,
+        "weekday": "Tuesday"
+    },
+    "2024-02-14": {
+        "minutes": 154.1,
+        "pomodoros": 6,
+        "weekday": "Wednesday"
+    },
+    "2024-02-15": {
+        "minutes": 51.3,
+        "pomodoros": 2,
+        "weekday": "Thursday"
+    },
+    "2024-02-16": {
+        "minutes": 127.8,
+        "pomodoros": 5,
+        "weekday": "Friday"
+    },
+    "2024-02-17": {
+        "minutes": 175.9,
+        "pomodoros": 7,
+        "weekday": "Saturday"
+    },
+    "2024-02-18": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Sunday"
+    },
+    "2024-02-19": {
+        "minutes": 125,
+        "pomodoros": 5,
+        "weekday": "Monday"
+    },
+    "2024-02-20": {
+        "minutes": 78.5,
+        "pomodoros": 3,
+        "weekday": "Tuesday"
+    },
+    "2024-02-21": {
+        "minutes": 77.9,
+        "pomodoros": 3,
+        "weekday": "Wednesday"
+    },
+    "2024-02-22": {
+        "minutes": 51.7,
+        "pomodoros": 2,
+        "weekday": "Thursday"
+    },
+    "2024-02-23": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Friday"
+    },
+    "2024-02-24": {
+        "minutes": 50.7,
+        "pomodoros": 2,
+        "weekday": "Saturday"
+    },
+    "2024-02-25": {
+        "minutes": 26.1,
+        "pomodoros": 1,
+        "weekday": "Sunday"
+    },
+    "2024-02-26": {
+        "minutes": 175.7,
+        "pomodoros": 7,
+        "weekday": "Monday"
+    },
+    "2024-02-27": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Tuesday"
+    },
+    "2024-02-28": {
+        "minutes": 126.7,
+        "pomodoros": 5,
+        "weekday": "Wednesday"
+    },
+    "2024-02-29": {
+        "minutes": 75.9,
+        "pomodoros": 3,
+        "weekday": "Thursday"
+    },
+    "2024-03-01": {
+        "minutes": 176.6,
+        "pomodoros": 7,
+        "weekday": "Friday"
+    },
+    "2024-03-02": {
+        "minutes": 77.8,
+        "pomodoros": 3,
+        "weekday": "Saturday"
+    },
+    "2024-03-03": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Sunday"
+    },
+    "2024-03-04": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Monday"
+    },
+    "2024-03-05": {
+        "minutes": 153.4,
+        "pomodoros": 6,
+        "weekday": "Tuesday"
+    },
+    "2024-03-06": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Wednesday"
+    },
+    "2024-03-07": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Thursday"
+    },
+    "2024-03-08": {
+        "minutes": 102.2,
+        "pomodoros": 4,
+        "weekday": "Friday"
+    },
+    "2024-03-09": {
+        "minutes": 175.6,
+        "pomodoros": 7,
+        "weekday": "Saturday"
+    },
+    "2024-03-10": {
+        "minutes": 129.5,
+        "pomodoros": 5,
+        "weekday": "Sunday"
+    },
+    "2024-03-11": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Monday"
+    },
+    "2024-03-12": {
+        "minutes": 200.3,
+        "pomodoros": 8,
+        "weekday": "Tuesday"
+    },
+    "2024-03-13": {
+        "minutes": 104.4,
+        "pomodoros": 4,
+        "weekday": "Wednesday"
+    },
+    "2024-03-14": {
+        "minutes": 150.7,
+        "pomodoros": 6,
+        "weekday": "Thursday"
+    },
+    "2024-03-15": {
+        "minutes": 179.4,
+        "pomodoros": 7,
+        "weekday": "Friday"
+    },
+    "2024-03-16": {
+        "minutes": 203.8,
+        "pomodoros": 8,
+        "weekday": "Saturday"
+    },
+    "2024-03-17": {
+        "minutes": 104.2,
+        "pomodoros": 4,
+        "weekday": "Sunday"
+    },
+    "2024-03-18": {
+        "minutes": 150.9,
+        "pomodoros": 6,
+        "weekday": "Monday"
+    },
+    "2024-03-19": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Tuesday"
+    },
+    "2024-03-20": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Wednesday"
+    },
+    "2024-03-21": {
+        "minutes": 75.7,
+        "pomodoros": 3,
+        "weekday": "Thursday"
+    },
+    "2024-03-22": {
+        "minutes": 150.9,
+        "pomodoros": 6,
+        "weekday": "Friday"
+    },
+    "2024-03-23": {
+        "minutes": 175.6,
+        "pomodoros": 7,
+        "weekday": "Saturday"
+    },
+    "2024-03-24": {
+        "minutes": 103.4,
+        "pomodoros": 4,
+        "weekday": "Sunday"
+    },
+    "2024-03-25": {
+        "minutes": 77.3,
+        "pomodoros": 3,
+        "weekday": "Monday"
+    },
+    "2024-03-26": {
+        "minutes": 128.4,
+        "pomodoros": 5,
+        "weekday": "Tuesday"
+    },
+    "2024-03-27": {
+        "minutes": 79.9,
+        "pomodoros": 3,
+        "weekday": "Wednesday"
+    },
+    "2024-03-28": {
+        "minutes": 25.9,
+        "pomodoros": 1,
+        "weekday": "Thursday"
+    },
+    "2024-03-29": {
+        "minutes": 54.1,
+        "pomodoros": 2,
+        "weekday": "Friday"
+    },
+    "2024-03-30": {
+        "minutes": 153.2,
+        "pomodoros": 6,
+        "weekday": "Saturday"
+    },
+    "2024-03-31": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Sunday"
+    },
+    "2024-04-01": {
+        "minutes": 102.8,
+        "pomodoros": 4,
+        "weekday": "Monday"
+    },
+    "2024-04-02": {
+        "minutes": 129.3,
+        "pomodoros": 5,
+        "weekday": "Tuesday"
+    },
+    "2024-04-03": {
+        "minutes": 27.8,
+        "pomodoros": 1,
+        "weekday": "Wednesday"
+    },
+    "2024-04-04": {
+        "minutes": 151.9,
+        "pomodoros": 6,
+        "weekday": "Thursday"
+    },
+    "2024-04-05": {
+        "minutes": 204.9,
+        "pomodoros": 8,
+        "weekday": "Friday"
+    },
+    "2024-04-06": {
+        "minutes": 151.2,
+        "pomodoros": 6,
+        "weekday": "Saturday"
+    },
+    "2024-04-07": {
+        "minutes": 52.5,
+        "pomodoros": 2,
+        "weekday": "Sunday"
+    },
+    "2024-04-08": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Monday"
+    },
+    "2024-04-09": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Tuesday"
+    },
+    "2024-04-10": {
+        "minutes": 53.7,
+        "pomodoros": 2,
+        "weekday": "Wednesday"
+    },
+    "2024-04-11": {
+        "minutes": 177.1,
+        "pomodoros": 7,
+        "weekday": "Thursday"
+    },
+    "2024-04-12": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Friday"
+    },
+    "2024-04-13": {
+        "minutes": 76.5,
+        "pomodoros": 3,
+        "weekday": "Saturday"
+    },
+    "2024-04-14": {
+        "minutes": 205,
+        "pomodoros": 8,
+        "weekday": "Sunday"
+    },
+    "2024-04-15": {
+        "minutes": 175.4,
+        "pomodoros": 7,
+        "weekday": "Monday"
+    },
+    "2024-04-16": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Tuesday"
+    },
+    "2024-04-17": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Wednesday"
+    },
+    "2024-04-18": {
+        "minutes": 27.5,
+        "pomodoros": 1,
+        "weekday": "Thursday"
+    },
+    "2024-04-19": {
+        "minutes": 102,
+        "pomodoros": 4,
+        "weekday": "Friday"
+    },
+    "2024-04-20": {
+        "minutes": 53.4,
+        "pomodoros": 2,
+        "weekday": "Saturday"
+    },
+    "2024-04-21": {
+        "minutes": 50.2,
+        "pomodoros": 2,
+        "weekday": "Sunday"
+    },
+    "2024-04-22": {
+        "minutes": 200.5,
+        "pomodoros": 8,
+        "weekday": "Monday"
+    },
+    "2024-04-23": {
+        "minutes": 27.7,
+        "pomodoros": 1,
+        "weekday": "Tuesday"
+    },
+    "2024-04-24": {
+        "minutes": 126.8,
+        "pomodoros": 5,
+        "weekday": "Wednesday"
+    },
+    "2024-04-25": {
+        "minutes": 128.6,
+        "pomodoros": 5,
+        "weekday": "Thursday"
+    },
+    "2024-04-26": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Friday"
+    },
+    "2024-04-27": {
+        "minutes": 153.2,
+        "pomodoros": 6,
+        "weekday": "Saturday"
+    },
+    "2024-04-28": {
+        "minutes": 100.2,
+        "pomodoros": 4,
+        "weekday": "Sunday"
+    },
+    "2024-04-29": {
+        "minutes": 127.1,
+        "pomodoros": 5,
+        "weekday": "Monday"
+    },
+    "2024-04-30": {
+        "minutes": 153.6,
+        "pomodoros": 6,
+        "weekday": "Tuesday"
+    },
+    "2024-05-01": {
+        "minutes": 130,
+        "pomodoros": 5,
+        "weekday": "Wednesday"
+    },
+    "2024-05-02": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Thursday"
+    },
+    "2024-05-03": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Friday"
+    },
+    "2024-05-04": {
+        "minutes": 27.6,
+        "pomodoros": 1,
+        "weekday": "Saturday"
+    },
+    "2024-05-05": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Sunday"
+    },
+    "2024-05-06": {
+        "minutes": 154.6,
+        "pomodoros": 6,
+        "weekday": "Monday"
+    },
+    "2024-05-07": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Tuesday"
+    },
+    "2024-05-08": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Wednesday"
+    },
+    "2024-05-09": {
+        "minutes": 152.3,
+        "pomodoros": 6,
+        "weekday": "Thursday"
+    },
+    "2024-05-10": {
+        "minutes": 77.3,
+        "pomodoros": 3,
+        "weekday": "Friday"
+    },
+    "2024-05-11": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Saturday"
+    },
+    "2024-05-12": {
+        "minutes": 101.3,
+        "pomodoros": 4,
+        "weekday": "Sunday"
+    },
+    "2024-05-13": {
+        "minutes": 76,
+        "pomodoros": 3,
+        "weekday": "Monday"
+    },
+    "2024-05-14": {
+        "minutes": 50.1,
+        "pomodoros": 2,
+        "weekday": "Tuesday"
+    },
+    "2024-05-15": {
+        "minutes": 204.9,
+        "pomodoros": 8,
+        "weekday": "Wednesday"
+    },
+    "2024-05-16": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Thursday"
+    },
+    "2024-05-17": {
+        "minutes": 153.9,
+        "pomodoros": 6,
+        "weekday": "Friday"
+    },
+    "2024-05-18": {
+        "minutes": 76.1,
+        "pomodoros": 3,
+        "weekday": "Saturday"
+    },
+    "2024-05-19": {
+        "minutes": 100.7,
+        "pomodoros": 4,
+        "weekday": "Sunday"
+    },
+    "2024-05-20": {
+        "minutes": 177.9,
+        "pomodoros": 7,
+        "weekday": "Monday"
+    },
+    "2024-05-21": {
+        "minutes": 27.9,
+        "pomodoros": 1,
+        "weekday": "Tuesday"
+    },
+    "2024-05-22": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Wednesday"
+    },
+    "2024-05-23": {
+        "minutes": 153.4,
+        "pomodoros": 6,
+        "weekday": "Thursday"
+    },
+    "2024-05-24": {
+        "minutes": 178,
+        "pomodoros": 7,
+        "weekday": "Friday"
+    },
+    "2024-05-25": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Saturday"
+    },
+    "2024-05-26": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Sunday"
+    },
+    "2024-05-27": {
+        "minutes": 54.3,
+        "pomodoros": 2,
+        "weekday": "Monday"
+    },
+    "2024-05-28": {
+        "minutes": 25,
+        "pomodoros": 1,
+        "weekday": "Tuesday"
+    },
+    "2024-05-29": {
+        "minutes": 152.4,
+        "pomodoros": 6,
+        "weekday": "Wednesday"
+    },
+    "2024-05-30": {
+        "minutes": 202,
+        "pomodoros": 8,
+        "weekday": "Thursday"
+    },
+    "2024-05-31": {
+        "minutes": 100.6,
+        "pomodoros": 4,
+        "weekday": "Friday"
+    },
+    "2024-06-01": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Saturday"
+    },
+    "2024-06-02": {
+        "minutes": 79.5,
+        "pomodoros": 3,
+        "weekday": "Sunday"
+    },
+    "2024-06-03": {
+        "minutes": 27.9,
+        "pomodoros": 1,
+        "weekday": "Monday"
+    },
+    "2024-06-04": {
+        "minutes": 78,
+        "pomodoros": 3,
+        "weekday": "Tuesday"
+    },
+    "2024-06-05": {
+        "minutes": 175.6,
+        "pomodoros": 7,
+        "weekday": "Wednesday"
+    },
+    "2024-06-06": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Thursday"
+    },
+    "2024-06-07": {
+        "minutes": 178.6,
+        "pomodoros": 7,
+        "weekday": "Friday"
+    },
+    "2024-06-08": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Saturday"
+    },
+    "2024-06-09": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Sunday"
+    },
+    "2024-06-10": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Monday"
+    },
+    "2024-06-11": {
+        "minutes": 101.1,
+        "pomodoros": 4,
+        "weekday": "Tuesday"
+    },
+    "2024-06-12": {
+        "minutes": 179.1,
+        "pomodoros": 7,
+        "weekday": "Wednesday"
+    },
+    "2024-06-13": {
+        "minutes": 75.9,
+        "pomodoros": 3,
+        "weekday": "Thursday"
+    },
+    "2024-06-14": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Friday"
+    },
+    "2024-06-15": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Saturday"
+    },
+    "2024-06-16": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Sunday"
+    },
+    "2024-06-17": {
+        "minutes": 79.9,
+        "pomodoros": 3,
+        "weekday": "Monday"
+    },
+    "2024-06-18": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Tuesday"
+    },
+    "2024-06-19": {
+        "minutes": 50.3,
+        "pomodoros": 2,
+        "weekday": "Wednesday"
+    },
+    "2024-06-20": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Thursday"
+    },
+    "2024-06-21": {
+        "minutes": 26.9,
+        "pomodoros": 1,
+        "weekday": "Friday"
+    },
+    "2024-06-22": {
+        "minutes": 153.1,
+        "pomodoros": 6,
+        "weekday": "Saturday"
+    },
+    "2024-06-23": {
+        "minutes": 101.8,
+        "pomodoros": 4,
+        "weekday": "Sunday"
+    },
+    "2024-06-24": {
+        "minutes": 126.6,
+        "pomodoros": 5,
+        "weekday": "Monday"
+    },
+    "2024-06-25": {
+        "minutes": 176.5,
+        "pomodoros": 7,
+        "weekday": "Tuesday"
+    },
+    "2024-06-26": {
+        "minutes": 76.1,
+        "pomodoros": 3,
+        "weekday": "Wednesday"
+    },
+    "2024-06-27": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Thursday"
+    },
+    "2024-06-28": {
+        "minutes": 50.7,
+        "pomodoros": 2,
+        "weekday": "Friday"
+    },
+    "2024-06-29": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Saturday"
+    },
+    "2024-06-30": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Sunday"
+    },
+    "2024-07-01": {
+        "minutes": 77,
+        "pomodoros": 3,
+        "weekday": "Monday"
+    },
+    "2024-07-02": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Tuesday"
+    },
+    "2024-07-03": {
+        "minutes": 77.9,
+        "pomodoros": 3,
+        "weekday": "Wednesday"
+    },
+    "2024-07-04": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Thursday"
+    },
+    "2024-07-05": {
+        "minutes": 126,
+        "pomodoros": 5,
+        "weekday": "Friday"
+    },
+    "2024-07-06": {
+        "minutes": 104.3,
+        "pomodoros": 4,
+        "weekday": "Saturday"
+    },
+    "2024-07-07": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Sunday"
+    },
+    "2024-07-08": {
+        "minutes": 151.1,
+        "pomodoros": 6,
+        "weekday": "Monday"
+    },
+    "2024-07-09": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Tuesday"
+    },
+    "2024-07-10": {
+        "minutes": 52.8,
+        "pomodoros": 2,
+        "weekday": "Wednesday"
+    },
+    "2024-07-11": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Thursday"
+    },
+    "2024-07-12": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Friday"
+    },
+    "2024-07-13": {
+        "minutes": 152.4,
+        "pomodoros": 6,
+        "weekday": "Saturday"
+    },
+    "2024-07-14": {
+        "minutes": 25.9,
+        "pomodoros": 1,
+        "weekday": "Sunday"
+    },
+    "2024-07-15": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Monday"
+    },
+    "2024-07-16": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Tuesday"
+    },
+    "2024-07-17": {
+        "minutes": 29.9,
+        "pomodoros": 1,
+        "weekday": "Wednesday"
+    },
+    "2024-07-18": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Thursday"
+    },
+    "2024-07-19": {
+        "minutes": 151.7,
+        "pomodoros": 6,
+        "weekday": "Friday"
+    },
+    "2024-07-20": {
+        "minutes": 150.7,
+        "pomodoros": 6,
+        "weekday": "Saturday"
+    },
+    "2024-07-21": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Sunday"
+    },
+    "2024-07-22": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Monday"
+    },
+    "2024-07-23": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Tuesday"
+    },
+    "2024-07-24": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Wednesday"
+    },
+    "2024-07-25": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Thursday"
+    },
+    "2024-07-26": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Friday"
+    },
+    "2024-07-27": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Saturday"
+    },
+    "2024-07-28": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Sunday"
+    },
+    "2024-07-29": {
+        "minutes": 103.5,
+        "pomodoros": 4,
+        "weekday": "Monday"
+    },
+    "2024-07-30": {
+        "minutes": 25.9,
+        "pomodoros": 1,
+        "weekday": "Tuesday"
+    },
+    "2024-07-31": {
+        "minutes": 129.7,
+        "pomodoros": 5,
+        "weekday": "Wednesday"
+    },
+    "2024-08-01": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Thursday"
+    },
+    "2024-08-02": {
+        "minutes": 78,
+        "pomodoros": 3,
+        "weekday": "Friday"
+    },
+    "2024-08-03": {
+        "minutes": 177,
+        "pomodoros": 7,
+        "weekday": "Saturday"
+    },
+    "2024-08-04": {
+        "minutes": 202.8,
+        "pomodoros": 8,
+        "weekday": "Sunday"
+    },
+    "2024-08-05": {
+        "minutes": 103.7,
+        "pomodoros": 4,
+        "weekday": "Monday"
+    },
+    "2024-08-06": {
+        "minutes": 27.7,
+        "pomodoros": 1,
+        "weekday": "Tuesday"
+    },
+    "2024-08-07": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Wednesday"
+    },
+    "2024-08-08": {
+        "minutes": 53.9,
+        "pomodoros": 2,
+        "weekday": "Thursday"
+    },
+    "2024-08-09": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Friday"
+    },
+    "2024-08-10": {
+        "minutes": 26.3,
+        "pomodoros": 1,
+        "weekday": "Saturday"
+    },
+    "2024-08-11": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Sunday"
+    },
+    "2024-08-12": {
+        "minutes": 29.3,
+        "pomodoros": 1,
+        "weekday": "Monday"
+    },
+    "2024-08-13": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Tuesday"
+    },
+    "2024-08-14": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Wednesday"
+    },
+    "2024-08-15": {
+        "minutes": 104.4,
+        "pomodoros": 4,
+        "weekday": "Thursday"
+    },
+    "2024-08-16": {
+        "minutes": 27.3,
+        "pomodoros": 1,
+        "weekday": "Friday"
+    },
+    "2024-08-17": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Saturday"
+    },
+    "2024-08-18": {
+        "minutes": 30,
+        "pomodoros": 1,
+        "weekday": "Sunday"
+    },
+    "2024-08-19": {
+        "minutes": 29.8,
+        "pomodoros": 1,
+        "weekday": "Monday"
+    },
+    "2024-08-20": {
+        "minutes": 151.6,
+        "pomodoros": 6,
+        "weekday": "Tuesday"
+    },
+    "2024-08-21": {
+        "minutes": 176.6,
+        "pomodoros": 7,
+        "weekday": "Wednesday"
+    },
+    "2024-08-22": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Thursday"
+    },
+    "2024-08-23": {
+        "minutes": 28.8,
+        "pomodoros": 1,
+        "weekday": "Friday"
+    },
+    "2024-08-24": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Saturday"
+    },
+    "2024-08-25": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Sunday"
+    },
+    "2024-08-26": {
+        "minutes": 52.9,
+        "pomodoros": 2,
+        "weekday": "Monday"
+    },
+    "2024-08-27": {
+        "minutes": 29.3,
+        "pomodoros": 1,
+        "weekday": "Tuesday"
+    },
+    "2024-08-28": {
+        "minutes": 77.4,
+        "pomodoros": 3,
+        "weekday": "Wednesday"
+    },
+    "2024-08-29": {
+        "minutes": 203.1,
+        "pomodoros": 8,
+        "weekday": "Thursday"
+    },
+    "2024-08-30": {
+        "minutes": 179.7,
+        "pomodoros": 7,
+        "weekday": "Friday"
+    },
+    "2024-08-31": {
+        "minutes": 153.8,
+        "pomodoros": 6,
+        "weekday": "Saturday"
+    },
+    "2024-09-01": {
+        "minutes": 152.8,
+        "pomodoros": 6,
+        "weekday": "Sunday"
+    },
+    "2024-09-02": {
+        "minutes": 52.2,
+        "pomodoros": 2,
+        "weekday": "Monday"
+    },
+    "2024-09-03": {
+        "minutes": 28.5,
+        "pomodoros": 1,
+        "weekday": "Tuesday"
+    },
+    "2024-09-04": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Wednesday"
+    },
+    "2024-09-05": {
+        "minutes": 78.4,
+        "pomodoros": 3,
+        "weekday": "Thursday"
+    },
+    "2024-09-06": {
+        "minutes": 128.8,
+        "pomodoros": 5,
+        "weekday": "Friday"
+    },
+    "2024-09-07": {
+        "minutes": 154.1,
+        "pomodoros": 6,
+        "weekday": "Saturday"
+    },
+    "2024-09-08": {
+        "minutes": 179.8,
+        "pomodoros": 7,
+        "weekday": "Sunday"
+    },
+    "2024-09-09": {
+        "minutes": 202.8,
+        "pomodoros": 8,
+        "weekday": "Monday"
+    },
+    "2024-09-10": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Tuesday"
+    },
+    "2024-09-11": {
+        "minutes": 75.7,
+        "pomodoros": 3,
+        "weekday": "Wednesday"
+    },
+    "2024-09-12": {
+        "minutes": 203.7,
+        "pomodoros": 8,
+        "weekday": "Thursday"
+    },
+    "2024-09-13": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Friday"
+    },
+    "2024-09-14": {
+        "minutes": 104.7,
+        "pomodoros": 4,
+        "weekday": "Saturday"
+    },
+    "2024-09-15": {
+        "minutes": 28.5,
+        "pomodoros": 1,
+        "weekday": "Sunday"
+    },
+    "2024-09-16": {
+        "minutes": 203.2,
+        "pomodoros": 8,
+        "weekday": "Monday"
+    },
+    "2024-09-17": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Tuesday"
+    },
+    "2024-09-18": {
+        "minutes": 78.1,
+        "pomodoros": 3,
+        "weekday": "Wednesday"
+    },
+    "2024-09-19": {
+        "minutes": 104.3,
+        "pomodoros": 4,
+        "weekday": "Thursday"
+    },
+    "2024-09-20": {
+        "minutes": 79.4,
+        "pomodoros": 3,
+        "weekday": "Friday"
+    },
+    "2024-09-21": {
+        "minutes": 152.2,
+        "pomodoros": 6,
+        "weekday": "Saturday"
+    },
+    "2024-09-22": {
+        "minutes": 102.5,
+        "pomodoros": 4,
+        "weekday": "Sunday"
+    },
+    "2024-09-23": {
+        "minutes": 28.1,
+        "pomodoros": 1,
+        "weekday": "Monday"
+    },
+    "2024-09-24": {
+        "minutes": 128.8,
+        "pomodoros": 5,
+        "weekday": "Tuesday"
+    },
+    "2024-09-25": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Wednesday"
+    },
+    "2024-09-26": {
+        "minutes": 127.3,
+        "pomodoros": 5,
+        "weekday": "Thursday"
+    },
+    "2024-09-27": {
+        "minutes": 25.2,
+        "pomodoros": 1,
+        "weekday": "Friday"
+    },
+    "2024-09-28": {
+        "minutes": 26.1,
+        "pomodoros": 1,
+        "weekday": "Saturday"
+    },
+    "2024-09-29": {
+        "minutes": 79.7,
+        "pomodoros": 3,
+        "weekday": "Sunday"
+    },
+    "2024-09-30": {
+        "minutes": 128.7,
+        "pomodoros": 5,
+        "weekday": "Monday"
+    },
+    "2024-10-01": {
+        "minutes": 102.2,
+        "pomodoros": 4,
+        "weekday": "Tuesday"
+    },
+    "2024-10-02": {
+        "minutes": 201.1,
+        "pomodoros": 8,
+        "weekday": "Wednesday"
+    },
+    "2024-10-03": {
+        "minutes": 203.9,
+        "pomodoros": 8,
+        "weekday": "Thursday"
+    },
+    "2024-10-04": {
+        "minutes": 125.1,
+        "pomodoros": 5,
+        "weekday": "Friday"
+    },
+    "2024-10-05": {
+        "minutes": 151.7,
+        "pomodoros": 6,
+        "weekday": "Saturday"
+    },
+    "2024-10-06": {
+        "minutes": 128.4,
+        "pomodoros": 5,
+        "weekday": "Sunday"
+    },
+    "2024-10-07": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Monday"
+    },
+    "2024-10-08": {
+        "minutes": 177.7,
+        "pomodoros": 7,
+        "weekday": "Tuesday"
+    },
+    "2024-10-09": {
+        "minutes": 103.9,
+        "pomodoros": 4,
+        "weekday": "Wednesday"
+    },
+    "2024-10-10": {
+        "minutes": 25.2,
+        "pomodoros": 1,
+        "weekday": "Thursday"
+    },
+    "2024-10-11": {
+        "minutes": 28.5,
+        "pomodoros": 1,
+        "weekday": "Friday"
+    },
+    "2024-10-12": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Saturday"
+    },
+    "2024-10-13": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Sunday"
+    },
+    "2024-10-14": {
+        "minutes": 78.3,
+        "pomodoros": 3,
+        "weekday": "Monday"
+    },
+    "2024-10-15": {
+        "minutes": 129.3,
+        "pomodoros": 5,
+        "weekday": "Tuesday"
+    },
+    "2024-10-16": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Wednesday"
+    },
+    "2024-10-17": {
+        "minutes": 205,
+        "pomodoros": 8,
+        "weekday": "Thursday"
+    },
+    "2024-10-18": {
+        "minutes": 203.9,
+        "pomodoros": 8,
+        "weekday": "Friday"
+    },
+    "2024-10-19": {
+        "minutes": 79.4,
+        "pomodoros": 3,
+        "weekday": "Saturday"
+    },
+    "2024-10-20": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Sunday"
+    },
+    "2024-10-21": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Monday"
+    },
+    "2024-10-22": {
+        "minutes": 201.9,
+        "pomodoros": 8,
+        "weekday": "Tuesday"
+    },
+    "2024-10-23": {
+        "minutes": 76.7,
+        "pomodoros": 3,
+        "weekday": "Wednesday"
+    },
+    "2024-10-24": {
+        "minutes": 102.1,
+        "pomodoros": 4,
+        "weekday": "Thursday"
+    },
+    "2024-10-25": {
+        "minutes": 51.5,
+        "pomodoros": 2,
+        "weekday": "Friday"
+    },
+    "2024-10-26": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Saturday"
+    },
+    "2024-10-27": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Sunday"
+    },
+    "2024-10-28": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Monday"
+    },
+    "2024-10-29": {
+        "minutes": 177.7,
+        "pomodoros": 7,
+        "weekday": "Tuesday"
+    },
+    "2024-10-30": {
+        "minutes": 79.5,
+        "pomodoros": 3,
+        "weekday": "Wednesday"
+    },
+    "2024-10-31": {
+        "minutes": 177.3,
+        "pomodoros": 7,
+        "weekday": "Thursday"
+    },
+    "2024-11-01": {
+        "minutes": 79.7,
+        "pomodoros": 3,
+        "weekday": "Friday"
+    },
+    "2024-11-02": {
+        "minutes": 151.1,
+        "pomodoros": 6,
+        "weekday": "Saturday"
+    },
+    "2024-11-03": {
+        "minutes": 150.7,
+        "pomodoros": 6,
+        "weekday": "Sunday"
+    },
+    "2024-11-04": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Monday"
+    },
+    "2024-11-05": {
+        "minutes": 178.2,
+        "pomodoros": 7,
+        "weekday": "Tuesday"
+    },
+    "2024-11-06": {
+        "minutes": 127.7,
+        "pomodoros": 5,
+        "weekday": "Wednesday"
+    },
+    "2024-11-07": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Thursday"
+    },
+    "2024-11-08": {
+        "minutes": 54.1,
+        "pomodoros": 2,
+        "weekday": "Friday"
+    },
+    "2024-11-09": {
+        "minutes": 29.1,
+        "pomodoros": 1,
+        "weekday": "Saturday"
+    },
+    "2024-11-10": {
+        "minutes": 53.6,
+        "pomodoros": 2,
+        "weekday": "Sunday"
+    },
+    "2024-11-11": {
+        "minutes": 150.9,
+        "pomodoros": 6,
+        "weekday": "Monday"
+    },
+    "2024-11-12": {
+        "minutes": 29.1,
+        "pomodoros": 1,
+        "weekday": "Tuesday"
+    },
+    "2024-11-13": {
+        "minutes": 127.1,
+        "pomodoros": 5,
+        "weekday": "Wednesday"
+    },
+    "2024-11-14": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Thursday"
+    },
+    "2024-11-15": {
+        "minutes": 153.3,
+        "pomodoros": 6,
+        "weekday": "Friday"
+    },
+    "2024-11-16": {
+        "minutes": 50.2,
+        "pomodoros": 2,
+        "weekday": "Saturday"
+    },
+    "2024-11-17": {
+        "minutes": 51.9,
+        "pomodoros": 2,
+        "weekday": "Sunday"
+    },
+    "2024-11-18": {
+        "minutes": 127.7,
+        "pomodoros": 5,
+        "weekday": "Monday"
+    },
+    "2024-11-19": {
+        "minutes": 175.4,
+        "pomodoros": 7,
+        "weekday": "Tuesday"
+    },
+    "2024-11-20": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Wednesday"
+    },
+    "2024-11-21": {
+        "minutes": 52,
+        "pomodoros": 2,
+        "weekday": "Thursday"
+    },
+    "2024-11-22": {
+        "minutes": 125.7,
+        "pomodoros": 5,
+        "weekday": "Friday"
+    },
+    "2024-11-23": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Saturday"
+    },
+    "2024-11-24": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Sunday"
+    },
+    "2024-11-25": {
+        "minutes": 104.1,
+        "pomodoros": 4,
+        "weekday": "Monday"
+    },
+    "2024-11-26": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Tuesday"
+    },
+    "2024-11-27": {
+        "minutes": 176.6,
+        "pomodoros": 7,
+        "weekday": "Wednesday"
+    },
+    "2024-11-28": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Thursday"
+    },
+    "2024-11-29": {
+        "minutes": 153.6,
+        "pomodoros": 6,
+        "weekday": "Friday"
+    },
+    "2024-11-30": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Saturday"
+    },
+    "2024-12-01": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Sunday"
+    },
+    "2024-12-02": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Monday"
+    },
+    "2024-12-03": {
+        "minutes": 78.1,
+        "pomodoros": 3,
+        "weekday": "Tuesday"
+    },
+    "2024-12-04": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Wednesday"
+    },
+    "2024-12-05": {
+        "minutes": 154.9,
+        "pomodoros": 6,
+        "weekday": "Thursday"
+    },
+    "2024-12-06": {
+        "minutes": 102.2,
+        "pomodoros": 4,
+        "weekday": "Friday"
+    },
+    "2024-12-07": {
+        "minutes": 128,
+        "pomodoros": 5,
+        "weekday": "Saturday"
+    },
+    "2024-12-08": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Sunday"
+    },
+    "2024-12-09": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Monday"
+    },
+    "2024-12-10": {
+        "minutes": 51.7,
+        "pomodoros": 2,
+        "weekday": "Tuesday"
+    },
+    "2024-12-11": {
+        "minutes": 77.9,
+        "pomodoros": 3,
+        "weekday": "Wednesday"
+    },
+    "2024-12-12": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Thursday"
+    },
+    "2024-12-13": {
+        "minutes": 153.1,
+        "pomodoros": 6,
+        "weekday": "Friday"
+    },
+    "2024-12-14": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Saturday"
+    },
+    "2024-12-15": {
+        "minutes": 79.8,
+        "pomodoros": 3,
+        "weekday": "Sunday"
+    },
+    "2024-12-16": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Monday"
+    },
+    "2024-12-17": {
+        "minutes": 26.7,
+        "pomodoros": 1,
+        "weekday": "Tuesday"
+    },
+    "2024-12-18": {
+        "minutes": 25.6,
+        "pomodoros": 1,
+        "weekday": "Wednesday"
+    },
+    "2024-12-19": {
+        "minutes": 176.9,
+        "pomodoros": 7,
+        "weekday": "Thursday"
+    },
+    "2024-12-20": {
+        "minutes": 78.5,
+        "pomodoros": 3,
+        "weekday": "Friday"
+    },
+    "2024-12-21": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Saturday"
+    },
+    "2024-12-22": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Sunday"
+    },
+    "2024-12-23": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Monday"
+    },
+    "2024-12-24": {
+        "minutes": 151.8,
+        "pomodoros": 6,
+        "weekday": "Tuesday"
+    },
+    "2024-12-25": {
+        "minutes": 204.1,
+        "pomodoros": 8,
+        "weekday": "Wednesday"
+    },
+    "2024-12-26": {
+        "minutes": 129.7,
+        "pomodoros": 5,
+        "weekday": "Thursday"
+    },
+    "2024-12-27": {
+        "minutes": 153.4,
+        "pomodoros": 6,
+        "weekday": "Friday"
+    },
+    "2024-12-28": {
+        "minutes": 204.9,
+        "pomodoros": 8,
+        "weekday": "Saturday"
+    },
+    "2024-12-29": {
+        "minutes": 28.2,
+        "pomodoros": 1,
+        "weekday": "Sunday"
+    },
+    "2024-12-30": {
+        "minutes": 53.8,
+        "pomodoros": 2,
+        "weekday": "Monday"
+    },
+    "2024-12-31": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Tuesday"
+    },
+    "2025-01-01": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Wednesday"
+    },
+    "2025-01-02": {
+        "minutes": 179.6,
+        "pomodoros": 7,
+        "weekday": "Thursday"
+    },
+    "2025-01-03": {
+        "minutes": 125.9,
+        "pomodoros": 5,
+        "weekday": "Friday"
+    },
+    "2025-01-04": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Saturday"
+    },
+    "2025-01-05": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Sunday"
+    },
+    "2025-01-06": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Monday"
+    },
+    "2025-01-07": {
+        "minutes": 26.8,
+        "pomodoros": 1,
+        "weekday": "Tuesday"
+    },
+    "2025-01-08": {
+        "minutes": 129.1,
+        "pomodoros": 5,
+        "weekday": "Wednesday"
+    },
+    "2025-01-09": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Thursday"
+    },
+    "2025-01-10": {
+        "minutes": 50.4,
+        "pomodoros": 2,
+        "weekday": "Friday"
+    },
+    "2025-01-11": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Saturday"
+    },
+    "2025-01-12": {
+        "minutes": 127.4,
+        "pomodoros": 5,
+        "weekday": "Sunday"
+    },
+    "2025-01-13": {
+        "minutes": 29,
+        "pomodoros": 1,
+        "weekday": "Monday"
+    },
+    "2025-01-14": {
+        "minutes": 75,
+        "pomodoros": 3,
+        "weekday": "Tuesday"
+    },
+    "2025-01-15": {
+        "minutes": 28.1,
+        "pomodoros": 1,
+        "weekday": "Wednesday"
+    },
+    "2025-01-16": {
+        "minutes": 101.9,
+        "pomodoros": 4,
+        "weekday": "Thursday"
+    },
+    "2025-01-17": {
+        "minutes": 79.8,
+        "pomodoros": 3,
+        "weekday": "Friday"
+    },
+    "2025-01-18": {
+        "minutes": 178,
+        "pomodoros": 7,
+        "weekday": "Saturday"
+    },
+    "2025-01-19": {
+        "minutes": 125.4,
+        "pomodoros": 5,
+        "weekday": "Sunday"
+    },
+    "2025-01-20": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Monday"
+    },
+    "2025-01-21": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Tuesday"
+    },
+    "2025-01-22": {
+        "minutes": 151.6,
+        "pomodoros": 6,
+        "weekday": "Wednesday"
+    },
+    "2025-01-23": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Thursday"
+    },
+    "2025-01-24": {
+        "minutes": 202.9,
+        "pomodoros": 8,
+        "weekday": "Friday"
+    },
+    "2025-01-25": {
+        "minutes": 202.8,
+        "pomodoros": 8,
+        "weekday": "Saturday"
+    },
+    "2025-01-26": {
+        "minutes": 53.2,
+        "pomodoros": 2,
+        "weekday": "Sunday"
+    },
+    "2025-01-27": {
+        "minutes": 201.4,
+        "pomodoros": 8,
+        "weekday": "Monday"
+    },
+    "2025-01-28": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Tuesday"
+    },
+    "2025-01-29": {
+        "minutes": 176.3,
+        "pomodoros": 7,
+        "weekday": "Wednesday"
+    },
+    "2025-01-30": {
+        "minutes": 51.7,
+        "pomodoros": 2,
+        "weekday": "Thursday"
+    },
+    "2025-01-31": {
+        "minutes": 179.2,
+        "pomodoros": 7,
+        "weekday": "Friday"
+    },
+    "2025-02-01": {
+        "minutes": 202.4,
+        "pomodoros": 8,
+        "weekday": "Saturday"
+    },
+    "2025-02-02": {
+        "minutes": 128,
+        "pomodoros": 5,
+        "weekday": "Sunday"
+    },
+    "2025-02-03": {
+        "minutes": 77.8,
+        "pomodoros": 3,
+        "weekday": "Monday"
+    },
+    "2025-02-04": {
+        "minutes": 101.7,
+        "pomodoros": 4,
+        "weekday": "Tuesday"
+    },
+    "2025-02-05": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Wednesday"
+    },
+    "2025-02-06": {
+        "minutes": 125.1,
+        "pomodoros": 5,
+        "weekday": "Thursday"
+    },
+    "2025-02-07": {
+        "minutes": 29.2,
+        "pomodoros": 1,
+        "weekday": "Friday"
+    },
+    "2025-02-08": {
+        "minutes": 179,
+        "pomodoros": 7,
+        "weekday": "Saturday"
+    },
+    "2025-02-09": {
+        "minutes": 102.6,
+        "pomodoros": 4,
+        "weekday": "Sunday"
+    },
+    "2025-02-10": {
+        "minutes": 54.5,
+        "pomodoros": 2,
+        "weekday": "Monday"
+    },
+    "2025-02-11": {
+        "minutes": 177.1,
+        "pomodoros": 7,
+        "weekday": "Tuesday"
+    },
+    "2025-02-12": {
+        "minutes": 153.8,
+        "pomodoros": 6,
+        "weekday": "Wednesday"
+    },
+    "2025-02-13": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Thursday"
+    },
+    "2025-02-14": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Friday"
+    },
+    "2025-02-15": {
+        "minutes": 76.5,
+        "pomodoros": 3,
+        "weekday": "Saturday"
+    },
+    "2025-02-16": {
+        "minutes": 25.1,
+        "pomodoros": 1,
+        "weekday": "Sunday"
+    },
+    "2025-02-17": {
+        "minutes": 176.8,
+        "pomodoros": 7,
+        "weekday": "Monday"
+    },
+    "2025-02-18": {
+        "minutes": 29.2,
+        "pomodoros": 1,
+        "weekday": "Tuesday"
+    },
+    "2025-02-19": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Wednesday"
+    },
+    "2025-02-20": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Thursday"
+    },
+    "2025-02-21": {
+        "minutes": 128.6,
+        "pomodoros": 5,
+        "weekday": "Friday"
+    },
+    "2025-02-22": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Saturday"
+    },
+    "2025-02-23": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Sunday"
+    },
+    "2025-02-24": {
+        "minutes": 53.4,
+        "pomodoros": 2,
+        "weekday": "Monday"
+    },
+    "2025-02-25": {
+        "minutes": 27.9,
+        "pomodoros": 1,
+        "weekday": "Tuesday"
+    },
+    "2025-02-26": {
+        "minutes": 51.8,
+        "pomodoros": 2,
+        "weekday": "Wednesday"
+    },
+    "2025-02-27": {
+        "minutes": 203.9,
+        "pomodoros": 8,
+        "weekday": "Thursday"
+    },
+    "2025-02-28": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Friday"
+    },
+    "2025-03-01": {
+        "minutes": 203.2,
+        "pomodoros": 8,
+        "weekday": "Saturday"
+    },
+    "2025-03-02": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Sunday"
+    },
+    "2025-03-03": {
+        "minutes": 176.5,
+        "pomodoros": 7,
+        "weekday": "Monday"
+    },
+    "2025-03-04": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Tuesday"
+    },
+    "2025-03-05": {
+        "minutes": 79.4,
+        "pomodoros": 3,
+        "weekday": "Wednesday"
+    },
+    "2025-03-06": {
+        "minutes": 27,
+        "pomodoros": 1,
+        "weekday": "Thursday"
+    },
+    "2025-03-07": {
+        "minutes": 29,
+        "pomodoros": 1,
+        "weekday": "Friday"
+    },
+    "2025-03-08": {
+        "minutes": 127.3,
+        "pomodoros": 5,
+        "weekday": "Saturday"
+    },
+    "2025-03-09": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Sunday"
+    },
+    "2025-03-10": {
+        "minutes": 129.6,
+        "pomodoros": 5,
+        "weekday": "Monday"
+    },
+    "2025-03-11": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Tuesday"
+    },
+    "2025-03-12": {
+        "minutes": 51.9,
+        "pomodoros": 2,
+        "weekday": "Wednesday"
+    },
+    "2025-03-13": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Thursday"
+    },
+    "2025-03-14": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Friday"
+    },
+    "2025-03-15": {
+        "minutes": 76,
+        "pomodoros": 3,
+        "weekday": "Saturday"
+    },
+    "2025-03-16": {
+        "minutes": 51.8,
+        "pomodoros": 2,
+        "weekday": "Sunday"
+    },
+    "2025-03-17": {
+        "minutes": 51.1,
+        "pomodoros": 2,
+        "weekday": "Monday"
+    },
+    "2025-03-18": {
+        "minutes": 25.1,
+        "pomodoros": 1,
+        "weekday": "Tuesday"
+    },
+    "2025-03-19": {
+        "minutes": 76.3,
+        "pomodoros": 3,
+        "weekday": "Wednesday"
+    },
+    "2025-03-20": {
+        "minutes": 53.3,
+        "pomodoros": 2,
+        "weekday": "Thursday"
+    },
+    "2025-03-21": {
+        "minutes": 28.5,
+        "pomodoros": 1,
+        "weekday": "Friday"
+    },
+    "2025-03-22": {
+        "minutes": 51,
+        "pomodoros": 2,
+        "weekday": "Saturday"
+    },
+    "2025-03-23": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Sunday"
+    },
+    "2025-03-24": {
+        "minutes": 102.2,
+        "pomodoros": 4,
+        "weekday": "Monday"
+    },
+    "2025-03-25": {
+        "minutes": 152.4,
+        "pomodoros": 6,
+        "weekday": "Tuesday"
+    },
+    "2025-03-26": {
+        "minutes": 53.2,
+        "pomodoros": 2,
+        "weekday": "Wednesday"
+    },
+    "2025-03-27": {
+        "minutes": 77.6,
+        "pomodoros": 3,
+        "weekday": "Thursday"
+    },
+    "2025-03-28": {
+        "minutes": 127.1,
+        "pomodoros": 5,
+        "weekday": "Friday"
+    },
+    "2025-03-29": {
+        "minutes": 76.5,
+        "pomodoros": 3,
+        "weekday": "Saturday"
+    },
+    "2025-03-30": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Sunday"
+    },
+    "2025-03-31": {
+        "minutes": 200.9,
+        "pomodoros": 8,
+        "weekday": "Monday"
+    },
+    "2025-04-01": {
+        "minutes": 154.1,
+        "pomodoros": 6,
+        "weekday": "Tuesday"
+    },
+    "2025-04-02": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Wednesday"
+    },
+    "2025-04-03": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Thursday"
+    },
+    "2025-04-04": {
+        "minutes": 125.2,
+        "pomodoros": 5,
+        "weekday": "Friday"
+    },
+    "2025-04-05": {
+        "minutes": 126,
+        "pomodoros": 5,
+        "weekday": "Saturday"
+    },
+    "2025-04-06": {
+        "minutes": 202.1,
+        "pomodoros": 8,
+        "weekday": "Sunday"
+    },
+    "2025-04-07": {
+        "minutes": 102.9,
+        "pomodoros": 4,
+        "weekday": "Monday"
+    },
+    "2025-04-08": {
+        "minutes": 77.5,
+        "pomodoros": 3,
+        "weekday": "Tuesday"
+    },
+    "2025-04-09": {
+        "minutes": 100.6,
+        "pomodoros": 4,
+        "weekday": "Wednesday"
+    },
+    "2025-04-10": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Thursday"
+    },
+    "2025-04-11": {
+        "minutes": 204.9,
+        "pomodoros": 8,
+        "weekday": "Friday"
+    },
+    "2025-04-12": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Saturday"
+    },
+    "2025-04-13": {
+        "minutes": 200.8,
+        "pomodoros": 8,
+        "weekday": "Sunday"
+    },
+    "2025-04-14": {
+        "minutes": 178,
+        "pomodoros": 7,
+        "weekday": "Monday"
+    },
+    "2025-04-15": {
+        "minutes": 203.6,
+        "pomodoros": 8,
+        "weekday": "Tuesday"
+    },
+    "2025-04-16": {
+        "minutes": 152.3,
+        "pomodoros": 6,
+        "weekday": "Wednesday"
+    },
+    "2025-04-17": {
+        "minutes": 25.8,
+        "pomodoros": 1,
+        "weekday": "Thursday"
+    },
+    "2025-04-18": {
+        "minutes": 154.6,
+        "pomodoros": 6,
+        "weekday": "Friday"
+    },
+    "2025-04-19": {
+        "minutes": 201.7,
+        "pomodoros": 8,
+        "weekday": "Saturday"
+    },
+    "2025-04-20": {
+        "minutes": 150.9,
+        "pomodoros": 6,
+        "weekday": "Sunday"
+    },
+    "2025-04-21": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Monday"
+    },
+    "2025-04-22": {
+        "minutes": 125.2,
+        "pomodoros": 5,
+        "weekday": "Tuesday"
+    },
+    "2025-04-23": {
+        "minutes": 27.5,
+        "pomodoros": 1,
+        "weekday": "Wednesday"
+    },
+    "2025-04-24": {
+        "minutes": 28.2,
+        "pomodoros": 1,
+        "weekday": "Thursday"
+    },
+    "2025-04-25": {
+        "minutes": 102,
+        "pomodoros": 4,
+        "weekday": "Friday"
+    },
+    "2025-04-26": {
+        "minutes": 103.6,
+        "pomodoros": 4,
+        "weekday": "Saturday"
+    },
+    "2025-04-27": {
+        "minutes": 77.3,
+        "pomodoros": 3,
+        "weekday": "Sunday"
+    },
+    "2025-04-28": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Monday"
+    },
+    "2025-04-29": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Tuesday"
+    },
+    "2025-04-30": {
+        "minutes": 78.2,
+        "pomodoros": 3,
+        "weekday": "Wednesday"
+    },
+    "2025-05-01": {
+        "minutes": 52,
+        "pomodoros": 2,
+        "weekday": "Thursday"
+    },
+    "2025-05-02": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Friday"
+    },
+    "2025-05-03": {
+        "minutes": 129.7,
+        "pomodoros": 5,
+        "weekday": "Saturday"
+    },
+    "2025-05-04": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Sunday"
+    },
+    "2025-05-05": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Monday"
+    },
+    "2025-05-06": {
+        "minutes": 154.2,
+        "pomodoros": 6,
+        "weekday": "Tuesday"
+    },
+    "2025-05-07": {
+        "minutes": 76.7,
+        "pomodoros": 3,
+        "weekday": "Wednesday"
+    },
+    "2025-05-08": {
+        "minutes": 154.8,
+        "pomodoros": 6,
+        "weekday": "Thursday"
+    },
+    "2025-05-09": {
+        "minutes": 125.7,
+        "pomodoros": 5,
+        "weekday": "Friday"
+    },
+    "2025-05-10": {
+        "minutes": 28.7,
+        "pomodoros": 1,
+        "weekday": "Saturday"
+    },
+    "2025-05-11": {
+        "minutes": 29.4,
+        "pomodoros": 1,
+        "weekday": "Sunday"
+    },
+    "2025-05-12": {
+        "minutes": 129.6,
+        "pomodoros": 5,
+        "weekday": "Monday"
+    },
+    "2025-05-13": {
+        "minutes": 153.9,
+        "pomodoros": 6,
+        "weekday": "Tuesday"
+    },
+    "2025-05-14": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Wednesday"
+    },
+    "2025-05-15": {
+        "minutes": 104.1,
+        "pomodoros": 4,
+        "weekday": "Thursday"
+    },
+    "2025-05-16": {
+        "minutes": 178.8,
+        "pomodoros": 7,
+        "weekday": "Friday"
+    },
+    "2025-05-17": {
+        "minutes": 152.7,
+        "pomodoros": 6,
+        "weekday": "Saturday"
+    },
+    "2025-05-18": {
+        "minutes": 103.7,
+        "pomodoros": 4,
+        "weekday": "Sunday"
+    },
+    "2025-05-19": {
+        "minutes": 200.6,
+        "pomodoros": 8,
+        "weekday": "Monday"
+    },
+    "2025-05-20": {
+        "minutes": 25.7,
+        "pomodoros": 1,
+        "weekday": "Tuesday"
+    },
+    "2025-05-21": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Wednesday"
+    },
+    "2025-05-22": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Thursday"
+    },
+    "2025-05-23": {
+        "minutes": 152.8,
+        "pomodoros": 6,
+        "weekday": "Friday"
+    },
+    "2025-05-24": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Saturday"
+    },
+    "2025-05-25": {
+        "minutes": 179.4,
+        "pomodoros": 7,
+        "weekday": "Sunday"
+    },
+    "2025-05-26": {
+        "minutes": 104.3,
+        "pomodoros": 4,
+        "weekday": "Monday"
+    },
+    "2025-05-27": {
+        "minutes": 176.8,
+        "pomodoros": 7,
+        "weekday": "Tuesday"
+    },
+    "2025-05-28": {
+        "minutes": 176.6,
+        "pomodoros": 7,
+        "weekday": "Wednesday"
+    },
+    "2025-05-29": {
+        "minutes": 200.6,
+        "pomodoros": 8,
+        "weekday": "Thursday"
+    },
+    "2025-05-30": {
+        "minutes": 75.8,
+        "pomodoros": 3,
+        "weekday": "Friday"
+    },
+    "2025-05-31": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Saturday"
+    },
+    "2025-06-01": {
+        "minutes": 203.5,
+        "pomodoros": 8,
+        "weekday": "Sunday"
+    },
+    "2025-06-02": {
+        "minutes": 79.7,
+        "pomodoros": 3,
+        "weekday": "Monday"
+    },
+    "2025-06-03": {
+        "minutes": 179.5,
+        "pomodoros": 7,
+        "weekday": "Tuesday"
+    },
+    "2025-06-04": {
+        "minutes": 27.6,
+        "pomodoros": 1,
+        "weekday": "Wednesday"
+    },
+    "2025-06-05": {
+        "minutes": 203.7,
+        "pomodoros": 8,
+        "weekday": "Thursday"
+    },
+    "2025-06-06": {
+        "minutes": 125.5,
+        "pomodoros": 5,
+        "weekday": "Friday"
+    },
+    "2025-06-07": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Saturday"
+    },
+    "2025-06-08": {
+        "minutes": 129.3,
+        "pomodoros": 5,
+        "weekday": "Sunday"
+    },
+    "2025-06-09": {
+        "minutes": 52.1,
+        "pomodoros": 2,
+        "weekday": "Monday"
+    },
+    "2025-06-10": {
+        "minutes": 75.1,
+        "pomodoros": 3,
+        "weekday": "Tuesday"
+    },
+    "2025-06-11": {
+        "minutes": 154.5,
+        "pomodoros": 6,
+        "weekday": "Wednesday"
+    },
+    "2025-06-12": {
+        "minutes": 54.3,
+        "pomodoros": 2,
+        "weekday": "Thursday"
+    },
+    "2025-06-13": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Friday"
+    },
+    "2025-06-14": {
+        "minutes": 53.7,
+        "pomodoros": 2,
+        "weekday": "Saturday"
+    },
+    "2025-06-15": {
+        "minutes": 50.3,
+        "pomodoros": 2,
+        "weekday": "Sunday"
+    },
+    "2025-06-16": {
+        "minutes": 178.1,
+        "pomodoros": 7,
+        "weekday": "Monday"
+    },
+    "2025-06-17": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Tuesday"
+    },
+    "2025-06-18": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Wednesday"
+    },
+    "2025-06-19": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Thursday"
+    },
+    "2025-06-20": {
+        "minutes": 201.9,
+        "pomodoros": 8,
+        "weekday": "Friday"
+    },
+    "2025-06-21": {
+        "minutes": 102.5,
+        "pomodoros": 4,
+        "weekday": "Saturday"
+    },
+    "2025-06-22": {
+        "minutes": 51.9,
+        "pomodoros": 2,
+        "weekday": "Sunday"
+    },
+    "2025-06-23": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Monday"
+    },
+    "2025-06-24": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Tuesday"
+    },
+    "2025-06-25": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Wednesday"
+    },
+    "2025-06-26": {
+        "minutes": 29.5,
+        "pomodoros": 1,
+        "weekday": "Thursday"
+    },
+    "2025-06-27": {
+        "minutes": 102.9,
+        "pomodoros": 4,
+        "weekday": "Friday"
+    },
+    "2025-06-28": {
+        "minutes": 77.2,
+        "pomodoros": 3,
+        "weekday": "Saturday"
+    },
+    "2025-06-29": {
+        "minutes": 102.1,
+        "pomodoros": 4,
+        "weekday": "Sunday"
+    },
+    "2025-06-30": {
+        "minutes": 27.7,
+        "pomodoros": 1,
+        "weekday": "Monday"
+    },
+    "2025-07-01": {
+        "minutes": 75.3,
+        "pomodoros": 3,
+        "weekday": "Tuesday"
+    },
+    "2025-07-02": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Wednesday"
+    },
+    "2025-07-03": {
+        "minutes": 203.9,
+        "pomodoros": 8,
+        "weekday": "Thursday"
+    },
+    "2025-07-04": {
+        "minutes": 28.9,
+        "pomodoros": 1,
+        "weekday": "Friday"
+    },
+    "2025-07-05": {
+        "minutes": 50.1,
+        "pomodoros": 2,
+        "weekday": "Saturday"
+    },
+    "2025-07-06": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Sunday"
+    },
+    "2025-07-07": {
+        "minutes": 52.6,
+        "pomodoros": 2,
+        "weekday": "Monday"
+    },
+    "2025-07-08": {
+        "minutes": 100.9,
+        "pomodoros": 4,
+        "weekday": "Tuesday"
+    },
+    "2025-07-09": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Wednesday"
+    },
+    "2025-07-10": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Thursday"
+    },
+    "2025-07-11": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Friday"
+    },
+    "2025-07-12": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Saturday"
+    },
+    "2025-07-13": {
+        "minutes": 150.8,
+        "pomodoros": 6,
+        "weekday": "Sunday"
+    },
+    "2025-07-14": {
+        "minutes": 178.8,
+        "pomodoros": 7,
+        "weekday": "Monday"
+    },
+    "2025-07-15": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Tuesday"
+    },
+    "2025-07-16": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Wednesday"
+    },
+    "2025-07-17": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Thursday"
+    },
+    "2025-07-18": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Friday"
+    },
+    "2025-07-19": {
+        "minutes": 79.7,
+        "pomodoros": 3,
+        "weekday": "Saturday"
+    },
+    "2025-07-20": {
+        "minutes": 76.6,
+        "pomodoros": 3,
+        "weekday": "Sunday"
+    },
+    "2025-07-21": {
+        "minutes": 175.3,
+        "pomodoros": 7,
+        "weekday": "Monday"
+    },
+    "2025-07-22": {
+        "minutes": 204.5,
+        "pomodoros": 8,
+        "weekday": "Tuesday"
+    },
+    "2025-07-23": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Wednesday"
+    },
+    "2025-07-24": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Thursday"
+    },
+    "2025-07-25": {
+        "minutes": 129.4,
+        "pomodoros": 5,
+        "weekday": "Friday"
+    },
+    "2025-07-26": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Saturday"
+    },
+    "2025-07-27": {
+        "minutes": 176.7,
+        "pomodoros": 7,
+        "weekday": "Sunday"
+    },
+    "2025-07-28": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Monday"
+    },
+    "2025-07-29": {
+        "minutes": 204.2,
+        "pomodoros": 8,
+        "weekday": "Tuesday"
+    },
+    "2025-07-30": {
+        "minutes": 102.9,
+        "pomodoros": 4,
+        "weekday": "Wednesday"
+    },
+    "2025-07-31": {
+        "minutes": 125.3,
+        "pomodoros": 5,
+        "weekday": "Thursday"
+    },
+    "2025-08-01": {
+        "minutes": 204.2,
+        "pomodoros": 8,
+        "weekday": "Friday"
+    },
+    "2025-08-02": {
+        "minutes": 176.5,
+        "pomodoros": 7,
+        "weekday": "Saturday"
+    },
+    "2025-08-03": {
+        "minutes": 51.3,
+        "pomodoros": 2,
+        "weekday": "Sunday"
+    },
+    "2025-08-04": {
+        "minutes": 26.9,
+        "pomodoros": 1,
+        "weekday": "Monday"
+    },
+    "2025-08-05": {
+        "minutes": 51.9,
+        "pomodoros": 2,
+        "weekday": "Tuesday"
+    },
+    "2025-08-06": {
+        "minutes": 75.5,
+        "pomodoros": 3,
+        "weekday": "Wednesday"
+    },
+    "2025-08-07": {
+        "minutes": 78.6,
+        "pomodoros": 3,
+        "weekday": "Thursday"
+    },
+    "2025-08-08": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Friday"
+    },
+    "2025-08-09": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Saturday"
+    },
+    "2025-08-10": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Sunday"
+    },
+    "2025-08-11": {
+        "minutes": 101.1,
+        "pomodoros": 4,
+        "weekday": "Monday"
+    },
+    "2025-08-12": {
+        "minutes": 202.8,
+        "pomodoros": 8,
+        "weekday": "Tuesday"
+    },
+    "2025-08-13": {
+        "minutes": 200.3,
+        "pomodoros": 8,
+        "weekday": "Wednesday"
+    },
+    "2025-08-14": {
+        "minutes": 29.1,
+        "pomodoros": 1,
+        "weekday": "Thursday"
+    },
+    "2025-08-15": {
+        "minutes": 151.2,
+        "pomodoros": 6,
+        "weekday": "Friday"
+    },
+    "2025-08-16": {
+        "minutes": 26.2,
+        "pomodoros": 1,
+        "weekday": "Saturday"
+    },
+    "2025-08-17": {
+        "minutes": 203.3,
+        "pomodoros": 8,
+        "weekday": "Sunday"
+    },
+    "2025-08-18": {
+        "minutes": 76.3,
+        "pomodoros": 3,
+        "weekday": "Monday"
+    },
+    "2025-08-19": {
+        "minutes": 50.2,
+        "pomodoros": 2,
+        "weekday": "Tuesday"
+    },
+    "2025-08-20": {
+        "minutes": 179.6,
+        "pomodoros": 7,
+        "weekday": "Wednesday"
+    },
+    "2025-08-21": {
+        "minutes": 29.5,
+        "pomodoros": 1,
+        "weekday": "Thursday"
+    },
+    "2025-08-22": {
+        "minutes": 77.5,
+        "pomodoros": 3,
+        "weekday": "Friday"
+    },
+    "2025-08-23": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Saturday"
+    },
+    "2025-08-24": {
+        "minutes": 51.2,
+        "pomodoros": 2,
+        "weekday": "Sunday"
+    },
+    "2025-08-25": {
+        "minutes": 125.3,
+        "pomodoros": 5,
+        "weekday": "Monday"
+    },
+    "2025-08-26": {
+        "minutes": 104.8,
+        "pomodoros": 4,
+        "weekday": "Tuesday"
+    },
+    "2025-08-27": {
+        "minutes": 129.7,
+        "pomodoros": 5,
+        "weekday": "Wednesday"
+    },
+    "2025-08-28": {
+        "minutes": 152.7,
+        "pomodoros": 6,
+        "weekday": "Thursday"
+    },
+    "2025-08-29": {
+        "minutes": 52.8,
+        "pomodoros": 2,
+        "weekday": "Friday"
+    },
+    "2025-08-30": {
+        "minutes": 54.3,
+        "pomodoros": 2,
+        "weekday": "Saturday"
+    },
+    "2025-08-31": {
+        "minutes": 126.1,
+        "pomodoros": 5,
+        "weekday": "Sunday"
+    },
+    "2025-09-01": {
+        "minutes": 178.6,
+        "pomodoros": 7,
+        "weekday": "Monday"
+    },
+    "2025-09-02": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Tuesday"
+    },
+    "2025-09-03": {
+        "minutes": 26.4,
+        "pomodoros": 1,
+        "weekday": "Wednesday"
+    },
+    "2025-09-04": {
+        "minutes": 50.8,
+        "pomodoros": 2,
+        "weekday": "Thursday"
+    },
+    "2025-09-05": {
+        "minutes": 150,
+        "pomodoros": 6,
+        "weekday": "Friday"
+    },
+    "2025-09-06": {
+        "minutes": 77.2,
+        "pomodoros": 3,
+        "weekday": "Saturday"
+    },
+    "2025-09-07": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Sunday"
+    },
+    "2025-09-08": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Monday"
+    },
+    "2025-09-09": {
+        "minutes": 76.2,
+        "pomodoros": 3,
+        "weekday": "Tuesday"
+    },
+    "2025-09-10": {
+        "minutes": 51.2,
+        "pomodoros": 2,
+        "weekday": "Wednesday"
+    },
+    "2025-09-11": {
+        "minutes": 201,
+        "pomodoros": 8,
+        "weekday": "Thursday"
+    },
+    "2025-09-12": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Friday"
+    },
+    "2025-09-13": {
+        "minutes": 175.8,
+        "pomodoros": 7,
+        "weekday": "Saturday"
+    },
+    "2025-09-14": {
+        "minutes": 177.2,
+        "pomodoros": 7,
+        "weekday": "Sunday"
+    },
+    "2025-09-15": {
+        "minutes": 200.3,
+        "pomodoros": 8,
+        "weekday": "Monday"
+    },
+    "2025-09-16": {
+        "minutes": 101.3,
+        "pomodoros": 4,
+        "weekday": "Tuesday"
+    },
+    "2025-09-17": {
+        "minutes": 52.3,
+        "pomodoros": 2,
+        "weekday": "Wednesday"
+    },
+    "2025-09-18": {
+        "minutes": 126.2,
+        "pomodoros": 5,
+        "weekday": "Thursday"
+    },
+    "2025-09-19": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Friday"
+    },
+    "2025-09-20": {
+        "minutes": 154,
+        "pomodoros": 6,
+        "weekday": "Saturday"
+    },
+    "2025-09-21": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Sunday"
+    },
+    "2025-09-22": {
+        "minutes": 27.5,
+        "pomodoros": 1,
+        "weekday": "Monday"
+    },
+    "2025-09-23": {
+        "minutes": 103.8,
+        "pomodoros": 4,
+        "weekday": "Tuesday"
+    },
+    "2025-09-24": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Wednesday"
+    },
+    "2025-09-25": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Thursday"
+    },
+    "2025-09-26": {
+        "minutes": 175.5,
+        "pomodoros": 7,
+        "weekday": "Friday"
+    },
+    "2025-09-27": {
+        "minutes": 102.4,
+        "pomodoros": 4,
+        "weekday": "Saturday"
+    },
+    "2025-09-28": {
+        "minutes": 54.6,
+        "pomodoros": 2,
+        "weekday": "Sunday"
+    },
+    "2025-09-29": {
+        "minutes": 53,
+        "pomodoros": 2,
+        "weekday": "Monday"
+    },
+    "2025-09-30": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Tuesday"
+    },
+    "2025-10-01": {
+        "minutes": 151.3,
+        "pomodoros": 6,
+        "weekday": "Wednesday"
+    },
+    "2025-10-02": {
+        "minutes": 154.4,
+        "pomodoros": 6,
+        "weekday": "Thursday"
+    },
+    "2025-10-03": {
+        "minutes": 25.5,
+        "pomodoros": 1,
+        "weekday": "Friday"
+    },
+    "2025-10-04": {
+        "minutes": 128.6,
+        "pomodoros": 5,
+        "weekday": "Saturday"
+    },
+    "2025-10-05": {
+        "minutes": 202.4,
+        "pomodoros": 8,
+        "weekday": "Sunday"
+    },
+    "2025-10-06": {
+        "minutes": 101.7,
+        "pomodoros": 4,
+        "weekday": "Monday"
+    },
+    "2025-10-07": {
+        "minutes": 125.5,
+        "pomodoros": 5,
+        "weekday": "Tuesday"
+    },
+    "2025-10-08": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Wednesday"
+    },
+    "2025-10-09": {
+        "minutes": 127.8,
+        "pomodoros": 5,
+        "weekday": "Thursday"
+    },
+    "2025-10-10": {
+        "minutes": 127.7,
+        "pomodoros": 5,
+        "weekday": "Friday"
+    },
+    "2025-10-11": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Saturday"
+    },
+    "2025-10-12": {
+        "minutes": 54.6,
+        "pomodoros": 2,
+        "weekday": "Sunday"
+    },
+    "2025-10-13": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Monday"
+    },
+    "2025-10-14": {
+        "minutes": 26.4,
+        "pomodoros": 1,
+        "weekday": "Tuesday"
+    },
+    "2025-10-15": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Wednesday"
+    },
+    "2025-10-16": {
+        "minutes": 202.8,
+        "pomodoros": 8,
+        "weekday": "Thursday"
+    },
+    "2025-10-17": {
+        "minutes": 25.6,
+        "pomodoros": 1,
+        "weekday": "Friday"
+    },
+    "2025-10-18": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Saturday"
+    },
+    "2025-10-19": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Sunday"
+    },
+    "2025-10-20": {
+        "minutes": 76,
+        "pomodoros": 3,
+        "weekday": "Monday"
+    },
+    "2025-10-21": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Tuesday"
+    },
+    "2025-10-22": {
+        "minutes": 100.8,
+        "pomodoros": 4,
+        "weekday": "Wednesday"
+    },
+    "2025-10-23": {
+        "minutes": 178.4,
+        "pomodoros": 7,
+        "weekday": "Thursday"
+    },
+    "2025-10-24": {
+        "minutes": 175.5,
+        "pomodoros": 7,
+        "weekday": "Friday"
+    },
+    "2025-10-25": {
+        "minutes": 150.7,
+        "pomodoros": 6,
+        "weekday": "Saturday"
+    },
+    "2025-10-26": {
+        "minutes": 129.7,
+        "pomodoros": 5,
+        "weekday": "Sunday"
+    },
+    "2025-10-27": {
+        "minutes": 153.2,
+        "pomodoros": 6,
+        "weekday": "Monday"
+    },
+    "2025-10-28": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Tuesday"
+    },
+    "2025-10-29": {
+        "minutes": 78.1,
+        "pomodoros": 3,
+        "weekday": "Wednesday"
+    },
+    "2025-10-30": {
+        "minutes": 29.5,
+        "pomodoros": 1,
+        "weekday": "Thursday"
+    },
+    "2025-10-31": {
+        "minutes": 103.3,
+        "pomodoros": 4,
+        "weekday": "Friday"
+    },
+    "2025-11-01": {
+        "minutes": 201.5,
+        "pomodoros": 8,
+        "weekday": "Saturday"
+    },
+    "2025-11-02": {
+        "minutes": 150.3,
+        "pomodoros": 6,
+        "weekday": "Sunday"
+    },
+    "2025-11-03": {
+        "minutes": 26,
+        "pomodoros": 1,
+        "weekday": "Monday"
+    },
+    "2025-11-04": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Tuesday"
+    },
+    "2025-11-05": {
+        "minutes": 101.1,
+        "pomodoros": 4,
+        "weekday": "Wednesday"
+    },
+    "2025-11-06": {
+        "minutes": 28.9,
+        "pomodoros": 1,
+        "weekday": "Thursday"
+    },
+    "2025-11-07": {
+        "minutes": 101.9,
+        "pomodoros": 4,
+        "weekday": "Friday"
+    },
+    "2025-11-08": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Saturday"
+    },
+    "2025-11-09": {
+        "minutes": 54.1,
+        "pomodoros": 2,
+        "weekday": "Sunday"
+    },
+    "2025-11-10": {
+        "minutes": 201.3,
+        "pomodoros": 8,
+        "weekday": "Monday"
+    },
+    "2025-11-11": {
+        "minutes": 51.6,
+        "pomodoros": 2,
+        "weekday": "Tuesday"
+    },
+    "2025-11-12": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Wednesday"
+    },
+    "2025-11-13": {
+        "minutes": 53.5,
+        "pomodoros": 2,
+        "weekday": "Thursday"
+    },
+    "2025-11-14": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Friday"
+    },
+    "2025-11-15": {
+        "minutes": 79,
+        "pomodoros": 3,
+        "weekday": "Saturday"
+    },
+    "2025-11-16": {
+        "minutes": 104.3,
+        "pomodoros": 4,
+        "weekday": "Sunday"
+    },
+    "2025-11-17": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Monday"
+    },
+    "2025-11-18": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Tuesday"
+    },
+    "2025-11-19": {
+        "minutes": 205,
+        "pomodoros": 8,
+        "weekday": "Wednesday"
+    },
+    "2025-11-20": {
+        "minutes": 129.9,
+        "pomodoros": 5,
+        "weekday": "Thursday"
+    },
+    "2025-11-21": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Friday"
+    },
+    "2025-11-22": {
+        "minutes": 154.2,
+        "pomodoros": 6,
+        "weekday": "Saturday"
+    },
+    "2025-11-23": {
+        "minutes": 53.5,
+        "pomodoros": 2,
+        "weekday": "Sunday"
+    },
+    "2025-11-24": {
+        "minutes": 151.1,
+        "pomodoros": 6,
+        "weekday": "Monday"
+    },
+    "2025-11-25": {
+        "minutes": 175.2,
+        "pomodoros": 7,
+        "weekday": "Tuesday"
+    },
+    "2025-11-26": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Wednesday"
+    },
+    "2025-11-27": {
+        "minutes": 178,
+        "pomodoros": 7,
+        "weekday": "Thursday"
+    },
+    "2025-11-28": {
+        "minutes": 129.3,
+        "pomodoros": 5,
+        "weekday": "Friday"
+    },
+    "2025-11-29": {
+        "minutes": 75,
+        "pomodoros": 3,
+        "weekday": "Saturday"
+    },
+    "2025-11-30": {
+        "minutes": 79.3,
+        "pomodoros": 3,
+        "weekday": "Sunday"
+    },
+    "2025-12-01": {
+        "minutes": 75.3,
+        "pomodoros": 3,
+        "weekday": "Monday"
+    },
+    "2025-12-02": {
+        "minutes": 151,
+        "pomodoros": 6,
+        "weekday": "Tuesday"
+    },
+    "2025-12-03": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Wednesday"
+    },
+    "2025-12-04": {
+        "minutes": 25.9,
+        "pomodoros": 1,
+        "weekday": "Thursday"
+    },
+    "2025-12-05": {
+        "minutes": 27,
+        "pomodoros": 1,
+        "weekday": "Friday"
+    },
+    "2025-12-06": {
+        "minutes": 129.1,
+        "pomodoros": 5,
+        "weekday": "Saturday"
+    },
+    "2025-12-07": {
+        "minutes": 100.2,
+        "pomodoros": 4,
+        "weekday": "Sunday"
+    },
+    "2025-12-08": {
+        "minutes": 25.8,
+        "pomodoros": 1,
+        "weekday": "Monday"
+    },
+    "2025-12-09": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Tuesday"
+    },
+    "2025-12-10": {
+        "minutes": 204,
+        "pomodoros": 8,
+        "weekday": "Wednesday"
+    },
+    "2025-12-11": {
+        "minutes": 50.2,
+        "pomodoros": 2,
+        "weekday": "Thursday"
+    },
+    "2025-12-12": {
+        "minutes": 77.4,
+        "pomodoros": 3,
+        "weekday": "Friday"
+    },
+    "2025-12-13": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Saturday"
+    },
+    "2025-12-14": {
+        "minutes": 126.3,
+        "pomodoros": 5,
+        "weekday": "Sunday"
+    },
+    "2025-12-15": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Monday"
+    },
+    "2025-12-16": {
+        "minutes": 54.7,
+        "pomodoros": 2,
+        "weekday": "Tuesday"
+    },
+    "2025-12-17": {
+        "minutes": 203.9,
+        "pomodoros": 8,
+        "weekday": "Wednesday"
+    },
+    "2025-12-18": {
+        "minutes": 178.6,
+        "pomodoros": 7,
+        "weekday": "Thursday"
+    },
+    "2025-12-19": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Friday"
+    },
+    "2025-12-20": {
+        "minutes": 128.8,
+        "pomodoros": 5,
+        "weekday": "Saturday"
+    },
+    "2025-12-21": {
+        "minutes": 52,
+        "pomodoros": 2,
+        "weekday": "Sunday"
+    },
+    "2025-12-22": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Monday"
+    },
+    "2025-12-23": {
+        "minutes": 100.6,
+        "pomodoros": 4,
+        "weekday": "Tuesday"
+    },
+    "2025-12-24": {
+        "minutes": 79.7,
+        "pomodoros": 3,
+        "weekday": "Wednesday"
+    },
+    "2025-12-25": {
+        "minutes": 75.5,
+        "pomodoros": 3,
+        "weekday": "Thursday"
+    },
+    "2025-12-26": {
+        "minutes": 28.2,
+        "pomodoros": 1,
+        "weekday": "Friday"
+    },
+    "2025-12-27": {
+        "minutes": 154,
+        "pomodoros": 6,
+        "weekday": "Saturday"
+    },
+    "2025-12-28": {
+        "minutes": 175.2,
+        "pomodoros": 7,
+        "weekday": "Sunday"
+    },
+    "2025-12-29": {
+        "minutes": 53.6,
+        "pomodoros": 2,
+        "weekday": "Monday"
+    },
+    "2025-12-30": {
+        "minutes": 50.1,
+        "pomodoros": 2,
+        "weekday": "Tuesday"
+    },
+    "2025-12-31": {
+        "minutes": 203.4,
+        "pomodoros": 8,
+        "weekday": "Wednesday"
+    },
+    "2026-01-01": {
+        "minutes": 104.8,
+        "pomodoros": 4,
+        "weekday": "Thursday"
+    },
+    "2026-01-02": {
+        "minutes": 129.4,
+        "pomodoros": 5,
+        "weekday": "Friday"
+    },
+    "2026-01-03": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Saturday"
+    },
+    "2026-01-04": {
+        "minutes": 201.6,
+        "pomodoros": 8,
+        "weekday": "Sunday"
+    },
+    "2026-01-05": {
+        "minutes": 50.8,
+        "pomodoros": 2,
+        "weekday": "Monday"
+    },
+    "2026-01-06": {
+        "minutes": 201,
+        "pomodoros": 8,
+        "weekday": "Tuesday"
+    },
+    "2026-01-07": {
+        "minutes": 76.7,
+        "pomodoros": 3,
+        "weekday": "Wednesday"
+    },
+    "2026-01-08": {
+        "minutes": 175.3,
+        "pomodoros": 7,
+        "weekday": "Thursday"
+    },
+    "2026-01-09": {
+        "minutes": 27.4,
+        "pomodoros": 1,
+        "weekday": "Friday"
+    },
+    "2026-01-10": {
+        "minutes": 102.7,
+        "pomodoros": 4,
+        "weekday": "Saturday"
+    },
+    "2026-01-11": {
+        "minutes": 178.6,
+        "pomodoros": 7,
+        "weekday": "Sunday"
+    },
+    "2026-01-12": {
+        "minutes": 204.5,
+        "pomodoros": 8,
+        "weekday": "Monday"
+    },
+    "2026-01-13": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Tuesday"
+    },
+    "2026-01-14": {
+        "minutes": 179.8,
+        "pomodoros": 7,
+        "weekday": "Wednesday"
+    },
+    "2026-01-15": {
+        "minutes": 51.1,
+        "pomodoros": 2,
+        "weekday": "Thursday"
+    },
+    "2026-01-16": {
+        "minutes": 103.8,
+        "pomodoros": 4,
+        "weekday": "Friday"
+    },
+    "2026-01-17": {
+        "minutes": 127.2,
+        "pomodoros": 5,
+        "weekday": "Saturday"
+    },
+    "2026-01-18": {
+        "minutes": 151.6,
+        "pomodoros": 6,
+        "weekday": "Sunday"
+    },
+    "2026-01-19": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Monday"
+    },
+    "2026-01-20": {
+        "minutes": 128,
+        "pomodoros": 5,
+        "weekday": "Tuesday"
+    },
+    "2026-01-21": {
+        "minutes": 101,
+        "pomodoros": 4,
+        "weekday": "Wednesday"
+    },
+    "2026-01-22": {
+        "minutes": 25.6,
+        "pomodoros": 1,
+        "weekday": "Thursday"
+    },
+    "2026-01-23": {
+        "minutes": 77.7,
+        "pomodoros": 3,
+        "weekday": "Friday"
+    },
+    "2026-01-24": {
+        "minutes": 76.3,
+        "pomodoros": 3,
+        "weekday": "Saturday"
+    },
+    "2026-01-25": {
+        "minutes": 154.7,
+        "pomodoros": 6,
+        "weekday": "Sunday"
+    },
+    "2026-01-26": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Monday"
+    },
+    "2026-01-27": {
+        "minutes": 175.4,
+        "pomodoros": 7,
+        "weekday": "Tuesday"
+    },
+    "2026-01-28": {
+        "minutes": 125.1,
+        "pomodoros": 5,
+        "weekday": "Wednesday"
+    },
+    "2026-01-29": {
+        "minutes": 103.1,
+        "pomodoros": 4,
+        "weekday": "Thursday"
+    },
+    "2026-01-30": {
+        "minutes": 26.9,
+        "pomodoros": 1,
+        "weekday": "Friday"
+    },
+    "2026-01-31": {
+        "minutes": 151.7,
+        "pomodoros": 6,
+        "weekday": "Saturday"
+    },
+    "2026-02-01": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Sunday"
+    },
+    "2026-02-02": {
+        "minutes": 125.3,
+        "pomodoros": 5,
+        "weekday": "Monday"
+    },
+    "2026-02-03": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Tuesday"
+    },
+    "2026-02-04": {
+        "minutes": 177.8,
+        "pomodoros": 7,
+        "weekday": "Wednesday"
+    },
+    "2026-02-05": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Thursday"
+    },
+    "2026-02-06": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Friday"
+    },
+    "2026-02-07": {
+        "minutes": 150.4,
+        "pomodoros": 6,
+        "weekday": "Saturday"
+    },
+    "2026-02-08": {
+        "minutes": 129.6,
+        "pomodoros": 5,
+        "weekday": "Sunday"
+    },
+    "2026-02-09": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Monday"
+    },
+    "2026-02-10": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Tuesday"
+    },
+    "2026-02-11": {
+        "minutes": 176.5,
+        "pomodoros": 7,
+        "weekday": "Wednesday"
+    },
+    "2026-02-12": {
+        "minutes": 51.6,
+        "pomodoros": 2,
+        "weekday": "Thursday"
+    },
+    "2026-02-13": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Friday"
+    },
+    "2026-02-14": {
+        "minutes": 151.5,
+        "pomodoros": 6,
+        "weekday": "Saturday"
+    },
+    "2026-02-15": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Sunday"
+    },
+    "2026-02-16": {
+        "minutes": 128.8,
+        "pomodoros": 5,
+        "weekday": "Monday"
+    },
+    "2026-02-17": {
+        "minutes": 28.8,
+        "pomodoros": 1,
+        "weekday": "Tuesday"
+    },
+    "2026-02-18": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Wednesday"
+    },
+    "2026-02-19": {
+        "minutes": 104.5,
+        "pomodoros": 4,
+        "weekday": "Thursday"
+    },
+    "2026-02-20": {
+        "minutes": 51.1,
+        "pomodoros": 2,
+        "weekday": "Friday"
+    },
+    "2026-02-21": {
+        "minutes": 153.9,
+        "pomodoros": 6,
+        "weekday": "Saturday"
+    },
+    "2026-02-22": {
+        "minutes": 101.5,
+        "pomodoros": 4,
+        "weekday": "Sunday"
+    },
+    "2026-02-23": {
+        "minutes": 153.7,
+        "pomodoros": 6,
+        "weekday": "Monday"
+    },
+    "2026-02-24": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Tuesday"
+    },
+    "2026-02-25": {
+        "minutes": 29.3,
+        "pomodoros": 1,
+        "weekday": "Wednesday"
+    },
+    "2026-02-26": {
+        "minutes": 179.8,
+        "pomodoros": 7,
+        "weekday": "Thursday"
+    },
+    "2026-02-27": {
+        "minutes": 79.3,
+        "pomodoros": 3,
+        "weekday": "Friday"
+    },
+    "2026-02-28": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Saturday"
+    },
+    "2026-03-01": {
+        "minutes": 179,
+        "pomodoros": 7,
+        "weekday": "Sunday"
+    },
+    "2026-03-02": {
+        "minutes": 178.3,
+        "pomodoros": 7,
+        "weekday": "Monday"
+    },
+    "2026-03-03": {
+        "minutes": 51.8,
+        "pomodoros": 2,
+        "weekday": "Tuesday"
+    },
+    "2026-03-04": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Wednesday"
+    },
+    "2026-03-05": {
+        "minutes": 100,
+        "pomodoros": 4,
+        "weekday": "Thursday"
+    },
+    "2026-03-06": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Friday"
+    },
+    "2026-03-07": {
+        "minutes": 28.6,
+        "pomodoros": 1,
+        "weekday": "Saturday"
+    },
+    "2026-03-08": {
+        "minutes": 177.7,
+        "pomodoros": 7,
+        "weekday": "Sunday"
+    },
+    "2026-03-09": {
+        "minutes": 104.7,
+        "pomodoros": 4,
+        "weekday": "Monday"
+    },
+    "2026-03-10": {
+        "minutes": 75.3,
+        "pomodoros": 3,
+        "weekday": "Tuesday"
+    },
+    "2026-03-11": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Wednesday"
+    },
+    "2026-03-12": {
+        "minutes": 102.6,
+        "pomodoros": 4,
+        "weekday": "Thursday"
+    },
+    "2026-03-13": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Friday"
+    },
+    "2026-03-14": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Saturday"
+    },
+    "2026-03-15": {
+        "minutes": 153.1,
+        "pomodoros": 6,
+        "weekday": "Sunday"
+    },
+    "2026-03-16": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Monday"
+    },
+    "2026-03-17": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Tuesday"
+    },
+    "2026-03-18": {
+        "minutes": 51.5,
+        "pomodoros": 2,
+        "weekday": "Wednesday"
+    },
+    "2026-03-19": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Thursday"
+    },
+    "2026-03-20": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Friday"
+    },
+    "2026-03-21": {
+        "minutes": 50.2,
+        "pomodoros": 2,
+        "weekday": "Saturday"
+    },
+    "2026-03-22": {
+        "minutes": 54.3,
+        "pomodoros": 2,
+        "weekday": "Sunday"
+    },
+    "2026-03-23": {
+        "minutes": 26.3,
+        "pomodoros": 1,
+        "weekday": "Monday"
+    },
+    "2026-03-24": {
+        "minutes": 204.7,
+        "pomodoros": 8,
+        "weekday": "Tuesday"
+    },
+    "2026-03-25": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Wednesday"
+    },
+    "2026-03-26": {
+        "minutes": 203.2,
+        "pomodoros": 8,
+        "weekday": "Thursday"
+    },
+    "2026-03-27": {
+        "minutes": 27.9,
+        "pomodoros": 1,
+        "weekday": "Friday"
+    },
+    "2026-03-28": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Saturday"
+    },
+    "2026-03-29": {
+        "minutes": 128.6,
+        "pomodoros": 5,
+        "weekday": "Sunday"
+    },
+    "2026-03-30": {
+        "minutes": 175,
+        "pomodoros": 7,
+        "weekday": "Monday"
+    },
+    "2026-03-31": {
+        "minutes": 27.3,
+        "pomodoros": 1,
+        "weekday": "Tuesday"
+    },
+    "2026-04-01": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Wednesday"
+    },
+    "2026-04-02": {
+        "minutes": 203.3,
+        "pomodoros": 8,
+        "weekday": "Thursday"
+    },
+    "2026-04-03": {
+        "minutes": 178.5,
+        "pomodoros": 7,
+        "weekday": "Friday"
+    },
+    "2026-04-04": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Saturday"
+    },
+    "2026-04-05": {
+        "minutes": 175.7,
+        "pomodoros": 7,
+        "weekday": "Sunday"
+    },
+    "2026-04-06": {
+        "minutes": 125.5,
+        "pomodoros": 5,
+        "weekday": "Monday"
+    },
+    "2026-04-07": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Tuesday"
+    },
+    "2026-04-08": {
+        "minutes": 51.1,
+        "pomodoros": 2,
+        "weekday": "Wednesday"
+    },
+    "2026-04-09": {
+        "minutes": 177.9,
+        "pomodoros": 7,
+        "weekday": "Thursday"
+    },
+    "2026-04-10": {
+        "minutes": 27.8,
+        "pomodoros": 1,
+        "weekday": "Friday"
+    },
+    "2026-04-11": {
+        "minutes": 102.4,
+        "pomodoros": 4,
+        "weekday": "Saturday"
+    },
+    "2026-04-12": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Sunday"
+    },
+    "2026-04-13": {
+        "minutes": 102,
+        "pomodoros": 4,
+        "weekday": "Monday"
+    },
+    "2026-04-14": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Tuesday"
+    },
+    "2026-04-15": {
+        "minutes": 154.3,
+        "pomodoros": 6,
+        "weekday": "Wednesday"
+    },
+    "2026-04-16": {
+        "minutes": 27.9,
+        "pomodoros": 1,
+        "weekday": "Thursday"
+    },
+    "2026-04-17": {
+        "minutes": 102.4,
+        "pomodoros": 4,
+        "weekday": "Friday"
+    },
+    "2026-04-18": {
+        "minutes": 153.9,
+        "pomodoros": 6,
+        "weekday": "Saturday"
+    },
+    "2026-04-19": {
+        "minutes": 200.8,
+        "pomodoros": 8,
+        "weekday": "Sunday"
+    },
+    "2026-04-20": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Monday"
+    },
+    "2026-04-21": {
+        "minutes": 53.3,
+        "pomodoros": 2,
+        "weekday": "Tuesday"
+    },
+    "2026-04-22": {
+        "minutes": 153.3,
+        "pomodoros": 6,
+        "weekday": "Wednesday"
+    },
+    "2026-04-23": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Thursday"
+    },
+    "2026-04-24": {
+        "minutes": 151.7,
+        "pomodoros": 6,
+        "weekday": "Friday"
+    },
+    "2026-04-25": {
+        "minutes": 153.4,
+        "pomodoros": 6,
+        "weekday": "Saturday"
+    },
+    "2026-04-26": {
+        "minutes": 155,
+        "pomodoros": 6,
+        "weekday": "Sunday"
+    },
+    "2026-04-27": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Monday"
+    },
+    "2026-04-28": {
+        "minutes": 27.1,
+        "pomodoros": 1,
+        "weekday": "Tuesday"
+    },
+    "2026-04-29": {
+        "minutes": 103.4,
+        "pomodoros": 4,
+        "weekday": "Wednesday"
+    },
+    "2026-04-30": {
+        "minutes": 204.8,
+        "pomodoros": 8,
+        "weekday": "Thursday"
+    },
+    "2026-05-01": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Friday"
+    },
+    "2026-05-02": {
+        "minutes": 51.7,
+        "pomodoros": 2,
+        "weekday": "Saturday"
+    },
+    "2026-05-03": {
+        "minutes": 76.4,
+        "pomodoros": 3,
+        "weekday": "Sunday"
+    },
+    "2026-05-04": {
+        "minutes": 101.3,
+        "pomodoros": 4,
+        "weekday": "Monday"
+    },
+    "2026-05-05": {
+        "minutes": 102.3,
+        "pomodoros": 4,
+        "weekday": "Tuesday"
+    },
+    "2026-05-06": {
+        "minutes": 102.2,
+        "pomodoros": 4,
+        "weekday": "Wednesday"
+    },
+    "2026-05-07": {
+        "minutes": 126,
+        "pomodoros": 5,
+        "weekday": "Thursday"
+    },
+    "2026-05-08": {
+        "minutes": 104.5,
+        "pomodoros": 4,
+        "weekday": "Friday"
+    },
+    "2026-05-09": {
+        "minutes": 127.2,
+        "pomodoros": 5,
+        "weekday": "Saturday"
+    },
+    "2026-05-10": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Sunday"
+    },
+    "2026-05-11": {
+        "minutes": 151.3,
+        "pomodoros": 6,
+        "weekday": "Monday"
+    },
+    "2026-05-12": {
+        "minutes": 28.1,
+        "pomodoros": 1,
+        "weekday": "Tuesday"
+    },
+    "2026-05-13": {
+        "minutes": 129.8,
+        "pomodoros": 5,
+        "weekday": "Wednesday"
+    },
+    "2026-05-14": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Thursday"
+    },
+    "2026-05-15": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Friday"
+    },
+    "2026-05-16": {
+        "minutes": 176.3,
+        "pomodoros": 7,
+        "weekday": "Saturday"
+    },
+    "2026-05-17": {
+        "minutes": 178.6,
+        "pomodoros": 7,
+        "weekday": "Sunday"
+    },
+    "2026-05-18": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Monday"
+    },
+    "2026-05-19": {
+        "minutes": 28.6,
+        "pomodoros": 1,
+        "weekday": "Tuesday"
+    },
+    "2026-05-20": {
+        "minutes": 103.2,
+        "pomodoros": 4,
+        "weekday": "Wednesday"
+    },
+    "2026-05-21": {
+        "minutes": 29.8,
+        "pomodoros": 1,
+        "weekday": "Thursday"
+    },
+    "2026-05-22": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Friday"
+    },
+    "2026-05-23": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Saturday"
+    },
+    "2026-05-24": {
+        "minutes": 28.2,
+        "pomodoros": 1,
+        "weekday": "Sunday"
+    },
+    "2026-05-25": {
+        "minutes": 200.2,
+        "pomodoros": 8,
+        "weekday": "Monday"
+    },
+    "2026-05-26": {
+        "minutes": 153.4,
+        "pomodoros": 6,
+        "weekday": "Tuesday"
+    },
+    "2026-05-27": {
+        "minutes": 50.6,
+        "pomodoros": 2,
+        "weekday": "Wednesday"
+    },
+    "2026-05-28": {
+        "minutes": 128.1,
+        "pomodoros": 5,
+        "weekday": "Thursday"
+    },
+    "2026-05-29": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Friday"
+    },
+    "2026-05-30": {
+        "minutes": 76.5,
+        "pomodoros": 3,
+        "weekday": "Saturday"
+    },
+    "2026-05-31": {
+        "minutes": 54.9,
+        "pomodoros": 2,
+        "weekday": "Sunday"
+    },
+    "2026-06-01": {
+        "minutes": 77.9,
+        "pomodoros": 3,
+        "weekday": "Monday"
+    },
+    "2026-06-02": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Tuesday"
+    },
+    "2026-06-03": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Wednesday"
+    },
+    "2026-06-04": {
+        "minutes": 150.1,
+        "pomodoros": 6,
+        "weekday": "Thursday"
+    },
+    "2026-06-05": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Friday"
+    },
+    "2026-06-06": {
+        "minutes": 152.4,
+        "pomodoros": 6,
+        "weekday": "Saturday"
+    },
+    "2026-06-07": {
+        "minutes": 104.9,
+        "pomodoros": 4,
+        "weekday": "Sunday"
+    },
+    "2026-06-08": {
+        "minutes": 179.9,
+        "pomodoros": 7,
+        "weekday": "Monday"
+    },
+    "2026-06-09": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Tuesday"
+    },
+    "2026-06-10": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Wednesday"
+    },
+    "2026-06-11": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Thursday"
+    },
+    "2026-06-12": {
+        "minutes": 79.8,
+        "pomodoros": 3,
+        "weekday": "Friday"
+    },
+    "2026-06-13": {
+        "minutes": 129.5,
+        "pomodoros": 5,
+        "weekday": "Saturday"
+    },
+    "2026-06-14": {
+        "minutes": 179.2,
+        "pomodoros": 7,
+        "weekday": "Sunday"
+    },
+    "2026-06-15": {
+        "minutes": 153.9,
+        "pomodoros": 6,
+        "weekday": "Monday"
+    },
+    "2026-06-16": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Tuesday"
+    },
+    "2026-06-17": {
+        "minutes": 28.1,
+        "pomodoros": 1,
+        "weekday": "Wednesday"
+    },
+    "2026-06-18": {
+        "minutes": 103,
+        "pomodoros": 4,
+        "weekday": "Thursday"
+    },
+    "2026-06-19": {
+        "minutes": 178.8,
+        "pomodoros": 7,
+        "weekday": "Friday"
+    },
+    "2026-06-20": {
+        "minutes": 51.2,
+        "pomodoros": 2,
+        "weekday": "Saturday"
+    },
+    "2026-06-21": {
+        "minutes": 203.2,
+        "pomodoros": 8,
+        "weekday": "Sunday"
+    },
+    "2026-06-22": {
+        "minutes": 100.2,
+        "pomodoros": 4,
+        "weekday": "Monday"
+    },
+    "2026-06-23": {
+        "minutes": 79.7,
+        "pomodoros": 3,
+        "weekday": "Tuesday"
+    },
+    "2026-06-24": {
+        "minutes": 128.9,
+        "pomodoros": 5,
+        "weekday": "Wednesday"
+    },
+    "2026-06-25": {
+        "minutes": 29.7,
+        "pomodoros": 1,
+        "weekday": "Thursday"
+    },
+    "2026-06-26": {
+        "minutes": 201.7,
+        "pomodoros": 8,
+        "weekday": "Friday"
+    },
+    "2026-06-27": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Saturday"
+    },
+    "2026-06-28": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Sunday"
+    },
+    "2026-06-29": {
+        "minutes": 25,
+        "pomodoros": 1,
+        "weekday": "Monday"
+    },
+    "2026-06-30": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Tuesday"
+    },
+    "2026-07-01": {
+        "minutes": 178.2,
+        "pomodoros": 7,
+        "weekday": "Wednesday"
+    },
+    "2026-07-02": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Thursday"
+    },
+    "2026-07-03": {
+        "minutes": 76.3,
+        "pomodoros": 3,
+        "weekday": "Friday"
+    },
+    "2026-07-04": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Saturday"
+    },
+    "2026-07-05": {
+        "minutes": 76.4,
+        "pomodoros": 3,
+        "weekday": "Sunday"
+    },
+    "2026-07-06": {
+        "minutes": 152.9,
+        "pomodoros": 6,
+        "weekday": "Monday"
+    },
+    "2026-07-07": {
+        "minutes": 25.9,
+        "pomodoros": 1,
+        "weekday": "Tuesday"
+    },
+    "2026-07-08": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Wednesday"
+    },
+    "2026-07-09": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Thursday"
+    },
+    "2026-07-10": {
+        "minutes": 179.7,
+        "pomodoros": 7,
+        "weekday": "Friday"
+    },
+    "2026-07-11": {
+        "minutes": 175.1,
+        "pomodoros": 7,
+        "weekday": "Saturday"
+    },
+    "2026-07-12": {
+        "minutes": 204.8,
+        "pomodoros": 8,
+        "weekday": "Sunday"
+    },
+    "2026-07-13": {
+        "minutes": 177.6,
+        "pomodoros": 7,
+        "weekday": "Monday"
+    },
+    "2026-07-14": {
+        "minutes": 52.1,
+        "pomodoros": 2,
+        "weekday": "Tuesday"
+    },
+    "2026-07-15": {
+        "minutes": 76,
+        "pomodoros": 3,
+        "weekday": "Wednesday"
+    },
+    "2026-07-16": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Thursday"
+    },
+    "2026-07-17": {
+        "minutes": 126,
+        "pomodoros": 5,
+        "weekday": "Friday"
+    },
+    "2026-07-18": {
+        "minutes": 126.6,
+        "pomodoros": 5,
+        "weekday": "Saturday"
+    },
+    "2026-07-19": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Sunday"
+    },
+    "2026-07-20": {
+        "minutes": 201.8,
+        "pomodoros": 8,
+        "weekday": "Monday"
+    },
+    "2026-07-21": {
+        "minutes": 129.2,
+        "pomodoros": 5,
+        "weekday": "Tuesday"
+    },
+    "2026-07-22": {
+        "minutes": 101.6,
+        "pomodoros": 4,
+        "weekday": "Wednesday"
+    },
+    "2026-07-23": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Thursday"
+    },
+    "2026-07-24": {
+        "minutes": 151.6,
+        "pomodoros": 6,
+        "weekday": "Friday"
+    },
+    "2026-07-25": {
+        "minutes": 104.1,
+        "pomodoros": 4,
+        "weekday": "Saturday"
+    },
+    "2026-07-26": {
+        "minutes": 128.2,
+        "pomodoros": 5,
+        "weekday": "Sunday"
+    },
+    "2026-07-27": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Monday"
+    },
+    "2026-07-28": {
+        "minutes": 79.3,
+        "pomodoros": 3,
+        "weekday": "Tuesday"
+    },
+    "2026-07-29": {
+        "minutes": 151.1,
+        "pomodoros": 6,
+        "weekday": "Wednesday"
+    },
+    "2026-07-30": {
+        "minutes": 79,
+        "pomodoros": 3,
+        "weekday": "Thursday"
+    },
+    "2026-07-31": {
+        "minutes": 51.1,
+        "pomodoros": 2,
+        "weekday": "Friday"
+    },
+    "2026-08-01": {
+        "minutes": 75.8,
+        "pomodoros": 3,
+        "weekday": "Saturday"
+    },
+    "2026-08-02": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Sunday"
+    },
+    "2026-08-03": {
+        "minutes": 202,
+        "pomodoros": 8,
+        "weekday": "Monday"
+    },
+    "2026-08-04": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Tuesday"
+    },
+    "2026-08-05": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Wednesday"
+    },
+    "2026-08-06": {
+        "minutes": 27.4,
+        "pomodoros": 1,
+        "weekday": "Thursday"
+    },
+    "2026-08-07": {
+        "minutes": 75.9,
+        "pomodoros": 3,
+        "weekday": "Friday"
+    },
+    "2026-08-08": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Saturday"
+    },
+    "2026-08-09": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Sunday"
+    },
+    "2026-08-10": {
+        "minutes": 154.1,
+        "pomodoros": 6,
+        "weekday": "Monday"
+    },
+    "2026-08-11": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Tuesday"
+    },
+    "2026-08-12": {
+        "minutes": 125,
+        "pomodoros": 5,
+        "weekday": "Wednesday"
+    },
+    "2026-08-13": {
+        "minutes": 153.6,
+        "pomodoros": 6,
+        "weekday": "Thursday"
+    },
+    "2026-08-14": {
+        "minutes": 27.2,
+        "pomodoros": 1,
+        "weekday": "Friday"
+    },
+    "2026-08-15": {
+        "minutes": 26.7,
+        "pomodoros": 1,
+        "weekday": "Saturday"
+    },
+    "2026-08-16": {
+        "minutes": 78.7,
+        "pomodoros": 3,
+        "weekday": "Sunday"
+    },
+    "2026-08-17": {
+        "minutes": 175.5,
+        "pomodoros": 7,
+        "weekday": "Monday"
+    },
+    "2026-08-18": {
+        "minutes": 27.5,
+        "pomodoros": 1,
+        "weekday": "Tuesday"
+    },
+    "2026-08-19": {
+        "minutes": 128.9,
+        "pomodoros": 5,
+        "weekday": "Wednesday"
+    },
+    "2026-08-20": {
+        "minutes": 76.9,
+        "pomodoros": 3,
+        "weekday": "Thursday"
+    },
+    "2026-08-21": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Friday"
+    },
+    "2026-08-22": {
+        "minutes": 203.7,
+        "pomodoros": 8,
+        "weekday": "Saturday"
+    },
+    "2026-08-23": {
+        "minutes": 78.1,
+        "pomodoros": 3,
+        "weekday": "Sunday"
+    },
+    "2026-08-24": {
+        "minutes": 176.3,
+        "pomodoros": 7,
+        "weekday": "Monday"
+    },
+    "2026-08-25": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Tuesday"
+    },
+    "2026-08-26": {
+        "minutes": 125.5,
+        "pomodoros": 5,
+        "weekday": "Wednesday"
+    },
+    "2026-08-27": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Thursday"
+    },
+    "2026-08-28": {
+        "minutes": 26.2,
+        "pomodoros": 1,
+        "weekday": "Friday"
+    },
+    "2026-08-29": {
+        "minutes": 51.2,
+        "pomodoros": 2,
+        "weekday": "Saturday"
+    },
+    "2026-08-30": {
+        "minutes": 78.9,
+        "pomodoros": 3,
+        "weekday": "Sunday"
+    },
+    "2026-08-31": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Monday"
+    },
+    "2026-09-01": {
+        "minutes": 178.4,
+        "pomodoros": 7,
+        "weekday": "Tuesday"
+    },
+    "2026-09-02": {
+        "minutes": 101.8,
+        "pomodoros": 4,
+        "weekday": "Wednesday"
+    },
+    "2026-09-03": {
+        "minutes": 151.6,
+        "pomodoros": 6,
+        "weekday": "Thursday"
+    },
+    "2026-09-04": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Friday"
+    },
+    "2026-09-05": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Saturday"
+    },
+    "2026-09-06": {
+        "minutes": 29.7,
+        "pomodoros": 1,
+        "weekday": "Sunday"
+    },
+    "2026-09-07": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Monday"
+    },
+    "2026-09-08": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Tuesday"
+    },
+    "2026-09-09": {
+        "minutes": 50.3,
+        "pomodoros": 2,
+        "weekday": "Wednesday"
+    },
+    "2026-09-10": {
+        "minutes": 176,
+        "pomodoros": 7,
+        "weekday": "Thursday"
+    },
+    "2026-09-11": {
+        "minutes": 154.1,
+        "pomodoros": 6,
+        "weekday": "Friday"
+    },
+    "2026-09-12": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Saturday"
+    },
+    "2026-09-13": {
+        "minutes": 126.9,
+        "pomodoros": 5,
+        "weekday": "Sunday"
+    },
+    "2026-09-14": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Monday"
+    },
+    "2026-09-15": {
+        "minutes": 127.2,
+        "pomodoros": 5,
+        "weekday": "Tuesday"
+    },
+    "2026-09-16": {
+        "minutes": 126.9,
+        "pomodoros": 5,
+        "weekday": "Wednesday"
+    },
+    "2026-09-17": {
+        "minutes": 75.2,
+        "pomodoros": 3,
+        "weekday": "Thursday"
+    },
+    "2026-09-18": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Friday"
+    },
+    "2026-09-19": {
+        "minutes": 177.3,
+        "pomodoros": 7,
+        "weekday": "Saturday"
+    },
+    "2026-09-20": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Sunday"
+    },
+    "2026-09-21": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Monday"
+    },
+    "2026-09-22": {
+        "minutes": 51.6,
+        "pomodoros": 2,
+        "weekday": "Tuesday"
+    },
+    "2026-09-23": {
+        "minutes": 204.3,
+        "pomodoros": 8,
+        "weekday": "Wednesday"
+    },
+    "2026-09-24": {
+        "minutes": 150.8,
+        "pomodoros": 6,
+        "weekday": "Thursday"
+    },
+    "2026-09-25": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Friday"
+    },
+    "2026-09-26": {
+        "minutes": 102.8,
+        "pomodoros": 4,
+        "weekday": "Saturday"
+    },
+    "2026-09-27": {
+        "minutes": 27.3,
+        "pomodoros": 1,
+        "weekday": "Sunday"
+    },
+    "2026-09-28": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Monday"
+    },
+    "2026-09-29": {
+        "minutes": 101,
+        "pomodoros": 4,
+        "weekday": "Tuesday"
+    },
+    "2026-09-30": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Wednesday"
+    },
+    "2026-10-01": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Thursday"
+    },
+    "2026-10-02": {
+        "minutes": 77.1,
+        "pomodoros": 3,
+        "weekday": "Friday"
+    },
+    "2026-10-03": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Saturday"
+    },
+    "2026-10-04": {
+        "minutes": 152.7,
+        "pomodoros": 6,
+        "weekday": "Sunday"
+    },
+    "2026-10-05": {
+        "minutes": 29.6,
+        "pomodoros": 1,
+        "weekday": "Monday"
+    },
+    "2026-10-06": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Tuesday"
+    },
+    "2026-10-07": {
+        "minutes": 150.5,
+        "pomodoros": 6,
+        "weekday": "Wednesday"
+    },
+    "2026-10-08": {
+        "minutes": 52.2,
+        "pomodoros": 2,
+        "weekday": "Thursday"
+    },
+    "2026-10-09": {
+        "minutes": 53.3,
+        "pomodoros": 2,
+        "weekday": "Friday"
+    },
+    "2026-10-10": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Saturday"
+    },
+    "2026-10-11": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Sunday"
+    },
+    "2026-10-12": {
+        "minutes": 51,
+        "pomodoros": 2,
+        "weekday": "Monday"
+    },
+    "2026-10-13": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Tuesday"
+    },
+    "2026-10-14": {
+        "minutes": 126.3,
+        "pomodoros": 5,
+        "weekday": "Wednesday"
+    },
+    "2026-10-15": {
+        "minutes": 204.4,
+        "pomodoros": 8,
+        "weekday": "Thursday"
+    },
+    "2026-10-16": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Friday"
+    },
+    "2026-10-17": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Saturday"
+    },
+    "2026-10-18": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Sunday"
+    },
+    "2026-10-19": {
+        "minutes": 76.7,
+        "pomodoros": 3,
+        "weekday": "Monday"
+    },
+    "2026-10-20": {
+        "minutes": 125.1,
+        "pomodoros": 5,
+        "weekday": "Tuesday"
+    },
+    "2026-10-21": {
+        "minutes": 103.1,
+        "pomodoros": 4,
+        "weekday": "Wednesday"
+    },
+    "2026-10-22": {
+        "minutes": 176.2,
+        "pomodoros": 7,
+        "weekday": "Thursday"
+    },
+    "2026-10-23": {
+        "minutes": 79.7,
+        "pomodoros": 3,
+        "weekday": "Friday"
+    },
+    "2026-10-24": {
+        "minutes": 152,
+        "pomodoros": 6,
+        "weekday": "Saturday"
+    },
+    "2026-10-25": {
+        "minutes": 126.7,
+        "pomodoros": 5,
+        "weekday": "Sunday"
+    },
+    "2026-10-26": {
+        "minutes": 52.7,
+        "pomodoros": 2,
+        "weekday": "Monday"
+    },
+    "2026-10-27": {
+        "minutes": 103.9,
+        "pomodoros": 4,
+        "weekday": "Tuesday"
+    },
+    "2026-10-28": {
+        "minutes": 103.1,
+        "pomodoros": 4,
+        "weekday": "Wednesday"
+    },
+    "2026-10-29": {
+        "minutes": 125.5,
+        "pomodoros": 5,
+        "weekday": "Thursday"
+    },
+    "2026-10-30": {
+        "minutes": 77,
+        "pomodoros": 3,
+        "weekday": "Friday"
+    },
+    "2026-10-31": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Saturday"
+    },
+    "2026-11-01": {
+        "minutes": 77.7,
+        "pomodoros": 3,
+        "weekday": "Sunday"
+    },
+    "2026-11-02": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Monday"
+    },
+    "2026-11-03": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Tuesday"
+    },
+    "2026-11-04": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Wednesday"
+    },
+    "2026-11-05": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Thursday"
+    },
+    "2026-11-06": {
+        "minutes": 202.6,
+        "pomodoros": 8,
+        "weekday": "Friday"
+    },
+    "2026-11-07": {
+        "minutes": 178.1,
+        "pomodoros": 7,
+        "weekday": "Saturday"
+    },
+    "2026-11-08": {
+        "minutes": 175.8,
+        "pomodoros": 7,
+        "weekday": "Sunday"
+    },
+    "2026-11-09": {
+        "minutes": 101.6,
+        "pomodoros": 4,
+        "weekday": "Monday"
+    },
+    "2026-11-10": {
+        "minutes": 175.9,
+        "pomodoros": 7,
+        "weekday": "Tuesday"
+    },
+    "2026-11-11": {
+        "minutes": 202.9,
+        "pomodoros": 8,
+        "weekday": "Wednesday"
+    },
+    "2026-11-12": {
+        "minutes": 204.3,
+        "pomodoros": 8,
+        "weekday": "Thursday"
+    },
+    "2026-11-13": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Friday"
+    },
+    "2026-11-14": {
+        "minutes": 101.5,
+        "pomodoros": 4,
+        "weekday": "Saturday"
+    },
+    "2026-11-15": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Sunday"
+    },
+    "2026-11-16": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Monday"
+    },
+    "2026-11-17": {
+        "minutes": 26.5,
+        "pomodoros": 1,
+        "weekday": "Tuesday"
+    },
+    "2026-11-18": {
+        "minutes": 102.1,
+        "pomodoros": 4,
+        "weekday": "Wednesday"
+    },
+    "2026-11-19": {
+        "minutes": 200.6,
+        "pomodoros": 8,
+        "weekday": "Thursday"
+    },
+    "2026-11-20": {
+        "minutes": 25.3,
+        "pomodoros": 1,
+        "weekday": "Friday"
+    },
+    "2026-11-21": {
+        "minutes": 176.1,
+        "pomodoros": 7,
+        "weekday": "Saturday"
+    },
+    "2026-11-22": {
+        "minutes": 179.5,
+        "pomodoros": 7,
+        "weekday": "Sunday"
+    },
+    "2026-11-23": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Monday"
+    },
+    "2026-11-24": {
+        "minutes": 178.4,
+        "pomodoros": 7,
+        "weekday": "Tuesday"
+    },
+    "2026-11-25": {
+        "minutes": 177.7,
+        "pomodoros": 7,
+        "weekday": "Wednesday"
+    },
+    "2026-11-26": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Thursday"
+    },
+    "2026-11-27": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Friday"
+    },
+    "2026-11-28": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Saturday"
+    },
+    "2026-11-29": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Sunday"
+    },
+    "2026-11-30": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Monday"
+    },
+    "2026-12-01": {
+        "minutes": 202.5,
+        "pomodoros": 8,
+        "weekday": "Tuesday"
+    },
+    "2026-12-02": {
+        "minutes": 25.7,
+        "pomodoros": 1,
+        "weekday": "Wednesday"
+    },
+    "2026-12-03": {
+        "minutes": 202.2,
+        "pomodoros": 8,
+        "weekday": "Thursday"
+    },
+    "2026-12-04": {
+        "minutes": 27.5,
+        "pomodoros": 1,
+        "weekday": "Friday"
+    },
+    "2026-12-05": {
+        "minutes": 77.4,
+        "pomodoros": 3,
+        "weekday": "Saturday"
+    },
+    "2026-12-06": {
+        "minutes": 51.1,
+        "pomodoros": 2,
+        "weekday": "Sunday"
+    },
+    "2026-12-07": {
+        "minutes": 103.6,
+        "pomodoros": 4,
+        "weekday": "Monday"
+    },
+    "2026-12-08": {
+        "minutes": 25.8,
+        "pomodoros": 1,
+        "weekday": "Tuesday"
+    },
+    "2026-12-09": {
+        "minutes": 129.5,
+        "pomodoros": 5,
+        "weekday": "Wednesday"
+    },
+    "2026-12-10": {
+        "minutes": 201,
+        "pomodoros": 8,
+        "weekday": "Thursday"
+    },
+    "2026-12-11": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Friday"
+    },
+    "2026-12-12": {
+        "minutes": 154.2,
+        "pomodoros": 6,
+        "weekday": "Saturday"
+    },
+    "2026-12-13": {
+        "minutes": 129,
+        "pomodoros": 5,
+        "weekday": "Sunday"
+    },
+    "2026-12-14": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Monday"
+    },
+    "2026-12-15": {
+        "minutes": 178.6,
+        "pomodoros": 7,
+        "weekday": "Tuesday"
+    },
+    "2026-12-16": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Wednesday"
+    },
+    "2026-12-17": {
+        "minutes": 104.9,
+        "pomodoros": 4,
+        "weekday": "Thursday"
+    },
+    "2026-12-18": {
+        "minutes": 175.3,
+        "pomodoros": 7,
+        "weekday": "Friday"
+    },
+    "2026-12-19": {
+        "minutes": 204,
+        "pomodoros": 8,
+        "weekday": "Saturday"
+    },
+    "2026-12-20": {
+        "minutes": 76.2,
+        "pomodoros": 3,
+        "weekday": "Sunday"
+    },
+    "2026-12-21": {
+        "minutes": 27.1,
+        "pomodoros": 1,
+        "weekday": "Monday"
+    },
+    "2026-12-22": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Tuesday"
+    },
+    "2026-12-23": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Wednesday"
+    },
+    "2026-12-24": {
+        "minutes": 54.2,
+        "pomodoros": 2,
+        "weekday": "Thursday"
+    },
+    "2026-12-25": {
+        "minutes": 76.6,
+        "pomodoros": 3,
+        "weekday": "Friday"
+    },
+    "2026-12-26": {
+        "minutes": 78.2,
+        "pomodoros": 3,
+        "weekday": "Saturday"
+    },
+    "2026-12-27": {
+        "minutes": 153.5,
+        "pomodoros": 6,
+        "weekday": "Sunday"
+    },
+    "2026-12-28": {
+        "minutes": 126.8,
+        "pomodoros": 5,
+        "weekday": "Monday"
+    },
+    "2026-12-29": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Tuesday"
+    },
+    "2026-12-30": {
+        "minutes": 0,
+        "pomodoros": 0,
+        "weekday": "Wednesday"
+    }
+}
