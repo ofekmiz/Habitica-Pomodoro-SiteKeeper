@@ -1,0 +1,15 @@
+{
+  "name": "habitica-pomodoro-sitekeeper-tests",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Playwright end-to-end tests for the Habitica Pomodoro SiteKeeper extension",
+  "scripts": {
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:ui": "playwright test --ui",
+    "test:report": "playwright show-report"
+  },
+  "devDependencies": {
+    "@playwright/test": "latest"
+  }
+}

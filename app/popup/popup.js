@@ -13,7 +13,6 @@ const BROWSER = getBrowser();
 document.addEventListener("DOMContentLoaded", async function () {
     await runBackgroundFunction("FetchHabiticaData", [true]);
     await getBackgroundData();
-    console.log("Vars", Vars);
     onPopupPageLoad();
 });
 
@@ -127,7 +126,6 @@ function onPopupPageLoad() {
        
         window.scrollTo(0, 0);
         var selected = $(this).find("input");
-        console.log( "HIII");
         var menu_container = $(this).attr("menu-container-id");
 
         $(".menu-container").hide();
@@ -442,15 +440,15 @@ function CredentialFields() {
     // $("#Duration").val(Vars.UserData.PassDurationMins);
     $("#PomoDuration").val(Vars.UserData.PomoDurationMins);
     $("#BreakDuration").val(Vars.UserData.BreakDuration);
-    $("#BreakExtention").val(Vars.UserData.BreakExtention);
+    $("#BreakExtension").val(Vars.UserData.BreakExtension);
     $("#LongBreakDuration").val(Vars.UserData.LongBreakDuration);
     $("#Whitelist").val(Vars.UserData.Whitelist);
     $("#PomoHabitPlus").prop('checked', Vars.UserData.PomoHabitPlus);
     $("#PomoHabitMinus").prop('checked', Vars.UserData.PomoHabitMinus);
     $("#ManualBreak").prop('checked', Vars.UserData.ManualBreak);
     $("#BreakFreePass").prop('checked', Vars.UserData.BreakFreePass);
-    $("#BreakExtentionFails").prop('checked', Vars.UserData.BreakExtentionFails);
-    $("#BreakExtentionNotify").prop('checked', Vars.UserData.BreakExtentionNotify);
+    $("#BreakExtensionFails").prop('checked', Vars.UserData.BreakExtensionFails);
+    $("#BreakExtensionNotify").prop('checked', Vars.UserData.BreakExtensionNotify);
     $("#HideEdit").prop('checked', Vars.UserData.HideEdit);
     $("#PomoSetNum").val(Vars.UserData.PomoSetNum);
     $("#PomoSetHabitPlus").prop('checked', Vars.UserData.PomoSetHabitPlus);
@@ -462,7 +460,7 @@ function CredentialFields() {
     $("#customSetTask").val(Vars.UserData.PomodoroSetTaskId);
     $("#ConnectHabitica").prop('checked', Vars.UserData.ConnectHabitica);
     $("#MuteBlockedSites").prop('checked', Vars.UserData.MuteBlockedSites);
-    $("#TranspartOverlay").prop('checked', Vars.UserData.TranspartOverlay);
+    $("#TransparentOverlay").prop('checked', Vars.UserData.TransparentOverlay);
     $("#TickSound").prop('checked', Vars.UserData.TickSound);
     $("#showSkipToBreak").prop('checked', Vars.UserData.showSkipToBreak);
     $("#showFreeze").prop('checked', Vars.UserData.showFreeze);
@@ -497,7 +495,7 @@ function CredentialFields() {
     $("#Duration").on("keyup", function () { updateCredentials(); });
     $("#PomoDuration").on("keyup", function () { updateCredentials(); });
     $("#BreakDuration").on("keyup", function () { updateCredentials(); });
-    $("#BreakExtention").on("keyup", function () { updateCredentials(); });
+    $("#BreakExtension").on("keyup", function () { updateCredentials(); });
     $("#LongBreakDuration").on("keyup", function () { updateCredentials(); });
     $("#Whitelist").on("keyup", function () { updateCredentials(); });
     $("#developerServerUrl").on("keyup", function () { updateCredentials(); });
@@ -505,8 +503,8 @@ function CredentialFields() {
     $("#PomoHabitMinus").click(function () { updateCredentials(); });
     $("#ManualBreak").click(function () { updateCredentials(); });
     $("#BreakFreePass").click(function () { updateCredentials(); });
-    $("#BreakExtentionFails").click(function () { updateCredentials(); });
-    $("#BreakExtentionNotify").click(function () { updateCredentials(); });
+    $("#BreakExtensionFails").click(function () { updateCredentials(); });
+    $("#BreakExtensionNotify").click(function () { updateCredentials(); });
     $("#HideEdit").click(function () { updateCredentials(); });
     $("#PomoSetNum").bind('keyup input change', function () { updateCredentials(); });
     $("#PomoSetHabitPlus").click(function () { updateCredentials(); });
@@ -520,7 +518,7 @@ function CredentialFields() {
     $("#customSetTaskEnabled").click(function () { updateCredentials(); });
     $("#ConnectHabitica").click(function () { updateCredentials(); });
     $("#MuteBlockedSites").click(function () { updateCredentials(); });
-    $("#TranspartOverlay").click(function () { updateCredentials(); });
+    $("#TransparentOverlay").click(function () { updateCredentials(); });
     $("#TickSound").click(function () { updateCredentials(); });
     $("#showSkipToBreak").click(function () { updateCredentials(); });
     $("#showFreeze").click(function () { updateCredentials(); });
@@ -612,19 +610,20 @@ function updateCredentials() {
     if (!isNaN(pmDuration)) Vars.UserData.PomoDurationMins = pmDuration;
     var brDuration = parseFloat($("#BreakDuration").val());
     if (!isNaN(brDuration)) Vars.UserData.BreakDuration = brDuration;
-    var exDuration = parseFloat($("#BreakExtention").val());
-    if (!isNaN(exDuration)) Vars.UserData.BreakExtention = exDuration;
+    var exDuration = parseFloat($("#BreakExtension").val());
+    if (!isNaN(exDuration)) Vars.UserData.BreakExtension = exDuration;
     var pomoNum = parseFloat($("#PomoSetNum").val());
     if (!isNaN(pomoNum)) Vars.UserData.PomoSetNum = pomoNum;
     var longBr = parseFloat($("#LongBreakDuration").val());
     if (!isNaN(longBr)) Vars.UserData.LongBreakDuration = longBr;
 
+    //Extension settings
     Vars.UserData.PomoHabitPlus = $("#PomoHabitPlus").prop('checked');
     Vars.UserData.PomoHabitMinus = $("#PomoHabitMinus").prop('checked');
     Vars.UserData.ManualBreak = $("#ManualBreak").prop('checked');
     Vars.UserData.BreakFreePass = $("#BreakFreePass").prop('checked');
-    Vars.UserData.BreakExtentionFails = $("#BreakExtentionFails").prop('checked');
-    Vars.UserData.BreakExtentionNotify = $("#BreakExtentionNotify").prop('checked');
+    Vars.UserData.BreakExtensionFails = $("#BreakExtensionFails").prop('checked');
+    Vars.UserData.BreakExtensionNotify = $("#BreakExtensionNotify").prop('checked');
     Vars.UserData.PomoSetHabitPlus = $("#PomoSetHabitPlus").prop('checked');
     Vars.UserData.LongBreakNotify = $("#LongBreakNotify").prop('checked');
     Vars.UserData.VacationMode = $("#VacationMode").prop('checked');
@@ -635,7 +634,7 @@ function updateCredentials() {
     Vars.UserData.PomodoroTaskId = $("#customPomodoroTask").val();
     Vars.UserData.ConnectHabitica = $("#ConnectHabitica").prop('checked');
     Vars.UserData.MuteBlockedSites = $("#MuteBlockedSites").prop('checked');
-    Vars.UserData.TranspartOverlay = $("#TranspartOverlay").prop('checked');
+    Vars.UserData.TransparentOverlay = $("#TransparentOverlay").prop('checked');
     Vars.UserData.TickSound = $("#TickSound").prop('checked');
     Vars.UserData.showSkipToBreak = $("#showSkipToBreak").prop('checked');
     Vars.UserData.showFreeze = $("#showFreeze").prop('checked');
@@ -681,7 +680,7 @@ function updateTimerDisplay() {
     else if (Vars.onBreak) {
         $(".unBlockSite").show();
         $("#QuickSettings").hide();
-        if (Vars.TimerRunnig) { //---On Break---
+        if (Vars.TimerRunning) { //---On Break---
             $('#pomodoro').css("background-color", "cornflowerblue");
             $('#pomodoro').css("color", "aqua");
             tomatoSetClass("tomatoBreak");
@@ -700,7 +699,7 @@ function updateTimerDisplay() {
         $("#PomoFreeze").hide();
         $("#SiteTable tbody").toggleClass('blocked', false);
     }
-    else if (Vars.TimerRunnig) { //---Pomodoro running or freeze---
+    else if (Vars.TimerRunning) { //---Pomodoro running or freeze---
         
         $(".unBlockSite").hide();
         $("#SiteTable tbody").toggleClass('blocked', true);

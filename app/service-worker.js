@@ -71,7 +71,7 @@ var Vars = {
     ServerResponse: 0,
     Timer: "00:00",
     TimerValue: 0, //in seconds
-    TimerRunnig: false,
+    TimerRunning: false,
     TimerFreeze: false, //(Pause)
     onBreak: false,
     onBreakExtension: false,
@@ -100,9 +100,9 @@ function UserSettings(copyFrom) {
     this.BreakDuration = copyFrom ? copyFrom.BreakDuration : 5;
     this.ManualBreak = copyFrom ? copyFrom.ManualBreak : true;
     this.BreakFreePass = copyFrom ? copyFrom.BreakFreePass : false;
-    this.BreakExtention = copyFrom ? copyFrom.BreakExtention : 2;
-    this.BreakExtentionFails = copyFrom ? copyFrom.BreakExtentionFails : false;
-    this.BreakExtentionNotify = copyFrom ? copyFrom.BreakExtentionNotify : false;
+    this.BreakExtension = copyFrom ? copyFrom.BreakExtension : 2;
+    this.BreakExtensionFails = copyFrom ? breakExtensionFails : false;
+    this.BreakExtensionNotify = copyFrom ? breakExtensionNotify : false;
     this.PomoSetNum = copyFrom ? copyFrom.PomoSetNum : 4;
     this.PomoSetHabitPlus = copyFrom ? copyFrom.PomoSetHabitPlus : false;
     this.LongBreakDuration = copyFrom ? copyFrom.LongBreakDuration : 30;
@@ -116,7 +116,7 @@ function UserSettings(copyFrom) {
     this.HideEdit = copyFrom ? copyFrom.HideEdit : false;
     this.ConnectHabitica = copyFrom ? copyFrom.ConnectHabitica : true;
     this.MuteBlockedSites = copyFrom ? copyFrom.MuteBlockedSites : true;
-    this.TranspartOverlay = copyFrom ? copyFrom.TranspartOverlay : true;
+    this.TransparentOverlay = copyFrom ? copyFrom.TransparentOverlay : true;
     this.TickSound = copyFrom ? copyFrom.TickSound : false;
     this.showSkipToBreak = copyFrom ? copyFrom.showSkipToBreak : false;
     this.showFreeze = copyFrom ? copyFrom.showFreeze : false;
@@ -193,9 +193,9 @@ function checkBlockedUrl(siteUrl) {
     var hostname = siteUrl.hostname;
 
     //free pass during break session, or Vacation Mode and not in pomodoro session
-    var freePass = ((Vars.UserData.BreakFreePass && Vars.onBreak && Vars.TimerRunnig) || ((Vars.UserData.VacationMode || isFreePassTimeNow()) && (!Vars.TimerRunnig || Vars.onBreak)));
+    var freePass = ((Vars.UserData.BreakFreePass && Vars.onBreak && Vars.TimerRunning) || ((Vars.UserData.VacationMode || isFreePassTimeNow()) && (!Vars.TimerRunning || Vars.onBreak)));
     var site = GetBlockedSite(hostname);
-    var pomodoro = Vars.TimerRunnig && !Vars.onBreak;
+    var pomodoro = Vars.TimerRunning && !Vars.onBreak;
 
     var unblocked = { block: false };
 
@@ -259,7 +259,7 @@ const callbackTabActive = function (details) {
         mainSiteBlockFunction(tab);
 
         // Pass Expiry time badge
-        if (!Vars.TimerRunnig) {
+        if (!Vars.TimerRunning) {
             const siteUrl = new URL(tab.url);
             const site = GetBlockedSite(siteUrl.hostname);
             showPayToPassTimerBadge(site);
@@ -278,7 +278,7 @@ function callbackTabUpdate(tabId) {
         mainSiteBlockFunction(tab);
 
         // Pass Expiry time badge
-        if (!Vars.TimerRunnig) {
+        if (!Vars.TimerRunning) {
             const siteUrl = new URL(tab.url);
             const site = GetBlockedSite(siteUrl.hostname);
             showPayToPassTimerBadge(site);
@@ -288,7 +288,7 @@ function callbackTabUpdate(tabId) {
 
 
 function mainSiteBlockFunction(tab) {
-    if (!Vars.TimerRunnig || Vars.onBreak) {
+    if (!Vars.TimerRunning || Vars.onBreak) {
         unblockSiteOverlay(tab);
         var siteUrl = new URL(tab.url);
         var checkSite = checkBlockedUrl(siteUrl);
@@ -331,7 +331,7 @@ function showPayToPassTimerBadge(site) {
     }, 1000);
 
     var passIntervalFuction = function () {
-        if (site && !Vars.TimerRunnig) {
+        if (site && !Vars.TimerRunning) {
             var remainingTime = getSitePassRemainingTime(site);
             if (remainingTime) {
                 chrome.action.setBadgeBackgroundColor({
@@ -364,7 +364,7 @@ function showPayToPassTimerBadge(site) {
 
 //Create "Pay X coins To Visit" site overlay
 function payToPassOverlay(tab, siteData) {
-    const opacity = Vars.UserData.TranspartOverlay ? "0.85" : "1";
+    const opacity = Vars.UserData.TransparentOverlay ? "0.85" : "1";
     const imageURLPayToPass = chrome.runtime.getURL("/img/siteKeeper2.png");
 
     // Inject CSS using a <style> tag (since dynamic CSS strings aren't supported directly)
@@ -410,7 +410,7 @@ function payToPassOverlay(tab, siteData) {
 
 //Create "Cant Afford To Visit" site overlay
 function cantAffordOverlay(tab, siteData) {
-    const opacity = Vars.UserData.TranspartOverlay ? "0.85" : "1";
+    const opacity = Vars.UserData.TransparentOverlay ? "0.85" : "1";
     const imageURLNoPass = chrome.runtime.getURL("/img/siteKeeper3.png");
 
     // Inject CSS via <style> tag
@@ -482,7 +482,7 @@ chrome.storage.sync.get(Consts.HistogramDataKey, function (result) {
 
 //Mute all tabs with blocked sites, unmute other tabs.
 function muteBlockedtabs() {
-    var pomodoro = Vars.TimerRunnig && !Vars.onBreak;
+    var pomodoro = Vars.TimerRunning && !Vars.onBreak;
     if (Vars.UserData.MuteBlockedSites) {
         chrome.tabs.query({
             currentWindow: true
@@ -856,10 +856,10 @@ function ActivatePomodoro() {
     if(Vars.TimerFreeze){
         pomoUnFreeze();
     }
-    else if (Vars.onBreak && !Vars.TimerRunnig) {
+    else if (Vars.onBreak && !Vars.TimerRunning) {
         startBreak();
     }
-    else if (!Vars.TimerRunnig || Vars.onBreak || Vars.onBreakExtension) {
+    else if (!Vars.TimerRunning || Vars.onBreak || Vars.onBreakExtension) {
         if (Vars.PomoSetCounter == Vars.UserData.PomoSetNum) { //Set complete
             pomoReset();
         } else {//next pomodoro
@@ -910,7 +910,7 @@ function startTimer(duration, duringTimerFunction, endTimerFunction) {
 function startPomodoro() {
     stopTimer();
     var duration = 60 * Vars.UserData.PomoDurationMins;
-    Vars.TimerRunnig = true;
+    Vars.TimerRunning = true;
     Vars.onBreak = false;
     Vars.TimerFreeze = false;
     startTimer(duration, duringPomodoro, pomodoroEnds);
@@ -1022,7 +1022,7 @@ function startBreak() {
         duration = 60 * Vars.UserData.BreakDuration;
     }
     stopTimer();
-    Vars.TimerRunnig = true;
+    Vars.TimerRunning = true;
     Vars.onBreak = true;
     Vars.TimerFreeze = false;
     startTimer(duration, duringBreak, breakEnds);
@@ -1033,7 +1033,7 @@ function takeBreak(duration) {
     stopTimer();
     Vars.PomoSetCounter = Vars.UserData.PomoSetNum;
     Vars.onManualTakeBreak = true;
-    Vars.TimerRunnig = true;
+    Vars.TimerRunning = true;
     Vars.onBreak = true;
     startTimer(60 * duration, duringBreak, breakEnds);
 }
@@ -1041,7 +1041,7 @@ function takeBreak(duration) {
 //start break session - duration in seconds
 function manualBreak() {
     stopTimer();
-    Vars.TimerRunnig = false;
+    Vars.TimerRunning = false;
     Vars.onBreak = true;
     Vars.Timer = Consts.POMODORO_DONE_TEXT;
 }
@@ -1066,7 +1066,7 @@ function breakEnds() {
 
     //Long break
     if (Vars.PomoSetCounter == Vars.UserData.PomoSetNum) {
-        msg = onManualTakeBreak ? "Break is 0ver" : "Long Break is over";
+        msg = onManualTakeBreak ? "Break is over" : "Long Break is over";
         pomoReset();
         if (Vars.UserData.LongBreakNotify) {
             notifyHabitica(msg);
@@ -1076,7 +1076,7 @@ function breakEnds() {
     //Break Extension on end
     else {
         msg = "Back to work";
-        startBreakExtension(Vars.UserData.BreakExtention * 60);
+        startBreakExtension(Vars.UserData.BreakExtension * 60);
     }
 
     //notify
@@ -1088,14 +1088,14 @@ function breakEnds() {
 //start break session - duration in seconds
 function startBreakExtension(duration) {
     stopTimer();
-    Vars.TimerRunnig = true;
+    Vars.TimerRunning = true;
     Vars.TimerFreeze = false;
     Vars.onBreakExtension = true;
     Vars.onBreak = true;
     var endFunc = Vars.UserData.ResetPomoAfterBreak ? (() => { pomodoroInterupted(true) }) : pomodoroInterupted;
     startTimer(duration, duringBreakExtension, endFunc);
-    if (Vars.UserData.BreakExtentionNotify) {
-        notifyHabitica("Back to work! " + secondsToTimeString(Vars.UserData.BreakExtention * 60) + " minutes left for Break Extension.");
+    if (Vars.UserData.BreakExtensionNotify) {
+        notifyHabitica("Back to work! " + secondsToTimeString(Vars.UserData.BreakExtension * 60) + " minutes left for Break Extension.");
     }
 }
 
@@ -1115,8 +1115,8 @@ async function pomodoroInterupted(breakPomoStreak) {
 
     stopAmbientSound();
 
-    var failedBreakExtension = Vars.UserData.BreakExtentionFails && Vars.onBreakExtension;
-    var breakExtensionZero = !Vars.UserData.BreakExtentionFails && (Vars.UserData.BreakExtention == 0);
+    var failedBreakExtension = Vars.UserData.BreakExtensionFails && Vars.onBreakExtension;
+    var breakExtensionZero = !Vars.UserData.BreakExtensionFails && (Vars.UserData.BreakExtension == 0);
     if (breakPomoStreak) {
         pomoReset();
     } else {
@@ -1154,7 +1154,7 @@ function stopTimer() {
 
     CurrentTab(unblockSiteOverlay); //if current tab is blocked, unblock it
     CurrentTab(mainSiteBlockFunction); //Confirm Purchase check
-    Vars.TimerRunnig = false;
+    Vars.TimerRunning = false;
     Vars.onBreak = false;
     Vars.onBreakExtension = false;
     Vars.onManualTakeBreak = false;
@@ -1229,7 +1229,7 @@ function CurrentTab(func) {
 
 //Block Site With Timer Overlay
 function blockSiteOverlay(tab) {
-    const opacity = Vars.UserData.TranspartOverlay ? "0.85" : "1";
+    const opacity = Vars.UserData.TransparentOverlay ? "0.85" : "1";
     const url = new URL(tab.url);
     const message = "Stay Focused! Time Left: " + Vars.Timer;
 
