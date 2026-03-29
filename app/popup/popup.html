@@ -22,7 +22,7 @@
 <body id="popup" class="loading">
         <div id="mainContainer" data-testid="main-container">
                 <!-- Menu -->
-                <div id=MenuContainer>
+                <div id="MenuContainer" data-testid="menu-container">
                         <div id="Menu">
                                 <table>
                                         <div class="menu-item" id="MenuSettings" menu-container-id="Settings" data-testid="menu-settings">
@@ -37,9 +37,9 @@
                                                 <label class="menu-label" data-testid="menu-feedback-trigger"><input type="checkbox"><span
                                                                 class="rate_icon small_icon"></span>FEEDBACK</label>
                                         </div>
-                                        <div class="menu-item" id="MenuDonate" menu-container-id="Donate" data-testid="menu-donate">
-                                                <label class="menu-label"><input type="checkbox"><span
-                                                                class="donate_icon small_icon"></span>COFFEE</label>
+                        <div class="menu-item" id="MenuDonate" menu-container-id="Donate" data-testid="menu-donate">
+                                        <label class="menu-label" data-testid="menu-donate-trigger"><input type="checkbox"><span
+                                                        class="donate_icon small_icon"></span>COFFEE</label>
                                         </div>
                                 </table>
                         </div>
@@ -68,11 +68,11 @@
                                         <br>
                                         <label><b>Pomodoro duration </b><input id="PomoDuration" data-testid="pomo-duration" type="text"></label>
                                         Minutes<br>
-                                        <label><input type="checkbox" id="showSkipToBreak">Skip to break button</label>
+                                        <label><input type="checkbox" id="showSkipToBreak" data-testid="show-skip-to-break">Skip to break button</label>
                                         <span class="small_icon help_icon tooltip"
                                                 data-tip=" shows &#9658; button that lets you skip the current pomodoro session (with no habitica rewards)"></span>
                                         <br>
-                                        <label><input type="checkbox" id="showFreeze">Freeze pomodoro button (pause)</label>
+                                        <label><input type="checkbox" id="showFreeze" data-testid="show-freeze">Freeze pomodoro button (pause)</label>
                                         <span class="small_icon help_icon tooltip"
                                                 data-tip=" shows &#10052; button that lets you freeze(pause) the pomodoro timer"></span>
                                         <br>
@@ -84,11 +84,11 @@
                                         Minutes
                                         <span class="small_icon help_icon tooltip"
                                                 data-tip="Break Extension is some extra time to come back from the short break. When you get back, click on the Tomato to start the next pomodoro. If the break extesion ended before you pressed the tomato the streak will break and the timer will reset."></span><br>
-                                        <label><input type="checkbox" id="ManualBreak">Start breaks manually</label>
+                                        <label><input type="checkbox" id="ManualBreak" data-testid="manual-break">Start breaks manually</label>
                                         <span class="small_icon help_icon tooltip"
                                                 data-tip="If enabled, breaks will start by clicking on the tomato after a pomodoro. If disabled breaks will start automatically after Pomodoro."></span>
                                         <br>
-                                        <label><input type="checkbox" id="ResetPomoAfterBreak">Reset timer after break
+                                        <label><input type="checkbox" id="ResetPomoAfterBreak" data-testid="reset-pomo-after-break">Reset timer after break
                                                 extension</label>
                                         <span class="small_icon help_icon tooltip"
                                                 data-tip="If enabled,coming back from break after break extension ended will reset the timer (break the streak)."></span>
@@ -102,21 +102,21 @@
                                         Minutes<br>
                                         <hr>
                                         <label for="pomodoroEndSound"><b>Pomodoro end sound:</b></label><br>
-                                        <select id="pomodoroEndSound">
+                                        <select id="pomodoroEndSound" data-testid="pomodoro-end-sound">
                                                 <option value="None">None</option>
-                                        </select><input id="pomodoroEndSoundVolume" type="range" min="0" max="1"
+                                        </select><input id="pomodoroEndSoundVolume" data-testid="pomodoro-end-sound-volume" type="range" min="0" max="1"
                                                 step="0.01" value="0.5">
                                         <br>
                                         <label for="breakEndSound"><b>Break end sound:</b></label><br>
-                                        <select id="breakEndSound">
+                                        <select id="breakEndSound" data-testid="break-end-sound">
                                                 <option value="None">None</option>
-                                        </select><input id="breakEndSoundVolume" type="range" min="0" max="1"
+                                        </select><input id="breakEndSoundVolume" data-testid="break-end-sound-volume" type="range" min="0" max="1"
                                                 step="0.01" value="0.5">
                                         <br>
                                         <label for="ambientSound"><b>Ambient sound:</b></label><br>
-                                        <select id="ambientSound">
+                                        <select id="ambientSound" data-testid="ambient-sound">
                                                 <option value="None">None</option>
-                                        </select><input id="ambientSoundVolume" type="range" min="0" max="1" step="0.01"
+                                        </select><input id="ambientSoundVolume" data-testid="ambient-sound-volume" type="range" min="0" max="1" step="0.01"
                                                 value="0.5">
                                         <br><br>
                                         <span class="setting-note">
@@ -129,6 +129,7 @@
                                         <br>
                                         <label><b class="connect-habitica-animate">Connect to Habitica</b><input
                                                         type="checkbox" checked id="ConnectHabitica"
+                                                        data-testid="connect-habitica"
                                                         class="switch"></label><br>
                                         <label class="connect-habitica-animate habitica-setting"><b>Habitica User
                                                         ID:</b><br /><input id="UID" data-testid="uid" type="text"></label><br>
@@ -144,13 +145,13 @@
                                         <span class="small_icon help_icon tooltip"
                                                 data-tip='"Pomodoro" Habit will be created automatically in Habitica and will be activated after each pomodoro before a short break'></span>
                                         <br>
-                                        <label class="habitica-setting"><input type="checkbox" id="PomoHabitPlus"> <span
+                                        <label class="habitica-setting"><input type="checkbox" id="PomoHabitPlus" data-testid="pomo-habit-plus"> <span
                                                         class="plus_minus_icon">+</span> habit when pomodoro is
                                                 done</label><br>
-                                        <label class="habitica-setting"><input type="checkbox" id="PomoHabitMinus">
+                                        <label class="habitica-setting"><input type="checkbox" id="PomoHabitMinus" data-testid="pomo-habit-minus">
                                                 <span class="plus_minus_icon">-</span> habit if stopped before timer
                                                 ends</label><br>
-                                        <label class="habitica-setting"><input type="checkbox" id="BreakExtensionFails">
+                                        <label class="habitica-setting"><input type="checkbox" id="BreakExtensionFails" data-testid="break-extension-fails">
                                                 <span class="plus_minus_icon">-</span> habit if Break Extension is
                                                 over</label><br>
 
@@ -163,7 +164,7 @@
                                         <span class="small_icon help_icon tooltip"
                                                 data-tip='"Pomodoro Combo!" Habit will be created automatically in Habitica and will be activated after the last pomodoro before a long break'></span>
                                         <br>
-                                        <label class="habitica-setting"><input type="checkbox" id="PomoSetHabitPlus">
+                                        <label class="habitica-setting"><input type="checkbox" id="PomoSetHabitPlus" data-testid="pomo-set-habit-plus">
                                                 <span class="plus_minus_icon">+</span> habit for pomodoro set
                                                 complete</label><br>
 
@@ -173,12 +174,12 @@
                                         <select class="habitica-setting" id="customSetTask"></select>
                                         <hr>
                                         <label class="habitica-setting"><input type="checkbox"
-                                                        id="BreakExtensionNotify">
+                                                        id="BreakExtensionNotify" data-testid="break-extension-notify">
                                                 Mobile Notification - Short break is over</label>
                                         <span class="small_icon help_icon tooltip"
                                                 data-tip='Notification is sent as a private message to yourself in the Habitica mobile app. Make sure private messaging is enabled.'></span>
                                         <br>
-                                        <label class="habitica-setting"><input type="checkbox" id="LongBreakNotify">
+                                        <label class="habitica-setting"><input type="checkbox" id="LongBreakNotify" data-testid="long-break-notify">
                                                 Mobile Notification - Long break is over</label>
                                         <span class="small_icon help_icon tooltip"
                                                 data-tip='Notification is sent as a private message to yourself in the Habitica mobile app. Make sure private messaging is enabled.'></span>
@@ -192,17 +193,17 @@
                                 <!-- Site Blocker settings -->
                                 <div id="BlockerSettingsContainer">
                                         <br><label class="habitica-setting"><input type="checkbox"
-                                                        id="BreakFreePass">During
+                                                        id="BreakFreePass" data-testid="break-free-pass">During
                                                 break
                                                 all sites are free</label>
                                         <span class=" habitica_small_icon small_icon tooltip"></span>
                                         <hr>
-                                        <label><input type="checkbox" id="HideEdit">Hide edit options</label>
+                                        <label><input type="checkbox" id="HideEdit" data-testid="hide-edit">Hide edit options</label>
                                         <span class="small_icon help_icon tooltip"
                                                 data-tip="Hide the option to block/unblock websites to lower the temptation of removing a blocked website during a work session."></span><br>
-                                        <label><input type="checkbox" id="MuteBlockedSites">Mute blocked
+                                        <label><input type="checkbox" id="MuteBlockedSites" data-testid="mute-blocked-sites">Mute blocked
                                                 websites</label><br>
-                                        <label><input type="checkbox" id="TransparentOverlay">Blocked website background
+                                        <label><input type="checkbox" id="TransparentOverlay" data-testid="transparent-overlay">Blocked website background
                                                 transparency</label>
                                         <hr>
                                         <label><b>Whitelist: </b></label><span class="small_icon help_icon tooltip"
@@ -215,7 +216,7 @@
                                                 /Regex line/.</span>
                                         <hr>
                                         <label class="habitica-setting"><b>Vacation Mode</b><input type="checkbox"
-                                                        id="VacationMode" class="switch">&nbsp;&nbsp;</label>
+                                                        id="VacationMode" data-testid="vacation-mode" class="switch">&nbsp;&nbsp;</label>
                                         <span class=" habitica_small_icon small_icon tooltip"></span>
                                         <span class="small_icon help_icon tooltip"
                                                 data-tip="All websites are free when enabled."></span>
@@ -225,8 +226,8 @@
                                         <span class="small_icon help_icon tooltip"
                                                 data-tip="All websites are free during this time."></span>
                                         <br>
-                                        <div class="habitica-setting" id="freePassBlocks"></div>
-                                        <div class="habitica-setting" id="addFreePassBlock"><span
+                                        <div class="habitica-setting" id="freePassBlocks" data-testid="free-pass-blocks"></div>
+                                        <div class="habitica-setting" id="addFreePassBlock" data-testid="add-free-pass-block"><span
                                                         style="margin-top: 1px;">Add
                                                         Free Pass Time</span>
                                         </div>
@@ -242,7 +243,7 @@
                         </div>
                         <!-- History -->
                         <div id="History" class="menu-container" data-testid="history-panel" style="display: none;">
-                                <span class="setting-note backupDataWarning">
+                                <span class="setting-note backupDataWarning" data-testid="backup-data-warning">
                                         <span style="font-size: 19px;">&#9888;</span>
                                         Uninstalling the extension will result in loss of history data! Please back up
                                         your data.
@@ -266,39 +267,39 @@
                                         </div>
                                         <div class="historyDataCircle" id="HoursTotal" data-testid="hours-total" data-text="HOURS TOTAL">0
                                         </div>
-                                        <div class="historyDataCircle" id="PomoAvg" data-text="POMODORO DAILY Avg">0
+                                        <div class="historyDataCircle" id="PomoAvg" data-testid="pomo-avg" data-text="POMODORO DAILY Avg">0
                                         </div>
-                                        <div class="historyDataCircle" id="HoursAvg" data-text="HOURS DAILY Avg">0</div>
+                                        <div class="historyDataCircle" id="HoursAvg" data-testid="hours-avg" data-text="HOURS DAILY Avg">0</div>
                                 </div>
                                 <hr>
                                 <div class="HistoryFlex">
-                                        <button class="settingButton" id="HistoryChartShowPomodoros">Pomodoros</button>
-                                        <button class="settingButton" id="HistoryChartShowHours">Hours</button>
+                                        <button class="settingButton" id="HistoryChartShowPomodoros" data-testid="history-chart-show-pomodoros">Pomodoros</button>
+                                        <button class="settingButton" id="HistoryChartShowHours" data-testid="history-chart-show-hours">Hours</button>
                                 </div>
                                 <hr>
                                 <div class="canvasChar">
                                         <canvas id="HistoryChart" data-testid="history-chart" height="300" width="400"></canvas>
                                 </div>
                                 <div class="HistoryFlex">
-                                        <button class="settingButton" id="HistoryCharPrev">&#x27F5;</button>
-                                        <div class="settingButton" id="HistoryChartTotal"></div>
+                                        <button class="settingButton" id="HistoryCharPrev" data-testid="history-chart-prev">&#x27F5;</button>
+                                        <div class="settingButton" id="HistoryChartTotal" data-testid="history-chart-total"></div>
                                         <!-- <a href="FullHistory.html" target="_blank" class="settingButton"><span
                                                         class="fullScreen_Icon small_icon"></span></a> -->
-                                        <button class="settingButton" id="HistoryChartNext">&#x27F6;</button>
+                                        <button class="settingButton" id="HistoryChartNext" data-testid="history-chart-next">&#x27F6;</button>
                                 </div>
                                 <hr>
                                 <div class="HistoryFlex">
-                                        <a class="settingButton" id="DownloadHistogram">&#x21e9; Download
+                                        <a class="settingButton" id="DownloadHistogram" data-testid="download-histogram">&#x21e9; Download
                                                 History</a>
                                 </div>
                                 <div class="HistoryFlex">
                                         <input class="settingButton" type="file" id="selectHistogramFile"
-                                                value="Import" />
-                                        <button class="settingButton" id="ImportHistogram">&#8683;
+                                                data-testid="import-histogram-file" value="Import" />
+                                        <button class="settingButton" id="ImportHistogram" data-testid="import-histogram">&#8683;
                                                 Import</button>
                                 </div>
                                 <div class="HistoryFlex">
-                                        <button class="settingButton" id="ClearHistogram"><span
+                                        <button class="settingButton" id="ClearHistogram" data-testid="clear-histogram"><span
                                                         class="trash_icon small_icon"></span>&nbsp;&nbsp;Clear
                                                 History</button>
                                 </div>
@@ -307,7 +308,7 @@
                         <div id="Feedback" class="menu-container" data-testid="feedback-panel" style="display: none;">
                                 <br>
                                 <a href="https://chrome.google.com/webstore/detail/habitica-pomodoro-sitekee/iaanigfbldakklgdfcnbjonbehpbpecl"
-                                        target="_blank" id="rateAndReviewLink" class="links""><span class=" rate_icon
+                                        target="_blank" id="rateAndReviewLink" data-testid="rate-and-review-link" class="links""><span class=" rate_icon
                                         small_icon"></span>Rate &
                                         Review</a>
                                 <br><br>
@@ -331,7 +332,7 @@
                         </div>
 
                         <!-- Donate -->
-                        <div id="Donate" class="menu-container" style="display: none;">
+                        <div id="Donate" class="menu-container" data-testid="donate-panel" style="display: none;">
                                 <br>
                                 <div>If you like this extension and want to support,<br>you can
                                         buy me a coffee &#9749; or pizza &#127829;</div>
@@ -349,7 +350,7 @@
 
                         <!-- Alerts -->
                         <div id="Alerts">
-                                <p id="CredError">
+                                <p id="CredError" data-testid="cred-error">
                                         <span style="font-size: 19px;">&#9888;</span></span> Credential
                                         Error!<br> The
                                         extension
@@ -358,7 +359,7 @@
                                                 Disable
                                                 Here</a>
                                 </p>
-                                <p id="VersionUpdate">
+                                <p id="VersionUpdate" data-testid="version-update">
                                         <span style="font-size: 19px;">&#10024;</span>New Update! <span
                                                 class="version"></span>
                                         <br>Read the release notes on the <a
@@ -370,39 +371,44 @@
 
                         <!-- Pomodoro Timer -->
                         <div id="pomodoro" data-testid="pomodoro-section">
-                                <div id="TopLeftPomoButtons">
-                                        <div id="PomoStop" title="End Session">X</div>
-                                        <div id="SkipToBreak" title="Skip to break">&#9658;&#9658;</div>
-                                        <div id="PomoFreeze" title="Freeze Pomodoro">&#10052;</div>
+                                <div id="TopLeftPomoButtons" data-testid="top-left-pomo-buttons">
+                                        <div id="PomoStop" data-testid="pomo-stop" title="End Session">X</div>
+                                        <div id="SkipToBreak" data-testid="skip-to-break" title="Skip to break">&#9658;&#9658;</div>
+                                        <div id="PomoFreeze" data-testid="pomo-freeze" title="Freeze Pomodoro">&#10052;</div>
                                 </div>
-                                <div id="PopupNewWindow" title="Open in new window"></div>
+                                <div id="PopupNewWindow" data-testid="popup-new-window" title="Open in new window"></div>
                                 <div id="QuickSettings" data-testid="quick-settings"></div>
                                 <span id="PomoButton" data-testid="pomo-button" data-pomodoros="0" class="tomato"></span><span id="Time" data-testid="timer-display"
                                         data-pomodoros-set="0/4">00:00</span>
                         </div>
 
                         <!-- Quick Settings -->
-                        <div id="pomodoroSettings">
+                        <div id="pomodoroSettings" data-testid="quick-settings-panel">
                                 <label for="quickSet-PomoDuration"><input id="quickSet-PomoDuration"
+                                                data-testid="quick-set-pomo-duration"
                                                 class="lightTextInput" type="text"></label>
                                 <label for="quickSet-BreakDuration"><input id="quickSet-BreakDuration"
+                                                data-testid="quick-set-break-duration"
                                                 class="lightTextInput" type="text"></label>
                                 <label for="quickSet-LongBreakDuration"><input id="quickSet-LongBreakDuration"
+                                                data-testid="quick-set-long-break-duration"
                                                 class="lightTextInput" type="text"></label>
                                 <br>
                                 <label class="longBreakQuickSet"><b>Long Break After </b><input id="quickSet-PomoSetNum"
+                                                data-testid="quick-set-pomo-set-num"
                                                 class="lightTextInput" type="text"><b>
                                                 Pomodoros</b></label>
                                 <br>
                                 <label class="takeBreakText">Take <input id="quickSet-takeBreakDuration"
+                                                data-testid="quick-set-take-break-duration"
                                                 class="lightTextInput" type="text" value="0"> Minutes Break
-                                        <span id="quickSet-takeBreak">
+                                        <span id="quickSet-takeBreak" data-testid="quick-set-take-break">
                                                 &#9658;</span></label><br>
-                                <button id="quickSave" type="submit">Ok</button>
+                                <button id="quickSave" data-testid="quick-save" type="submit">Ok</button>
                         </div>
 
                         <!-- Vacation mode -->
-                        <div class="vacationBanner">Free Pass enabled!<br> All WebSites are free</div>
+                        <div class="vacationBanner" data-testid="vacation-banner">Free Pass enabled!<br> All WebSites are free</div>
 
                         <!-- Block Site -->
                         <br>
@@ -413,17 +419,17 @@
                         <br><br><br>
                 </div>
                 <!-- Footer -->
-                <div id="Footer">
+                <div id="Footer" data-testid="footer">
                         <a href="https://habitica.com" target="_blank">
                                 <div class="footer_icons habitica-setting"><span class="habitica_icon"></span>
                                 </div>
                         </a>
-                        <div class="footer_icons habitica-setting" style="color: goldenrod;" id="Dosh"><span
+                        <div class="footer_icons habitica-setting" style="color: goldenrod;" id="Dosh" data-testid="dosh"><span
                                         class="gold_icon"></span></div>
-                        <div class="footer_icons habitica-setting" style="color: red;" id="MyHp"><span
+                        <div class="footer_icons habitica-setting" style="color: red;" id="MyHp" data-testid="my-hp"><span
                                         class="hp_icon"></span>
                         </div>
-                        <div class="footer_icons habitica-setting" id="RefreshStats"><span class="refresh_icon"></span>
+                        <div class="footer_icons habitica-setting" id="RefreshStats" data-testid="refresh-stats"><span class="refresh_icon"></span>
                         </div>
                 </div>
         </div>

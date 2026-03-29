@@ -4,6 +4,9 @@
  * All locators are exposed as getters so they are lazily evaluated and always
  * reference the live page. Action methods encapsulate multi-step interactions
  * that would otherwise be repeated across tests.
+ *
+ * Every locator uses getByTestId() so selectors are decoupled from CSS classes,
+ * element IDs, and markup structure — the Playwright-recommended best practice.
  */
 class PopupPage {
   /** @param {import('@playwright/test').Page} page */
@@ -17,6 +20,10 @@ class PopupPage {
 
   get mainContainer() {
     return this.page.getByTestId('main-container');
+  }
+
+  get menuContainer() {
+    return this.page.getByTestId('menu-container');
   }
 
   // ---------------------------------------------------------------------------
@@ -55,12 +62,72 @@ class PopupPage {
     return this.page.getByTestId('timer-display');
   }
 
+  /** Gear icon that opens the quick-settings overlay (visible when timer is idle). */
   get quickSettings() {
     return this.page.getByTestId('quick-settings');
   }
 
+  /** X button that ends the current session (visible during break / break-extension). */
+  get pomoStop() {
+    return this.page.getByTestId('pomo-stop');
+  }
+
+  /** >> button that skips the running pomodoro straight to break (requires showSkipToBreak setting). */
+  get skipToBreak() {
+    return this.page.getByTestId('skip-to-break');
+  }
+
+  /** Snowflake button that freezes / pauses the pomodoro (requires showFreeze setting). */
+  get pomoFreeze() {
+    return this.page.getByTestId('pomo-freeze');
+  }
+
+  /** Button that opens the popup in a standalone window. */
+  get popupNewWindow() {
+    return this.page.getByTestId('popup-new-window');
+  }
+
   async getTimerText() {
     return this.timerDisplay.textContent();
+  }
+
+  // ---------------------------------------------------------------------------
+  // Quick-settings overlay
+  // ---------------------------------------------------------------------------
+
+  /** The full quick-settings panel (distinct from the gear icon trigger). */
+  get quickSettingsPanel() {
+    return this.page.getByTestId('quick-settings-panel');
+  }
+
+  get quickSetPomoDuration() {
+    return this.page.getByTestId('quick-set-pomo-duration');
+  }
+
+  get quickSetBreakDuration() {
+    return this.page.getByTestId('quick-set-break-duration');
+  }
+
+  get quickSetLongBreakDuration() {
+    return this.page.getByTestId('quick-set-long-break-duration');
+  }
+
+  get quickSetPomoSetNum() {
+    return this.page.getByTestId('quick-set-pomo-set-num');
+  }
+
+  get quickSetTakeBreakDuration() {
+    return this.page.getByTestId('quick-set-take-break-duration');
+  }
+
+  /** Arrow button that starts the manual break from the quick-settings panel. */
+  get quickSetTakeBreak() {
+    return this.page.getByTestId('quick-set-take-break');
+  }
+
+  /** OK button that saves quick settings and returns to the timer view. */
+  get quickSave() {
+    return this.page.getByTestId('quick-save');
   }
 
   // ---------------------------------------------------------------------------
@@ -73,6 +140,16 @@ class PopupPage {
 
   get siteTable() {
     return this.page.getByTestId('site-table');
+  }
+
+  /** Welcome info paragraph shown inside the site table when no sites are blocked. */
+  get welcomeInfo() {
+    return this.page.getByTestId('welcome-info');
+  }
+
+  /** Vacation-mode banner shown across the popup when vacation mode is active. */
+  get vacationBanner() {
+    return this.page.getByTestId('vacation-banner');
   }
 
   // ---------------------------------------------------------------------------
@@ -89,6 +166,25 @@ class PopupPage {
 
   get feedbackPanel() {
     return this.page.getByTestId('feedback-panel');
+  }
+
+  /** Donate / Coffee panel. */
+  get donatePanel() {
+    return this.page.getByTestId('donate-panel');
+  }
+
+  // ---------------------------------------------------------------------------
+  // Alerts
+  // ---------------------------------------------------------------------------
+
+  /** Credential-error alert shown when Habitica API calls fail (401). */
+  get credError() {
+    return this.page.getByTestId('cred-error');
+  }
+
+  /** Version-update notification banner. */
+  get versionUpdate() {
+    return this.page.getByTestId('version-update');
   }
 
   // ---------------------------------------------------------------------------
@@ -131,13 +227,57 @@ class PopupPage {
     return this.page.getByTestId('pomo-set-num');
   }
 
+  get showSkipToBreakCheckbox() {
+    return this.page.getByTestId('show-skip-to-break');
+  }
+
+  get showFreezeCheckbox() {
+    return this.page.getByTestId('show-freeze');
+  }
+
+  get manualBreakCheckbox() {
+    return this.page.getByTestId('manual-break');
+  }
+
+  get resetPomoAfterBreakCheckbox() {
+    return this.page.getByTestId('reset-pomo-after-break');
+  }
+
+  get pomodoroEndSoundSelect() {
+    return this.page.getByTestId('pomodoro-end-sound');
+  }
+
+  get pomodoroEndSoundVolumeSlider() {
+    return this.page.getByTestId('pomodoro-end-sound-volume');
+  }
+
+  get breakEndSoundSelect() {
+    return this.page.getByTestId('break-end-sound');
+  }
+
+  get breakEndSoundVolumeSlider() {
+    return this.page.getByTestId('break-end-sound-volume');
+  }
+
+  get ambientSoundSelect() {
+    return this.page.getByTestId('ambient-sound');
+  }
+
+  get ambientSoundVolumeSlider() {
+    return this.page.getByTestId('ambient-sound-volume');
+  }
+
   get saveButton() {
-    return this.page.getByRole('button', { name: /save/i });
+    return this.page.getByTestId('save-button');
   }
 
   // ---------------------------------------------------------------------------
   // Settings – Habitica sub-tab inputs
   // ---------------------------------------------------------------------------
+
+  get connectHabiticaToggle() {
+    return this.page.getByTestId('connect-habitica');
+  }
 
   get uidInput() {
     return this.page.getByTestId('uid');
@@ -147,12 +287,71 @@ class PopupPage {
     return this.page.getByTestId('api-token');
   }
 
+  get pomoHabitPlusCheckbox() {
+    return this.page.getByTestId('pomo-habit-plus');
+  }
+
+  get pomoHabitMinusCheckbox() {
+    return this.page.getByTestId('pomo-habit-minus');
+  }
+
+  get breakExtensionFailsCheckbox() {
+    return this.page.getByTestId('break-extension-fails');
+  }
+
+  get pomoSetHabitPlusCheckbox() {
+    return this.page.getByTestId('pomo-set-habit-plus');
+  }
+
+  get breakExtensionNotifyCheckbox() {
+    return this.page.getByTestId('break-extension-notify');
+  }
+
+  get longBreakNotifyCheckbox() {
+    return this.page.getByTestId('long-break-notify');
+  }
+
+  /** All elements that fade to opacity 0.3 when ConnectHabitica is OFF. */
+  get habiticaSettings() {
+    return this.page.locator('.habitica-setting');
+  }
+
   // ---------------------------------------------------------------------------
   // Settings – Blocker sub-tab inputs
   // ---------------------------------------------------------------------------
 
   get whitelistTextarea() {
     return this.page.getByTestId('whitelist');
+  }
+
+  get breakFreePassCheckbox() {
+    return this.page.getByTestId('break-free-pass');
+  }
+
+  get hideEditCheckbox() {
+    return this.page.getByTestId('hide-edit');
+  }
+
+  get muteBlockedSitesCheckbox() {
+    return this.page.getByTestId('mute-blocked-sites');
+  }
+
+  get transparentOverlayCheckbox() {
+    return this.page.getByTestId('transparent-overlay');
+  }
+
+  get vacationModeToggle() {
+    return this.page.getByTestId('vacation-mode');
+  }
+
+  /** Container holding all added free-pass schedule blocks. */
+  get freePassBlocks() {
+    return this.page.getByTestId('free-pass-blocks');
+  }
+
+  /** "Add Free Pass Time" button inside the Blocker settings tab. */
+  get addFreePassBlock() {
+    return this.page.getByTestId('add-free-pass-block');
   }
 
   // ---------------------------------------------------------------------------
@@ -175,12 +374,91 @@ class PopupPage {
     return this.page.getByTestId('hours-total');
   }
 
+  get pomoAvg() {
+    return this.page.getByTestId('pomo-avg');
+  }
+
+  get hoursAvg() {
+    return this.page.getByTestId('hours-avg');
+  }
+
   get historyChart() {
     return this.page.getByTestId('history-chart');
   }
 
+  get historyChartShowPomodoros() {
+    return this.page.getByTestId('history-chart-show-pomodoros');
+  }
+
+  get historyChartShowHours() {
+    return this.page.getByTestId('history-chart-show-hours');
+  }
+
+  get historyChartPrev() {
+    return this.page.getByTestId('history-chart-prev');
+  }
+
+  get historyChartNext() {
+    return this.page.getByTestId('history-chart-next');
+  }
+
+  /** Summary label below the chart (e.g. "Sum: X | Avg: Y"). */
+  get historyChartTotal() {
+    return this.page.getByTestId('history-chart-total');
+  }
+
+  /** "Full History & Backup" link that opens fullHistory.html. */
   get fullHistoryLink() {
-    return this.page.getByRole('link', { name: /full history/i });
+    return this.page.getByTestId('backup-link');
+  }
+
+  /** Backup-data warning note shown at the top of the history panel. */
+  get backupDataWarning() {
+    return this.page.getByTestId('backup-data-warning');
+  }
+
+  get downloadHistogram() {
+    return this.page.getByTestId('download-histogram');
+  }
+
+  get importHistogramFile() {
+    return this.page.getByTestId('import-histogram-file');
+  }
+
+  get importHistogramButton() {
+    return this.page.getByTestId('import-histogram');
+  }
+
+  get clearHistogram() {
+    return this.page.getByTestId('clear-histogram');
+  }
+
+  // ---------------------------------------------------------------------------
+  // Footer (visible only when ConnectHabitica is ON)
+  // ---------------------------------------------------------------------------
+
+  get footer() {
+    return this.page.getByTestId('footer');
+  }
+
+  get dosh() {
+    return this.page.getByTestId('dosh');
+  }
+
+  get myHp() {
+    return this.page.getByTestId('my-hp');
+  }
+
+  get refreshStats() {
+    return this.page.getByTestId('refresh-stats');
+  }
+
+  // ---------------------------------------------------------------------------
+  // Feedback panel links
+  // ---------------------------------------------------------------------------
+
+  get rateAndReviewLink() {
+    return this.page.getByTestId('rate-and-review-link');
   }
 
   // ---------------------------------------------------------------------------
@@ -202,6 +480,26 @@ class PopupPage {
     await this.page.getByTestId('menu-feedback-trigger').click();
   }
 
+  /** Open the Donate / Coffee panel. */
+  async clickDonate() {
+    await this.page.getByTestId('menu-donate-trigger').click();
+  }
+
+  /** Start (or resume) the pomodoro timer. */
+  async clickPomoButton() {
+    await this.pomoButton.click();
+  }
+
+  /** Click the gear icon to open the quick-settings overlay. */
+  async openQuickSettings() {
+    await this.quickSettings.click();
+  }
+
+  /** Save quick settings and return to the timer view. */
+  async saveQuickSettings() {
+    await this.quickSave.click();
+  }
+
   /**
    * Switch to the Habitica inner-tab inside the Settings panel.
    * Uses evaluate() because the radio input is CSS-hidden and Playwright's
@@ -217,6 +515,60 @@ class PopupPage {
    */
   async switchToBlockerTab() {
     await this.innerMenuBlocker.evaluate((el) => el.click());
+  }
+
+  /**
+   * Switch to the Timer inner-tab inside the Settings panel.
+   * Same visibility caveat as switchToHabiticaTab().
+   */
+  async switchToTimerTab() {
+    await this.innerMenuTimer.evaluate((el) => el.click());
+  }
+
+  /**
+   * Click the SkipToBreak (>>) button.
+   * Uses evaluate() because the button may be CSS-hidden; call only after
+   * confirming showSkipToBreak is enabled and the timer is running.
+   */
+  async clickSkipToBreak() {
+    await this.skipToBreak.evaluate((el) => el.click());
+  }
+
+  /**
+   * Click the PomoFreeze (snowflake) button.
+   * Uses evaluate() for the same reason as clickSkipToBreak().
+   */
+  async clickPomoFreeze() {
+    await this.pomoFreeze.evaluate((el) => el.click());
+  }
+
+  /** Click the PomoStop (X) button to end the current session. */
+  async clickPomoStop() {
+    await this.pomoStop.click();
+  }
+
+  /**
+   * Return the site-table row (tbody) for a given hostname.
+   * @param {string} hostname  e.g. 'ofex.me' or 'localhost'
+   */
+  siteRow(hostname) {
+    return this.page.locator(`tbody#${hostname}`);
+  }
+
+  /**
+   * Return the delete (trash) button inside a specific site row.
+   * @param {string} hostname
+   */
+  siteRowDeleteButton(hostname) {
+    return this.siteRow(hostname).locator('.trash_icon, [title="Delete"]').first();
+  }
+
+  /**
+   * Return the edit (pencil) button inside a specific site row.
+   * @param {string} hostname
+   */
+  siteRowEditButton(hostname) {
+    return this.siteRow(hostname).locator('.edit_icon, [title="Edit"]').first();
   }
 }
 
