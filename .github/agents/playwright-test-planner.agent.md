@@ -31,6 +31,7 @@ mcp-servers:
     args:
       - playwright
       - run-test-mcp-server
+    cwd: tests
     tools:
       - "*"
 ---
