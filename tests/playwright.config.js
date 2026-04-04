@@ -18,6 +18,8 @@ module.exports = defineConfig({
     video: 'on-failure',
     trace: 'on-failure',
   },
+  fullyParallel: true,
+
   projects: [
     {
       name: 'chromium-extension',
