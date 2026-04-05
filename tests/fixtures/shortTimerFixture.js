@@ -9,8 +9,12 @@
 
 const { test: base } = require('../fixtures');
 const { PopupPage } = require('../pages/popupPageModel');
+const { HOST_OFEX, OFEX_DEMO_URL } = require('../constants/testConstants');
+const { syncServiceWorkerFromStorage } = require('./userDataStorage');
 
 const USER_DATA_KEY = 'USER_DATA';
+
+const OFEX_BLOCKED = { hostname: HOST_OFEX, cost: 0, passDuration: 30 };
 
 /** Raw fixture definitions — consumed by fixtures/index.js for merging. */
 const definitions = {
@@ -36,6 +40,7 @@ const definitions = {
         });
       });
     }, { key: USER_DATA_KEY, patch: { PomoDurationMins: 1, BreakDuration: 1, LongBreakDuration: 1 } });
+    await syncServiceWorkerFromStorage(page, ['USER_DATA']);
 
     await page.reload();
     await popupPage.waitForReady();
@@ -59,6 +64,68 @@ const definitions = {
       await testInfo.attach('failure screenshot', { path: screenshotPath, contentType: 'image/png' });
     }
 
+    await page.close();
+  },
+
+  /**
+   * 1-minute pomo/break/long-break plus ofex.me blocked; active tab is ofex.me
+   * (same ordering as siteBlockerFixture).
+   */
+  popupPageShortTimerWithOfexBlocked: async ({ extensionContext, popupUrl }, use, testInfo) => {
+    const page = await extensionContext.newPage();
+    await page.goto(popupUrl);
+    const popupPage = new PopupPage(page);
+    await popupPage.waitForReady();
+
+    const originalUserData = await page.evaluate((key) => {
+      return new Promise((resolve) => {
+        chrome.storage.sync.get(key, (result) => resolve(result[key] ?? null));
+      });
+    }, USER_DATA_KEY);
+
+    await page.evaluate(({ key, hostname, site }) => {
+      return new Promise((resolve) => {
+        chrome.storage.sync.get(key, (result) => {
+          const updated = Object.assign({}, result[key] ?? {}, {
+            PomoDurationMins: 1,
+            BreakDuration: 1,
+            LongBreakDuration: 1,
+          });
+          updated.BlockedSites = Object.assign({}, updated.BlockedSites ?? {}, { [hostname]: site });
+          chrome.storage.sync.set({ [key]: updated }, resolve);
+        });
+      });
+    }, { key: USER_DATA_KEY, hostname: HOST_OFEX, site: OFEX_BLOCKED });
+    await syncServiceWorkerFromStorage(page, ['USER_DATA']);
+
+    await page.reload();
+    await popupPage.waitForReady();
+
+    const activePage = await extensionContext.newPage();
+    await activePage.goto(OFEX_DEMO_URL);
+    await activePage.bringToFront();
+    await page.reload();
+    await popupPage.waitForReady();
+
+    await use(popupPage);
+
+    await page.evaluate(({ key, original }) => {
+      return new Promise((resolve) => {
+        if (original === null) {
+          chrome.storage.sync.remove(key, resolve);
+        } else {
+          chrome.storage.sync.set({ [key]: original }, resolve);
+        }
+      });
+    }, { key: USER_DATA_KEY, original: originalUserData });
+
+    if (testInfo.status !== testInfo.expectedStatus) {
+      const screenshotPath = testInfo.outputPath('failure.png');
+      await page.screenshot({ path: screenshotPath, fullPage: true });
+      await testInfo.attach('failure screenshot', { path: screenshotPath, contentType: 'image/png' });
+    }
+
+    await activePage.close();
     await page.close();
   },
 };

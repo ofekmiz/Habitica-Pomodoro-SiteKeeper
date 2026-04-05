@@ -8,41 +8,8 @@
 
 const { test: base } = require('../fixtures');
 const { PopupPage } = require('../pages/popupPageModel');
-
-const USER_DATA_KEY = 'USER_DATA';
-
-// ---------------------------------------------------------------------------
-// Shared helpers (not exported — internal to this module)
-// ---------------------------------------------------------------------------
-
-/**
- * Merge a new hostname entry into BlockedSites inside USER_DATA in storage.sync.
- * Returns the original USER_DATA so it can be restored in teardown.
- */
-async function injectBlockedSite(page, hostname, siteData) {
-  return page.evaluate(({ key, hostname, siteData }) => {
-    return new Promise((resolve) => {
-      chrome.storage.sync.get(key, (result) => {
-        const original = result[key] ?? null;
-        const updated = Object.assign({}, original ?? {});
-        updated.BlockedSites = Object.assign({}, updated.BlockedSites ?? {}, { [hostname]: siteData });
-        chrome.storage.sync.set({ [key]: updated }, () => resolve(original));
-      });
-    });
-  }, { key: USER_DATA_KEY, hostname, siteData });
-}
-
-async function restoreUserData(page, original) {
-  await page.evaluate(({ key, original }) => {
-    return new Promise((resolve) => {
-      if (original === null) {
-        chrome.storage.sync.remove(key, resolve);
-      } else {
-        chrome.storage.sync.set({ [key]: original }, resolve);
-      }
-    });
-  }, { key: USER_DATA_KEY, original });
-}
+const { injectBlockedSite, restoreUserData } = require('./userDataStorage');
+const { HOST_OFEX, HOST_LOCALHOST, OFEX_DEMO_URL, LOCALHOST_URL } = require('../constants/testConstants');
 
 async function openPopupWithBlockedSite(extensionContext, popupUrl, hostname, siteData) {
   const page = await extensionContext.newPage();
@@ -76,17 +43,16 @@ const definitions = {
    * Yields { popupPage, activePage } where activePage is a tab open to ofex.me.
    */
   popupPageWithOfexBlocked: async ({ extensionContext, popupUrl }, use, testInfo) => {
-    // Open the popup first, inject the blocked site, then bring ofex.me to the
-    // foreground so getCurrentTabUrl() in the popup sees ofex.me as the active tab.
     const { page: rawPage, originalUserData } = await openPopupWithBlockedSite(
-      extensionContext, popupUrl, 'ofex.me', { hostname: 'ofex.me', cost: 0, passDuration: 30 },
+      extensionContext,
+      popupUrl,
+      HOST_OFEX,
+      { hostname: HOST_OFEX, cost: 0, passDuration: 30 },
     );
 
     const activePage = await extensionContext.newPage();
-    await activePage.goto('https://ofex.me/animation-timer/');
+    await activePage.goto(OFEX_DEMO_URL);
 
-    // ofex.me must be the active tab when the popup re-initialises so that
-    // getCurrentTabUrl() returns ofex.me (not the popup's own chrome-extension:// URL).
     await activePage.bringToFront();
     await rawPage.reload();
     const popupPage = new PopupPage(rawPage);
@@ -105,13 +71,15 @@ const definitions = {
    * Yields { popupPage, activePage } where activePage is a tab open to localhost.
    */
   popupPageWithLocalhostBlocked: async ({ extensionContext, popupUrl }, use, testInfo) => {
-    // Same ordering as ofex: popup first, then bring the target site to front.
     const { page: rawPage, originalUserData } = await openPopupWithBlockedSite(
-      extensionContext, popupUrl, 'localhost', { hostname: 'localhost', cost: 0, passDuration: 30 },
+      extensionContext,
+      popupUrl,
+      HOST_LOCALHOST,
+      { hostname: HOST_LOCALHOST, cost: 0, passDuration: 30 },
     );
 
     const activePage = await extensionContext.newPage();
-    await activePage.goto('http://localhost/').catch(() => {});
+    await activePage.goto(LOCALHOST_URL).catch(() => {});
 
     await activePage.bringToFront();
     await rawPage.reload();
@@ -128,5 +96,5 @@ const definitions = {
 };
 
 exports.definitions = definitions;
-exports.test   = base.extend(definitions);
+exports.test = base.extend(definitions);
 exports.expect = base.expect;

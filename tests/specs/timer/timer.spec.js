@@ -1,4 +1,5 @@
 const { test, expect } = require('../../fixtures');
+const { parseTimerDisplayToSeconds } = require('../../utils/timerDisplay');
 
 // Use the extended fixtures for tests that need a short 1-min timer.
 const { test: shortTimerTest } = require('../../fixtures/index');
@@ -27,11 +28,12 @@ test.describe('Pomodoro Timer: Core Functionality', () => {
     await expect(popupPage.pomoButton).toHaveClass(/tomatoProgress/);
     await expect(popupPage.quickSettings).toBeHidden();
 
-    // Assert countdown after 2 seconds
+    // Assert countdown — idle shows 00:00; after start the timer shows remaining pomo time (1…25 min).
     await popupPage.waitForTimerToChange(initialText);
     const newText = await popupPage.getTimerText();
-    expect(newText).toMatch(/^\d{2}:\d{2}$/);
-    expect(newText).not.toBe(initialText);
+    const newSec = parseTimerDisplayToSeconds(newText);
+    expect(newSec).toBeGreaterThan(0);
+    expect(newSec).toBeLessThanOrEqual(25 * 60);
 
     // Cleanup
     await popupPage.clickPomoButton(); // toggle off / stop
@@ -74,11 +76,21 @@ test.describe('Pomodoro Timer: Core Functionality', () => {
     const valueBefore = await popupPage.getTimerText();
     await popupPage.clickPomoFreeze();
 
-    // Assert frozen
+    // Assert frozen — display must stay on the same MM:SS across several polls (no countdown).
     await expect(popupPage.pomoButton).toHaveClass(/tomatoFreeze/);
-    await popupPage.page.waitForTimeout(2000);
+    let stableHits = 0;
+    await expect
+      .poll(
+        async () => {
+          const t = await popupPage.getTimerText();
+          stableHits = t === valueBefore ? stableHits + 1 : 0;
+          return stableHits;
+        },
+        { intervals: [200], timeout: 8000 },
+      )
+      .toBeGreaterThanOrEqual(8);
     const valueAfterWait = await popupPage.getTimerText();
-    expect(valueAfterWait).toBe(valueBefore);
+    expect(parseTimerDisplayToSeconds(valueAfterWait)).toBe(parseTimerDisplayToSeconds(valueBefore));
 
     // Act – resume
     await popupPage.clickPomoButton();
@@ -86,6 +98,8 @@ test.describe('Pomodoro Timer: Core Functionality', () => {
     // Assert resumed
     await expect(popupPage.pomoButton).toHaveClass(/tomatoProgress/);
     await popupPage.waitForTimerToChange(valueAfterWait);
+    const resumedText = await popupPage.getTimerText();
+    expect(parseTimerDisplayToSeconds(resumedText)).toBeLessThan(parseTimerDisplayToSeconds(valueAfterWait));
 
     // Cleanup
     await popupPage.clickPomoButton();
@@ -101,6 +115,8 @@ shortTimerTest.describe('Suite 3 — Pomodoro Timer: Short Timer Tests', () => {
 
     // Assert – wait up to 75s for pomodoro to complete
     await popupPage.waitForPomoButtonClass('tomatoBreak', 75_000);
+    const breakTimer = await popupPage.getTimerText();
+    expect(parseTimerDisplayToSeconds(breakTimer)).toBeLessThanOrEqual(60);
 
     await expect(popupPage.pomoButton).toHaveClass(/tomatoBreak/);
     await expect(popupPage.pomoStop).toBeVisible();

@@ -20,7 +20,7 @@
  *                           without importing PopupPage; all pages auto-closed after test
  *
  *  From historyFixture.js:
- *    popupPageWithHistory   Popup with HistoryTestData.json pre-loaded into storage
+ *    popupPageWithHistory   Popup with HistoryTestData.json pre-loaded (rolling ~21-day window, browser dates)
  *
  *  From siteBlockerFixture.js:
  *    popupPageWithOfexBlocked      { popupPage, activePage } — ofex.me pre-blocked
@@ -28,17 +28,24 @@
  *
  *  From shortTimerFixture.js:
  *    popupPageShortTimer    Popup with 1-min pomo/break durations for fast timer tests
+ *    popupPageShortTimerWithOfexBlocked  Short timer + ofex.me blocked + active ofex tab
+ *
+ *  From consoleErrorFixture.js (opt-in — list in test args):
+ *    noConsoleErrors                  Assert no console errors on popupPage.page
+ *    noConsoleErrorsWithOfexBlocked   Same for popupPageWithOfexBlocked.popupPage.page
  */
 
 const { test: base, expect } = require('../fixtures');
-const { definitions: historyDefs }      = require('./historyFixture');
-const { definitions: siteBlockerDefs }  = require('./siteBlockerFixture');
-const { definitions: shortTimerDefs }   = require('./shortTimerFixture');
+const { definitions: historyDefs } = require('./historyFixture');
+const { definitions: siteBlockerDefs } = require('./siteBlockerFixture');
+const { definitions: shortTimerDefs } = require('./shortTimerFixture');
+const { definitions: consoleErrorDefs } = require('./consoleErrorFixture');
 
 exports.test = base.extend({
   ...historyDefs,
   ...siteBlockerDefs,
   ...shortTimerDefs,
+  ...consoleErrorDefs,
 });
 
 exports.expect = expect;

@@ -1,7 +1,7 @@
 const { test: base, chromium } = require('@playwright/test');
 const path = require('path');
 const fs = require('fs');
-const { PopupPage } = require('./pages/PopupPageModel');
+const { PopupPage } = require('./pages/popupPageModel');
 
 const pathToExtension = path.join(__dirname, '..', 'app');
 

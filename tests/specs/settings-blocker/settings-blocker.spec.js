@@ -1,4 +1,5 @@
 const { test, expect } = require('../../fixtures/index');
+const { HOST_OFEX, OFEX_WHITELIST_SAMPLE } = require('../../constants/testConstants');
 
 test.describe('Settings: Blocker Tab', () => {
   // 7.1
@@ -24,7 +25,7 @@ test.describe('Settings: Blocker Tab', () => {
     await popupPage.openSettingsBlockerTab();
 
     // Act
-    await popupPage.whitelistTextarea.fill('ofex.me/animation-timer');
+    await popupPage.whitelistTextarea.fill(OFEX_WHITELIST_SAMPLE);
     await popupPage.saveButton.click();
 
     // Reload and verify
@@ -53,8 +54,8 @@ test.describe('Settings: Blocker Tab', () => {
     await popupPage.clickSettings();
 
     // Assert edit / delete buttons hidden for the ofex.me row
-    await expect(popupPage.siteRowEditButton('ofex.me')).toBeHidden();
-    await expect(popupPage.siteRowDeleteButton('ofex.me')).toBeHidden();
+    await expect(popupPage.siteRowEditButton(HOST_OFEX)).toBeHidden();
+    await expect(popupPage.siteRowDeleteButton(HOST_OFEX)).toBeHidden();
     // Assert block-link hidden
     await expect(popupPage.blockLink).toBeHidden();
 

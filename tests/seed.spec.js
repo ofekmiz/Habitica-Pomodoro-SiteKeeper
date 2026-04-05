@@ -1,5 +1,5 @@
 /**
- * seed.spec.ts — Best-practice reference test
+ * seed.spec.js — Best-practice reference test
  *
  * This file is the canonical example of how tests in this project are
  * structured. Read it before writing new specs.
@@ -26,15 +26,17 @@
  *  2. All locators live in popupPageModel.js — tests never call
  *     page.getByTestId() or page.locator() directly.
  *  3. AAA pattern: every test has a clear Arrange / Act / Assert structure.
- *  4. No hard waits (page.waitForTimeout) except in timer tests where a
- *     counted delay is the only way to verify timer behaviour.
- *  5. Storage state set-up and tear-down is done via chrome.storage.local
- *     inside page.evaluate(), never via the UI, to keep tests fast and
- *     deterministic.
+ *  4. No hard waits (page.waitForTimeout) except where a bounded poll is the
+ *     only way to verify timer behaviour without flaking.
+ *  5. Storage setup/teardown for “given state” uses chrome.storage.sync and
+ *     USER_DATA / Histogram (see fixtures/userDataStorage.js), then syncs the
+ *     service worker — not chrome.storage.local (the app does not use it for
+ *     blocked sites).
  */
 
 // ─── Import from the extended fixtures, not @playwright/test directly ───────
 const { test, expect } = require('./fixtures');
+const { clearAllBlockedSitesInUserData } = require('./fixtures/userDataStorage');
 
 // ─── Suite wraps a logical group of related tests ───────────────────────────
 test.describe.skip('Seed — Popup Initial Load', () => {
@@ -59,16 +61,12 @@ test.describe.skip('Seed — Popup Initial Load', () => {
   /**
    * Example of an Arrange / Act / Assert test that mutates state.
    *
-   * Storage state is injected via chrome.storage.local (fast, no network
-   * calls) and cleaned up after the test to keep isolation.
+   * Blocked sites are cleared in USER_DATA (sync) and pushed to the service
+   * worker so Vars match storage (see userDataStorage.js).
    */
   test('shows welcome info when no sites are blocked', async ({ popupPage }) => {
     // Arrange — ensure no blocked sites (clean state from fixture)
-    await popupPage.page.evaluate(() => {
-      return new Promise((resolve) => {
-        chrome.storage.local.remove('BlockedSites', resolve);
-      });
-    });
+    await clearAllBlockedSitesInUserData(popupPage.page);
     await popupPage.reloadPopup();
 
     // Act — (nothing; just observing the UI)

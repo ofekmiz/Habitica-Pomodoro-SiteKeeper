@@ -475,6 +475,12 @@ class PopupPage {
     await this.page.getByTestId('menu-history-trigger').click();
   }
 
+  /** Open the History panel and wait until it is visible. */
+  async openHistoryPanel() {
+    await this.clickHistory();
+    await this.historyPanel.waitFor({ state: 'visible' });
+  }
+
   /** Open the Feedback panel. */
   async clickFeedback() {
     await this.page.getByTestId('menu-feedback-trigger').click();
@@ -523,6 +529,15 @@ class PopupPage {
    */
   async switchToTimerTab() {
     await this.innerMenuTimer.evaluate((el) => el.click());
+  }
+
+  /**
+   * Toggle the Connect Habitica switch (Settings → Habitica tab).
+   * Uses evaluate() because the native checkbox is CSS-hidden by the switch UI;
+   * Playwright's normal click() requires the element to be visible.
+   */
+  async clickConnectHabiticaToggle() {
+    await this.connectHabiticaToggle.evaluate((el) => el.click());
   }
 
   /**
