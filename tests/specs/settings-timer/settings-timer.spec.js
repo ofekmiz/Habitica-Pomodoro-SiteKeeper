@@ -56,7 +56,7 @@ test.describe('Settings: Timer Tab', () => {
   // 5.4
   test('should persist skip-to-break setting and show >> button when timer running', async ({ popupPage }) => {
     await popupPage.openSettingsTimerTab();
-    await popupPage.showSkipToBreakCheckbox.check();
+    await popupPage.setShowSkipToBreak(true);
     await popupPage.saveButton.click();
 
     await popupPage.reloadPopup();
@@ -67,17 +67,17 @@ test.describe('Settings: Timer Tab', () => {
     await popupPage.clickPomoButton();
     await expect(popupPage.skipToBreak).toBeVisible();
 
-    // Cleanup
-    await popupPage.clickPomoStop();
+    // Cleanup — stop pomodoro (X / End session is only shown during break, not while pomodoro is running)
+    await popupPage.clickPomoButton();
     await popupPage.openSettingsTimerTab();
-    await popupPage.showSkipToBreakCheckbox.uncheck();
+    await popupPage.setShowSkipToBreak(false);
     await popupPage.saveButton.click();
   });
 
   // 5.5
   test('should persist freeze setting and show snowflake button when timer running', async ({ popupPage }) => {
     await popupPage.openSettingsTimerTab();
-    await popupPage.showFreezeCheckbox.check();
+    await popupPage.setShowFreeze(true);
     await popupPage.saveButton.click();
 
     await popupPage.reloadPopup();
@@ -88,10 +88,10 @@ test.describe('Settings: Timer Tab', () => {
     await popupPage.clickPomoButton();
     await expect(popupPage.pomoFreeze).toBeVisible();
 
-    // Cleanup
-    await popupPage.clickPomoStop();
+    // Cleanup — same as skip-to-break test: stop via tomato while pomodoro is running
+    await popupPage.clickPomoButton();
     await popupPage.openSettingsTimerTab();
-    await popupPage.showFreezeCheckbox.uncheck();
+    await popupPage.setShowFreeze(false);
     await popupPage.saveButton.click();
   });
 

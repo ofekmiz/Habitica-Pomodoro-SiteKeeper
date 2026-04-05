@@ -3,8 +3,11 @@ const { test, expect } = require('../../fixtures');
 test.describe('Settings: Habitica Tab (UI Only, no API calls)', () => {
   // 6.1
   test('should fade habitica-setting elements when ConnectHabitica is OFF; footer hidden', async ({ popupPage }) => {
-    // Arrange
+    // Arrange — default USER_DATA has ConnectHabitica on; turn off via visible label, then assert
     await popupPage.openSettingsHabiticaTab();
+    if (await popupPage.connectHabiticaToggle.isChecked()) {
+      await popupPage.connectHabiticaLabel.click();
+    }
 
     // Assert toggle is OFF
     await expect(popupPage.connectHabiticaToggle).not.toBeChecked();
@@ -34,8 +37,10 @@ test.describe('Settings: Habitica Tab (UI Only, no API calls)', () => {
     // Arrange
     await popupPage.openSettingsHabiticaTab();
 
-    // Act – turn ON
-    await popupPage.connectHabiticaToggle.check();
+    // Act – turn ON (native checkbox is CSS-hidden; use the visible label)
+    if (!(await popupPage.connectHabiticaToggle.isChecked())) {
+      await popupPage.connectHabiticaLabel.click();
+    }
 
     // Assert full opacity
     const habiticaSettingEls = popupPage.habiticaSettings;
@@ -48,7 +53,9 @@ test.describe('Settings: Habitica Tab (UI Only, no API calls)', () => {
     }
 
     // Act – turn OFF
-    await popupPage.connectHabiticaToggle.uncheck();
+    if (await popupPage.connectHabiticaToggle.isChecked()) {
+      await popupPage.connectHabiticaLabel.click();
+    }
 
     // Assert faded again
     for (let i = 0; i < count; i++) {

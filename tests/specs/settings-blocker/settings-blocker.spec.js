@@ -7,10 +7,10 @@ test.describe('Settings: Blocker Tab', () => {
     // Arrange
     await popupPage.openSettingsBlockerTab();
 
-    // Assert non-gated inputs visible
-    await expect(popupPage.hideEditCheckbox).toBeVisible();
-    await expect(popupPage.muteBlockedSitesCheckbox).toBeVisible();
-    await expect(popupPage.transparentOverlayCheckbox).toBeVisible();
+    // Assert non-gated controls visible (native checkboxes are CSS-hidden; labels are visible)
+    await expect(popupPage.hideEditLabel).toBeVisible();
+    await expect(popupPage.muteBlockedSitesLabel).toBeVisible();
+    await expect(popupPage.transparentOverlayLabel).toBeVisible();
     await expect(popupPage.whitelistTextarea).toBeVisible();
 
     // Assert gated (habitica-setting class) elements present in DOM
@@ -47,7 +47,7 @@ test.describe('Settings: Blocker Tab', () => {
 
     // Act – enable hide-edit in blocker settings
     await popupPage.openSettingsBlockerTab();
-    await popupPage.hideEditCheckbox.check();
+    await popupPage.setHideEdit(true);
     await popupPage.saveButton.click();
 
     // Close settings panel to return to main view
@@ -61,7 +61,7 @@ test.describe('Settings: Blocker Tab', () => {
 
     // Cleanup – uncheck hide-edit so it doesn't bleed into other tests
     await popupPage.openSettingsBlockerTab();
-    await popupPage.hideEditCheckbox.uncheck();
+    await popupPage.setHideEdit(false);
     await popupPage.saveButton.click();
   });
 });

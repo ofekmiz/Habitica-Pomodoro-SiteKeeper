@@ -56,11 +56,11 @@
                                 <!-- inner menu -->
 
                                 <input type="radio" checked id="MenuTimerSettings" name="innerMenu" data-testid="inner-menu-timer">
-                                <label for="MenuTimerSettings"><span class="innerMenuIcon"></span> TIMER</label>
+                                <label for="MenuTimerSettings" data-testid="inner-tab-timer"><span class="innerMenuIcon"></span> TIMER</label>
                                 <input type="radio" id="MenuHabiticaSettings" name="innerMenu" data-testid="inner-menu-habitica">
-                                <label for="MenuHabiticaSettings"><span class="innerMenuIcon"></span> HABITICA</label>
+                                <label for="MenuHabiticaSettings" data-testid="inner-tab-habitica"><span class="innerMenuIcon"></span> HABITICA</label>
                                 <input type="radio" id="MenuBlockerSettings" name="innerMenu" data-testid="inner-menu-blocker">
-                                <label for="MenuBlockerSettings"><span class="innerMenuIcon"></span> BLOCKER</label><br>
+                                <label for="MenuBlockerSettings" data-testid="inner-tab-blocker"><span class="innerMenuIcon"></span> BLOCKER</label><br>
 
 
                                 <!-- Timer settings -->
@@ -68,11 +68,11 @@
                                         <br>
                                         <label><b>Pomodoro duration </b><input id="PomoDuration" data-testid="pomo-duration" type="text"></label>
                                         Minutes<br>
-                                        <label><input type="checkbox" id="showSkipToBreak" data-testid="show-skip-to-break">Skip to break button</label>
+                                        <label for="showSkipToBreak" data-testid="label-show-skip-to-break">Skip to break button</label><input type="checkbox" id="showSkipToBreak" data-testid="show-skip-to-break">
                                         <span class="small_icon help_icon tooltip"
                                                 data-tip=" shows &#9658; button that lets you skip the current pomodoro session (with no habitica rewards)"></span>
                                         <br>
-                                        <label><input type="checkbox" id="showFreeze" data-testid="show-freeze">Freeze pomodoro button (pause)</label>
+                                        <label for="showFreeze" data-testid="label-show-freeze">Freeze pomodoro button (pause)</label><input type="checkbox" id="showFreeze" data-testid="show-freeze">
                                         <span class="small_icon help_icon tooltip"
                                                 data-tip=" shows &#10052; button that lets you freeze(pause) the pomodoro timer"></span>
                                         <br>
@@ -84,12 +84,11 @@
                                         Minutes
                                         <span class="small_icon help_icon tooltip"
                                                 data-tip="Break Extension is some extra time to come back from the short break. When you get back, click on the Tomato to start the next pomodoro. If the break extesion ended before you pressed the tomato the streak will break and the timer will reset."></span><br>
-                                        <label><input type="checkbox" id="ManualBreak" data-testid="manual-break">Start breaks manually</label>
+                                        <label for="ManualBreak" data-testid="label-manual-break">Start breaks manually</label><input type="checkbox" id="ManualBreak" data-testid="manual-break">
                                         <span class="small_icon help_icon tooltip"
                                                 data-tip="If enabled, breaks will start by clicking on the tomato after a pomodoro. If disabled breaks will start automatically after Pomodoro."></span>
                                         <br>
-                                        <label><input type="checkbox" id="ResetPomoAfterBreak" data-testid="reset-pomo-after-break">Reset timer after break
-                                                extension</label>
+                                        <label for="ResetPomoAfterBreak" data-testid="label-reset-pomo-after-break">Reset timer after break extension</label><input type="checkbox" id="ResetPomoAfterBreak" data-testid="reset-pomo-after-break">
                                         <span class="small_icon help_icon tooltip"
                                                 data-tip="If enabled,coming back from break after break extension ended will reset the timer (break the streak)."></span>
                                         <br>
@@ -127,10 +126,10 @@
                                 <!-- Habitica settings -->
                                 <div id="HabiticaSettingsContainer">
                                         <br>
-                                        <label><b class="connect-habitica-animate">Connect to Habitica</b><input
+                                        <label class="connect-habitica-animate" for="ConnectHabitica" data-testid="label-connect-habitica"><b>Connect to Habitica</b></label><input
                                                         type="checkbox" checked id="ConnectHabitica"
                                                         data-testid="connect-habitica"
-                                                        class="switch"></label><br>
+                                                        class="switch"><br>
                                         <label class="connect-habitica-animate habitica-setting"><b>Habitica User
                                                         ID:</b><br /><input id="UID" data-testid="uid" type="text"></label><br>
                                         <label class="connect-habitica-animate habitica-setting"><b>Habitica API
@@ -192,19 +191,15 @@
                                 </div>
                                 <!-- Site Blocker settings -->
                                 <div id="BlockerSettingsContainer">
-                                        <br><label class="habitica-setting"><input type="checkbox"
-                                                        id="BreakFreePass" data-testid="break-free-pass">During
-                                                break
-                                                all sites are free</label>
+                                        <br><label class="habitica-setting" for="BreakFreePass" data-testid="label-break-free-pass">During break all sites are free</label><input type="checkbox"
+                                                        id="BreakFreePass" data-testid="break-free-pass">
                                         <span class=" habitica_small_icon small_icon tooltip"></span>
                                         <hr>
-                                        <label><input type="checkbox" id="HideEdit" data-testid="hide-edit">Hide edit options</label>
+                                        <label for="HideEdit" data-testid="label-hide-edit">Hide edit options</label><input type="checkbox" id="HideEdit" data-testid="hide-edit">
                                         <span class="small_icon help_icon tooltip"
                                                 data-tip="Hide the option to block/unblock websites to lower the temptation of removing a blocked website during a work session."></span><br>
-                                        <label><input type="checkbox" id="MuteBlockedSites" data-testid="mute-blocked-sites">Mute blocked
-                                                websites</label><br>
-                                        <label><input type="checkbox" id="TransparentOverlay" data-testid="transparent-overlay">Blocked website background
-                                                transparency</label>
+                                        <label for="MuteBlockedSites" data-testid="label-mute-blocked-sites">Mute blocked websites</label><input type="checkbox" id="MuteBlockedSites" data-testid="mute-blocked-sites"><br>
+                                        <label for="TransparentOverlay" data-testid="label-transparent-overlay">Blocked website background transparency</label><input type="checkbox" id="TransparentOverlay" data-testid="transparent-overlay">
                                         <hr>
                                         <label><b>Whitelist: </b></label><span class="small_icon help_icon tooltip"
                                                 data-tip="Websites in whitelist are also unblocked during pomodoro."></span><br>
@@ -215,8 +210,8 @@
                                                 <a href="https://regexr.com/" target="_blank">Regex</a> support. i.e.
                                                 /Regex line/.</span>
                                         <hr>
-                                        <label class="habitica-setting"><b>Vacation Mode</b><input type="checkbox"
-                                                        id="VacationMode" data-testid="vacation-mode" class="switch">&nbsp;&nbsp;</label>
+                                        <label class="habitica-setting" for="VacationMode"><b>Vacation Mode</b></label><input type="checkbox"
+                                                        id="VacationMode" data-testid="vacation-mode" class="switch">&nbsp;&nbsp;
                                         <span class=" habitica_small_icon small_icon tooltip"></span>
                                         <span class="small_icon help_icon tooltip"
                                                 data-tip="All websites are free when enabled."></span>
@@ -372,12 +367,12 @@
                         <!-- Pomodoro Timer -->
                         <div id="pomodoro" data-testid="pomodoro-section">
                                 <div id="TopLeftPomoButtons" data-testid="top-left-pomo-buttons">
-                                        <div id="PomoStop" data-testid="pomo-stop" title="End Session">X</div>
-                                        <div id="SkipToBreak" data-testid="skip-to-break" title="Skip to break">&#9658;&#9658;</div>
-                                        <div id="PomoFreeze" data-testid="pomo-freeze" title="Freeze Pomodoro">&#10052;</div>
+                                        <div id="PomoStop" data-testid="pomo-stop" role="button" tabindex="0" aria-label="End session" title="End Session">X</div>
+                                        <div id="SkipToBreak" data-testid="skip-to-break" role="button" tabindex="0" aria-label="Skip to break" title="Skip to break">&#9658;&#9658;</div>
+                                        <div id="PomoFreeze" data-testid="pomo-freeze" role="button" tabindex="0" aria-label="Freeze pomodoro" title="Freeze Pomodoro">&#10052;</div>
                                 </div>
-                                <div id="PopupNewWindow" data-testid="popup-new-window" title="Open in new window"></div>
-                                <div id="QuickSettings" data-testid="quick-settings"></div>
+                                <div id="PopupNewWindow" data-testid="popup-new-window" role="button" tabindex="0" aria-label="Open popup in new window" title="Open in new window"></div>
+                                <div id="QuickSettings" data-testid="quick-settings" role="button" tabindex="0" aria-label="Timer quick settings" title="Quick settings"></div>
                                 <span id="PomoButton" data-testid="pomo-button" data-pomodoros="0" class="tomato"></span><span id="Time" data-testid="timer-display"
                                         data-pomodoros-set="0/4">00:00</span>
                         </div>

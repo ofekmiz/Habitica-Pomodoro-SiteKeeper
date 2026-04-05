@@ -43,7 +43,7 @@ test.describe('Pomodoro Timer: Core Functionality', () => {
   test('should skip to break when showSkipToBreak is enabled', async ({ popupPage }) => {
     // Arrange – enable skip-to-break in settings
     await popupPage.openSettingsTimerTab();
-    await popupPage.showSkipToBreakCheckbox.check();
+    await popupPage.setShowSkipToBreak(true);
     await popupPage.saveButton.click();
 
     // Act – start timer
@@ -65,7 +65,7 @@ test.describe('Pomodoro Timer: Core Functionality', () => {
   test('should freeze and resume timer when showFreeze is enabled', async ({ popupPage }) => {
     // Arrange – enable freeze in settings
     await popupPage.openSettingsTimerTab();
-    await popupPage.showFreezeCheckbox.check();
+    await popupPage.setShowFreeze(true);
     await popupPage.saveButton.click();
 
     // Act – start timer

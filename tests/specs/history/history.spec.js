@@ -114,8 +114,11 @@ historyTest.describe('History Panel (with fixture data)', () => {
     //BUG -> this is a workaround should not be needed to open the history panel again
     await popupPage.openHistoryPanel();
 
+    await expect(popupPage.pomoToday).toHaveText('0');
+    await expect(popupPage.hoursToday).toHaveText('0');
     await expect(popupPage.pomoTotal).toHaveText('0');
     await expect(popupPage.hoursTotal).toHaveText('0.0');
     await expect(popupPage.pomoAvg).toHaveText('0.0');
+    await expect(popupPage.hoursAvg).toHaveText('0.0');
   });
 });

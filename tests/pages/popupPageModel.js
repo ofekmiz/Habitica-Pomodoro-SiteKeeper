@@ -5,8 +5,8 @@
  * reference the live page. Action methods encapsulate multi-step interactions
  * that would otherwise be repeated across tests.
  *
- * Every locator uses getByTestId() so selectors are decoupled from CSS classes,
- * element IDs, and markup structure — the Playwright-recommended best practice.
+ * Prefer `data-testid` for stable hooks. Native `<button>` / `<a>` and
+ * `role="button"` controls use getByRole with accessible name when available.
  */
 class PopupPage {
   /** @param {import('@playwright/test').Page} page */
@@ -64,27 +64,27 @@ class PopupPage {
 
   /** Gear icon that opens the quick-settings overlay (visible when timer is idle). */
   get quickSettings() {
-    return this.page.getByTestId('quick-settings');
+    return this.page.getByRole('button', { name: 'Timer quick settings' });
   }
 
-  /** X button that ends the current session (visible during break / break-extension). */
+  /** X / end session — role="button" aria-label="End session". */
   get pomoStop() {
-    return this.page.getByTestId('pomo-stop');
+    return this.page.getByRole('button', { name: 'End session' });
   }
 
-  /** >> button that skips the running pomodoro straight to break (requires showSkipToBreak setting). */
+  /** >> skip to break — role="button" aria-label="Skip to break". */
   get skipToBreak() {
-    return this.page.getByTestId('skip-to-break');
+    return this.page.getByRole('button', { name: 'Skip to break' });
   }
 
-  /** Snowflake button that freezes / pauses the pomodoro (requires showFreeze setting). */
+  /** Snowflake freeze — role="button" aria-label="Freeze pomodoro". */
   get pomoFreeze() {
-    return this.page.getByTestId('pomo-freeze');
+    return this.page.getByRole('button', { name: 'Freeze pomodoro' });
   }
 
-  /** Button that opens the popup in a standalone window. */
+  /** Open popup in new window — role="button" aria-label="Open popup in new window". */
   get popupNewWindow() {
-    return this.page.getByTestId('popup-new-window');
+    return this.page.getByRole('button', { name: 'Open popup in new window' });
   }
 
   async getTimerText() {
@@ -127,7 +127,7 @@ class PopupPage {
 
   /** OK button that saves quick settings and returns to the timer view. */
   get quickSave() {
-    return this.page.getByTestId('quick-save');
+    return this.page.getByRole('button', { name: 'Ok' });
   }
 
   // ---------------------------------------------------------------------------
@@ -231,16 +231,48 @@ class PopupPage {
     return this.page.getByTestId('show-skip-to-break');
   }
 
+  /** Click target for Skip to break (native checkbox is CSS-hidden). */
+  get showSkipToBreakLabel() {
+    return this.page.getByTestId('label-show-skip-to-break');
+  }
+
   get showFreezeCheckbox() {
     return this.page.getByTestId('show-freeze');
+  }
+
+  /** Click target for Freeze pomodoro (native checkbox is CSS-hidden). */
+  get showFreezeLabel() {
+    return this.page.getByTestId('label-show-freeze');
   }
 
   get manualBreakCheckbox() {
     return this.page.getByTestId('manual-break');
   }
 
+  get manualBreakLabel() {
+    return this.page.getByTestId('label-manual-break');
+  }
+
   get resetPomoAfterBreakCheckbox() {
     return this.page.getByTestId('reset-pomo-after-break');
+  }
+
+  get resetPomoAfterBreakLabel() {
+    return this.page.getByTestId('label-reset-pomo-after-break');
+  }
+
+  /** @param {boolean} checked */
+  async setShowSkipToBreak(checked) {
+    if ((await this.showSkipToBreakCheckbox.isChecked()) !== checked) {
+      await this.showSkipToBreakLabel.click();
+    }
+  }
+
+  /** @param {boolean} checked */
+  async setShowFreeze(checked) {
+    if ((await this.showFreezeCheckbox.isChecked()) !== checked) {
+      await this.showFreezeLabel.click();
+    }
   }
 
   get pomodoroEndSoundSelect() {
@@ -268,7 +300,7 @@ class PopupPage {
   }
 
   get saveButton() {
-    return this.page.getByTestId('save-button');
+    return this.page.getByRole('button', { name: /SAVE|CLOSE/ });
   }
 
   // ---------------------------------------------------------------------------
@@ -277,6 +309,11 @@ class PopupPage {
 
   get connectHabiticaToggle() {
     return this.page.getByTestId('connect-habitica');
+  }
+
+  /** Click target for the Connect Habitica switch (native checkbox is CSS-hidden). */
+  get connectHabiticaLabel() {
+    return this.page.getByTestId('label-connect-habitica');
   }
 
   get uidInput() {
@@ -340,6 +377,29 @@ class PopupPage {
     return this.page.getByTestId('transparent-overlay');
   }
 
+  get hideEditLabel() {
+    return this.page.getByTestId('label-hide-edit');
+  }
+
+  get muteBlockedSitesLabel() {
+    return this.page.getByTestId('label-mute-blocked-sites');
+  }
+
+  get transparentOverlayLabel() {
+    return this.page.getByTestId('label-transparent-overlay');
+  }
+
+  get breakFreePassLabel() {
+    return this.page.getByTestId('label-break-free-pass');
+  }
+
+  /** @param {boolean} checked */
+  async setHideEdit(checked) {
+    if ((await this.hideEditCheckbox.isChecked()) !== checked) {
+      await this.hideEditLabel.click();
+    }
+  }
+
   get vacationModeToggle() {
     return this.page.getByTestId('vacation-mode');
   }
@@ -387,11 +447,11 @@ class PopupPage {
   }
 
   get historyChartShowPomodoros() {
-    return this.page.getByTestId('history-chart-show-pomodoros');
+    return this.page.getByRole('button', { name: 'Pomodoros' });
   }
 
   get historyChartShowHours() {
-    return this.page.getByTestId('history-chart-show-hours');
+    return this.page.getByRole('button', { name: 'Hours' });
   }
 
   get historyChartPrev() {
@@ -409,7 +469,7 @@ class PopupPage {
 
   /** "Full History & Backup" link that opens fullHistory.html. */
   get fullHistoryLink() {
-    return this.page.getByTestId('backup-link');
+    return this.page.getByRole('link', { name: /Full History/i });
   }
 
   /** Backup-data warning note shown at the top of the history panel. */
@@ -426,11 +486,11 @@ class PopupPage {
   }
 
   get importHistogramButton() {
-    return this.page.getByTestId('import-histogram');
+    return this.page.getByRole('button', { name: /Import/ });
   }
 
   get clearHistogram() {
-    return this.page.getByTestId('clear-histogram');
+    return this.page.getByRole('button', { name: /Clear History/i });
   }
 
   // ---------------------------------------------------------------------------
@@ -458,7 +518,7 @@ class PopupPage {
   // ---------------------------------------------------------------------------
 
   get rateAndReviewLink() {
-    return this.page.getByTestId('rate-and-review-link');
+    return this.page.getByRole('link', { name: /Rate.*Review/i });
   }
 
   // ---------------------------------------------------------------------------
@@ -508,53 +568,47 @@ class PopupPage {
 
   /**
    * Switch to the Habitica inner-tab inside the Settings panel.
-   * Uses evaluate() because the radio input is CSS-hidden and Playwright's
-   * normal click() requires the element to be visible.
+   * Clicks the visible tab control (radio inputs are display:none).
    */
   async switchToHabiticaTab() {
-    await this.innerMenuHabitica.evaluate((el) => el.click());
+    await this.page.getByTestId('inner-tab-habitica').click();
   }
 
   /**
    * Switch to the Blocker inner-tab inside the Settings panel.
-   * Same visibility caveat as switchToHabiticaTab().
    */
   async switchToBlockerTab() {
-    await this.innerMenuBlocker.evaluate((el) => el.click());
+    await this.page.getByTestId('inner-tab-blocker').click();
   }
 
   /**
    * Switch to the Timer inner-tab inside the Settings panel.
-   * Same visibility caveat as switchToHabiticaTab().
    */
   async switchToTimerTab() {
-    await this.innerMenuTimer.evaluate((el) => el.click());
+    await this.page.getByTestId('inner-tab-timer').click();
   }
 
   /**
    * Toggle the Connect Habitica switch (Settings → Habitica tab).
-   * Uses evaluate() because the native checkbox is CSS-hidden by the switch UI;
-   * Playwright's normal click() requires the element to be visible.
+   * Clicks the visible control (native checkbox is CSS-hidden).
    */
   async clickConnectHabiticaToggle() {
-    await this.connectHabiticaToggle.evaluate((el) => el.click());
+    await this.connectHabiticaLabel.click();
   }
 
   /**
    * Click the SkipToBreak (>>) button.
-   * Uses evaluate() because the button may be CSS-hidden; call only after
-   * confirming showSkipToBreak is enabled and the timer is running.
+   * Call only after confirming showSkipToBreak is enabled and the timer is running.
    */
   async clickSkipToBreak() {
-    await this.skipToBreak.evaluate((el) => el.click());
+    await this.skipToBreak.click();
   }
 
   /**
    * Click the PomoFreeze (snowflake) button.
-   * Uses evaluate() for the same reason as clickSkipToBreak().
    */
   async clickPomoFreeze() {
-    await this.pomoFreeze.evaluate((el) => el.click());
+    await this.pomoFreeze.click();
   }
 
   /** Click the PomoStop (X) button to end the current session. */
@@ -579,7 +633,7 @@ class PopupPage {
   }
 
   /**
-   * Return the edit (pencil) button inside a specific site row.
+   * Return the edit (pencil) control inside a specific site row.
    * @param {string} hostname
    */
   siteRowEditButton(hostname) {
@@ -587,13 +641,11 @@ class PopupPage {
   }
 
   /**
-   * Click the edit (pencil) button for a site row using evaluate(), because
-   * the element may be CSS-hidden (e.g. when ConnectHabitica is off) and
-   * Playwright's normal click() requires the element to be visible.
+   * Click the edit (pencil) control for a site row.
    * @param {string} hostname
    */
   async clickSiteRowEditButton(hostname) {
-    await this.siteRowEditButton(hostname).evaluate((el) => el.click());
+    await this.siteRowEditButton(hostname).click();
   }
 
   /**
@@ -636,8 +688,12 @@ class PopupPage {
 
   /**
    * Open the Settings panel and make sure it is visible before returning.
+   * If the panel is already open (e.g. prior step left it open), does not toggle closed.
    */
   async openSettings() {
+    if (await this.settingsPanel.isVisible()) {
+      return;
+    }
     await this.clickSettings();
     await this.settingsPanel.waitFor({ state: 'visible' });
   }

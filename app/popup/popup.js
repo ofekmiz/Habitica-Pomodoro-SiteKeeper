@@ -352,7 +352,7 @@ function AddSiteToTable(site, fadein) {
         '<div class="siteDuration"><span class="hourglass_icon"></span>' + duration + '</div>' +
         '</a></td>' +
         '<td><div class="hostname" data-testid="site-hostname" data-hostname="' + site.hostname + '">' + site.hostname + passExpiryElement + '</div></td>' +
-        '<td><a class="edit" data-testid="site-edit" data-hostname="' + site.hostname + '"><img src="../img/pencil.png"></a></td>' +
+        '<td><a class="edit" data-testid="site-edit" data-hostname="' + site.hostname + '" aria-label="Edit ' + site.hostname + '"><img alt="" src="../img/pencil.png"></a></td>' +
         '<td><a class="delete" data-testid="site-delete" data-hostname="' + site.hostname + '"><img src="../img/trash.png"></a></td>' +
         '</tr>' +
         '<tr class="cost-duration-input" style="display:none;">' +
