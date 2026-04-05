@@ -552,7 +552,7 @@ class PopupPage {
    * @param {string} hostname  e.g. 'ofex.me' or 'localhost'
    */
   siteRow(hostname) {
-    return this.page.locator(`tbody#${hostname}`);
+    return this.page.locator(`[data-testid="site-row"][data-hostname="${hostname}"]`);
   }
 
   /**
@@ -560,7 +560,7 @@ class PopupPage {
    * @param {string} hostname
    */
   siteRowDeleteButton(hostname) {
-    return this.siteRow(hostname).locator('.trash_icon, [title="Delete"]').first();
+    return this.siteRow(hostname).getByTestId('site-delete');
   }
 
   /**
@@ -568,7 +568,235 @@ class PopupPage {
    * @param {string} hostname
    */
   siteRowEditButton(hostname) {
-    return this.siteRow(hostname).locator('.edit_icon, [title="Edit"]').first();
+    return this.siteRow(hostname).getByTestId('site-edit');
+  }
+
+  /**
+   * Click the edit (pencil) button for a site row using evaluate(), because
+   * the element may be CSS-hidden (e.g. when ConnectHabitica is off) and
+   * Playwright's normal click() requires the element to be visible.
+   * @param {string} hostname
+   */
+  async clickSiteRowEditButton(hostname) {
+    await this.siteRowEditButton(hostname).evaluate((el) => el.click());
+  }
+
+  /**
+   * Return the inline pass-duration input that appears when a site row is in
+   * edit mode.
+   * @param {string} hostname
+   */
+  siteRowPassDurationInput(hostname) {
+    return this.siteRow(hostname).getByTestId('site-pass-duration-input');
+  }
+
+  /**
+   * Return the pass-duration display text element inside a site row.
+   * @param {string} hostname
+   */
+  siteRowPassDurationText(hostname) {
+    return this.siteRow(hostname).getByTestId('site-hostname');
+  }
+
+  // ---------------------------------------------------------------------------
+  // Extended actions
+  // ---------------------------------------------------------------------------
+
+  /**
+   * Wait for the popup's async initialisation to finish.
+   * The body starts with class "loading" which is removed once init is done;
+   * main-container becomes visible at the same moment.
+   */
+  async waitForReady() {
+    await this.mainContainer.waitFor({ state: 'visible' });
+  }
+
+  /**
+   * Reload the popup page and wait for its async initialisation to finish.
+   */
+  async reloadPopup() {
+    await this.page.reload();
+    await this.waitForReady();
+  }
+
+  /**
+   * Open the Settings panel and make sure it is visible before returning.
+   */
+  async openSettings() {
+    await this.clickSettings();
+    await this.settingsPanel.waitFor({ state: 'visible' });
+  }
+
+  /**
+   * Open the Settings panel and navigate to the Timer sub-tab.
+   */
+  async openSettingsTimerTab() {
+    await this.openSettings();
+    await this.switchToTimerTab();
+  }
+
+  /**
+   * Open the Settings panel and navigate to the Habitica sub-tab.
+   */
+  async openSettingsHabiticaTab() {
+    await this.openSettings();
+    await this.switchToHabiticaTab();
+  }
+
+  /**
+   * Open the Settings panel and navigate to the Blocker sub-tab.
+   */
+  async openSettingsBlockerTab() {
+    await this.openSettings();
+    await this.switchToBlockerTab();
+  }
+
+  /**
+   * Open the quick-settings overlay and set pomo duration, then save.
+   * @param {number} minutes
+   */
+  async setQuickPomoDuration(minutes) {
+    await this.openQuickSettings();
+    await this.quickSetPomoDuration.fill(String(minutes));
+    await this.saveQuickSettings();
+  }
+
+  /**
+   * Open the quick-settings overlay and set break duration, then save.
+   * @param {number} minutes
+   */
+  async setQuickBreakDuration(minutes) {
+    await this.openQuickSettings();
+    await this.quickSetBreakDuration.fill(String(minutes));
+    await this.saveQuickSettings();
+  }
+
+  /**
+   * Configure pomo, break, and pomo-set-num all in one quick-settings visit.
+   * @param {{ pomo?: number, break?: number, longBreak?: number, pomoSetNum?: number }} opts
+   */
+  async configureQuickSettings(opts = {}) {
+    await this.openQuickSettings();
+    if (opts.pomo !== undefined)      await this.quickSetPomoDuration.fill(String(opts.pomo));
+    if (opts.break !== undefined)     await this.quickSetBreakDuration.fill(String(opts.break));
+    if (opts.longBreak !== undefined) await this.quickSetLongBreakDuration.fill(String(opts.longBreak));
+    if (opts.pomoSetNum !== undefined) await this.quickSetPomoSetNum.fill(String(opts.pomoSetNum));
+    await this.saveQuickSettings();
+  }
+
+  /**
+   * Wait until the timer display changes from a given value.
+   * @param {string} initialValue  e.g. '25:00'
+   * @param {number} [timeout=5000]
+   */
+  async waitForTimerToChange(initialValue, timeout = 5000) {
+    await this.page.waitForFunction(
+      (val) => {
+        const el = document.querySelector('[data-testid="timer-display"]');
+        return el && el.textContent.trim() !== val;
+      },
+      initialValue,
+      { timeout },
+    );
+  }
+
+  // ---------------------------------------------------------------------------
+  // Storage helpers
+  // ---------------------------------------------------------------------------
+
+  /**
+   * Patch one or more fields inside the USER_DATA object in chrome.storage.sync
+   * (the storage area the service worker reads for all user settings).
+   * Returns the original USER_DATA snapshot so callers can restore it.
+   *
+   * @param {Record<string, unknown>} patch  e.g. { showFreeze: true }
+   * @returns {Promise<object|null>} the previous USER_DATA value (null if absent)
+   */
+  async patchUserData(patch) {
+    return this.page.evaluate(({ patch }) => {
+      return new Promise((resolve) => {
+        chrome.storage.sync.get('USER_DATA', (result) => {
+          const original = result['USER_DATA'] ?? null;
+          const updated = Object.assign({}, original ?? {}, patch);
+          chrome.storage.sync.set({ USER_DATA: updated }, () => resolve(original));
+        });
+      });
+    }, { patch });
+  }
+
+  /**
+   * Restore USER_DATA in chrome.storage.sync to a previously saved snapshot.
+   * Pass the value returned by patchUserData().
+   *
+   * @param {object|null} original  the value returned by patchUserData()
+   */
+  async restoreUserData(original) {
+    await this.page.evaluate((original) => {
+      return new Promise((resolve) => {
+        // 1. Fetch current Vars from the service worker
+        chrome.runtime.sendMessage({ sender: 'popup', msg: 'get_data' }, (swResponse) => {
+          const currentVars = swResponse.vars;
+          const restoredUserData = original ?? {};
+
+          // 2. Write to storage
+          const storageOp = original === null
+            ? (cb) => chrome.storage.sync.remove('USER_DATA', cb)
+            : (cb) => chrome.storage.sync.set({ USER_DATA: restoredUserData }, cb);
+
+          storageOp(() => {
+            // 3. Push restored UserData back into the service worker
+            const updatedVars = Object.assign({}, currentVars, { UserData: restoredUserData });
+            chrome.runtime.sendMessage(
+              { sender: 'popup', msg: 'set_data', data: { vars: updatedVars } },
+              () => resolve(),
+            );
+          });
+        });
+      });
+    }, original);
+  }
+
+  /**
+   * Reset the service worker timer state and wait for the button to reflect it.
+   * Call this at the start of any test that clicks the pomo button, to guard
+   * against dirty state left by previous tests in the same worker context.
+   */
+  async resetTimerState() {
+    await this.page.evaluate(() => new Promise((resolve) => {
+      chrome.runtime.sendMessage(
+        { sender: 'popup', msg: 'run_function', functionName: 'pomoReset', args: [] },
+        resolve,
+      );
+    }));
+    await this.waitForPomoButtonClass('tomatoWait');
+  }
+
+  /**
+   * Wait until the pomo button has a specific CSS class.
+   * @param {string} cls  e.g. 'tomatoBreak'
+   * @param {number} [timeout=120_000]
+   */
+  async waitForPomoButtonClass(cls, timeout = 120_000) {
+    await this.page.waitForFunction(
+      (c) => {
+        const el = document.querySelector('[data-testid="pomo-button"]');
+        return el && el.classList.contains(c);
+      },
+      cls,
+      { timeout },
+    );
+  }
+
+  /**
+   * Check whether the pomo button currently has a specific CSS class.
+   * @param {string} cls
+   * @returns {Promise<boolean>}
+   */
+  async pomoButtonHasClass(cls) {
+    return this.pomoButton.evaluate(
+      (el, c) => el.classList.contains(c),
+      cls,
+    );
   }
 }
 

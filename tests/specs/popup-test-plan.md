@@ -658,12 +658,14 @@ The Habitica Pomodoro SiteKeeper is a Chrome extension that combines a Pomodoro 
 
 #### 11.2. invalid pass duration input ('abc') on blocked site edit row → rejected/defaulted, no JS errors
 
-**File:** `tests/specs/edge-cases/should-reject-invalid-pass-duration.spec.js`
+**File:** `tests/specs/edge-cases/edge-cases.spec.js`
 
 **Steps:**
-  1. Ensure ofex.me is blocked, open popup, click the edit (pencil) button in the ofex.me row, clear the pass duration input, type 'abc', press Enter
+  1. The `popupPageWithOfexBlocked` fixture opens a real tab to `https://ofex.me/animation-timer/` and makes it the active tab, then reloads the popup — so the popup's "Block Site" button targets ofex.me via the normal UI flow (no direct storage injection at this step)
+  2. Enable ConnectHabitica via `patchUserData` so the edit (pencil) button is rendered, then reload the popup
+  3. Click "Un-Block Site" / block link to open the site list, click the pencil edit button on the ofex.me row, clear the pass duration input, type 'abc', press Enter
     - expect: No JavaScript console errors are thrown
-    - expect: The pass duration is rejected or defaulted to a valid value (e.g. 30)
+    - expect: The pass duration is rejected or defaulted to a valid numeric value (e.g. 30)
 
 #### 11.3. rapid tomato clicks (5×) → no JS errors, timer state consistent
 

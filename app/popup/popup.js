@@ -340,23 +340,25 @@ function AddSiteToTable(site, fadein) {
 
     var tbody = $(document.createElement("tbody"));
     tbody.attr("id", site.hostname);
+    tbody.attr("data-testid", "site-row");
+    tbody.attr("data-hostname", site.hostname);
 
     //Single Blocked wensite UI
     var html =
         '<tr class="reward-item">' +
         '<td class="gp">' +
-        '<a class="buy" href="#">' +
+        '<a class="buy" href="#" data-testid="site-buy" data-hostname="' + site.hostname + '">' +
         '<div class="siteCost"><span class="gold_icon"></span>' + cost + '</div>' +
         '<div class="siteDuration"><span class="hourglass_icon"></span>' + duration + '</div>' +
         '</a></td>' +
-        '<td><div class="hostname">' + site.hostname + passExpiryElement + '</div></td>' +
-        '<td><a class="edit"><img src="../img/pencil.png"></a></td>' +
-        '<td><a class="delete"><img src="../img/trash.png"></a></td>' +
+        '<td><div class="hostname" data-testid="site-hostname" data-hostname="' + site.hostname + '">' + site.hostname + passExpiryElement + '</div></td>' +
+        '<td><a class="edit" data-testid="site-edit" data-hostname="' + site.hostname + '"><img src="../img/pencil.png"></a></td>' +
+        '<td><a class="delete" data-testid="site-delete" data-hostname="' + site.hostname + '"><img src="../img/trash.png"></a></td>' +
         '</tr>' +
         '<tr class="cost-duration-input" style="display:none;">' +
         '<td style="white-space:nowrap;text-align:center;" colspan="4">' +
-        '<label>Cost <input class="cost" type="text"maxlength="8" size="8" value="' + cost + '"></label>' +
-        '<label>Pass duration (minutes) <input class="time" type="text"maxlength="8" size="8" value="' + duration + '"></label>' +
+        '<label>Cost <input class="cost" data-testid="site-cost-input" data-hostname="' + site.hostname + '" type="text"maxlength="8" size="8" value="' + cost + '"></label>' +
+        '<label>Pass duration (minutes) <input class="time" data-testid="site-pass-duration-input" data-hostname="' + site.hostname + '" type="text"maxlength="8" size="8" value="' + duration + '"></label>' +
         '</td></tr>' +
         '<tr><td></td><tr>';
 

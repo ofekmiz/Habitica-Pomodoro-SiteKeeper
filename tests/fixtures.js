@@ -70,14 +70,11 @@ exports.test = base.extend({
   popupPage: async ({ extensionContext, popupUrl }, use, testInfo) => {
     const page = await extensionContext.newPage();
     await page.goto(popupUrl);
-    await page.waitForFunction(
-      () => !document.body.classList.contains('loading'),
-      { timeout: 15_000 },
-    );
+    const popupPage = new PopupPage(page);
+    await popupPage.waitForReady();
 
-    await use(new PopupPage(page));
+    await use(popupPage);
 
-    // Capture a screenshot on failure and attach it to the test report.
     if (testInfo.status !== testInfo.expectedStatus) {
       const screenshotPath = testInfo.outputPath('failure.png');
       await page.screenshot({ path: screenshotPath, fullPage: true });
@@ -88,6 +85,31 @@ exports.test = base.extend({
     }
 
     await page.close();
+  },
+
+  /**
+   * Factory that opens a fresh popup page in the shared extension context.
+   * Use this when a test needs more than one popup page (e.g. close-and-reopen
+   * scenarios) without importing PopupPage directly.
+   *
+   * Usage:
+   *   const popup = await newPopupPage();
+   *   // … test …
+   *   await popup.page.close();
+   */
+  newPopupPage: async ({ extensionContext, popupUrl }, use) => {
+    const pages = [];
+    await use(async () => {
+      const page = await extensionContext.newPage();
+      await page.goto(popupUrl);
+      const popupPage = new PopupPage(page);
+      await popupPage.waitForReady();
+      pages.push(page);
+      return popupPage;
+    });
+    for (const page of pages) {
+      if (!page.isClosed()) await page.close();
+    }
   },
 });
 
