@@ -63,6 +63,7 @@ test.describe('Suite 8 — Site Blocker: ofex.me', () => {
     await expect(popupPage.welcomeInfo).toBeVisible();
 
     await tab.close();
+    // Cleanup
     await restoreUserData(popupPage.page, original);
   });
 
@@ -149,6 +150,7 @@ test.describe('Suite 8 — Site Blocker: ofex.me', () => {
     await popupPage.reloadPopup();
     await expect(popupPage.siteRow(HOST_OFEX)).toHaveCount(0);
 
+    // Cleanup
     await restoreUserData(popupPage.page, original);
   });
 

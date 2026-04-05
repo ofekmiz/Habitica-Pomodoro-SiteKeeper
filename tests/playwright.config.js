@@ -24,7 +24,8 @@ module.exports = defineConfig({
     video: 'on-failure',
     trace: 'on-failure',
   },
-  fullyParallel: true,
+  // Disable parallelism to avoid race conditions in the extension context. (will need to revisit this)
+  fullyParallel: false,
 
   projects: [
     {

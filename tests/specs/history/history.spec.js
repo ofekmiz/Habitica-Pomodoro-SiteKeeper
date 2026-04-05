@@ -70,6 +70,7 @@ historyTest.describe('History Panel (with fixture data)', () => {
 
     await newTab.waitForLoadState('domcontentloaded');
     expect(newTab.url()).toMatch(/fullHistory\.html/);
+    // Cleanup
     await newTab.close();
   });
 

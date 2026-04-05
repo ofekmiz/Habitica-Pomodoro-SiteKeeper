@@ -59,6 +59,7 @@ test.describe('Popup Initial Load & UI Elements', () => {
 
     await newPage.waitForLoadState('domcontentloaded');
     expect(newPage.url()).toMatch(/popup\.html/);
+    // Cleanup
     await newPage.close();
   });
 });

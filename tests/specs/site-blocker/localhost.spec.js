@@ -67,6 +67,7 @@ test.describe('Site Blocker: localhost (non-real site)', () => {
     await expect(popupPage.blockLink).toHaveText(/Block Site!/i);
 
     await tab.close();
+    // Cleanup
     await restoreUserData(popupPage.page, original);
   });
 
@@ -90,6 +91,7 @@ test.describe('Site Blocker: localhost (non-real site)', () => {
     await expect(popupPage.siteRow(HOST_LOCALHOST)).toHaveCount(0);
     await expect(popupPage.blockLink).toHaveText(/Block Site!/i);
 
+    // Cleanup
     await restoreUserData(popupPage.page, original);
   });
 });

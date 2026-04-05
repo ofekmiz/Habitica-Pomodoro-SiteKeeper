@@ -86,6 +86,7 @@ test.describe('Edge Cases', () => {
     expect(timerAfter).toMatch(/^\d{2}:\d{2}$/);
     parseTimerDisplayToSeconds(timerAfter);
 
+    // Cleanup
     await popupPage2.clickPomoButton();
   });
 });
