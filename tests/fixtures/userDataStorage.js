@@ -105,23 +105,8 @@ async function removeBlockedHostname(page, hostname) {
   await syncServiceWorkerFromStorage(page, ['USER_DATA']);
 }
 
-/** Clear `USER_DATA.BlockedSites` in sync storage and push to the service worker (no sites blocked). */
-async function clearAllBlockedSitesInUserData(page) {
-  await page.evaluate((key) => {
-    return new Promise((resolve) => {
-      chrome.storage.sync.get(key, (result) => {
-        const ud = Object.assign({}, result[key] ?? {});
-        ud.BlockedSites = {};
-        chrome.storage.sync.set({ [key]: ud }, resolve);
-      });
-    });
-  }, USER_DATA_KEY);
-  await syncServiceWorkerFromStorage(page, ['USER_DATA']);
-}
-
 exports.USER_DATA_KEY = USER_DATA_KEY;
 exports.syncServiceWorkerFromStorage = syncServiceWorkerFromStorage;
 exports.injectBlockedSite = injectBlockedSite;
 exports.restoreUserData = restoreUserData;
 exports.removeBlockedHostname = removeBlockedHostname;
-exports.clearAllBlockedSitesInUserData = clearAllBlockedSitesInUserData;

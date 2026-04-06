@@ -36,7 +36,6 @@
 
 // ─── Import from the extended fixtures, not @playwright/test directly ───────
 const { test, expect } = require('./fixtures');
-const { clearAllBlockedSitesInUserData } = require('./fixtures/userDataStorage');
 
 // ─── Suite wraps a logical group of related tests ───────────────────────────
 test.describe.skip('Seed — Popup Initial Load', () => {
@@ -66,7 +65,6 @@ test.describe.skip('Seed — Popup Initial Load', () => {
    */
   test('shows welcome info when no sites are blocked', async ({ popupPage }) => {
     // Arrange — ensure no blocked sites (clean state from fixture)
-    await clearAllBlockedSitesInUserData(popupPage.page);
     await popupPage.reloadPopup();
 
     // Act — (nothing; just observing the UI)

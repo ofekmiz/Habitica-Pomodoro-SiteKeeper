@@ -1,3 +1,5 @@
+const { expect } = require('@playwright/test');
+
 /**
  * Page Object Model for the extension popup.
  *
@@ -843,19 +845,16 @@ class PopupPage {
   }
 
   /**
-   * Wait until the pomo button has a specific CSS class.
+   * Wait until the pomo button has a specific CSS class (uses Playwright expect
+   * auto-retry / polling). Default timeout is 75s; pass `options` to override.
    * @param {string} cls  e.g. 'tomatoBreak'
-   * @param {number} [timeout=120_000]
+   * @param {{ timeout?: number }} [options]  merged into `toContainClass` (e.g. `{ timeout: 120_000 }`)
    */
-  async waitForPomoButtonClass(cls, timeout = 120_000) {
-    await this.page.waitForFunction(
-      (c) => {
-        const el = document.querySelector('[data-testid="pomo-button"]');
-        return el && el.classList.contains(c);
-      },
-      cls,
-      { timeout },
-    );
+  async waitForPomoButtonClass(cls, options) {
+    await expect(this.pomoButton).toContainClass(cls, {
+      timeout: 75_000,
+      ...options,
+    });
   }
 
   /**

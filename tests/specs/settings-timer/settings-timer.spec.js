@@ -99,27 +99,14 @@ test.describe('Settings: Timer Tab', () => {
   test('should save sound selections (Sound1, Ambient Rain) and persist after reload', async ({ popupPage }) => {
     await popupPage.openSettingsTimerTab();
 
-    const soundOptions = await popupPage.pomodoroEndSoundSelect.locator('option').allTextContents();
-    const sound1Option = soundOptions.find((o) => /sound1|sound 1/i.test(o));
-    if (sound1Option) {
-      await popupPage.pomodoroEndSoundSelect.selectOption({ label: sound1Option });
-    }
-
-    const ambientOptions = await popupPage.ambientSoundSelect.locator('option').allTextContents();
-    const rainOption = ambientOptions.find((o) => /rain/i.test(o));
-    if (rainOption) {
-      await popupPage.ambientSoundSelect.selectOption({ label: rainOption });
-    }
+    await popupPage.pomodoroEndSoundSelect.selectOption({ value: 'Sound1.mp3' });
+    await popupPage.ambientSoundSelect.selectOption({ value: 'Ambient Rain.mp3' });
 
     await popupPage.saveButton.click();
     await popupPage.reloadPopup();
     await popupPage.openSettingsTimerTab();
 
-    if (sound1Option) {
-      await expect(popupPage.pomodoroEndSoundSelect).not.toHaveValue('');
-    }
-    if (rainOption) {
-      await expect(popupPage.ambientSoundSelect).not.toHaveValue('');
-    }
+    await expect(popupPage.pomodoroEndSoundSelect).toHaveValue('Sound1.mp3');
+    await expect(popupPage.ambientSoundSelect).toHaveValue('Ambient Rain.mp3');
   });
 });

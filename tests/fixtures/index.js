@@ -27,8 +27,9 @@
  *    popupPageWithLocalhostBlocked { popupPage, activePage } — localhost pre-blocked
  *
  *  From shortTimerFixture.js:
- *    popupPageShortTimer    Popup with 1-min pomo/break durations for fast timer tests
- *    popupPageShortTimerWithOfexBlocked  Short timer + ofex.me blocked + active ofex tab
+ *    popupPageShortTimer    Popup with 1-min pomo/break, ManualBreak off, for fast timer tests
+ *    popupPageShortTimerWithOfexBlocked  { popupPage, activePage } — short timer + ofex blocked
+ *    popupPageShortTimerWithLocalhostBlocked  { popupPage, activePage } — short timer + localhost blocked
  *
  *  From consoleErrorFixture.js (opt-in — list in test args):
  *    noConsoleErrors                  Assert no console errors on popupPage.page

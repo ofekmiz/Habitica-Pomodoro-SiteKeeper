@@ -1,4 +1,5 @@
 const { test, expect } = require('../../fixtures/index');
+const { ContentPage } = require('../../pages/contentPageModel');
 const { HOST_OFEX, OFEX_DEMO_URL } = require('../../constants/testConstants');
 const { injectBlockedSite, restoreUserData, removeBlockedHostname } = require('../../fixtures/userDataStorage');
 
@@ -154,22 +155,37 @@ test.describe('Suite 8 — Site Blocker: ofex.me', () => {
     await restoreUserData(popupPage.page, original);
   });
 
-  // 8.7
-  test('should apply "blocked" CSS class during pomodoro, remove during break', async ({ popupPageShortTimerWithOfexBlocked: popupPage }) => {
-    // Act – start timer
+  // 8.7 — class `blocked` is on the site-table tbody (see popup.js), not on inner cells.
+  test('should apply "blocked" CSS class during pomodoro, remove during break', async ({
+    popupPageShortTimerWithOfexBlocked: { popupPage },
+  }) => {
+    const row = popupPage.siteRow(HOST_OFEX);
+
     await popupPage.clickPomoButton();
 
-    // Assert 'blocked' class applied
-    const row = popupPage.siteRow(HOST_OFEX);
-    await expect(row).toHaveClass(/blocked/);
+    await expect(row).toHaveClass(/blocked/, { timeout: 15_000 });
 
-    // Wait for break
-    await popupPage.waitForPomoButtonClass('tomatoBreak', 75_000);
+    await popupPage.waitForPomoButtonClass('tomatoBreak');
 
-    // Assert 'blocked' class removed during break
     await expect(row).not.toHaveClass(/blocked/);
 
-    // Cleanup
     await popupPage.clickPomoStop();
+  });
+
+  // 8.8 — service worker injects body.blockedSite + data-html while pomodoro runs (mainSiteBlockFunction path).
+  test('should show Stay Focused overlay on ofex.me tab during pomodoro', async ({
+    popupPageShortTimerWithOfexBlocked: { popupPage, activePage },
+  }) => {
+    const content = new ContentPage(activePage);
+
+    await activePage.bringToFront();
+    await popupPage.clickPomoButton();
+    await activePage.bringToFront();
+
+    await expect(content.body).toHaveClass(/blockedSite/, { timeout: 20_000 });
+    await expect(content.body).toHaveAttribute('data-html', /Stay Focused! Time Left:/);
+
+    // During pomodoro the X (End session) control is hidden; interrupt via second tomato click.
+    await popupPage.clickPomoButton();
   });
 });
