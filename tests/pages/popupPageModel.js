@@ -1,4 +1,5 @@
 const { expect } = require('@playwright/test');
+const { syncServiceWorkerFromStorage } = require('../fixtures/userDataStorage');
 
 /**
  * Page Object Model for the extension popup.
@@ -786,15 +787,18 @@ class PopupPage {
    * @returns {Promise<object|null>} the previous USER_DATA value (null if absent)
    */
   async patchUserData(patch) {
-    return this.page.evaluate(({ patch }) => {
+    const original = await this.page.evaluate(({ patch }) => {
       return new Promise((resolve) => {
         chrome.storage.sync.get('USER_DATA', (result) => {
-          const original = result['USER_DATA'] ?? null;
-          const updated = Object.assign({}, original ?? {}, patch);
-          chrome.storage.sync.set({ USER_DATA: updated }, () => resolve(original));
+          const prev = result['USER_DATA'] ?? null;
+          const updated = Object.assign({}, prev ?? {}, patch);
+          chrome.storage.sync.set({ USER_DATA: updated }, () => resolve(prev));
         });
       });
     }, { patch });
+    // Popup init uses get_data (service worker Vars), not storage alone — keep SW in sync.
+    await syncServiceWorkerFromStorage(this.page, ['USER_DATA']);
+    return original;
   }
 
   /**
@@ -848,7 +852,7 @@ class PopupPage {
    * Wait until the pomo button has a specific CSS class (uses Playwright expect
    * auto-retry / polling). Default timeout is 75s; pass `options` to override.
    * @param {string} cls  e.g. 'tomatoBreak'
-   * @param {{ timeout?: number }} [options]  merged into `toContainClass` (e.g. `{ timeout: 120_000 }`)
+   * @param {{ timeout?: number }} [options]  merged into `toContainClass` (e.g. `{ timeout: 75_000 }`)
    */
   async waitForPomoButtonClass(cls, options) {
     await expect(this.pomoButton).toContainClass(cls, {

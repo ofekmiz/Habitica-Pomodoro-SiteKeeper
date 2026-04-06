@@ -163,7 +163,7 @@ test.describe('Suite 8 — Site Blocker: ofex.me', () => {
 
     await popupPage.clickPomoButton();
 
-    await expect(row).toHaveClass(/blocked/, { timeout: 15_000 });
+    await expect(row).toHaveClass(/blocked/);
 
     await popupPage.waitForPomoButtonClass('tomatoBreak');
 

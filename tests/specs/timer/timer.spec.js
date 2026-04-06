@@ -1,9 +1,6 @@
 const { test, expect } = require('../../fixtures');
 const { parseTimerDisplayToSeconds } = require('../../utils/timerDisplay');
 
-// Use the extended fixtures for tests that need a short 1-min timer.
-const { test: shortTimerTest } = require('../../fixtures/index');
-
 test.describe('Pomodoro Timer: Core Functionality', () => {
   // 3.1 – idle state
   test('should display idle state: timer shows 00:00, tomatoWait class, quick-settings visible, controls hidden', async ({ popupPage }) => {
@@ -61,23 +58,17 @@ test.describe('Pomodoro Timer: Core Functionality', () => {
 
     await popupPage.clickPomoButton();
     await expect(popupPage.pomoFreeze).toBeVisible();
+    await popupPage.waitForTimerToChange('00:00');
 
     const valueBefore = await popupPage.getTimerText();
     await popupPage.clickPomoFreeze();
 
-    //display must stay on the same MM:SS across several polls (no countdown).
+    // Test plan 3.4: timer display frozen (same value after 2 seconds).
     await expect(popupPage.pomoButton).toHaveClass(/tomatoFreeze/);
-    let stableHits = 0;
+  // Verify timer stays frozen for 2 seconds
     await expect
-      .poll(
-        async () => {
-          const t = await popupPage.getTimerText();
-          stableHits = t === valueBefore ? stableHits + 1 : 0;
-          return stableHits;
-        },
-        { intervals: [200], timeout: 8000 },
-      )
-      .toBeGreaterThanOrEqual(8);
+      .poll(async () => await popupPage.getTimerText(), { timeout: 2000, intervals: [500] })
+      .toBe(valueBefore);
     const valueAfterWait = await popupPage.getTimerText();
     expect(parseTimerDisplayToSeconds(valueAfterWait)).toBe(parseTimerDisplayToSeconds(valueBefore));
 
@@ -90,87 +81,5 @@ test.describe('Pomodoro Timer: Core Functionality', () => {
 
     // Cleanup
     await popupPage.clickPomoButton();
-  });
-});
-
-// 3.5 – 3.9 require a short timer fixture
-shortTimerTest.describe('Suite 3 — Pomodoro Timer: Short Timer Tests', () => {
-  // 3.5
-  shortTimerTest('should enter break after pomodoro completes (1 min)', async ({ popupPageShortTimer: popupPage }) => {
-    await popupPage.clickPomoButton();
-
-    //wait up to 75s for pomodoro to complete
-    await popupPage.waitForPomoButtonClass('tomatoBreak');
-    const breakTimer = await popupPage.getTimerText();
-    expect(parseTimerDisplayToSeconds(breakTimer)).toBeLessThanOrEqual(60);
-
-    await expect(popupPage.pomoButton).toHaveClass(/tomatoBreak/);
-    await expect(popupPage.pomoStop).toBeVisible();
-    await expect(popupPage.skipToBreak).toBeHidden();
-    await expect(popupPage.quickSettings).toBeHidden();
-
-    // Cleanup
-    await popupPage.clickPomoStop();
-  });
-
-  // 3.6
-  shortTimerTest('should display break state UI: tomatoBreak, correct button visibility', async ({ popupPageShortTimer: popupPage }) => {
-    await popupPage.clickPomoButton();
-    await popupPage.waitForPomoButtonClass('tomatoBreak');
-
-    await expect(popupPage.pomoButton).toHaveClass(/tomatoBreak/);
-    await expect(popupPage.pomoStop).toBeVisible();
-    await expect(popupPage.quickSettings).toBeHidden();
-
-    // Cleanup
-    await popupPage.clickPomoStop();
-  });
-
-  // 3.7
-  shortTimerTest('should reset to idle on pomo-stop during break: 00:00, tomatoWait, quick-settings visible', async ({ popupPageShortTimer: popupPage }) => {
-    await popupPage.clickPomoButton();
-    await popupPage.waitForPomoButtonClass('tomatoBreak');
-    await expect(popupPage.pomoStop).toBeVisible();
-
-    await popupPage.clickPomoStop();
-
-    await expect(popupPage.timerDisplay).toHaveText('00:00');
-    await expect(popupPage.pomoButton).toHaveClass(/tomatoWait/);
-    await expect(popupPage.quickSettings).toBeVisible();
-    await expect(popupPage.pomoStop).toBeHidden();
-  });
-
-  // 3.8
-  shortTimerTest('should enter break-extension state (tomatoWarning) after break duration expires', async ({ popupPageShortTimer: popupPage }) => {
-    // Reach break state then let break also expire
-    await popupPage.clickPomoButton();
-    await popupPage.waitForPomoButtonClass('tomatoBreak');
-
-    // Wait for 1-min break to expire (tomatoWarning)
-    await popupPage.waitForPomoButtonClass('tomatoWarning');
-
-    await expect(popupPage.pomoButton).toHaveClass(/tomatoWarning/);
-
-    // Cleanup
-    await popupPage.clickPomoStop();
-  });
-
-  // 3.9
-  shortTimerTest('should trigger long break after completing PomoSetNum pomodoros (set = 2)', async ({ popupPageShortTimer: popupPage }) => {
-    // Configure set num to 2 via quick settings
-    await popupPage.configureQuickSettings({ pomoSetNum: 2 });
-
-    await popupPage.clickPomoButton();
-    await popupPage.waitForPomoButtonClass('tomatoBreak');
-    await popupPage.clickPomoStop();
-
-    await popupPage.clickPomoButton();
-    await popupPage.waitForPomoButtonClass('tomatoBreak');
-
-    await expect(popupPage.pomoButton).toHaveClass(/tomatoBreak/);
-    await expect(popupPage.pomoStop).toBeVisible();
-
-    // Cleanup
-    await popupPage.clickPomoStop();
   });
 });

@@ -58,6 +58,39 @@ async function restoreUserDataSnapshot(page, original) {
 }
 
 /**
+ * Clear in-memory pomodoro/break state in the service worker. Required after
+ * syncServiceWorkerFromStorage: that merge keeps Vars.TimerRunning / break flags
+ * from a prior test on the same worker.
+ */
+async function resetServiceWorkerPomodoro(page) {
+  await page.evaluate(() => {
+    return new Promise((resolve, reject) => {
+      chrome.runtime.sendMessage(
+        { sender: 'popup', msg: 'run_function', functionName: 'pomoReset' },
+        (response) => {
+          if (chrome.runtime.lastError) {
+            reject(new Error(chrome.runtime.lastError.message));
+            return;
+          }
+          resolve(response);
+        },
+      );
+    });
+  });
+}
+
+/**
+ * Reset SW timer state and reload popup — call from beforeEach for parallel short-timer tests.
+ * @param {PopupPage} popupPage
+ */
+async function prepareShortTimerTestStart(popupPage) {
+  await resetServiceWorkerPomodoro(popupPage.page);
+  await syncServiceWorkerFromStorage(popupPage.page, ['USER_DATA']);
+  await popupPage.page.reload();
+  await popupPage.waitForReady();
+}
+
+/**
  * Apply short timer + optional blocked host, sync SW, reload `page`.
  * @returns {Promise<object|null>} snapshot to pass to restoreUserDataSnapshot
  */
@@ -80,6 +113,7 @@ async function applyShortTimerPatch(page, hostname, siteData) {
     site: siteData ?? null,
   });
   await syncServiceWorkerFromStorage(page, ['USER_DATA']);
+  await resetServiceWorkerPomodoro(page);
   await page.reload();
   return originalUserData;
 }
@@ -183,3 +217,5 @@ exports.SHORT_TIMER_USER_DATA_PATCH = SHORT_TIMER_USER_DATA_PATCH;
 exports.applyShortTimerPatch = applyShortTimerPatch;
 exports.restoreUserDataSnapshot = restoreUserDataSnapshot;
 exports.readUserDataSnapshot = readUserDataSnapshot;
+exports.resetServiceWorkerPomodoro = resetServiceWorkerPomodoro;
+exports.prepareShortTimerTestStart = prepareShortTimerTestStart;
