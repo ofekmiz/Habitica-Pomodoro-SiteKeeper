@@ -43,11 +43,11 @@ jobs:
           Xvfb :99 -screen 0 1280x720x24 &
           echo "DISPLAY=:99" >> $GITHUB_ENV
 
-      - name: Run timer-short tests (longest suite — run first)
+      - name: Run timer-short tests (longest suite - run first)
         run: npx playwright test specs/timer/timer-short.spec.js
 
       - name: Run remaining Playwright tests
-        run: npx playwright test --grep-invert "Pomodoro Timer: Short Timer Tests"
+        run: npx playwright test --grep-invert 'Pomodoro Timer: Short Timer Tests'
 
       - name: Upload Playwright report
         if: always()
