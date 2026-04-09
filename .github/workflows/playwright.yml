@@ -3,7 +3,6 @@ name: Playwright E2E (Chromium + Extension)
 on:
   push:
   pull_request:
-  # Allows running the workflow manually from the Actions tab
   workflow_dispatch:
 
 jobs:
@@ -28,26 +27,25 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Install Playwright browsers + system deps (incl. xvfb)
+      - name: Install Playwright browsers and system deps
         run: npx playwright install --with-deps chromium
 
       # Chrome extensions require headless:false, which needs a real display.
-      # xvfb-run provides a virtual framebuffer so the headed browser works on
-      # the headless CI runner.
-      #
-      # timer-short.spec.js is the longest-running suite (real timer waits), so
-      # it is scheduled first to overlap with the remaining specs as much as
-      # possible. Both steps share the same xvfb server via DISPLAY.
+      # Xvfb provides a virtual framebuffer so the headed browser works on the
+      # headless CI runner. Both test steps share the same DISPLAY.
       - name: Start Xvfb
         run: |
           Xvfb :99 -screen 0 1280x720x24 &
           echo "DISPLAY=:99" >> $GITHUB_ENV
 
-      - name: Run timer-short tests (longest suite - run first)
+      # timer-short.spec.js is the longest-running suite (waits for real timers)
+      # so it runs first to keep total wall-clock time as short as possible.
+      - name: Run timer-short tests (longest suite, run first)
         run: npx playwright test specs/timer/timer-short.spec.js
 
       - name: Run remaining Playwright tests
-        run: npx playwright test --grep-invert 'Pomodoro Timer: Short Timer Tests'
+        run: |
+          npx playwright test --grep-invert "Pomodoro Timer: Short Timer Tests"
 
       - name: Upload Playwright report
         if: always()
