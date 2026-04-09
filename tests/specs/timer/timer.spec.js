@@ -60,12 +60,11 @@ test.describe('Pomodoro Timer: Core Functionality', () => {
     await expect(popupPage.pomoFreeze).toBeVisible();
     await popupPage.waitForTimerToChange('00:00');
 
-    const valueBefore = await popupPage.getTimerText();
     await popupPage.clickPomoFreeze();
 
     // Test plan 3.4: timer display frozen (same value after 2 seconds).
     await expect(popupPage.pomoButton).toHaveClass(/tomatoFreeze/);
-  // Verify timer stays frozen for 2 seconds
+    const valueBefore = await popupPage.getTimerText();
     await expect
       .poll(async () => await popupPage.getTimerText(), { timeout: 2000, intervals: [200] })
       .toBe(valueBefore);
