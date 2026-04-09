@@ -10,6 +10,6 @@
     "test:report": "playwright show-report"
   },
   "devDependencies": {
-    "@playwright/test": "latest"
+    "@playwright/test": "^1.59.1"
   }
 }

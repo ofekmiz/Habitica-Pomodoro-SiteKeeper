@@ -6,7 +6,6 @@
  * in ~1 minute. The original values are restored after the test.
  */
 
-const { test: base } = require('../fixtures');
 const { PopupPage } = require('../pages/popupPageModel');
 const {
   HOST_OFEX,
@@ -14,7 +13,8 @@ const {
   HOST_LOCALHOST,
   LOCALHOST_URL,
 } = require('../constants/testConstants');
-const { syncServiceWorkerFromStorage } = require('./userDataStorage');
+const { syncServiceWorkerFromStorage, restoreUserData } = require('./userDataStorage');
+const { attachFailureScreenshot } = require('../utils/testHelpers');
 
 const USER_DATA_KEY = 'USER_DATA';
 
@@ -30,37 +30,10 @@ const SHORT_TIMER_USER_DATA_PATCH = {
 };
 
 /**
- * @param {import('@playwright/test').Page} page
- * @returns {Promise<object|null>} previous USER_DATA for restore
- */
-async function readUserDataSnapshot(page) {
-  return page.evaluate((key) => {
-    return new Promise((resolve) => {
-      chrome.storage.sync.get(key, (result) => resolve(result[key] ?? null));
-    });
-  }, USER_DATA_KEY);
-}
-
-/**
- * @param {import('@playwright/test').Page} page
- * @param {object|null} original
- */
-async function restoreUserDataSnapshot(page, original) {
-  await page.evaluate(({ key, original: orig }) => {
-    return new Promise((resolve) => {
-      if (orig === null) {
-        chrome.storage.sync.remove(key, resolve);
-      } else {
-        chrome.storage.sync.set({ [key]: orig }, resolve);
-      }
-    });
-  }, { key: USER_DATA_KEY, original });
-}
-
-/**
  * Clear in-memory pomodoro/break state in the service worker. Required after
  * syncServiceWorkerFromStorage: that merge keeps Vars.TimerRunning / break flags
  * from a prior test on the same worker.
+ * @param {import('@playwright/test').Page} page
  */
 async function resetServiceWorkerPomodoro(page) {
   await page.evaluate(() => {
@@ -91,11 +64,20 @@ async function prepareShortTimerTestStart(popupPage) {
 }
 
 /**
- * Apply short timer + optional blocked host, sync SW, reload `page`.
- * @returns {Promise<object|null>} snapshot to pass to restoreUserDataSnapshot
+ * Patch USER_DATA with short-timer settings and optional blocked host, sync SW, reset timer
+ * state, then reload `page`.
+ * @param {import('@playwright/test').Page} page
+ * @param {string|null} hostname
+ * @param {object|null} siteData
+ * @returns {Promise<object|null>} previous USER_DATA snapshot for restoreUserData()
  */
 async function applyShortTimerPatch(page, hostname, siteData) {
-  const originalUserData = await readUserDataSnapshot(page);
+  const originalUserData = await page.evaluate((key) => {
+    return new Promise((resolve) => {
+      chrome.storage.sync.get(key, (result) => resolve(result[key] ?? null));
+    });
+  }, USER_DATA_KEY);
+
   await page.evaluate(({ key, patch, hostname: host, site }) => {
     return new Promise((resolve) => {
       chrome.storage.sync.get(key, (result) => {
@@ -131,15 +113,9 @@ const definitions = {
 
     await use(popupPage);
 
-    await restoreUserDataSnapshot(page, originalUserData);
+    await attachFailureScreenshot(page, testInfo);
+    await restoreUserData(page, originalUserData);
     await syncServiceWorkerFromStorage(page, ['USER_DATA']);
-
-    if (testInfo.status !== testInfo.expectedStatus) {
-      const screenshotPath = testInfo.outputPath('failure.png');
-      await page.screenshot({ path: screenshotPath, fullPage: true });
-      await testInfo.attach('failure screenshot', { path: screenshotPath, contentType: 'image/png' });
-    }
-
     await page.close();
   },
 
@@ -163,15 +139,9 @@ const definitions = {
 
     await use({ popupPage, activePage });
 
-    await restoreUserDataSnapshot(page, originalUserData);
+    await attachFailureScreenshot(page, testInfo);
+    await restoreUserData(page, originalUserData);
     await syncServiceWorkerFromStorage(page, ['USER_DATA']);
-
-    if (testInfo.status !== testInfo.expectedStatus) {
-      const screenshotPath = testInfo.outputPath('failure.png');
-      await page.screenshot({ path: screenshotPath, fullPage: true });
-      await testInfo.attach('failure screenshot', { path: screenshotPath, contentType: 'image/png' });
-    }
-
     await activePage.close();
     await page.close();
   },
@@ -196,26 +166,13 @@ const definitions = {
 
     await use({ popupPage, activePage });
 
-    await restoreUserDataSnapshot(page, originalUserData);
+    await attachFailureScreenshot(page, testInfo);
+    await restoreUserData(page, originalUserData);
     await syncServiceWorkerFromStorage(page, ['USER_DATA']);
-
-    if (testInfo.status !== testInfo.expectedStatus) {
-      const screenshotPath = testInfo.outputPath('failure.png');
-      await page.screenshot({ path: screenshotPath, fullPage: true });
-      await testInfo.attach('failure screenshot', { path: screenshotPath, contentType: 'image/png' });
-    }
-
     await activePage.close();
     await page.close();
   },
 };
 
 exports.definitions = definitions;
-exports.test = base.extend(definitions);
-exports.expect = base.expect;
-exports.SHORT_TIMER_USER_DATA_PATCH = SHORT_TIMER_USER_DATA_PATCH;
-exports.applyShortTimerPatch = applyShortTimerPatch;
-exports.restoreUserDataSnapshot = restoreUserDataSnapshot;
-exports.readUserDataSnapshot = readUserDataSnapshot;
-exports.resetServiceWorkerPomodoro = resetServiceWorkerPomodoro;
 exports.prepareShortTimerTestStart = prepareShortTimerTestStart;

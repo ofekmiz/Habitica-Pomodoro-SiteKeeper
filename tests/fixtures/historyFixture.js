@@ -7,12 +7,12 @@
  * computed in the browser (see historyDateRemap.js) so they match getDate().
  */
 
-const { test: base } = require('../fixtures');
 const path = require('path');
 const fs = require('fs');
 const { PopupPage } = require('../pages/popupPageModel');
 const { remapHistogramToRollingWindow, getBrowserRollingWindowYmds } = require('./historyDateRemap');
 const { syncServiceWorkerFromStorage } = require('./userDataStorage');
+const { attachFailureScreenshot } = require('../utils/testHelpers');
 
 const HISTORY_DATA_PATH = path.join(__dirname, 'data', 'HistoryTestData.json');
 
@@ -45,6 +45,8 @@ const definitions = {
 
     await use(popupPage);
 
+    await attachFailureScreenshot(page, testInfo);
+
     await page.evaluate(() => {
       return new Promise((resolve) => {
         chrome.storage.sync.remove('Histogram', resolve);
@@ -52,18 +54,9 @@ const definitions = {
     });
     await syncServiceWorkerFromStorage(page, ['Histogram']);
 
-    if (testInfo.status !== testInfo.expectedStatus) {
-      const screenshotPath = testInfo.outputPath('failure.png');
-      await page.screenshot({ path: screenshotPath, fullPage: true });
-      await testInfo.attach('failure screenshot', { path: screenshotPath, contentType: 'image/png' });
-    }
-
     await page.close();
   },
 };
 
 exports.definitions = definitions;
-exports.test = base.extend(definitions);
-exports.expect = base.expect;
 exports.loadRemappedHistogramForPage = loadRemappedHistogramForPage;
-exports.HISTORY_DATA_PATH = HISTORY_DATA_PATH;

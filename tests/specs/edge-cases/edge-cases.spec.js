@@ -19,7 +19,7 @@ test.describe('Edge Cases', () => {
 
     const timerText = await popupPage.getTimerText();
     expect(timerText).toMatch(/^\d{2}:\d{2}$/);
-    parseTimerDisplayToSeconds(timerText);
+    expect(parseTimerDisplayToSeconds(timerText)).toBeGreaterThanOrEqual(0);
   });
 
   // 11.2
@@ -39,12 +39,12 @@ test.describe('Edge Cases', () => {
     await popupPage2.waitForPomoButtonClass('tomatoProgress');
     await expect(popupPage2.pomoButton).toHaveClass(/tomatoProgress/);
     await expect
-      .poll(async () => popupPage2.getTimerText(), { timeout: 15_000 })
+      .poll(async () => popupPage2.getTimerText())
       .not.toBe(timerBefore);
 
     const timerAfter = await popupPage2.getTimerText();
     expect(timerAfter).toMatch(/^\d{2}:\d{2}$/);
-    parseTimerDisplayToSeconds(timerAfter);
+    expect(parseTimerDisplayToSeconds(timerAfter)).toBeGreaterThanOrEqual(0);
 
     // Cleanup
     await popupPage2.clickPomoButton();

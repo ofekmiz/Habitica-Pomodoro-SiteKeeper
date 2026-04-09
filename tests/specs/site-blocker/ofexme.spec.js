@@ -1,5 +1,4 @@
 const { test, expect } = require('../../fixtures/index');
-const { ContentPage } = require('../../pages/contentPageModel');
 const { HOST_OFEX, OFEX_DEMO_URL } = require('../../constants/testConstants');
 const { injectBlockedSite, restoreUserData, removeBlockedHostname } = require('../../fixtures/userDataStorage');
 
@@ -153,14 +152,14 @@ test.describe('Site Blocker: ofex.me', () => {
   test('should show Stay Focused overlay on ofex.me tab during pomodoro', async ({
     popupPageShortTimerWithOfexBlocked: { popupPage, activePage },
   }) => {
-    const content = new ContentPage(activePage);
+    const body = activePage.locator('body');
 
     await activePage.bringToFront();
     await popupPage.clickPomoButton();
     await activePage.bringToFront();
 
-    await expect(content.body).toHaveClass(/blockedSite/, { timeout: 20_000 });
-    await expect(content.body).toHaveAttribute('data-html', /Stay Focused! Time Left:/);
+    await expect(body).toHaveClass(/blockedSite/);
+    await expect(body).toHaveAttribute('data-html', /Stay Focused! Time Left:/);
 
     // During pomodoro the X (End session) control is hidden; interrupt via second tomato click.
     await popupPage.clickPomoButton();

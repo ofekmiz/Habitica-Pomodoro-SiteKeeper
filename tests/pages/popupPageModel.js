@@ -660,14 +660,6 @@ class PopupPage {
     return this.siteRow(hostname).getByTestId('site-pass-duration-input');
   }
 
-  /**
-   * Return the pass-duration display text element inside a site row.
-   * @param {string} hostname
-   */
-  siteRowPassDurationText(hostname) {
-    return this.siteRow(hostname).getByTestId('site-hostname');
-  }
-
   // ---------------------------------------------------------------------------
   // Extended actions
   // ---------------------------------------------------------------------------
@@ -726,26 +718,6 @@ class PopupPage {
   }
 
   /**
-   * Open the quick-settings overlay and set pomo duration, then save.
-   * @param {number} minutes
-   */
-  async setQuickPomoDuration(minutes) {
-    await this.openQuickSettings();
-    await this.quickSetPomoDuration.fill(String(minutes));
-    await this.saveQuickSettings();
-  }
-
-  /**
-   * Open the quick-settings overlay and set break duration, then save.
-   * @param {number} minutes
-   */
-  async setQuickBreakDuration(minutes) {
-    await this.openQuickSettings();
-    await this.quickSetBreakDuration.fill(String(minutes));
-    await this.saveQuickSettings();
-  }
-
-  /**
    * Configure pomo, break, and pomo-set-num all in one quick-settings visit.
    * @param {{ pomo?: number, break?: number, longBreak?: number, pomoSetNum?: number }} opts
    */
@@ -761,17 +733,9 @@ class PopupPage {
   /**
    * Wait until the timer display changes from a given value.
    * @param {string} initialValue  e.g. '25:00'
-   * @param {number} [timeout=5000]
    */
-  async waitForTimerToChange(initialValue, timeout = 5000) {
-    await this.page.waitForFunction(
-      (val) => {
-        const el = document.querySelector('[data-testid="timer-display"]');
-        return el && el.textContent.trim() !== val;
-      },
-      initialValue,
-      { timeout },
-    );
+  async waitForTimerToChange(initialValue) {
+    await expect(this.timerDisplay).not.toHaveText(initialValue);
   }
 
   // ---------------------------------------------------------------------------
@@ -802,38 +766,6 @@ class PopupPage {
   }
 
   /**
-   * Restore USER_DATA in chrome.storage.sync to a previously saved snapshot.
-   * Pass the value returned by patchUserData().
-   *
-   * @param {object|null} original  the value returned by patchUserData()
-   */
-  async restoreUserData(original) {
-    await this.page.evaluate((original) => {
-      return new Promise((resolve) => {
-        // 1. Fetch current Vars from the service worker
-        chrome.runtime.sendMessage({ sender: 'popup', msg: 'get_data' }, (swResponse) => {
-          const currentVars = swResponse.vars;
-          const restoredUserData = original ?? {};
-
-          // 2. Write to storage
-          const storageOp = original === null
-            ? (cb) => chrome.storage.sync.remove('USER_DATA', cb)
-            : (cb) => chrome.storage.sync.set({ USER_DATA: restoredUserData }, cb);
-
-          storageOp(() => {
-            // 3. Push restored UserData back into the service worker
-            const updatedVars = Object.assign({}, currentVars, { UserData: restoredUserData });
-            chrome.runtime.sendMessage(
-              { sender: 'popup', msg: 'set_data', data: { vars: updatedVars } },
-              () => resolve(),
-            );
-          });
-        });
-      });
-    }, original);
-  }
-
-  /**
    * Reset the service worker timer state and wait for the button to reflect it.
    * Call this at the start of any test that clicks the pomo button, to guard
    * against dirty state left by previous tests in the same worker context.
@@ -850,27 +782,13 @@ class PopupPage {
 
   /**
    * Wait until the pomo button has a specific CSS class (uses Playwright expect
-   * auto-retry / polling). Default timeout is 75s; pass `options` to override.
+   * auto-retry / polling). Defaults to 75 s to accommodate a full 1-min pomodoro
+   * plus scheduling overhead; override with `timeout` when a shorter wait suffices.
    * @param {string} cls  e.g. 'tomatoBreak'
-   * @param {{ timeout?: number }} [options]  merged into `toContainClass` (e.g. `{ timeout: 75_000 }`)
+   * @param {number} [timeout=75_000]
    */
-  async waitForPomoButtonClass(cls, options) {
-    await expect(this.pomoButton).toContainClass(cls, {
-      timeout: 75_000,
-      ...options,
-    });
-  }
-
-  /**
-   * Check whether the pomo button currently has a specific CSS class.
-   * @param {string} cls
-   * @returns {Promise<boolean>}
-   */
-  async pomoButtonHasClass(cls) {
-    return this.pomoButton.evaluate(
-      (el, c) => el.classList.contains(c),
-      cls,
-    );
+  async waitForPomoButtonClass(cls, timeout = 75_000) {
+    await expect(this.pomoButton).toContainClass(cls, { timeout });
   }
 }
 

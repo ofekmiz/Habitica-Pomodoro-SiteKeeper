@@ -1,4 +1,10 @@
 const { test, expect } = require('../../fixtures');
+const {
+  DEFAULT_POMO_DURATION,
+  DEFAULT_BREAK_DURATION,
+  DEFAULT_LONG_BREAK_DURATION,
+  DEFAULT_POMO_SET_NUM,
+} = require('../../constants/testConstants');
 
 test.describe('Quick Settings', () => {
   // 4.1
@@ -8,10 +14,10 @@ test.describe('Quick Settings', () => {
     await expect(popupPage.quickSettingsPanel).toBeVisible();
 
     await expect(popupPage.quickSetPomoDuration).toBeVisible();
-    await expect(popupPage.quickSetPomoDuration).toHaveValue('25');
-    await expect(popupPage.quickSetBreakDuration).toHaveValue('5');
-    await expect(popupPage.quickSetLongBreakDuration).toHaveValue('30');
-    await expect(popupPage.quickSetPomoSetNum).toHaveValue('4');
+    await expect(popupPage.quickSetPomoDuration).toHaveValue(DEFAULT_POMO_DURATION);
+    await expect(popupPage.quickSetBreakDuration).toHaveValue(DEFAULT_BREAK_DURATION);
+    await expect(popupPage.quickSetLongBreakDuration).toHaveValue(DEFAULT_LONG_BREAK_DURATION);
+    await expect(popupPage.quickSetPomoSetNum).toHaveValue(DEFAULT_POMO_SET_NUM);
 
     await expect(popupPage.pomodoroSection).toBeHidden();
   });
@@ -30,7 +36,7 @@ test.describe('Quick Settings', () => {
     await expect(popupPage.quickSetPomoDuration).toHaveValue('30');
 
     // Cleanup
-    await popupPage.quickSetPomoDuration.fill('25');
+    await popupPage.quickSetPomoDuration.fill(DEFAULT_POMO_DURATION);
     await popupPage.saveQuickSettings();
   });
 

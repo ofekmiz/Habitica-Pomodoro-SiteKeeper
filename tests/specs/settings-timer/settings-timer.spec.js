@@ -1,15 +1,22 @@
 const { test, expect } = require('../../fixtures');
+const {
+  DEFAULT_POMO_DURATION,
+  DEFAULT_BREAK_DURATION,
+  DEFAULT_LONG_BREAK_DURATION,
+  DEFAULT_POMO_SET_NUM,
+  DEFAULT_BREAK_EXTENSION,
+} = require('../../constants/testConstants');
 
 test.describe('Settings: Timer Tab', () => {
   // 5.1
   test('should display all timer fields with correct defaults', async ({ popupPage }) => {
     await popupPage.openSettingsTimerTab();
 
-    await expect(popupPage.pomoDurationInput).toHaveValue('25');
-    await expect(popupPage.breakDurationInput).toHaveValue('5');
-    await expect(popupPage.longBreakDurationInput).toHaveValue('30');
-    await expect(popupPage.pomoSetNumInput).toHaveValue('4');
-    await expect(popupPage.breakExtensionInput).toHaveValue('2');
+    await expect(popupPage.pomoDurationInput).toHaveValue(DEFAULT_POMO_DURATION);
+    await expect(popupPage.breakDurationInput).toHaveValue(DEFAULT_BREAK_DURATION);
+    await expect(popupPage.longBreakDurationInput).toHaveValue(DEFAULT_LONG_BREAK_DURATION);
+    await expect(popupPage.pomoSetNumInput).toHaveValue(DEFAULT_POMO_SET_NUM);
+    await expect(popupPage.breakExtensionInput).toHaveValue(DEFAULT_BREAK_EXTENSION);
 
     await expect(popupPage.showSkipToBreakCheckbox).not.toBeChecked();
     await expect(popupPage.showFreezeCheckbox).not.toBeChecked();
@@ -33,7 +40,7 @@ test.describe('Settings: Timer Tab', () => {
     await expect(popupPage.pomoDurationInput).toHaveValue('35');
 
     // Cleanup
-    await popupPage.pomoDurationInput.fill('25');
+    await popupPage.pomoDurationInput.fill(DEFAULT_POMO_DURATION);
     await popupPage.saveButton.click();
   });
 
@@ -49,7 +56,7 @@ test.describe('Settings: Timer Tab', () => {
     await expect(popupPage.breakDurationInput).toHaveValue('10');
 
     // Cleanup
-    await popupPage.breakDurationInput.fill('5');
+    await popupPage.breakDurationInput.fill(DEFAULT_BREAK_DURATION);
     await popupPage.saveButton.click();
   });
 

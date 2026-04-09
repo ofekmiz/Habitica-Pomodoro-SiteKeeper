@@ -65,6 +65,9 @@ async function injectBlockedSite(page, hostname, siteData) {
         const orig = result[key] ?? null;
         const updated = Object.assign({}, orig ?? {});
         updated.BlockedSites = Object.assign({}, updated.BlockedSites ?? {}, { [hostname]: siteData });
+        // Ensure HideEdit is off so block-link is always visible in site-blocker tests,
+        // regardless of state left behind by other tests (e.g. settings-blocker 7.3).
+        updated.HideEdit = false;
         chrome.storage.sync.set({ [key]: updated }, () => resolve(orig));
       });
     });
@@ -105,8 +108,40 @@ async function removeBlockedHostname(page, hostname) {
   await syncServiceWorkerFromStorage(page, ['USER_DATA']);
 }
 
-exports.USER_DATA_KEY = USER_DATA_KEY;
+/** Read current USER_DATA snapshot without modifying it. */
+async function snapshotUserData(page) {
+  return page.evaluate(() => {
+    return new Promise((resolve) => {
+      chrome.storage.sync.get('USER_DATA', (result) => resolve(result['USER_DATA'] ?? null));
+    });
+  });
+}
+
+/**
+ * Fire-and-forget timer reset via the service worker's pomoReset function.
+ * Does NOT wait for the popup UI to reflect the change.
+ * @param {import('@playwright/test').Page} page
+ */
+async function resetServiceWorkerPomodoro(page) {
+  await page.evaluate(() => {
+    return new Promise((resolve, reject) => {
+      chrome.runtime.sendMessage(
+        { sender: 'popup', msg: 'run_function', functionName: 'pomoReset' },
+        (response) => {
+          if (chrome.runtime.lastError) {
+            reject(new Error(chrome.runtime.lastError.message));
+            return;
+          }
+          resolve(response);
+        },
+      );
+    });
+  });
+}
+
 exports.syncServiceWorkerFromStorage = syncServiceWorkerFromStorage;
 exports.injectBlockedSite = injectBlockedSite;
 exports.restoreUserData = restoreUserData;
 exports.removeBlockedHostname = removeBlockedHostname;
+exports.snapshotUserData = snapshotUserData;
+exports.resetServiceWorkerPomodoro = resetServiceWorkerPomodoro;

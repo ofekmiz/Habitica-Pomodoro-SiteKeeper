@@ -13,3 +13,10 @@ exports.LOCALHOST_URL = 'http://localhost/';
 
 /** Example whitelist line used in settings-blocker tests (matches built-in demo URL host + path). */
 exports.OFEX_WHITELIST_SAMPLE = `${exports.HOST_OFEX}/animation-timer`;
+
+/** Extension default values (used in assertions to avoid hardcoded strings). */
+exports.DEFAULT_POMO_DURATION = '25';
+exports.DEFAULT_BREAK_DURATION = '5';
+exports.DEFAULT_LONG_BREAK_DURATION = '30';
+exports.DEFAULT_POMO_SET_NUM = '4';
+exports.DEFAULT_BREAK_EXTENSION = '2';
