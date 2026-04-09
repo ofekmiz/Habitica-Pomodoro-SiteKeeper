@@ -67,7 +67,7 @@ test.describe('Pomodoro Timer: Core Functionality', () => {
     await expect(popupPage.pomoButton).toHaveClass(/tomatoFreeze/);
   // Verify timer stays frozen for 2 seconds
     await expect
-      .poll(async () => await popupPage.getTimerText(), { timeout: 2000, intervals: [500] })
+      .poll(async () => await popupPage.getTimerText(), { timeout: 2000, intervals: [200] })
       .toBe(valueBefore);
     const valueAfterWait = await popupPage.getTimerText();
     expect(parseTimerDisplayToSeconds(valueAfterWait)).toBe(parseTimerDisplayToSeconds(valueBefore));
