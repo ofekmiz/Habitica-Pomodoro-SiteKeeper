@@ -31,21 +31,10 @@ jobs:
         run: npx playwright install --with-deps chromium
 
       # Chrome extensions require headless:false, which needs a real display.
-      # Xvfb provides a virtual framebuffer so the headed browser works on the
-      # headless CI runner. Both test steps share the same DISPLAY.
-      - name: Start Xvfb
-        run: |
-          Xvfb :99 -screen 0 1280x720x24 &
-          echo "DISPLAY=:99" >> $GITHUB_ENV
-
-      # timer-short.spec.js is the longest-running suite (waits for real timers)
-      # so it runs first to keep total wall-clock time as short as possible.
-      - name: Run timer-short tests (longest suite, run first)
-        run: npx playwright test specs/timer/timer-short.spec.js
-
-      - name: Run remaining Playwright tests
-        run: |
-          npx playwright test --grep-invert "Pomodoro Timer: Short Timer Tests"
+      # xvfb-run provides a virtual framebuffer so the headed browser works on
+      # the headless CI runner.
+      - name: Run Playwright tests
+        run: xvfb-run --auto-servernum -- npx playwright test
 
       - name: Upload Playwright report
         if: always()
