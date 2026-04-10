@@ -1,7 +1,6 @@
 name: Playwright E2E (Chromium + Extension)
 
 on:
-  push:
   pull_request:
   workflow_dispatch:
 
