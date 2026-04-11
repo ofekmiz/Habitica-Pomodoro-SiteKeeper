@@ -1,6 +1,6 @@
 const { test, expect } = require('../../fixtures/index');
 const { HOST_OFEX } = require('../../constants/testConstants');
-const { parseTimerDisplayToSeconds } = require('../../utils/timerDisplay');
+const { restoreUserData } = require('../../fixtures/userDataStorage');
 
 test.describe('Edge Cases', () => {
   // 11.1
@@ -14,12 +14,8 @@ test.describe('Edge Cases', () => {
       await popupPage.clickPomoButton();
     }
 
-    const pomoClass = await popupPage.pomoButton.getAttribute('class');
-    expect(pomoClass).toMatch(/tomatoWait|tomatoProgress/);
-
-    const timerText = await popupPage.getTimerText();
-    expect(timerText).toMatch(/^\d{2}:\d{2}$/);
-    expect(parseTimerDisplayToSeconds(timerText)).toBeGreaterThanOrEqual(0);
+    await expect(popupPage.pomoButton).toHaveClass(/tomatoWait|tomatoProgress/);
+    await expect(popupPage.timerDisplay).toHaveText(/^\d{2}:\d{2}$/);
   });
 
   // 11.2
@@ -42,46 +38,44 @@ test.describe('Edge Cases', () => {
       .poll(async () => popupPage2.getTimerText())
       .not.toBe(timerBefore);
 
-    const timerAfter = await popupPage2.getTimerText();
-    expect(timerAfter).toMatch(/^\d{2}:\d{2}$/);
-    expect(parseTimerDisplayToSeconds(timerAfter)).toBeGreaterThanOrEqual(0);
+    await expect(popupPage2.timerDisplay).toHaveText(/^\d{2}:\d{2}$/);
 
     // Cleanup
     await popupPage2.clickPomoButton();
   });
 
-    // 11.3 — Invalid pomo duration: updateCredentials() only assigns when parseFloat is finite (popup.js).
-    test('should reject invalid pomo duration ("abc"): previous valid value retained', async ({
-      popupPage,
-    }) => {
-      await popupPage.openSettingsTimerTab();
-      const validValue = await popupPage.pomoDurationInput.inputValue();
-  
-      await popupPage.pomoDurationInput.fill('abc');
-      await popupPage.saveButton.click();
-  
-      await popupPage.reloadPopup();
-      await popupPage.openSettingsTimerTab();
-      await expect(popupPage.pomoDurationInput).toHaveValue(validValue);
-    });
-  
-    // 11.4 — fixture pre-blocks ofex.me with the real ofex tab active (see siteBlockerFixture).
-    test('should reject invalid pass duration ("abc") on blocked site edit row', async ({
-      popupPageWithOfexBlocked,
-    }) => {
-      const { popupPage } = popupPageWithOfexBlocked;
-  
-      await popupPage.patchUserData({ ConnectHabitica: true });
-      await popupPage.reloadPopup();
-  
-      await popupPage.clickSiteRowEditButton(HOST_OFEX);
-      const input = popupPage.siteRowPassDurationInput(HOST_OFEX);
-      await input.waitFor({ state: 'visible' });
-      await input.fill('abc');
-      await input.press('Enter');
-  
-      // Pass duration unchanged when parseFloat is NaN (updateSiteCostDuration in popup.js).
-      const row = popupPage.siteRow(HOST_OFEX);
-      await expect(row).toContainText('30');
-    });
+  // 11.3 — Invalid pomo duration: updateCredentials() only assigns when parseFloat is finite (popup.js).
+  test('should reject invalid pomo duration ("abc"): previous valid value retained', async ({
+    popupPage,
+  }) => {
+    await popupPage.openSettingsTimerTab();
+    const validValue = await popupPage.pomoDurationInput.inputValue();
+
+    await popupPage.pomoDurationInput.fill('abc');
+    await popupPage.saveButton.click();
+
+    await popupPage.reloadPopup();
+    await popupPage.openSettingsTimerTab();
+    await expect(popupPage.pomoDurationInput).toHaveValue(validValue);
+  });
+
+  // 11.4 — fixture pre-blocks ofex.me with the real ofex tab active (see siteBlockerFixture).
+  test('should reject invalid pass duration ("abc") on blocked site edit row', async ({
+    popupPageWithOfexBlocked,
+  }) => {
+    const { popupPage } = popupPageWithOfexBlocked;
+
+    await popupPage.patchUserData({ ConnectHabitica: true });
+    await popupPage.reloadPopup();
+
+    await popupPage.clickSiteRowEditButton(HOST_OFEX);
+    const input = popupPage.siteRowPassDurationInput(HOST_OFEX);
+    await input.waitFor({ state: 'visible' });
+    await input.fill('abc');
+    await input.press('Enter');
+
+    // Pass duration unchanged when parseFloat is NaN (updateSiteCostDuration in popup.js).
+    const row = popupPage.siteRow(HOST_OFEX);
+    await expect(row).toContainText('30');
+  });
 });

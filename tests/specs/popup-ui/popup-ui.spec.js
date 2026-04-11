@@ -34,8 +34,7 @@ test.describe('Popup Initial Load & UI Elements', () => {
   // 1.2
   test('should show welcome info when no sites are blocked; block-link shows "Block Site!"', async ({ popupPage }) => {
     await expect(popupPage.welcomeInfo).toBeVisible();
-    const welcomeText = await popupPage.welcomeInfo.textContent();
-    expect(welcomeText).toMatch(/block site/i);
+    await expect(popupPage.welcomeInfo).toContainText(/block site/i);
     await expect(popupPage.blockLink).toHaveText(/Block Site!/i);
   });
 
@@ -58,7 +57,7 @@ test.describe('Popup Initial Load & UI Elements', () => {
     ]);
 
     await newPage.waitForLoadState('domcontentloaded');
-    expect(newPage.url()).toMatch(/popup\.html/);
+    await expect(newPage).toHaveURL(/popup\.html/);
     // Cleanup
     await newPage.close();
   });

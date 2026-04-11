@@ -7,17 +7,13 @@ historyTest.describe('History Panel (with fixture data)', () => {
     await popupPage.openHistoryPanel();
     await expect(popupPage.historyPanel).toBeVisible();
 
-    const pomoTotalText = await popupPage.pomoTotal.textContent();
-    expect(parseInt(pomoTotalText, 10)).toBeGreaterThan(0);
-
-    const hoursTotalText = await popupPage.hoursTotal.textContent();
-    expect(parseFloat(hoursTotalText)).toBeGreaterThan(0);
-
-    const pomoAvgText = await popupPage.pomoAvg.textContent();
-    expect(parseFloat(pomoAvgText)).toBeGreaterThan(0);
-
-    const hoursAvgText = await popupPage.hoursAvg.textContent();
-    expect(parseFloat(hoursAvgText)).toBeGreaterThan(0);
+    await expect(popupPage.pomoTotal).not.toHaveText('0');
+    await expect(popupPage.hoursTotal).not.toHaveText('0');
+    await expect(popupPage.hoursTotal).not.toHaveText('0.0');
+    await expect(popupPage.pomoAvg).not.toHaveText('0');
+    await expect(popupPage.pomoAvg).not.toHaveText('0.0');
+    await expect(popupPage.hoursAvg).not.toHaveText('0');
+    await expect(popupPage.hoursAvg).not.toHaveText('0.0');
   });
 
   // 10.2
@@ -25,37 +21,34 @@ historyTest.describe('History Panel (with fixture data)', () => {
     await popupPage.openHistoryPanel();
 
     await expect(popupPage.historyChart).toBeVisible();
-    const totalText = await popupPage.historyChartTotal.textContent();
-    expect(totalText).toMatch(/Sum:/i);
-    expect(totalText).toMatch(/Avg:/i);
+    await expect(popupPage.historyChartTotal).toHaveText(/Sum:/i);
+    await expect(popupPage.historyChartTotal).toHaveText(/Avg:/i);
   });
 
   // 10.3
   historyTest('should toggle chart view: Pomodoros → Hours → Pomodoros', async ({ popupPageWithHistory: popupPage }) => {
     await popupPage.openHistoryPanel();
-    const initialTotal = await popupPage.historyChartTotal.textContent();
+    await expect(popupPage.historyChartTotal).toHaveText(/Sum:/i);
+    const initialTotal = await popupPage.historyChartTotal.innerText();
 
     await popupPage.historyChartShowHours.click();
-    const hoursTotal = await popupPage.historyChartTotal.textContent();
-    expect(hoursTotal).not.toBe(initialTotal);
+    await expect(popupPage.historyChartTotal).not.toHaveText(initialTotal);
 
     await popupPage.historyChartShowPomodoros.click();
-    const revertedTotal = await popupPage.historyChartTotal.textContent();
-    expect(revertedTotal).toBe(initialTotal);
+    await expect(popupPage.historyChartTotal).toHaveText(initialTotal);
   });
 
   // 10.4
   historyTest('should navigate chart prev/next windows', async ({ popupPageWithHistory: popupPage }) => {
     await popupPage.openHistoryPanel();
-    const currentWindowTotal = await popupPage.historyChartTotal.textContent();
+    await expect(popupPage.historyChartTotal).toHaveText(/Sum:/i);
+    const currentWindowTotal = await popupPage.historyChartTotal.innerText();
 
     await popupPage.historyChartPrev.click();
-    const prevWindowTotal = await popupPage.historyChartTotal.textContent();
-    expect(prevWindowTotal).not.toBe(currentWindowTotal);
+    await expect(popupPage.historyChartTotal).not.toHaveText(currentWindowTotal);
 
     await popupPage.historyChartNext.click();
-    const nextWindowTotal = await popupPage.historyChartTotal.textContent();
-    expect(nextWindowTotal).toBe(currentWindowTotal);
+    await expect(popupPage.historyChartTotal).toHaveText(currentWindowTotal);
   });
 
   // 10.5
@@ -69,7 +62,7 @@ historyTest.describe('History Panel (with fixture data)', () => {
     ]);
 
     await newTab.waitForLoadState('domcontentloaded');
-    expect(newTab.url()).toMatch(/fullHistory\.html/);
+    await expect(newTab).toHaveURL(/fullHistory\.html/);
     // Cleanup
     await newTab.close();
   });
@@ -108,8 +101,13 @@ historyTest.describe('History Panel (with fixture data)', () => {
     await popupPage.waitForReady();
     //BUG -> this is a workaround should not be needed to open the history panel again
     await popupPage.openHistoryPanel();
-    const pomoTotalAfterImport = await popupPage.pomoTotal.textContent();
-    expect(parseInt(pomoTotalAfterImport, 10)).toBeGreaterThan(0);
+    await expect(popupPage.pomoTotal).not.toHaveText('0');
+    await expect(popupPage.hoursTotal).not.toHaveText('0');
+    await expect(popupPage.hoursTotal).not.toHaveText('0.0');
+    await expect(popupPage.pomoAvg).not.toHaveText('0');
+    await expect(popupPage.pomoAvg).not.toHaveText('0.0');
+    await expect(popupPage.hoursAvg).not.toHaveText('0');
+    await expect(popupPage.hoursAvg).not.toHaveText('0.0');
 
     await popupPage.clearHistogram.click();
     //BUG -> this is a workaround should not be needed to open the history panel again
