@@ -16,45 +16,65 @@ const { attachFailureScreenshot } = require('../utils/testHelpers');
 
 const HISTORY_DATA_PATH = path.join(__dirname, 'data', 'HistoryTestData.json');
 
-/** @param {import('@playwright/test').Page} page @param {number} [dayCount=21] */
-async function loadRemappedHistogramForPage(page, dayCount = 21) {
-  const raw = JSON.parse(fs.readFileSync(HISTORY_DATA_PATH, 'utf8'));
+/** Rolling window length (days) for remapped histogram keys; matches chart navigation range in tests. */
+const DEFAULT_HISTOGRAM_WINDOW_DAYS = 21;
+
+const RAW_HISTOGRAM_FIXTURE = JSON.parse(fs.readFileSync(HISTORY_DATA_PATH, 'utf8'));
+
+/**
+ * @param {import('@playwright/test').Page} page
+ * @param {number} [dayCount] Rolling window in days; defaults to `DEFAULT_HISTOGRAM_WINDOW_DAYS`.
+ */
+async function loadRemappedHistogramForPage(page, dayCount = DEFAULT_HISTOGRAM_WINDOW_DAYS) {
   const windowYmds = await getBrowserRollingWindowYmds(page, dayCount);
-  return remapHistogramToRollingWindow(raw, windowYmds);
+  return remapHistogramToRollingWindow(RAW_HISTOGRAM_FIXTURE, windowYmds);
 }
 
 /** Raw fixture definitions — consumed by fixtures/index.js for merging. */
 const definitions = {
   popupPageWithHistory: async ({ extensionContext, popupUrl }, use, testInfo) => {
     const page = await extensionContext.newPage();
-    await page.goto(popupUrl);
-    const popupPage = new PopupPage(page);
-    await popupPage.waitForReady();
+    try {
+      // Setup: open popup and prepare page
+      await page.goto(popupUrl);
+      const popupPage = new PopupPage(page);
+      await popupPage.waitForReady();
 
-    const historyData = await loadRemappedHistogramForPage(page, 21);
+      // Inject remapped histogram → extension storage → service worker
+      const historyData = await loadRemappedHistogramForPage(page, DEFAULT_HISTOGRAM_WINDOW_DAYS);
 
-    await page.evaluate((data) => {
-      return new Promise((resolve) => {
-        chrome.storage.sync.set({ Histogram: data }, resolve);
-      });
-    }, historyData);
-    await syncServiceWorkerFromStorage(page, ['Histogram']);
+      await page.evaluate((data) => {
+        return new Promise((resolve) => {
+          chrome.storage.sync.set({ Histogram: data }, resolve);
+        });
+      }, historyData);
+      await syncServiceWorkerFromStorage(page, ['Histogram']);
 
-    await page.reload();
-    await popupPage.waitForReady();
+      // Reload: sync updates the service worker only; popup `Vars` was set on first load via
+      // getBackgroundData() and would stay stale until the page loads again (see communication.js).
+      await page.reload();
+      await popupPage.waitForReady();
 
-    await use(popupPage);
-
-    await attachFailureScreenshot(page, testInfo);
-
-    await page.evaluate(() => {
-      return new Promise((resolve) => {
-        chrome.storage.sync.remove('Histogram', resolve);
-      });
-    });
-    await syncServiceWorkerFromStorage(page, ['Histogram']);
-
-    await page.close();
+      await use(popupPage);
+    } finally {
+      // Teardown: screenshot (best-effort), then always clear storage and close page for isolation
+      try {
+        await attachFailureScreenshot(page, testInfo);
+      } catch {
+        // Do not skip storage cleanup if screenshot fails
+      }
+      try {
+        await page.evaluate(() => {
+          return new Promise((resolve) => {
+            chrome.storage.sync.remove('Histogram', resolve);
+          });
+        });
+        await syncServiceWorkerFromStorage(page, ['Histogram']);
+      } catch {
+        // Page or storage may be unavailable if setup failed early
+      }
+      await page.close().catch(() => {});
+    }
   },
 };
 

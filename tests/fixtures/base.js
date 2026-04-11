@@ -20,8 +20,11 @@ exports.test = base.extend({
           `--load-extension=${pathToExtension}`,
         ],
       });
-      await use(ctx);
-      await ctx.close();
+      try {
+        await use(ctx);
+      } finally {
+        await ctx.close().catch(() => {});
+      }
     },
     { scope: 'worker' },
   ],
@@ -60,14 +63,20 @@ exports.test = base.extend({
    */
   popupPage: async ({ extensionContext, popupUrl }, use, testInfo) => {
     const page = await extensionContext.newPage();
-    await page.goto(popupUrl);
-    const popupPage = new PopupPage(page);
-    await popupPage.waitForReady();
+    try {
+      await page.goto(popupUrl);
+      const popupPage = new PopupPage(page);
+      await popupPage.waitForReady();
 
-    await use(popupPage);
-
-    await attachFailureScreenshot(page, testInfo);
-    await page.close();
+      await use(popupPage);
+    } finally {
+      try {
+        await attachFailureScreenshot(page, testInfo);
+      } catch {
+        // Do not skip page.close if screenshot fails
+      }
+      await page.close().catch(() => {});
+    }
   },
 
   /**
@@ -84,14 +93,14 @@ exports.test = base.extend({
     const pages = [];
     await use(async () => {
       const page = await extensionContext.newPage();
+      pages.push(page);
       await page.goto(popupUrl);
       const popupPage = new PopupPage(page);
       await popupPage.waitForReady();
-      pages.push(page);
       return popupPage;
     });
     for (const page of pages) {
-      if (!page.isClosed()) await page.close();
+      if (!page.isClosed()) await page.close().catch(() => {});
     }
   },
 });

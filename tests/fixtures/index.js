@@ -5,6 +5,9 @@
  *   const { test, expect } = require('../../fixtures/index');
  *
  * The base extension-loading fixtures live in fixtures/base.js.
+ * Shared scenario setup/teardown for USER_DATA + optional tabs lives in
+ * fixtures/scenarioBuilder.js (used by site-blocker and short-timer fixtures).
+ *
  * Each fixture module exports its raw `definitions` object so they can all
  * be merged into one `test` via a single base.extend() call — the safest
  * Playwright pattern (no internal API access, no chaining surprises).
