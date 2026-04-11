@@ -1,59 +1,55 @@
 /**
- * seed.spec.js — Best-practice reference for Playwright MCP test generation.
+ * seed.spec.js — Reference template for humans and MCP / AI test generation.
  *
- * This file is NOT executed by the test runner (it lives outside `specs/`).
- * It serves as a template for the Playwright MCP tools when generating new
- * test files. Read it before writing new specs.
+ * NOT executed: Playwright’s testDir is `specs/` only. Do not move this file into
+ * `specs/` unless you intend it to run as a real test.
  *
- * ──────────────────────────────────────────────────────────────────────────
- * Architecture at a glance
- * ──────────────────────────────────────────────────────────────────────────
+ * ─────────────────────────────────────────────────────────────────────────────
+ * MCP / AI generation guidelines (read first)
+ * ─────────────────────────────────────────────────────────────────────────────
  *
- *  fixtures/base.js           Base extension-loading fixtures.
- *  fixtures/index.js          Merges base + scenario fixtures into one `test`.
- *  │  ├─ popupPage            Fresh popup page, extension loaded, loading done.
- *  │  ├─ popupPageWithHistory Popup with HistoryTestData.json pre-loaded.
- *  │  ├─ popupPageShortTimer  Popup with 1-min pomo/break for fast timer tests.
- *  │  ├─ popupPageWithOfexBlocked      { popupPage, activePage } — ofex.me pre-blocked
- *  │  ├─ popupPageWithLocalhostBlocked { popupPage, activePage } — localhost pre-blocked
- *  │  └─ …
- *  │
- *  pages/popupPageModel.js    Page Object Model (POM).
- *     ├─ Getters              Return Playwright Locators (no selectors in tests).
- *     └─ Actions              Encapsulate multi-step UI interactions.
+ * 1. Prefer existing fixtures (`tests/fixtures/index.js`) and `scenarioBuilder`
+ *    flows over ad-hoc `chrome.storage` scripts in the spec. Add a new fixture
+ *    when the same “given” state will repeat across tests.
+ * 2. Do not mutate USER_DATA (or Histogram) directly in a spec unless there is
+ *    no fixture yet; then snapshot → mutate → restore (see Storage below).
+ * 3. All UI access goes through `PopupPage` (`tests/pages/popupPageModel.js`):
+ *    no `page.getByTestId`, `page.locator`, or new selectors inside `.spec.js`.
+ * 4. Naming: extended fixtures follow `popupPageWith…` / `popupPageShortTimer…`
+ *    patterns; base fixture is `popupPage`. Merge new definitions in
+ *    `fixtures/index.js` — never chain ad-hoc `test.extend` in a spec.
+ * 5. Import `test` and `expect` from `tests/fixtures` (or `fixtures/index`), never
+ *    from `@playwright/test` in spec files. Use `constants/testConstants.js` for
+ *    default durations and hosts, not literals in assertions.
  *
- * ──────────────────────────────────────────────────────────────────────────
- * Rules (enforced by convention, not lint)
- * ──────────────────────────────────────────────────────────────────────────
- *  1. Import `test` and `expect` from the nearest fixtures file, NEVER from
- *     @playwright/test directly (except inside the POM or fixtures themselves).
- *     - Use `../../fixtures` for tests that only need the base popupPage.
- *     - Use `../../fixtures/index` for tests that need extended fixtures.
- *  2. All locators live in popupPageModel.js — tests never call
- *     page.getByTestId() or page.locator() directly.
- *  3. AAA pattern: every test has a clear Arrange / Act / Assert structure.
- *  4. No hard waits (page.waitForTimeout) except where a bounded poll is the
- *     only way to verify timer behaviour without flaking.
- *  5. Storage setup/teardown for "given state" uses chrome.storage.sync and
- *     USER_DATA / Histogram (see fixtures/userDataStorage.js), then syncs the
- *     service worker — not chrome.storage.local.
- *  6. Every describe that mutates state must have:
- *     - test.beforeEach: snapshot USER_DATA via snapshotUserData()
- *     - test.afterEach: restore USER_DATA via restoreUserData() + reset timer
- *       via resetServiceWorkerPomodoro(). Both wrapped in .catch(() => {}).
- *     - No manual cleanup at the end of individual tests.
- *  7. Default values (pomo duration, break, etc.) come from
- *     constants/testConstants.js — never hardcode '25', '5', etc. in assertions.
- *  8. For mixed-fixture specs, use nested describes to separate tests that use
- *     different fixtures (each with their own beforeEach/afterEach).
+ * ─────────────────────────────────────────────────────────────────────────────
+ * Architecture (detail lives in tests/README.md)
+ * ─────────────────────────────────────────────────────────────────────────────
+ *
+ *  fixtures/base.js        Extension context, popupPage, newPopupPage, …
+ *  fixtures/index.js       Merged scenario fixtures (history, site-blocker, short timer).
+ *  fixtures/scenarioBuilder.js   createScenario / cleanupScenario, USER_DATA apply + sync.
+ *  fixtures/userDataStorage.js   USER_DATA, syncServiceWorkerFromStorage, snapshot/restore.
+ *  pages/popupPageModel.js       POM — locators + actions only.
+ *
+ * ─────────────────────────────────────────────────────────────────────────────
+ * Rules (convention)
+ * ─────────────────────────────────────────────────────────────────────────────
+ *
+ *  • AAA: Arrange / Act / Assert in every test (comments help).
+ *  • No raw selectors in tests — POM only.
+ *  • No page.waitForTimeout except where an existing spec uses bounded polling
+ *    for timer behaviour.
+ *  • Storage: if a test changes USER_DATA, snapshot before and restore after
+ *    (beforeEach/afterEach or try/finally), then sync SW + reset pomodoro as in
+ *    tests/README.md. Use chrome.storage.sync + USER_DATA — not local.
  */
 
-// ─── Import from the extended fixtures, not @playwright/test directly ───────
 const { test, expect } = require('./fixtures');
 const { snapshotUserData, restoreUserData, resetServiceWorkerPomodoro } = require('./fixtures/userDataStorage');
 
-// ─── Suite wraps a logical group of related tests ───────────────────────────
-test.describe.skip('Seed — Popup Initial Load', () => {
+// Example suite: skipped so it never runs; illustrates snapshot/restore for storage mutation.
+test.describe.skip('Seed — template only (AAA + POM + storage hooks)', () => {
   let snapshot;
 
   test.beforeEach(async ({ popupPage }) => {
@@ -65,33 +61,23 @@ test.describe.skip('Seed — Popup Initial Load', () => {
     await resetServiceWorkerPomodoro(popupPage.page).catch(() => {});
   });
 
-  /**
-   * 1. Arrange  — the fixture already opened the popup and waited for it to
-   *               finish loading; no extra setup needed here.
-   * 2. Act      — (nothing; this test only inspects the initial DOM state)
-   * 3. Assert   — verify the main container and timer display are correct.
-   */
-  test('main container is visible on initial load', async ({ popupPage }) => {
+  // Arrange: fixture opened popup and waited for ready. Act: (none). Assert: initial UI.
+  test('main container and timer visible on load', async ({ popupPage }) => {
     await expect(popupPage.mainContainer).toBeVisible();
     await expect(popupPage.timerDisplay).toHaveText('00:00');
     await expect(popupPage.pomoButton).toHaveClass(/tomatoWait/);
   });
 
-  /**
-   * Example of an Arrange / Act / Assert test that mutates state.
-   * afterEach handles cleanup — no manual restoration needed.
-   */
-  test('shows welcome info when no sites are blocked', async ({ popupPage }) => {
+  // Act + assert through POM only; afterEach restores storage.
+  test('welcome copy when reloading popup', async ({ popupPage }) => {
     await popupPage.reloadPopup();
 
     await expect(popupPage.welcomeInfo).toBeVisible();
     await expect(popupPage.blockLink).toHaveText(/Block Site!/i);
   });
 
-  /**
-   * Example: opening a panel via POM action, then asserting via POM getters.
-   */
-  test('Settings panel opens and reveals save button', async ({ popupPage }) => {
+  // Open panel via POM action; assert via POM getters — no selectors here.
+  test('Settings panel opens from menu', async ({ popupPage }) => {
     await expect(popupPage.settingsPanel).toBeHidden();
 
     await popupPage.clickSettings();

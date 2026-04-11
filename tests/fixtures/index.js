@@ -1,6 +1,8 @@
 /**
  * fixtures/index.js — single import point for all extended fixtures.
  *
+ * Lifecycle diagram: see ../README.md (Runtime flow).
+ *
  * Tests that need scenario-specific fixtures import from here:
  *   const { test, expect } = require('../../fixtures/index');
  *

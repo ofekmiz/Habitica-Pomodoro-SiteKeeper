@@ -70,11 +70,7 @@ exports.test = base.extend({
 
       await use(popupPage);
     } finally {
-      try {
-        await attachFailureScreenshot(page, testInfo);
-      } catch {
-        // Do not skip page.close if screenshot fails
-      }
+      await attachFailureScreenshot(page, testInfo).catch(() => {});
       await page.close().catch(() => {});
     }
   },

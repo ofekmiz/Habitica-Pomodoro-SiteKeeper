@@ -2,8 +2,9 @@
  * chrome.storage.sync USER_DATA helpers — matches production (service-worker / popup).
  * BlockedSites live under Vars.UserData.BlockedSites, persisted as key USER_DATA.
  *
- * After mutating storage, call syncServiceWorkerFromStorage() so the service worker's
- * in-memory Vars match storage (get_data otherwise returns stale Vars).
+ * Why syncServiceWorkerFromStorage exists: the service worker keeps live `Vars` in memory.
+ * Writes go to chrome.storage.sync first; without pushing storage into Vars via set_data,
+ * the next get_data in the SW can still reflect pre-mutation state.
  */
 
 const USER_DATA_KEY = 'USER_DATA';
@@ -76,7 +77,12 @@ async function injectBlockedSite(page, hostname, siteData) {
   return original;
 }
 
-/** Restore full USER_DATA to a snapshot from injectBlockedSite (or null = remove key). */
+/**
+ * Restore full USER_DATA to a snapshot from injectBlockedSite (or null = remove key).
+ * Ends with syncServiceWorkerFromStorage on the success path — callers (e.g. cleanupScenario)
+ * must not sync again after a successful restore; on throw, scenarioBuilder may call sync once
+ * as a fallback.
+ */
 async function restoreUserData(page, original) {
   await page.evaluate(({ key, original }) => {
     return new Promise((resolve) => {

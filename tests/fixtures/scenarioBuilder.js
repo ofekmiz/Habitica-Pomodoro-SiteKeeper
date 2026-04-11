@@ -4,6 +4,10 @@
  *
  * Fixtures declare WHAT state they need; this module handles HOW (sync, reload,
  * pomodoro reset, page lifecycle) in one place.
+ *
+ * vs cleanupScenario: createScenario builds state and returns handles; cleanupScenario
+ * runs in the fixture’s finally (after the test passes or fails) to restore USER_DATA
+ * and close pages. Tests only contain assertions and UI actions — not this wiring.
  */
 
 const { PopupPage } = require('../pages/popupPageModel');
@@ -15,6 +19,14 @@ const {
 const { attachFailureScreenshot } = require('../utils/testHelpers');
 
 const USER_DATA_KEY = 'USER_DATA';
+
+/**
+ * Best-effort page close (createScenario error path + cleanupScenario).
+ * @param {import('@playwright/test').Page | null | undefined} p
+ */
+async function closePageIfOpen(p) {
+  if (p && !p.isClosed()) await p.close().catch(() => {});
+}
 
 /**
  * @param {import('@playwright/test').Page} page
@@ -63,6 +75,7 @@ async function applyUserDataStorage(page, { userDataPatch, blockedSite, resetPom
     blocked: blockedSite,
   });
 
+  // Forward setup: new USER_DATA is on disk; SW Vars must match before reload.
   await syncServiceWorkerFromStorage(page, ['USER_DATA']);
   if (resetPomodoro) {
     await resetServiceWorkerPomodoro(page);
@@ -145,8 +158,10 @@ async function createScenario({
       storageModified,
     };
   } catch (e) {
-    if (activePage && !activePage.isClosed()) await activePage.close().catch(() => {});
-    await page.close().catch(() => {});
+    // Single setup-failure path: tear down pages only. USER_DATA rollback is handled
+    // by cleanupScenario after a successful createScenario; mid-setup leaks are rare.
+    await closePageIfOpen(activePage);
+    await closePageIfOpen(page);
     throw e;
   }
 }
@@ -166,29 +181,23 @@ async function cleanupScenario({
   storageModified = false,
   testInfo,
 } = {}) {
-  try {
-    if (page) await attachFailureScreenshot(page, testInfo);
-  } catch {
-    // Best-effort screenshot; continue teardown
+  if (page) {
+    await attachFailureScreenshot(page, testInfo).catch(() => {});
   }
-  try {
-    if (storageModified && page) {
+
+  // Rollback for scenario fixtures: restoreUserData writes USER_DATA and syncs SW on success.
+  // If restore throws (e.g. sync failed inside restoreUserData), a second sync is best-effort
+  // so the worker is not left with stale Vars while storage may already match the snapshot.
+  if (storageModified && page && !page.isClosed()) {
+    try {
       await restoreUserData(page, originalUserData);
-      await syncServiceWorkerFromStorage(page, ['USER_DATA']);
+    } catch {
+      await syncServiceWorkerFromStorage(page, ['USER_DATA']).catch(() => {});
     }
-  } catch {
-    // Best-effort restore
   }
-  try {
-    if (activePage && !activePage.isClosed()) await activePage.close().catch(() => {});
-  } catch {
-    // ignore
-  }
-  try {
-    if (page && !page.isClosed()) await page.close().catch(() => {});
-  } catch {
-    // ignore
-  }
+
+  await closePageIfOpen(activePage);
+  await closePageIfOpen(page);
 }
 
 module.exports = {
