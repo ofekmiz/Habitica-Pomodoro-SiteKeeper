@@ -36,3 +36,8 @@ To test the extension in firefox go to the url "about:debugging" => This firefox
             "strict_min_version": "42.0"
         }
     }
+
+### Tests folder is for Playwrite testing
+- Install playwrite dependencies in tests folder (terminal: cd tests , npm i)
+- Then install playwrite (terminal: npx playwright install)
+- Run tests with UI: npm run test:ui
