@@ -41,3 +41,4 @@ To test the extension in firefox go to the url "about:debugging" => This firefox
 - Install playwrite dependencies in tests folder (terminal: cd tests , npm i)
 - Then install playwrite (terminal: npx playwright install)
 - Run tests with UI: npm run test:ui
+* Playwrite MCP generator agent does not support chrome extensions for now (waiting for plawrite updates), use the playwrite planner MCP agent and then implement with any other ai agent (copilot, codex, etc..)
